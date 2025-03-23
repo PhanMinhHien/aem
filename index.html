@@ -992,7 +992,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const masterCodes = Object.keys(localLanguages);
             const masterSelectionButton = document.createElement("button");
-            masterSelectionButton.textContent = "Select Master Code";
+            masterSelectionButton.textContent = "Show Select Master Code";
             masterSelectionButton.onclick = showMasterCodePopup;
             document.getElementById("buttons").appendChild(masterSelectionButton);
             const columnLeft = document.querySelector(".column-left");
@@ -1001,18 +1001,20 @@
             popup.className = "popup-content";
             popup.style.display = "none";
             popup.innerHTML = `
-        <h3>Select Master Language</h3>
-        <input type="text" id="masterCodeInput" placeholder="Enter master codes (comma separated)" />
-        <div id="masterCheckboxContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;"></div>
-        <button onclick="generateMasterCheckboxes()">Submit</button>
-        <button onclick="clearMasterSelections()">Clear</button>
-    `;
+                <h3>Select Master Language</h3>
+                <input type="text" id="masterCodeInput" placeholder="Enter master codes (comma separated)" />
+                <div id="masterCheckboxContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;"></div>
+                <button onclick="generateMasterCheckboxes()">Submit</button>
+                <button onclick="clearMasterSelections()">Clear</button>
+            `;
             columnLeft.appendChild(popup);
             function showMasterCodePopup() {
                 if (popup.style.display === "none") {
                     popup.style.display = "block";
+                    masterSelectionButton.textContent = "Hide Select Master Code";
                 } else {
                     popup.style.display = "none";
+                    masterSelectionButton.textContent = "Show Select Master Code";
                 }
             }
             window.generateMasterCheckboxes = function () {
@@ -1106,10 +1108,10 @@
             const button = document.getElementById("toggleSearchButton");
             if (searchContainer.style.display === "none") {
                 searchContainer.style.display = "block";
-                button.textContent = "Hide Search Input";
+                button.textContent = "Hide Search Code";
             } else {
                 searchContainer.style.display = "none";
-                button.textContent = "Show Search Input";
+                button.textContent = "Show Search Code";
             }
         }
         function handleInputSearch() {
@@ -2023,7 +2025,7 @@
                 const searchContainer = document.getElementById("searchContainer");
                 const button = document.getElementById("toggleSearchButton");
                 searchContainer.style.display = "none";
-                button.textContent = "Show Search Input";
+                button.textContent = "Show Search Code";
                 const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
                 localLanguageCheckboxes.forEach((checkbox) => {
                     checkbox.checked = false;
