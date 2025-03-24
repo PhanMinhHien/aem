@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -919,35 +920,72 @@
             document.getElementById("toggleSaveButton").style.display = "none";
         }
         function processAndAddCustomInput() {
-            let input = document.getElementById("customInput").value;
-            const baseUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
-            if (!input.startsWith(baseUrl)) {
-                input = input.trim();
-            } else {
-                input = input.replace(baseUrl, "");
-            }
-            let savedInputs = JSON.parse(localStorage.getItem('savedInputs')) || [];
-            if (savedInputs.includes(input)) {
-                return;
-            }
-            if (input) {
-                savedInputs.push(input);
-                localStorage.setItem('savedInputs', JSON.stringify(savedInputs));
-                const container = document.getElementById("savedCustomInputs");
-                const div = document.createElement("div");
-                div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" checked /> ${input}`;
-                container.appendChild(div);
-                const radios = document.querySelectorAll('input[name="savedInput"]');
-                radios[radios.length - 1].value = input;
-                radios[radios.length - 1].nextSibling.textContent = input;
-                document.getElementById("customInput").value = input;
-                generateLinks();
-                masterLanguage.disabled = false;
+    let input = document.getElementById("customInput").value.trim();
 
-                document.getElementById("clearSavedLinksBtn").style.display = "block";
-                document.getElementById("toggleSaveButton").style.display = "block";
-            }
-        }
+    // Kiểm tra nếu input hiện tại khác với input đã được generate
+    if (input !== lastGeneratedInput) {
+        alert("Please generate links for this input before saving!");
+        return;
+    }
+
+    const baseUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
+    
+    if (input.startsWith(baseUrl)) {
+        input = input.replace(baseUrl, "");
+    }
+
+    let savedInputs = JSON.parse(localStorage.getItem('savedInputs')) || [];
+    if (savedInputs.includes(input)) {
+        return;
+    }
+
+    if (input) {
+        savedInputs.push(input);
+        localStorage.setItem('savedInputs', JSON.stringify(savedInputs));
+
+        const container = document.getElementById("savedCustomInputs");
+        const div = document.createElement("div");
+        div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" checked /> ${input}`;
+        container.appendChild(div);
+
+        document.getElementById("customInput").value = input;
+        masterLanguage.disabled = false;
+
+        document.getElementById("clearSavedLinksBtn").style.display = "block";
+        document.getElementById("toggleSaveButton").style.display = "block";
+    }
+}
+        // function processAndAddCustomInput() {
+        //     let input = document.getElementById("customInput").value;
+        //     const baseUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
+        //     if (!input.startsWith(baseUrl)) {
+        //         input = input.trim();
+        //     } else {
+        //         input = input.replace(baseUrl, "");
+        //     }
+        //     let savedInputs = JSON.parse(localStorage.getItem('savedInputs')) || [];
+        //     if (savedInputs.includes(input)) {
+        //         return;
+        //     }
+        //     if (input) {
+        //         savedInputs.push(input);
+        //         localStorage.setItem('savedInputs', JSON.stringify(savedInputs));
+        //         const container = document.getElementById("savedCustomInputs");
+        //         const div = document.createElement("div");
+        //         div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" checked /> ${input}`;
+        //         container.appendChild(div);
+        //         const radios = document.querySelectorAll('input[name="savedInput"]');
+        //         radios[radios.length - 1].value = input;
+        //         radios[radios.length - 1].nextSibling.textContent = input;
+        //         document.getElementById("customInput").value = input;
+        //         generateLinks();
+        //         masterLanguage.disabled = false;
+
+        //         document.getElementById("clearSavedLinksBtn").style.display = "block";
+        //         document.getElementById("toggleSaveButton").style.display = "block";
+        //     }
+        // }
+        let lastGeneratedInput = ""; // Biến để lưu input đã được generate  
         function updateCustomInput(radio) {
             const input = document.getElementById("customInput");
             input.value = radio.value;
@@ -961,7 +999,7 @@
                 savedInputs[index] = radio.value;
                 localStorage.setItem('savedInputs', JSON.stringify(savedInputs));
             }
-        }
+        }   
         function toggleSavedInputs() {
             const container = document.getElementById("savedCustomInputs");
             if (container.style.display === "none") {
@@ -1539,6 +1577,13 @@
             document.getElementById("customInput").value = result;
             document.getElementById("saveButton").style.display = "block";
             document.getElementById("toggleSaveButton").style.display = "none";
+            let inputField = document.getElementById("customInput");
+    if (inputField.value.trim() === "") {
+        alert("Please enter a valid input before generating links!");
+        return;
+    }
+    lastGeneratedInput = inputField.value.trim(); // Cập nhật input sau khi generate
+    console.log("Generated input:", lastGeneratedInput);
         }
         function generateAdditionalLinks(masterLanguage, localLanguage, customInput, localLanguages, liveSiteLanguage, linksDiv) {
             let linksHTML = "";
