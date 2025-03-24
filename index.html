@@ -54,19 +54,19 @@
             margin-bottom: 50px;
         }
 
-        button {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+            button {
+                padding: 10px 15px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+            button:hover {
+                background-color: #0056b3;
+            }
 
         .radio-group {
             column-count: 3;
@@ -396,17 +396,17 @@
             <label for="customInput">Custom Input:</label>
             <input type="text" id="customInput" />
             <div id="buttons-input">
-                <button id="saveButton" onclick="processAndAddCustomInput()" style="display: none;">Save</button>
+        <button id="generateAndSaveBtn">Generate & Save</button>
+        <button onclick="generateLinks()">Generate</button>
+        <button id="resetLinks">Reset Status Links</button>
+        <button onclick="generateLanguageSuggestions()">Suggest Language</button>
 
-                <button id="toggleSaveButton" onclick="toggleSavedInputs()" style="display: none;">Toggle Saved
-                    Inputs</button>
-                <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button>
-                <button onclick="generateLinks()">Generate</button>
-                <button id="generateAndSaveBtn">Generate & Save</button>
+        <button id="saveButton" onclick="processAndAddCustomInput()" style="display: none;">Save</button>
+        <button id="toggleSaveButton" onclick="toggleSavedInputs()" style="display: none;">Toggle Saved Inputs</button>
+        <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button>
 
-                <button id="resetLinks">Reset Status Links</button>
-                <button onclick="generateLanguageSuggestions()">Suggest Language</button>
-            </div>
+</div>
+
             <div class="check"><a
                     href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB"
                     target="_blank">Wrong URL?</a> | <a href="https://www.grundfos.com/components" target="_blank">Brand
@@ -914,6 +914,10 @@
             GMX: ["mx/es"],
         };
       document.getElementById("generateAndSaveBtn").addEventListener("click", function() {
+    // Kiểm tra nếu customInput rỗng thì bỏ qua ngay
+    const customInput = document.getElementById("customInput").value.trim();
+    if (!customInput) return;
+    
     generateLinks();  // Gọi generate trước
 
     setTimeout(() => {
@@ -1586,6 +1590,10 @@
                         result = baseUrl;
                     }
                 }
+                document.getElementById("customInput").value = result;
+   
+    //         document.getElementById("toggleSaveButton").style.display = "block";
+   
             }
 
             if (condition === "radio1") {
@@ -1597,11 +1605,9 @@
             } else if (condition === "radio4") {
                 generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
             }
-            document.getElementById("customInput").value = result;
-            document.getElementById("saveButton").style.display = "block";
-            document.getElementById("toggleSaveButton").style.display = "block";
+                     document.getElementById("saveButton").style.display = "block";
             let inputField = document.getElementById("customInput");
-    if (inputField.value.trim() === "") {
+             if (inputField.value.trim() === "") {
         alert("Please enter a valid input before generating links!");
         return;
     }
