@@ -19,13 +19,7 @@
             box-sizing: border-box;
         }
 
-        .column-left {
-            flex: 1;
-            padding-right: 20px;
-            max-width: 40%;
-            position: sticky;
-            top: 30px;
-        }
+        
 
         .link-part {
             background-color: black;
@@ -34,12 +28,21 @@
             color: #fff;
             border-radius: 5px;
         }
-
-        .column-right {
+        @media(min-width: 1200px){
+            .column-left {
+            flex: 1;
+            padding-right: 20px;
+            max-width: 40%;
+            position: sticky;
+            top: 30px;
+        }
+.column-right {
             flex: 1;
             padding-left: 20px;
             max-width: 55%;
         }
+        }
+        
 
         #links:not(:empty),
         #fragmentContainer:not(:empty) {
@@ -115,9 +118,9 @@
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .container {
-                width: 90%;
+                width: 100%;
             }
         }
 
@@ -399,6 +402,8 @@
                     Inputs</button>
                 <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button>
                 <button onclick="generateLinks()">Generate</button>
+                <button id="generateAndSaveBtn">Generate & Save</button>
+
                 <button id="resetLinks">Reset Status Links</button>
                 <button onclick="generateLanguageSuggestions()">Suggest Language</button>
             </div>
@@ -407,7 +412,6 @@
                     target="_blank">Wrong URL?</a> | <a href="https://www.grundfos.com/components" target="_blank">Brand
                     Components</a></div>
             <div id="savedCustomInputs" style="display: none;"></div>
-            <div id="savedCustomInputs"></div>
             <div id="searchContainer" style="display: none">
                 <label for="searchInput">Search Language:</label>
                 <input type="text" id="searchInput" placeholder="Search Language" oninput="handleInputSearch()" />
@@ -909,6 +913,26 @@
             GCA_FR: ["ca/fr"],
             GMX: ["mx/es"],
         };
+      document.getElementById("generateAndSaveBtn").addEventListener("click", function() {
+    generateLinks();  // Gọi generate trước
+
+    setTimeout(() => {
+        processAndAddCustomInput();  // Sau đó mới gọi save
+
+        // Đảm bảo box chứa inputs được hiển thị với CSS đúng
+        const container = document.getElementById("savedCustomInputs");
+        container.style.display = "block";
+        container.style.padding = "20px";
+        container.style.backgroundColor = "#ffffff";
+        container.style.marginBottom = "30px";
+        container.style.width = "98%";
+
+        // Hiển thị nút toggle save nếu cần
+        document.getElementById("toggleSaveButton").style.display = "block"; 
+    }, 100); // Delay 1 chút để đảm bảo generateLinks() hoàn tất
+});
+
+
         window.clearRadioSelections = function () {
             const RadioSelections = document.getElementById("savedCustomInputs");
             RadioSelections.innerHTML = "";
@@ -1574,9 +1598,8 @@
                 generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
             }
             document.getElementById("customInput").value = result;
-            document.getElementById("customInput").value = result;
             document.getElementById("saveButton").style.display = "block";
-            document.getElementById("toggleSaveButton").style.display = "none";
+            document.getElementById("toggleSaveButton").style.display = "block";
             let inputField = document.getElementById("customInput");
     if (inputField.value.trim() === "") {
         alert("Please enter a valid input before generating links!");
