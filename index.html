@@ -909,6 +909,7 @@
             GCA_FR: ["ca/fr"],
             GMX: ["mx/es"],
         };
+       
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
@@ -1015,6 +1016,8 @@
                 document.getElementById("toggleSaveButton").style.display = "none";
             }
         };
+       
+
         document.addEventListener("DOMContentLoaded", function () {
             const masterCodes = Object.keys(localLanguages);
             const masterSelectionButton = document.createElement("button");
@@ -1030,10 +1033,11 @@
         <h3>Select Master Language</h3>
         <input type="text" id="masterCodeInput" placeholder="Enter master codes (comma separated)" />
         <div id="masterCheckboxContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;"></div>
-        <button onclick="generateMasterCheckboxes()">Submit</button>
-        <button onclick="clearMasterSelections()">Clear</button>
+        <button id="submit">Submit</button>
+        <button id="clear">Clear</button>
     `;
             columnLeft.appendChild(popup);
+           
             function showMasterCodePopup() {
                 if (popup.style.display === "none") {
                     popup.style.display = "block";
@@ -1093,6 +1097,8 @@
                 const container = document.getElementById("masterCheckboxContainer");
                 container.innerHTML = "";
             };
+            document.getElementById("submit").addEventListener("click", generateMasterCheckboxes);
+            document.getElementById("clear").addEventListener("click", clearMasterSelections);
         });
         document.getElementById("customInput").addEventListener("input", function () {
             let inputValue = this.value;
@@ -1157,15 +1163,15 @@
         if (!found) {
             document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
             document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-            document.getElementById("masterLanguage").selectedIndex = -1;  
+            document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
         }
     } else {
         document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
         document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-        document.getElementById("masterLanguage").selectedIndex = -1;  
+        document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
     }
 }
-
+document.getElementById("applySearchButton").addEventListener("click", applySearchInput);
 function applySearchInput() {
     console.log("applySearchInput ready ✅");
     const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
@@ -1214,12 +1220,12 @@ function applySearchInput() {
 
         if (!found) {
             console.warn("⚠️ Không tìm thấy localLang trong localLanguages");
-            document.getElementById("masterLanguage").selectedIndex = -1;  
+            document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
             document.getElementById("localLanguages").innerHTML = "";
         }
     } else {
         console.warn("⚠️ searchInput không có trong languageMapping");
-        document.getElementById("masterLanguage").selectedIndex = -1;  
+        document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
         document.getElementById("localLanguages").innerHTML = "";
     }
 }
