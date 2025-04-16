@@ -413,7 +413,7 @@
                 <input type="text" id="searchInput" placeholder="Search Language" oninput="handleInputSearch()" />
                 <div id="masterLanguageInfo">Master Language:</div>
                 <div id="localLanguagesInfo">Local Languages:</div>
-                <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
+                <button id="applySearchButton">Apply Search</button>
             </div>
             <div class="radio-group">
                 <label>
@@ -1137,76 +1137,93 @@
             }
         }
         function handleInputSearch() {
-            const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
-            document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
-            document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
-            if (languageMapping[searchInput]) {
-                const localLang = languageMapping[searchInput][0];
-                let found = false;
-                for (const masterLang in localLanguages) {
-                    if (localLanguages[masterLang].includes(localLang)) {
-                        document.getElementById("masterLanguageInfo").textContent = "Master Language: " + masterLang;
-                        document.getElementById("localLanguagesInfo").textContent = "Local Languages: " + localLang;
-                        found = true;
+    const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
+    document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
+    document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
+
+    if (languageMapping[searchInput]) {
+        const localLang = languageMapping[searchInput][0];
+        let found = false;
+
+        for (const masterLang in localLanguages) {
+            if (localLanguages[masterLang].includes(localLang)) {
+                document.getElementById("masterLanguageInfo").textContent = "Master Language: " + masterLang;
+                document.getElementById("localLanguagesInfo").textContent = "Local Languages: " + localLang;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
+            document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+            document.getElementById("masterLanguage").selectedIndex = -1;  
+        }
+    } else {
+        document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
+        document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+        document.getElementById("masterLanguage").selectedIndex = -1;  
+    }
+}
+
+function applySearchInput() {
+    console.log("applySearchInput ready ✅");
+    const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
+    const customInput = document.getElementById("customInput").value.trim();
+
+    if (!customInput) {
+        alert("Please enter data into the customInput before proceeding.");
+        return;
+    }
+
+    if (!searchInput) {
+        alert("Please enter data into the Search Language before proceeding.");
+        return;
+    }
+
+    if (languageMapping[searchInput]) {
+        const localLang = languageMapping[searchInput][0];
+        let found = false;
+
+        for (const masterLang in localLanguages) {
+            if (localLanguages[masterLang].includes(localLang)) {
+                const masterSelect = document.getElementById("masterLanguage");
+                const options = masterSelect.getElementsByTagName("option");
+
+                for (let option of options) {
+                    if (option.value === masterLang) {
+                        option.selected = true;
                         break;
                     }
                 }
-                if (!found) {
-                    document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
-                    document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+
+                updateLocalLanguages1(localLanguages[masterLang]);
+
+                const localCheckboxToSelect = document.querySelector(
+                    `#localLanguages input[type="checkbox"][value="${localLang}"]`
+                );
+                if (localCheckboxToSelect) {
+                    localCheckboxToSelect.checked = true;
                 }
-            } else {
-                document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
-                document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+
+                generateLinks();
+                found = true;
+                break;
             }
         }
-        function applySearchInput() {
-            const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
-            const customInput = document.getElementById("customInput").value.trim();
-            if (!customInput) {
-                alert("Please enter data into the customInput before proceeding.");
-                return;
-            }
-            if (!searchInput) alert("Please enter data into the Search Language before proceeding.");
-            {
-                return;
-            }
-            if (languageMapping[searchInput]) {
-                const localLang = languageMapping[searchInput][0];
-                let found = false;
-                for (const masterLang in localLanguages) {
-                    if (localLanguages[masterLang].includes(localLang)) {
-                        const masterSelect = document.getElementById("masterLanguage");
-                        const options = masterSelect.getElementsByTagName("option");
-                        for (let option of options) {
-                            if (option.value === masterLang) {
-                                option.selected = true;
-                                break;
-                            }
-                        }
-                        updateLocalLanguages1(localLanguages[masterLang]);
-                        const localCheckboxToSelect = document.querySelector(`#localLanguages input[type="checkbox"][value="${localLang}"]`);
-                        if (localCheckboxToSelect) {
-                            localCheckboxToSelect.checked = true;
-                        }
-                        generateLinks();
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    document.getElementById("masterLanguage").selectedIndex = 0;
-                    document.getElementById("localLanguages").innerHTML = "";
-                    const localCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
-                    localCheckboxes.forEach((checkbox) => (checkbox.checked = false));
-                }
-            } else {
-                document.getElementById("masterLanguage").selectedIndex = 0;
-                document.getElementById("localLanguages").innerHTML = "";
-                const localCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
-                localCheckboxes.forEach((checkbox) => (checkbox.checked = false));
-            }
+
+        if (!found) {
+            console.warn("⚠️ Không tìm thấy localLang trong localLanguages");
+            document.getElementById("masterLanguage").selectedIndex = -1;  
+            document.getElementById("localLanguages").innerHTML = "";
         }
+    } else {
+        console.warn("⚠️ searchInput không có trong languageMapping");
+        document.getElementById("masterLanguage").selectedIndex = -1;  
+        document.getElementById("localLanguages").innerHTML = "";
+    }
+}
+
         function generateLanguageSuggestions() {
             const inputURL = document.getElementById("customInput").value.trim();
             const masterSelect = document.getElementById("masterLanguage");
