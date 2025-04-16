@@ -912,17 +912,17 @@
             GMX: ["mx/es"],
         };
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
-            // Kiểm tra nếu customInput rỗng thì bỏ qua ngay
+            
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
 
-            // Gọi generate trước
-            await generateLinks(); // Chờ generate hoàn tất
+            
+            await generateLinks(); 
 
-            // Sau khi generate hoàn tất mới gọi save
+            
             processAndAddCustomInput();
 
-            // Đảm bảo box chứa inputs được hiển thị với CSS đúng
+            
             const container = document.getElementById("savedCustomInputs");
             container.style.display = "block";
             container.style.padding = "20px";
@@ -939,13 +939,13 @@
             RadioSelections.style.display = "none";
             localStorage.removeItem("savedInputs");
             document.getElementById("clearSavedLinksBtn").style.display = "none";
-            // document.getElementById("saveButton").style.display = "none";
+            
             document.getElementById("toggleSaveButton").style.display = "none";
         };
         function processAndAddCustomInput() {
             let input = document.getElementById("customInput").value.trim();
 
-            // Kiểm tra nếu input hiện tại khác với input đã được generate
+            
             if (input !== lastGeneratedInput) {
                 alert("Please generate links for this input before saving!");
                 return;
@@ -965,7 +965,7 @@
                 div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" checked /> ${input}`;
                 container.appendChild(div);
 
-                // Sau khi lưu, không thay đổi giá trị của customInput
+                
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
 
@@ -974,68 +974,68 @@
             }
         }
 
-        // function processAndAddCustomInput() {
-        //     let input = document.getElementById("customInput").value;
-        //     const baseUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
-        //     if (!input.startsWith(baseUrl)) {
-        //         input = input.trim();
-        //     } else {
-        //         input = input.replace(baseUrl, "");
-        //     }
-        //     let savedInputs = JSON.parse(localStorage.getItem('savedInputs')) || [];
-        //     if (savedInputs.includes(input)) {
-        //         return;
-        //     }
-        //     if (input) {
-        //         savedInputs.push(input);
-        //         localStorage.setItem('savedInputs', JSON.stringify(savedInputs));
-        //         const container = document.getElementById("savedCustomInputs");
-        //         const div = document.createElement("div");
-        //         div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" checked /> ${input}`;
-        //         container.appendChild(div);
-        //         const radios = document.querySelectorAll('input[name="savedInput"]');
-        //         radios[radios.length - 1].value = input;
-        //         radios[radios.length - 1].nextSibling.textContent = input;
-        //         document.getElementById("customInput").value = input;
-        //         generateLinks();
-        //         masterLanguage.disabled = false;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
-        //         document.getElementById("clearSavedLinksBtn").style.display = "block";
-        //         document.getElementById("toggleSaveButton").style.display = "block";
-        //     }
-        // }
-        let lastGeneratedInput = ""; // Biến để lưu input đã được generate
+        
+        
+        
+        
+        let lastGeneratedInput = ""; 
         function updateCustomInput(radio) {
             const input = document.getElementById("customInput");
 
-            // Cập nhật giá trị của customInput từ radio button
+            
             input.value = radio.value;
 
-            // Kiểm tra nếu customInput đã được generate trước đó (để tránh gọi lại generateLinks)
+            
             if (input.value !== lastGeneratedInput) {
-                generateLinks(); // Chỉ gọi generate nếu customInput chưa được generate
+                generateLinks(); 
             }
 
-            // Cập nhật lại radio.value nếu cần thiết
+            
             setTimeout(() => {
-                // Đồng bộ lại radio.value với customInput.value
+                
                 if (radio.value !== input.value) {
                     radio.value = input.value;
                 }
             }, 0);
 
-            // Lưu lại giá trị mới vào savedInputs trong localStorage
+            
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
 
-            // Kiểm tra xem radio.value có tồn tại trong savedInputs không
+            
             const index = savedInputs.indexOf(radio.value);
             if (index === -1) {
-                savedInputs.push(radio.value); // Nếu không có, thêm mới vào savedInputs
+                savedInputs.push(radio.value); 
             } else {
-                savedInputs[index] = radio.value; // Nếu có, cập nhật lại giá trị
+                savedInputs[index] = radio.value; 
             }
 
-            // Lưu lại vào localStorage
+            
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
         }
 
@@ -1163,25 +1163,29 @@
             };
         });
         document.getElementById("customInput").addEventListener("input", function () {
-            let inputValue = this.value;
-            if (inputValue.startsWith("/")) {
-                inputValue = inputValue.substring(1);
-            }
-            const baseUrls = ["https://author-grundfos-prod-65.adobecqms.net/", "https://www.grundfos.com/", "https://product-selection.grundfos.com/"];
-            const customUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
-            let isValid = false;
-            for (let url of baseUrls) {
-                if (inputValue.startsWith(url)) {
-                    isValid = true;
-                    break;
-                }
-            }
-            if (!isValid && !inputValue.startsWith(customUrl)) {
-                this.value = customUrl + inputValue;
-            } else {
-                this.value = inputValue;
-            }
-        });
+    let inputValue = this.value;
+    if (inputValue.startsWith("/")) {
+        inputValue = inputValue.substring(1);
+    }
+
+    const baseUrls = [
+        "https://author-grundfos-prod-65.adobecqms.net/",
+        "https://www.grundfos.com/",
+        "https://product-selection.grundfos.com/"
+    ];
+    const customUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
+
+    let isValid = baseUrls.some(url => inputValue.startsWith(url));
+    let finalUrl = isValid || inputValue.startsWith(customUrl)
+        ? inputValue
+        : customUrl + inputValue;
+
+    
+    console.log("Final URL:", finalUrl);
+
+    
+});
+
         const openModalButton = document.getElementById("openModalButton");
         const modal = document.getElementById("modal");
         const closeModalButton = document.getElementById("closeModalButton");
@@ -1603,7 +1607,7 @@
                 }
                 document.getElementById("customInput").value = result;
 
-                //         document.getElementById("toggleSaveButton").style.display = "block";
+                
             }
 
             if (condition === "radio1") {
@@ -1615,23 +1619,23 @@
             } else if (condition === "radio4") {
                 generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
             }
-            // Đảm bảo rằng customInput không rỗng trước khi gọi generate
+            
             let inputField = document.getElementById("customInput");
             if (inputField.value.trim() === "") {
                 alert("Please enter a valid input before generating links!");
                 return;
             }
 
-            // Lưu giá trị đầu vào hiện tại trước khi thay đổi
-            const lastInput = inputField.value.trim(); // Lưu giá trị trước khi thay đổi
+            
+            const lastInput = inputField.value.trim(); 
 
-            // Gán lại giá trị đã generate cho customInput
+            
             document.getElementById("customInput").value = result;
 
-            // Cập nhật lastGeneratedInput sau khi đã thay đổi customInput
+            
             lastGeneratedInput = inputField.value.trim();
 
-            // In ra giá trị của lastGeneratedInput để kiểm tra
+            
             console.log("Generated input:", lastGeneratedInput);
 
         }
