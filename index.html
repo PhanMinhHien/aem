@@ -6,6 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic_Links_Generator_AEM</title>
     <style>
+        #tooltip {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            /* Chiều rộng tối đa của tooltip */
+            z-index: 9999;
+            display: grid;
+            /* Dùng grid cho tất cả */
+            grid-gap: 8px;
+            /* Khoảng cách giữa các phần tử */
+            overflow-y: auto;
+            /* Để có thể cuộn khi nhiều gợi ý */
+            max-height: 300px;
+            /* Đảm bảo tooltip có chiều cao tối đa */
+        }
+
+        #tooltip.three-columns {
+            grid-template-columns: repeat(3, 1fr);
+            /* Chia thành 3 cột */
+        }
+
+        #tooltip.single-column {
+            grid-template-columns: 1fr;
+            /* Chỉ 1 cột */
+        }
+
+        .suggestion-item {
+            cursor: pointer;
+            padding: 5px;
+            white-space: nowrap;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -411,6 +450,7 @@
             <div id="searchContainer" style="display: none">
                 <label for="searchInput">Search Language:</label>
                 <input type="text" id="searchInput" placeholder="Search Language" oninput="handleInputSearch()" />
+                <div id="tooltip" style="display:none;"></div>
                 <div id="masterLanguageInfo">Master Language:</div>
                 <div id="localLanguagesInfo">Local Languages:</div>
                 <button id="applySearchButton">Apply Search</button>
@@ -1207,6 +1247,46 @@
         }
         function handleInputSearch() {
             const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
+            const tooltip = document.getElementById("tooltip");
+            document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
+            document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
+            if (!searchInput) {
+                tooltip.style.display = "none";
+                return;
+            }
+            const matchedKeys = Object.keys(languageMapping).filter(key =>
+                key.toUpperCase().includes(searchInput)
+            );
+            if (matchedKeys.length > 0) {
+                const rect = document.getElementById("searchInput").getBoundingClientRect();
+                tooltip.style.display = "grid";
+                tooltip.style.left = rect.left + "px";
+                tooltip.style.top = rect.bottom + "px";
+                tooltip.style.width = "50%";
+                tooltip.innerHTML = "";
+                if (matchedKeys.length > 10) {
+                    tooltip.classList.add("three-columns");
+                    tooltip.classList.remove("single-column");
+                } else {
+                    tooltip.classList.add("single-column");
+                    tooltip.classList.remove("three-columns");
+                }
+                matchedKeys.forEach(key => {
+                    const suggestion = document.createElement("div");
+                    suggestion.textContent = key;
+                    suggestion.classList.add("suggestion-item");
+                    suggestion.onclick = () => {
+                        document.getElementById("searchInput").value = key;
+                        tooltip.style.display = "none";
+                        displayMasterAndLocalLanguages(key);
+                    };
+                    tooltip.appendChild(suggestion);
+                });
+            } else {
+                tooltip.style.display = "none";
+            }
+        }
+        function displayMasterAndLocalLanguages(searchInput) {
             document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
             document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
             if (languageMapping[searchInput]) {
@@ -1223,12 +1303,41 @@
                 if (!found) {
                     document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
                     document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-                    document.getElementById("masterLanguage").selectedIndex = -1;
                 }
             } else {
                 document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
                 document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-                document.getElementById("masterLanguage").selectedIndex = -1;
+            }
+        }
+        function showSuggestions() {
+            const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
+            const tooltip = document.getElementById("tooltip");
+            if (!searchInput) {
+                tooltip.style.display = "none";
+                return;
+            }
+            const matchedKeys = Object.keys(languageMapping).filter(key =>
+                key.toUpperCase().includes(searchInput)
+            );
+            if (matchedKeys.length > 0) {
+                const rect = document.getElementById("searchInput").getBoundingClientRect();
+                tooltip.style.display = "block";
+                tooltip.style.left = rect.left + "px";
+                tooltip.style.top = rect.bottom + "px";
+                tooltip.innerHTML = "";
+                matchedKeys.forEach(key => {
+                    const suggestion = document.createElement("div");
+                    suggestion.textContent = key;
+                    suggestion.classList.add("suggestion-item");
+                    suggestion.onclick = () => {
+                        document.getElementById("searchInput").value = key;
+                        tooltip.style.display = "none";
+                        applySearchInput();
+                    };
+                    tooltip.appendChild(suggestion);
+                });
+            } else {
+                tooltip.style.display = "none";
             }
         }
         document.getElementById("applySearchButton").addEventListener("click", applySearchInput);
