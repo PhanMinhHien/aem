@@ -909,7 +909,7 @@
             GCA_FR: ["ca/fr"],
             GMX: ["mx/es"],
         };
-       
+
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
@@ -1016,7 +1016,7 @@
                 document.getElementById("toggleSaveButton").style.display = "none";
             }
         };
-       
+
 
         document.addEventListener("DOMContentLoaded", function () {
             const masterCodes = Object.keys(localLanguages);
@@ -1037,7 +1037,7 @@
         <button id="clear">Clear</button>
     `;
             columnLeft.appendChild(popup);
-           
+
             function showMasterCodePopup() {
                 if (popup.style.display === "none") {
                     popup.style.display = "block";
@@ -1143,92 +1143,92 @@
             }
         }
         function handleInputSearch() {
-    const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
-    document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
-    document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
+            const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
+            document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
+            document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
 
-    if (languageMapping[searchInput]) {
-        const localLang = languageMapping[searchInput][0];
-        let found = false;
+            if (languageMapping[searchInput]) {
+                const localLang = languageMapping[searchInput][0];
+                let found = false;
 
-        for (const masterLang in localLanguages) {
-            if (localLanguages[masterLang].includes(localLang)) {
-                document.getElementById("masterLanguageInfo").textContent = "Master Language: " + masterLang;
-                document.getElementById("localLanguagesInfo").textContent = "Local Languages: " + localLang;
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
-            document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-            document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
-        }
-    } else {
-        document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
-        document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-        document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
-    }
-}
-document.getElementById("applySearchButton").addEventListener("click", applySearchInput);
-function applySearchInput() {
-    console.log("applySearchInput ready ✅");
-    const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
-    const customInput = document.getElementById("customInput").value.trim();
-
-    if (!customInput) {
-        alert("Please enter data into the customInput before proceeding.");
-        return;
-    }
-
-    if (!searchInput) {
-        alert("Please enter data into the Search Language before proceeding.");
-        return;
-    }
-
-    if (languageMapping[searchInput]) {
-        const localLang = languageMapping[searchInput][0];
-        let found = false;
-
-        for (const masterLang in localLanguages) {
-            if (localLanguages[masterLang].includes(localLang)) {
-                const masterSelect = document.getElementById("masterLanguage");
-                const options = masterSelect.getElementsByTagName("option");
-
-                for (let option of options) {
-                    if (option.value === masterLang) {
-                        option.selected = true;
+                for (const masterLang in localLanguages) {
+                    if (localLanguages[masterLang].includes(localLang)) {
+                        document.getElementById("masterLanguageInfo").textContent = "Master Language: " + masterLang;
+                        document.getElementById("localLanguagesInfo").textContent = "Local Languages: " + localLang;
+                        found = true;
                         break;
                     }
                 }
 
-                updateLocalLanguages1(localLanguages[masterLang]);
-
-                const localCheckboxToSelect = document.querySelector(
-                    `#localLanguages input[type="checkbox"][value="${localLang}"]`
-                );
-                if (localCheckboxToSelect) {
-                    localCheckboxToSelect.checked = true;
+                if (!found) {
+                    document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
+                    document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+                    document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
                 }
-
-                generateLinks();
-                found = true;
-                break;
+            } else {
+                document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
+                document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+                document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
             }
         }
+        document.getElementById("applySearchButton").addEventListener("click", applySearchInput);
+        function applySearchInput() {
+            console.log("applySearchInput ready ✅");
+            const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
+            const customInput = document.getElementById("customInput").value.trim();
 
-        if (!found) {
-            console.warn("⚠️ Không tìm thấy localLang trong localLanguages");
-            document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
-            document.getElementById("localLanguages").innerHTML = "";
+            if (!customInput) {
+                alert("Please enter data into the customInput before proceeding.");
+                return;
+            }
+
+            if (!searchInput) {
+                alert("Please enter data into the Search Language before proceeding.");
+                return;
+            }
+
+            if (languageMapping[searchInput]) {
+                const localLang = languageMapping[searchInput][0];
+                let found = false;
+
+                for (const masterLang in localLanguages) {
+                    if (localLanguages[masterLang].includes(localLang)) {
+                        const masterSelect = document.getElementById("masterLanguage");
+                        const options = masterSelect.getElementsByTagName("option");
+
+                        for (let option of options) {
+                            if (option.value === masterLang) {
+                                option.selected = true;
+                                break;
+                            }
+                        }
+
+                        updateLocalLanguages1(localLanguages[masterLang]);
+
+                        const localCheckboxToSelect = document.querySelector(
+                            `#localLanguages input[type="checkbox"][value="${localLang}"]`
+                        );
+                        if (localCheckboxToSelect) {
+                            localCheckboxToSelect.checked = true;
+                        }
+
+                        generateLinks();
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    console.warn("⚠️ Không tìm thấy localLang trong localLanguages");
+                    document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
+                    document.getElementById("localLanguages").innerHTML = "";
+                }
+            } else {
+                console.warn("⚠️ searchInput không có trong languageMapping");
+                document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
+                document.getElementById("localLanguages").innerHTML = "";
+            }
         }
-    } else {
-        console.warn("⚠️ searchInput không có trong languageMapping");
-        document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
-        document.getElementById("localLanguages").innerHTML = "";
-    }
-}
 
         function generateLanguageSuggestions() {
             const inputURL = document.getElementById("customInput").value.trim();
@@ -1489,6 +1489,9 @@ function applySearchInput() {
                     if (result.endsWith("/")) {
                         result = result.slice(0, -1);
                     }
+                    if (result.startsWith("/")) {
+                        result = result.slice(1);
+                    }
                 }
                 else if (!alreadyHandled && baseUrl.includes("grundfos/")) {
                     const grundfosMatch = baseUrl.match(/^.*grundfos\/([^/]+\/[^/]+\/.*)/);
@@ -1522,6 +1525,9 @@ function applySearchInput() {
                     if (result.endsWith("/")) {
                         result = result.slice(0, -1);
                     }
+                    if (result.startsWith("/")) {
+                        result = result.slice(1);
+                    }
                 }
                 else if (baseUrl.match(/https:\/\/www\.grundfos\.com\/([a-z]{2})\//) || baseUrl.match(/https:\/\/product-selection\.grundfos\.com\/([a-z]{2})\//)) {
                     const regionPattern = /(https:\/\/(?:www|product-selection)\.grundfos\.com\/)([a-z]{2})\//;
@@ -1548,6 +1554,9 @@ function applySearchInput() {
                     }
                     if (result.endsWith("/")) {
                         result = result.slice(0, -1);
+                    }
+                    if (result.startsWith("/")) {
+                        result = result.slice(1);
                     }
                     if (!baseUrl.match(/https:\/\/www\.grundfos\.com\//) && !baseUrl.match(/https:\/\/product-selection\.grundfos\.com\//)) {
                         result = baseUrl;
@@ -1599,6 +1608,9 @@ function applySearchInput() {
                 }
                 if (result.endsWith("/")) {
                     result = result.slice(0, -1);
+                }
+                if (result.startsWith("/")) {
+                    result = result.slice(1);
                 }
             }
             const replacements = [
