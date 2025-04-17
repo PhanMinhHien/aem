@@ -909,7 +909,6 @@
             GCA_FR: ["ca/fr"],
             GMX: ["mx/es"],
         };
-
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
@@ -931,6 +930,7 @@
             document.getElementById("clearSavedLinksBtn").style.display = "none";
             document.getElementById("toggleSaveButton").style.display = "none";
         };
+        let lastGeneratedInput = "";
         function processAndAddCustomInput() {
             let input = document.getElementById("customInput").value.trim();
             if (input !== lastGeneratedInput) {
@@ -946,26 +946,50 @@
                 localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
                 const container = document.getElementById("savedCustomInputs");
                 const div = document.createElement("div");
-                div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" checked /> ${input}`;
+                div.innerHTML = `
+            <input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" /> ${input}
+            <span class="removeChecked" onclick="removeCheckedInput(this)">&#10006;</span>  <!-- Dấu 'x' để xóa -->
+        `;
                 container.appendChild(div);
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
                 document.getElementById("clearSavedLinksBtn").style.display = "block";
                 document.getElementById("toggleSaveButton").style.display = "block";
+                let radios = document.getElementsByName("savedInput");
+                radios.forEach(function (r) {
+                    r.checked = false;
+                    const removeIcon = r.parentElement.querySelector(".removeChecked");
+                    if (removeIcon) {
+                        removeIcon.style.display = "none";
+                    }
+                });
+                const newRadio = div.querySelector('input[type="radio"]');
+                newRadio.checked = true;
+                const newRemoveIcon = div.querySelector('.removeChecked');
+                if (newRemoveIcon) {
+                    newRemoveIcon.style.display = "inline";
+                }
             }
         }
-        let lastGeneratedInput = "";
         function updateCustomInput(radio) {
             const input = document.getElementById("customInput");
             input.value = radio.value;
             if (input.value !== lastGeneratedInput) {
                 generateLinks();
             }
-            setTimeout(() => {
-                if (radio.value !== input.value) {
-                    radio.value = input.value;
+            let radios = document.getElementsByName("savedInput");
+            radios.forEach(function (r) {
+                r.checked = false;
+                const removeIcon = r.parentElement.querySelector(".removeChecked");
+                if (removeIcon) {
+                    removeIcon.style.display = "none";
                 }
-            }, 0);
+            });
+            radio.checked = true;
+            const selectedRemoveIcon = radio.parentElement.querySelector(".removeChecked");
+            if (selectedRemoveIcon) {
+                selectedRemoveIcon.style.display = "inline";
+            }
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             const index = savedInputs.indexOf(radio.value);
             if (index === -1) {
@@ -974,7 +998,49 @@
                 savedInputs[index] = radio.value;
             }
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+            setTimeout(() => {
+                if (radio.value !== input.value) {
+                    radio.value = input.value;
+                }
+            }, 0);
         }
+        function removeCheckedInput(span) {
+            const radio = span.previousElementSibling;
+            let radios = document.getElementsByName("savedInput");
+            let indexToRemove = Array.from(radios).indexOf(radio);
+            let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            if (indexToRemove !== -1) {
+                savedInputs.splice(indexToRemove, 1);
+            }
+            localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+            span.parentElement.remove();
+            if (indexToRemove > 0) {
+                const previousRadio = radios[indexToRemove - 1];
+                previousRadio.checked = true;
+                document.getElementById("customInput").value = previousRadio.value;
+                generateLinks();
+            } else if (savedInputs.length > 0) {
+                document.getElementById("customInput").value = '';
+            } else {
+                document.getElementById("customInput").value = '';
+                document.getElementById("clearSavedLinksBtn").style.display = "none";
+                document.getElementById("toggleSaveButton").style.display = "none";
+            }
+            toggleRemoveIcon();
+        }
+        function toggleRemoveIcon() {
+            let radios = document.getElementsByName("savedInput");
+            radios.forEach(function (r) {
+                const parentDiv = r.parentElement;
+                const removeIcon = parentDiv.querySelector(".removeChecked");
+                if (r.checked) {
+                    removeIcon.style.display = "inline";
+                } else {
+                    removeIcon.style.display = "none";
+                }
+            });
+        }
+        document.addEventListener('change', toggleRemoveIcon);
         function toggleSavedInputs() {
             const container = document.getElementById("savedCustomInputs");
             if (container.style.display === "none") {
@@ -1016,8 +1082,6 @@
                 document.getElementById("toggleSaveButton").style.display = "none";
             }
         };
-
-
         document.addEventListener("DOMContentLoaded", function () {
             const masterCodes = Object.keys(localLanguages);
             const masterSelectionButton = document.createElement("button");
@@ -1037,7 +1101,6 @@
         <button id="clear">Clear</button>
     `;
             columnLeft.appendChild(popup);
-
             function showMasterCodePopup() {
                 if (popup.style.display === "none") {
                     popup.style.display = "block";
@@ -1146,11 +1209,9 @@
             const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
             document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
             document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
-
             if (languageMapping[searchInput]) {
                 const localLang = languageMapping[searchInput][0];
                 let found = false;
-
                 for (const masterLang in localLanguages) {
                     if (localLanguages[masterLang].includes(localLang)) {
                         document.getElementById("masterLanguageInfo").textContent = "Master Language: " + masterLang;
@@ -1159,16 +1220,15 @@
                         break;
                     }
                 }
-
                 if (!found) {
                     document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
                     document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-                    document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
+                    document.getElementById("masterLanguage").selectedIndex = -1;
                 }
             } else {
                 document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
                 document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
-                document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
+                document.getElementById("masterLanguage").selectedIndex = -1;
             }
         }
         document.getElementById("applySearchButton").addEventListener("click", applySearchInput);
@@ -1176,60 +1236,50 @@
             console.log("applySearchInput ready ✅");
             const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
             const customInput = document.getElementById("customInput").value.trim();
-
             if (!customInput) {
                 alert("Please enter data into the customInput before proceeding.");
                 return;
             }
-
             if (!searchInput) {
                 alert("Please enter data into the Search Language before proceeding.");
                 return;
             }
-
             if (languageMapping[searchInput]) {
                 const localLang = languageMapping[searchInput][0];
                 let found = false;
-
                 for (const masterLang in localLanguages) {
                     if (localLanguages[masterLang].includes(localLang)) {
                         const masterSelect = document.getElementById("masterLanguage");
                         const options = masterSelect.getElementsByTagName("option");
-
                         for (let option of options) {
                             if (option.value === masterLang) {
                                 option.selected = true;
                                 break;
                             }
                         }
-
                         updateLocalLanguages1(localLanguages[masterLang]);
-
                         const localCheckboxToSelect = document.querySelector(
                             `#localLanguages input[type="checkbox"][value="${localLang}"]`
                         );
                         if (localCheckboxToSelect) {
                             localCheckboxToSelect.checked = true;
                         }
-
                         generateLinks();
                         found = true;
                         break;
                     }
                 }
-
                 if (!found) {
                     console.warn("⚠️ Không tìm thấy localLang trong localLanguages");
-                    document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
+                    document.getElementById("masterLanguage").selectedIndex = -1;
                     document.getElementById("localLanguages").innerHTML = "";
                 }
             } else {
                 console.warn("⚠️ searchInput không có trong languageMapping");
-                document.getElementById("masterLanguage").selectedIndex = -1;  // Deselect the master language
+                document.getElementById("masterLanguage").selectedIndex = -1;
                 document.getElementById("localLanguages").innerHTML = "";
             }
         }
-
         function generateLanguageSuggestions() {
             const inputURL = document.getElementById("customInput").value.trim();
             const masterSelect = document.getElementById("masterLanguage");
