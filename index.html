@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +17,7 @@
             background-color: #f4f4f9;
             box-sizing: border-box;
         }
+
         .link-part {
             background-color: black;
             display: inline-block;
@@ -23,6 +25,7 @@
             color: #fff;
             border-radius: 5px;
         }
+
         @media (min-width: 1200px) {
             .column-left {
                 flex: 1;
@@ -31,12 +34,14 @@
                 position: sticky;
                 top: 30px;
             }
+
             .column-right {
                 flex: 1;
                 padding-left: 20px;
                 max-width: 50%;
             }
         }
+
         #links:not(:empty),
         #fragmentContainer:not(:empty) {
             background-color: #e7e5b6;
@@ -46,6 +51,7 @@
             word-wrap: break-word;
             margin-bottom: 50px;
         }
+
         button {
             padding: 10px 15px;
             background-color: #007bff;
@@ -55,12 +61,15 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .radio-group {
             column-count: 3;
         }
+
         input[type="text"],
         select {
             width: 100%;
@@ -72,12 +81,14 @@
             background-color: #f9f9f9;
             transition: border-color 0.3s ease, background-color 0.3s ease;
         }
+
         input[type="text"]:focus,
         select:focus {
             border-color: #007bff;
             outline: none;
             background-color: #fff;
         }
+
         /* 
         .radio-group {
             margin: 20px 0;
@@ -87,9 +98,11 @@
             margin-bottom: 10px;
             cursor: pointer;
         }
+
         .radio-group input[type="radio"] {
             margin-right: 10px;
         }
+
         #links a,
         #fragmentContainer a {
             display: block;
@@ -97,18 +110,22 @@
             text-decoration: none;
             margin-bottom: 8px;
         }
+
         #links a:hover,
         #fragmentContainer a:hover {
             text-decoration: underline;
         }
+
         @media (max-width: 1200px) {
             .container {
                 width: 100%;
             }
         }
+
         #localLanguages {
             column-count: 5;
         }
+
         input[type="checkbox"] {
             -webkit-appearance: none;
             appearance: none;
@@ -123,10 +140,12 @@
             display: inline-block;
             position: relative;
         }
+
         input[type="checkbox"]:checked {
             background-color: #4caf50;
             border-color: #4caf50;
         }
+
         input[type="checkbox"]:checked::before {
             content: "✓";
             font-weight: bold;
@@ -139,27 +158,34 @@
             line-height: 1.25em;
             color: white;
         }
+
         label {
             margin-left: 0.5em;
             font-size: 1em;
             font-weight: 400;
         }
+
         .local-languages {
             margin: 1em 0;
         }
+
         input[type="checkbox"]:hover {
             cursor: pointer;
             border-color: #4caf50;
         }
+
         .hidden {
             display: none;
         }
+
         a.previous {
             color: #05a769 !important;
         }
+
         a.active {
             color: red !important;
         }
+
         textarea {
             width: 100%;
             padding: 10px;
@@ -168,9 +194,11 @@
             border-radius: 4px;
             resize: unset;
         }
+
         #masterLanguage {
             width: auto;
         }
+
         .popup {
             display: none;
             position: fixed;
@@ -183,6 +211,7 @@
             border-radius: 10px;
             z-index: 1000;
         }
+
         .close-btn {
             position: absolute;
             top: 10px;
@@ -190,6 +219,7 @@
             font-size: 24px;
             cursor: pointer;
         }
+
         #buttons,
         #buttons-input {
             display: flex;
@@ -198,14 +228,17 @@
             flex-wrap: wrap;
             margin: 20px 0;
         }
+
         #buttons button {
             padding: 10px 20px;
             font-size: 14px;
             cursor: pointer;
         }
+
         #searchContainer {
             margin-bottom: 30px;
         }
+
         .modal {
             display: none;
             position: fixed;
@@ -217,6 +250,7 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
         }
+
         .modal-content {
             background-color: #fff;
             margin: 0;
@@ -231,6 +265,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
         .hidden-input {
             opacity: 0.5;
             pointer-events: none;
@@ -238,6 +273,7 @@
             text-align: center;
             padding: 10px 0;
         }
+
         .close-button {
             color: #aaa;
             font-size: 28px;
@@ -247,12 +283,14 @@
             right: 15px;
             cursor: pointer;
         }
+
         .close-button:hover,
         .close-button:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -260,6 +298,7 @@
             font-family: Arial, sans-serif;
             background-color: #fff;
         }
+
         th {
             background-color: #4caf50;
             color: white;
@@ -268,58 +307,69 @@
             font-weight: bold;
             font-size: 16px;
         }
+
         td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
             font-size: 14px;
         }
+
         tr:hover {
             background-color: #f1f1f1;
         }
+
         td,
         th {
             border: 1px solid #ddd;
         }
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
         .table-container {
             max-width: 100%;
             overflow-x: auto;
         }
+
         #addFragment,
         #applySearchButton {
             margin-top: 25px;
         }
+
         #searchInput {
             margin-bottom: 25px;
         }
+
         .check {
             margin: 20px 0;
         }
+
         #floatingSavedBtn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 60px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s;
-}
-#floatingSavedBtn:hover {
-    background-color: #0056b3;
-}
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        #floatingSavedBtn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="column-left">
@@ -884,7 +934,7 @@
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
-            await generateLinks(); 
+            await generateLinks();
             processAndAddCustomInput();
             const container = document.getElementById("savedCustomInputs");
             container.style.display = "block";
@@ -900,7 +950,6 @@
             RadioSelections.style.display = "none";
             localStorage.removeItem("savedInputs");
             document.getElementById("clearSavedLinksBtn").style.display = "none";
-            document.getElementById("toggleSaveButton").style.display = "none";
         };
         function processAndAddCustomInput() {
             let input = document.getElementById("customInput").value.trim();
@@ -909,29 +958,57 @@
                 return;
             }
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
-            if (savedInputs.includes(input)) {
-                return;
-            }
+            if (savedInputs.includes(input)) return;
             if (input) {
                 savedInputs.push(input);
                 localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
                 const container = document.getElementById("savedCustomInputs");
-                const div = document.createElement("div");
-                div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${input}" checked /> ${input}`;
-                container.appendChild(div);
+                addSavedInputToDOM(input, container);
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
                 document.getElementById("clearSavedLinksBtn").style.display = "block";
-                document.getElementById("toggleSaveButton").style.display = "block";
+                showOnlyDeleteButtonFor(input);
             }
         }
-        let lastGeneratedInput = ""; 
+        function addSavedInputToDOM(input, container) {
+            const div = document.createElement("div");
+            div.style.display = "flex";
+            div.style.alignItems = "center";
+            div.style.justifyContent = "space-between";
+            const label = document.createElement("label");
+            label.style.flex = "1";
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "savedInput";
+            radio.value = input;
+            radio.checked = true;
+            radio.onchange = function () {
+                updateCustomInput(radio);
+                showOnlyDeleteButtonFor(radio.value);
+            };
+            label.appendChild(radio);
+            label.append(` ${input}`);
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "❌";
+            deleteBtn.onclick = () => deleteSavedInput(input);
+            deleteBtn.style.marginLeft = "10px";
+            deleteBtn.style.background = "none";
+            deleteBtn.style.border = "none";
+            deleteBtn.style.color = "red";
+            deleteBtn.style.cursor = "pointer";
+            deleteBtn.style.display = "inline";
+            deleteBtn.className = "delete-btn";
+            div.appendChild(label);
+            div.appendChild(deleteBtn);
+            container.appendChild(div);
+        }
         function updateCustomInput(radio) {
             const input = document.getElementById("customInput");
             input.value = radio.value;
             if (input.value !== lastGeneratedInput) {
-                generateLinks(); 
+                generateLinks();
             }
+            showOnlyDeleteButtonFor(radio.value);
             setTimeout(() => {
                 if (radio.value !== input.value) {
                     radio.value = input.value;
@@ -940,12 +1017,57 @@
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             const index = savedInputs.indexOf(radio.value);
             if (index === -1) {
-                savedInputs.push(radio.value); 
+                savedInputs.push(radio.value);
             } else {
-                savedInputs[index] = radio.value; 
+                savedInputs[index] = radio.value;
             }
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
         }
+        function showOnlyDeleteButtonFor(selectedValue) {
+            const container = document.getElementById("savedCustomInputs");
+            const divs = container.querySelectorAll("div");
+            divs.forEach(div => {
+                const radio = div.querySelector('input[type="radio"]');
+                const btn = div.querySelector(".delete-btn");
+                if (radio && btn) {
+                    btn.style.display = (radio.value === selectedValue && radio.checked) ? "inline" : "none";
+                }
+            });
+        }
+        window.deleteSavedInput = function (value) {
+            let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            savedInputs = savedInputs.filter(input => input !== value);
+            localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+            const container = document.getElementById("savedCustomInputs");
+            container.innerHTML = "";
+            savedInputs.forEach(input => addSavedInputToDOM(input, container));
+            if (savedInputs.length === 0) {
+                container.style.display = "none";
+                document.getElementById("clearSavedLinksBtn").style.display = "none";
+                document.getElementById("masterLanguage").disabled = true;
+                document.getElementById("customInput").value = "";
+            } else {
+                showOnlyDeleteButtonFor(savedInputs[savedInputs.length - 1]);
+            }
+        };
+        window.onload = function () {
+            const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            const container = document.getElementById("savedCustomInputs");
+            const clearBtn = document.getElementById("clearSavedLinksBtn");
+            if (savedInputs.length > 0) {
+                masterLanguage.disabled = false;
+                savedInputs.forEach((input, index) => {
+                    addSavedInputToDOM(input, container);
+                });
+                document.getElementById("customInput").value = savedInputs[savedInputs.length - 1];
+                generateLinks();
+                clearBtn.style.display = "block";
+                showOnlyDeleteButtonFor(savedInputs[savedInputs.length - 1]);
+            } else {
+                clearBtn.style.display = "none";
+                masterLanguage.disabled = true;
+            }
+        };
         function generateLinksFromInput(input) {
             return input.split("?")[0];
         }
@@ -969,10 +1091,8 @@
                 document.getElementById("customInput").value = savedInputs[savedInputs.length - 1];
                 generateLinks();
                 clearBtn.style.display = "block";
-                document.getElementById("toggleSaveButton").style.display = "block";
             } else {
                 clearBtn.style.display = "none";
-                document.getElementById("toggleSaveButton").style.display = "none";
             }
         };
         document.addEventListener("DOMContentLoaded", function () {
@@ -1055,22 +1175,22 @@
             };
         });
         document.getElementById("customInput").addEventListener("input", function () {
-    let inputValue = this.value;
-    if (inputValue.startsWith("/")) {
-        inputValue = inputValue.substring(1);
-    }
-    const baseUrls = [
-        "https://author-grundfos-prod-65.adobecqms.net/",
-        "https://www.grundfos.com/",
-        "https://product-selection.grundfos.com/"
-    ];
-    const customUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
-    let isValid = baseUrls.some(url => inputValue.startsWith(url));
-    let finalUrl = isValid || inputValue.startsWith(customUrl)
-        ? inputValue
-        : customUrl + inputValue;
-    console.log("Final URL:", finalUrl);
-});
+            let inputValue = this.value;
+            if (inputValue.startsWith("/")) {
+                inputValue = inputValue.substring(1);
+            }
+            const baseUrls = [
+                "https://author-grundfos-prod-65.adobecqms.net/",
+                "https://www.grundfos.com/",
+                "https://product-selection.grundfos.com/"
+            ];
+            const customUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
+            let isValid = baseUrls.some(url => inputValue.startsWith(url));
+            let finalUrl = isValid || inputValue.startsWith(customUrl)
+                ? inputValue
+                : customUrl + inputValue;
+            console.log("Final URL:", finalUrl);
+        });
         const openModalButton = document.getElementById("openModalButton");
         const modal = document.getElementById("modal");
         const closeModalButton = document.getElementById("closeModalButton");
@@ -1120,26 +1240,26 @@
                 document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
             }
         }
-let floatBtn = document.createElement("div");
-floatBtn.id = "floatingSavedBtn";
-floatBtn.innerHTML = "💾"; 
-floatBtn.onclick = function () {
-    const savedBox = document.getElementById("savedCustomInputs");
-    savedBox.style.display = savedBox.style.display === "block" ? "none" : "block";
-};
-document.body.appendChild(floatBtn);
-const savedBox = document.getElementById("savedCustomInputs");
-savedBox.style.position = "fixed";
-savedBox.style.bottom = "100px";
-savedBox.style.left = "20px";
-savedBox.style.width = "300px";
-savedBox.style.maxHeight = "300px";
-savedBox.style.overflowY = "auto";
-savedBox.style.background = "#fff";
-savedBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-savedBox.style.borderRadius = "12px";
-savedBox.style.padding = "15px";
-savedBox.style.zIndex = "999";
+        let floatBtn = document.createElement("div");
+        floatBtn.id = "floatingSavedBtn";
+        floatBtn.innerHTML = "💾";
+        floatBtn.onclick = function () {
+            const savedBox = document.getElementById("savedCustomInputs");
+            savedBox.style.display = savedBox.style.display === "block" ? "none" : "block";
+        };
+        document.body.appendChild(floatBtn);
+        const savedBox = document.getElementById("savedCustomInputs");
+        savedBox.style.position = "fixed";
+        savedBox.style.bottom = "100px";
+        savedBox.style.left = "20px";
+        savedBox.style.width = "300px";
+        savedBox.style.maxHeight = "300px";
+        savedBox.style.overflowY = "auto";
+        savedBox.style.background = "#fff";
+        savedBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+        savedBox.style.borderRadius = "12px";
+        savedBox.style.padding = "15px";
+        savedBox.style.zIndex = "999";
         function applySearchInput() {
             const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
             const customInput = document.getElementById("customInput").value.trim();
@@ -1526,7 +1646,7 @@ savedBox.style.zIndex = "999";
                 alert("Please enter a valid input before generating links!");
                 return;
             }
-            const lastInput = inputField.value.trim(); 
+            const lastInput = inputField.value.trim();
             document.getElementById("customInput").value = result;
             lastGeneratedInput = inputField.value.trim();
             console.log("Generated input:", lastGeneratedInput);
@@ -2251,11 +2371,11 @@ savedBox.style.zIndex = "999";
             }
         });
         document.getElementById("customInput").addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault(); 
-        document.getElementById("generateAndSaveBtn").click();
-    }
-});
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("generateAndSaveBtn").click();
+            }
+        });
         document.addEventListener("keydown", function (event) {
             if (event.target.id === "masterCodeInput" && event.key === "Enter") {
                 event.preventDefault();
@@ -2279,4 +2399,5 @@ savedBox.style.zIndex = "999";
         });
     </script>
 </body>
+
 </html>
