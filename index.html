@@ -345,7 +345,9 @@
         .check {
             margin: 20px 0;
         }
-
+.delete-btn{
+    padding: 0!important;
+}
         #floatingSavedBtn {
             position: fixed;
             bottom: 20px;
@@ -971,37 +973,47 @@
             }
         }
         function addSavedInputToDOM(input, container) {
-            const div = document.createElement("div");
-            div.style.display = "flex";
-            div.style.alignItems = "center";
-            div.style.justifyContent = "space-between";
-            const label = document.createElement("label");
-            label.style.flex = "1";
-            const radio = document.createElement("input");
-            radio.type = "radio";
-            radio.name = "savedInput";
-            radio.value = input;
-            radio.checked = true;
-            radio.onchange = function () {
-                updateCustomInput(radio);
-                showOnlyDeleteButtonFor(radio.value);
-            };
-            label.appendChild(radio);
-            label.append(` ${input}`);
-            const deleteBtn = document.createElement("button");
-            deleteBtn.innerText = "❌";
-            deleteBtn.onclick = () => deleteSavedInput(input);
-            deleteBtn.style.marginLeft = "10px";
-            deleteBtn.style.background = "none";
-            deleteBtn.style.border = "none";
-            deleteBtn.style.color = "red";
-            deleteBtn.style.cursor = "pointer";
-            deleteBtn.style.display = "inline";
-            deleteBtn.className = "delete-btn";
-            div.appendChild(label);
-            div.appendChild(deleteBtn);
-            container.appendChild(div);
-        }
+    const div = document.createElement("div");
+    div.style.display = "flex";
+    div.style.alignItems = "center";
+    div.style.justifyContent = "space-between";
+    
+    const label = document.createElement("label");
+    label.style.flex = "1";
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "savedInput";
+    radio.value = input;
+    radio.checked = true;
+    radio.onchange = function () {
+        updateCustomInput(radio);
+        showOnlyDeleteButtonFor(radio.value);
+    };
+    label.appendChild(radio);
+    label.append(` ${input}`);
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "❌";
+    deleteBtn.onclick = () => deleteSavedInput(input);
+    deleteBtn.style.marginLeft = "10px";
+    deleteBtn.style.background = "none";
+    deleteBtn.style.border = "none";
+    deleteBtn.style.color = "red";
+    deleteBtn.style.cursor = "pointer";
+    deleteBtn.style.display = "inline";
+    deleteBtn.className = "delete-btn";
+    
+    div.appendChild(label);
+    div.appendChild(deleteBtn);
+    container.appendChild(div);
+
+    // 👉 Xử lý padding sau khi append
+    const allDivs = container.querySelectorAll("div");
+    allDivs.forEach((el, index) => {
+        el.style.paddingBottom = index === allDivs.length - 1 ? "0px" : "10px";
+    });
+}
+
         function updateCustomInput(radio) {
             const input = document.getElementById("customInput");
             input.value = radio.value;
