@@ -1564,160 +1564,292 @@
             });
         }
         function generateLinks() {
-            const masterLanguage = document.getElementById("masterLanguage").value;
-            const localLanguagesDiv = document.getElementById("localLanguages");
-            const customInput = document.getElementById("customInput").value;
-            const fragmentInput = document.getElementById("fragmentInput").value;
-            const linksDiv = document.getElementById("links");
-            linksDiv.innerHTML = "";
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
-            const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
-            const condition = document.querySelector('input[name="condition"]:checked').value;
-            let result = "";
-            let baseUrl = customInput;
-            let alreadyHandled = false;
-            const mappings = [
-                {
-                    old: "products",
-                    new: "solutions",
-                },
-                {
-                    old: "learn",
-                    new: "solutions/learn",
-                },
-                {
-                    old: "support",
-                    new: "solutions/support",
-                },
-                {
-                    old: "about-us/sustainability",
-                    new: "sustainability",
-                },
-                {
-                    old: "about-us/media",
-                    new: "media",
-                },
-                {
-                    old: "about-us/careers",
-                    new: "careers",
-                },
-            ];
-            if (!baseUrl || baseUrl.trim() === "") {
-            } else {
-                const questionMarkIndex = baseUrl.indexOf("?");
-                if (questionMarkIndex !== -1) {
-                    baseUrl = baseUrl.substring(0, questionMarkIndex);
+    const masterLanguage = document.getElementById("masterLanguage").value;
+    const customInputEl = document.getElementById("customInput");
+    const fragmentInput = document.getElementById("fragmentInput").value;
+    const linksDiv = document.getElementById("links");
+    const condition = document.querySelector('input[name="condition"]:checked').value;
+    const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
+    const localLanguagesChecked = Array.from(checkboxes).map(cb => cb.value);
+
+    linksDiv.innerHTML = "";
+
+    let input = customInputEl.value.trim();
+    if (!input) {
+        alert("Please enter a valid input before generating links!");
+        return;
+    }
+
+    let result = extractPathFromUrl(input);
+    result = cleanUpPath(result);
+
+    // Set cleaned path back to input field
+    customInputEl.value = result;
+    lastGeneratedInput = result;
+
+    switch (condition) {
+        case "radio1":
+            generateLinksForCondition1(masterLanguage, localLanguagesChecked, result, linksDiv);
+            break;
+        case "radio2":
+            generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
+            break;
+        case "radio3":
+            generateLinksForCondition3();
+            break;
+        case "radio4":
+            generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
+            break;
+    }
+
+    console.log("Generated input:", lastGeneratedInput);
+}
+function extractPathFromUrl(url) {
+    const mappings = [
+        { old: "products", new: "solutions" },
+        { old: "learn", new: "solutions/learn" },
+        { old: "support", new: "solutions/support" },
+        { old: "about-us/sustainability", new: "sustainability" },
+        { old: "about-us/media", new: "media" },
+        { old: "about-us/careers", new: "careers" },
+    ];
+
+    url = url.split("?")[0]; // Remove query string
+
+    // Case 1: language-masters/
+    const lmIndex = url.indexOf("language-masters/");
+    if (lmIndex !== -1) {
+        let path = url.substring(lmIndex + "language-masters/".length);
+        const firstSlashIndex = path.indexOf("/");
+        return firstSlashIndex !== -1 ? path.substring(firstSlashIndex + 1) : path;
+    }
+
+    // Case 2: grundfos/
+    const grundfosMatch = url.match(/^.*grundfos\/([^/]+\/[^/]+\/.*)/);
+    if (grundfosMatch) {
+        let path = grundfosMatch[1];
+
+        if (url.includes("www/en")) {
+            mappings.forEach(({ old, new: n }) => {
+                if (!(path.includes("solutions/learn/") && old === "products")) {
+                    if (path.includes(old)) path = path.replace(old, n);
                 }
-                const languageMastersIndex = baseUrl.indexOf("language-masters/");
-                if (languageMastersIndex !== -1) {
-                    baseUrl = baseUrl.substring(languageMastersIndex + "language-masters/".length);
-                    const firstSlashIndex = baseUrl.indexOf("/");
-                    if (firstSlashIndex !== -1) {
-                        result = baseUrl.substring(firstSlashIndex + 1);
-                    } else {
-                        result = baseUrl;
-                    }
-                    alreadyHandled = true;
-                    if (result.endsWith(".html")) {
-                        result = result.slice(0, -5);
-                    }
-                    if (result.endsWith("/")) {
-                        result = result.slice(0, -1);
-                    }
-                    if (result.startsWith("/")) {
-                        result = result.slice(1);
-                    }
+            });
+        } else {
+            mappings.forEach(({ old, new: n }) => {
+                if (!(path.includes("solutions/learn/") && old === "products")) {
+                    if (path.includes(n)) path = path.replace(n, old);
                 }
-                else if (!alreadyHandled && baseUrl.includes("grundfos/")) {
-                    const grundfosMatch = baseUrl.match(/^.*grundfos\/([^/]+\/[^/]+\/.*)/);
-                    if (grundfosMatch) {
-                        result = grundfosMatch[1];
-                    } else {
-                        result = baseUrl;
-                    }
-                    if (result.includes("www/en")) {
-                        mappings.forEach((mapping) => {
-                            if (result.includes("solutions/learn/") && mapping.old === "products" && mapping.new === "solutions") {
-                                return;
-                            }
-                            if (result.includes(mapping.old)) {
-                                result = result.replace(mapping.old, mapping.new);
-                            }
-                        });
-                    } else {
-                        mappings.forEach((mapping) => {
-                            if (result.includes("solutions/learn/") && mapping.new === "solutions" && mapping.old === "products") {
-                                return;
-                            }
-                            if (result.includes(mapping.new)) {
-                                result = result.replace(mapping.new, mapping.old);
-                            }
-                        });
-                    }
-                    if (result.endsWith(".html")) {
-                        result = result.slice(0, -5);
-                    }
-                    if (result.endsWith("/")) {
-                        result = result.slice(0, -1);
-                    }
-                    if (result.startsWith("/")) {
-                        result = result.slice(1);
-                    }
-                }
-                else if (baseUrl.match(/https:\/\/www\.grundfos\.com\/([a-z]{2})\//) || baseUrl.match(/https:\/\/product-selection\.grundfos\.com\/([a-z]{2})\//)) {
-                    const regionPattern = /(https:\/\/(?:www|product-selection)\.grundfos\.com\/)([a-z]{2})\//;
-                    const match = baseUrl.match(regionPattern);
-                    if (match) {
-                        const regionCode = match[2];
-                        const regionIndex = baseUrl.indexOf(regionCode) + regionCode.length + 1;
-                        result = baseUrl.substring(regionIndex);
-                        if (baseUrl.includes("product-selection.grundfos.com/")) {
-                            result = "products/" + result;
-                        }
-                    }
-                } else {
-                    let baseIndex = baseUrl.indexOf("www.grundfos.com/") !== -1 ? baseUrl.indexOf("www.grundfos.com/") : baseUrl.indexOf("product-selection.grundfos.com/");
-                    if (baseIndex !== -1) {
-                        baseUrl = baseUrl.substring(baseIndex + (baseUrl.indexOf("www.grundfos.com/") !== -1 ? "www.grundfos.com/".length : "product-selection.grundfos.com/".length));
-                        result = baseUrl;
-                    }
-                    if (baseUrl.startsWith("product-selection.grundfos.com/")) {
-                        result = "products/" + result;
-                    }
-                    if (result.endsWith(".html")) {
-                        result = result.slice(0, -5);
-                    }
-                    if (result.endsWith("/")) {
-                        result = result.slice(0, -1);
-                    }
-                    if (result.startsWith("/")) {
-                        result = result.slice(1);
-                    }
-                    if (!baseUrl.match(/https:\/\/www\.grundfos\.com\//) && !baseUrl.match(/https:\/\/product-selection\.grundfos\.com\//)) {
-                        result = baseUrl;
-                    }
-                }
-                document.getElementById("customInput").value = result;
-            }
-            if (condition === "radio1") {
-                generateLinksForCondition1(masterLanguage, localLanguagesChecked, result, linksDiv);
-            } else if (condition === "radio2") {
-                generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
-            } else if (condition === "radio3") {
-                generateLinksForCondition3();
-            } else if (condition === "radio4") {
-                generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
-            }
-            let inputField = document.getElementById("customInput");
-            if (inputField.value.trim() === "") {
-                alert("Please enter a valid input before generating links!");
-                return;
-            }
-            const lastInput = inputField.value.trim();
-            document.getElementById("customInput").value = result;
-            lastGeneratedInput = inputField.value.trim();
-            console.log("Generated input:", lastGeneratedInput);
+            });
         }
+
+        return path;
+    }
+
+    // Case 3: domain pattern www / product-selection
+    const domainPattern = /https:\/\/(www|product-selection)\.grundfos\.com\/([a-z]{2})\//;
+    const match = url.match(domainPattern);
+    if (match) {
+        const regionCode = match[2];
+        const regionIndex = url.indexOf(regionCode) + regionCode.length + 1;
+        let path = url.substring(regionIndex);
+        if (url.includes("product-selection")) {
+            path = "products/" + path;
+        }
+        return path;
+    }
+
+    // Default fallback
+let baseIndex = url.indexOf("www.grundfos.com/") !== -1
+    ? url.indexOf("www.grundfos.com/")
+    : url.indexOf("product-selection.grundfos.com/");
+if (baseIndex !== -1) {
+    let path = url.substring(baseIndex + (
+        url.indexOf("www.grundfos.com/") !== -1
+            ? "www.grundfos.com/".length
+            : "product-selection.grundfos.com/".length
+    ));
+
+    if (url.includes("product-selection.grundfos.com/")) {
+        path = "products/" + path;
+    }
+
+    // Chuyển từ new -> old
+    mappings.forEach(({ old, new: n }) => {
+        if (!(path.includes("solutions/learn/") && old === "products")) {
+            if (path.includes(n)) path = path.replace(n, old);
+        }
+    });
+
+    return path;
+}
+
+
+    // No matches
+    return url;
+}
+function cleanUpPath(path) {
+    if (path.endsWith(".html")) path = path.slice(0, -5);
+    if (path.endsWith("/")) path = path.slice(0, -1);
+    if (path.startsWith("/")) path = path.slice(1);
+    return path;
+}
+
+        // function generateLinks() {
+        //     const masterLanguage = document.getElementById("masterLanguage").value;
+        //     const localLanguagesDiv = document.getElementById("localLanguages");
+        //     const customInput = document.getElementById("customInput").value;
+        //     const fragmentInput = document.getElementById("fragmentInput").value;
+        //     const linksDiv = document.getElementById("links");
+        //     linksDiv.innerHTML = "";
+        //     const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
+        //     const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
+        //     const condition = document.querySelector('input[name="condition"]:checked').value;
+        //     let result = "";
+        //     let baseUrl = customInput;
+        //     let alreadyHandled = false;
+        //     const mappings = [
+        //         {
+        //             old: "products",
+        //             new: "solutions",
+        //         },
+        //         {
+        //             old: "learn",
+        //             new: "solutions/learn",
+        //         },
+        //         {
+        //             old: "support",
+        //             new: "solutions/support",
+        //         },
+        //         {
+        //             old: "about-us/sustainability",
+        //             new: "sustainability",
+        //         },
+        //         {
+        //             old: "about-us/media",
+        //             new: "media",
+        //         },
+        //         {
+        //             old: "about-us/careers",
+        //             new: "careers",
+        //         },
+        //     ];
+        //     if (!baseUrl || baseUrl.trim() === "") {
+        //     } else {
+        //         const questionMarkIndex = baseUrl.indexOf("?");
+        //         if (questionMarkIndex !== -1) {
+        //             baseUrl = baseUrl.substring(0, questionMarkIndex);
+        //         }
+        //         const languageMastersIndex = baseUrl.indexOf("language-masters/");
+        //         if (languageMastersIndex !== -1) {
+        //             baseUrl = baseUrl.substring(languageMastersIndex + "language-masters/".length);
+        //             const firstSlashIndex = baseUrl.indexOf("/");
+        //             if (firstSlashIndex !== -1) {
+        //                 result = baseUrl.substring(firstSlashIndex + 1);
+        //             } else {
+        //                 result = baseUrl;
+        //             }
+        //             alreadyHandled = true;
+        //             if (result.endsWith(".html")) {
+        //                 result = result.slice(0, -5);
+        //             }
+        //             if (result.endsWith("/")) {
+        //                 result = result.slice(0, -1);
+        //             }
+        //             if (result.startsWith("/")) {
+        //                 result = result.slice(1);
+        //             }
+        //         }
+        //         else if (!alreadyHandled && baseUrl.includes("grundfos/")) {
+        //             const grundfosMatch = baseUrl.match(/^.*grundfos\/([^/]+\/[^/]+\/.*)/);
+        //             if (grundfosMatch) {
+        //                 result = grundfosMatch[1];
+        //             } else {
+        //                 result = baseUrl;
+        //             }
+        //             if (result.includes("www/en")) {
+        //                 mappings.forEach((mapping) => {
+        //                     if (result.includes("solutions/learn/") && mapping.old === "products" && mapping.new === "solutions") {
+        //                         return;
+        //                     }
+        //                     if (result.includes(mapping.old)) {
+        //                         result = result.replace(mapping.old, mapping.new);
+        //                     }
+        //                 });
+        //             } else {
+        //                 mappings.forEach((mapping) => {
+        //                     if (result.includes("solutions/learn/") && mapping.new === "solutions" && mapping.old === "products") {
+        //                         return;
+        //                     }
+        //                     if (result.includes(mapping.new)) {
+        //                         result = result.replace(mapping.new, mapping.old);
+        //                     }
+        //                 });
+        //             }
+        //             if (result.endsWith(".html")) {
+        //                 result = result.slice(0, -5);
+        //             }
+        //             if (result.endsWith("/")) {
+        //                 result = result.slice(0, -1);
+        //             }
+        //             if (result.startsWith("/")) {
+        //                 result = result.slice(1);
+        //             }
+        //         }
+        //         else if (baseUrl.match(/https:\/\/www\.grundfos\.com\/([a-z]{2})\//) || baseUrl.match(/https:\/\/product-selection\.grundfos\.com\/([a-z]{2})\//)) {
+        //             const regionPattern = /(https:\/\/(?:www|product-selection)\.grundfos\.com\/)([a-z]{2})\//;
+        //             const match = baseUrl.match(regionPattern);
+        //             if (match) {
+        //                 const regionCode = match[2];
+        //                 const regionIndex = baseUrl.indexOf(regionCode) + regionCode.length + 1;
+        //                 result = baseUrl.substring(regionIndex);
+        //                 if (baseUrl.includes("product-selection.grundfos.com/")) {
+        //                     result = "products/" + result;
+        //                 }
+        //             }
+        //         } else {
+        //             let baseIndex = baseUrl.indexOf("www.grundfos.com/") !== -1 ? baseUrl.indexOf("www.grundfos.com/") : baseUrl.indexOf("product-selection.grundfos.com/");
+        //             if (baseIndex !== -1) {
+        //                 baseUrl = baseUrl.substring(baseIndex + (baseUrl.indexOf("www.grundfos.com/") !== -1 ? "www.grundfos.com/".length : "product-selection.grundfos.com/".length));
+        //                 result = baseUrl;
+        //             }
+        //             if (baseUrl.startsWith("product-selection.grundfos.com/")) {
+        //                 result = "products/" + result;
+        //             }
+        //             if (result.endsWith(".html")) {
+        //                 result = result.slice(0, -5);
+        //             }
+        //             if (result.endsWith("/")) {
+        //                 result = result.slice(0, -1);
+        //             }
+        //             if (result.startsWith("/")) {
+        //                 result = result.slice(1);
+        //             }
+        //             if (!baseUrl.match(/https:\/\/www\.grundfos\.com\//) && !baseUrl.match(/https:\/\/product-selection\.grundfos\.com\//)) {
+        //                 result = baseUrl;
+        //             }
+        //         }
+        //         document.getElementById("customInput").value = result;
+        //     }
+        //     if (condition === "radio1") {
+        //         generateLinksForCondition1(masterLanguage, localLanguagesChecked, result, linksDiv);
+        //     } else if (condition === "radio2") {
+        //         generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
+        //     } else if (condition === "radio3") {
+        //         generateLinksForCondition3();
+        //     } else if (condition === "radio4") {
+        //         generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
+        //     }
+        //     let inputField = document.getElementById("customInput");
+        //     if (inputField.value.trim() === "") {
+        //         alert("Please enter a valid input before generating links!");
+        //         return;
+        //     }
+        //     const lastInput = inputField.value.trim();
+        //     document.getElementById("customInput").value = result;
+        //     lastGeneratedInput = inputField.value.trim();
+        //     console.log("Generated input:", lastGeneratedInput);
+        // }
         function generateAdditionalLinks(masterLanguage, localLanguage, customInput, localLanguages, liveSiteLanguage, linksDiv) {
             let linksHTML = "";
             let result = "";
