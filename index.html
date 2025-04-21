@@ -942,12 +942,12 @@
             processAndAddCustomInput();
             const container = document.getElementById("savedCustomInputs");
         });
-        // Lưu input được chọn hiện tại
+        
         function saveSelectedInput(input) {
             localStorage.setItem("selectedInput", input);
         }
 
-        // Load input được chọn trước đó
+        
         function getSelectedInput() {
             return localStorage.getItem("selectedInput") || "";
         }
@@ -1062,27 +1062,49 @@
 
         window.deleteSavedInput = function (value) {
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            const indexToRemove = savedInputs.indexOf(value);
+            const isCurrentSelected = getSelectedInput() === value;
+
             savedInputs = savedInputs.filter(input => input !== value);
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
-            if (getSelectedInput() === value) {
-                localStorage.removeItem("selectedInput");
-            }
+
             const container = document.getElementById("savedCustomInputs");
             container.innerHTML = "";
+
+            let newSelectedInput = getSelectedInput();
+
+            
+            if (isCurrentSelected) {
+                
+                if (savedInputs.length > 0) {
+                    const newIndex = Math.max(0, indexToRemove - 1);
+                    newSelectedInput = savedInputs[newIndex];
+                    saveSelectedInput(newSelectedInput);
+                } else {
+                    newSelectedInput = "";
+                    localStorage.removeItem("selectedInput");
+                }
+            }
+
             savedInputs.forEach(input => {
-                const isChecked = input === getSelectedInput();
+                const isChecked = input === newSelectedInput;
                 addSavedInputToDOM(input, container, isChecked);
             });
+
             if (savedInputs.length === 0) {
                 container.style.display = "none";
                 document.getElementById("clearSavedLinksBtn").style.display = "none";
                 document.getElementById("masterLanguage").disabled = true;
                 document.getElementById("customInput").value = "";
             } else {
-                const last = getSelectedInput() || savedInputs[savedInputs.length - 1];
-                showOnlyDeleteButtonFor(last);
+                document.getElementById("customInput").value = newSelectedInput;
+                generateLinks();
+                showOnlyDeleteButtonFor(newSelectedInput);
+                document.getElementById("masterLanguage").disabled = false;
+                document.getElementById("clearSavedLinksBtn").style.display = "block";
             }
         };
+
 
         window.onload = function () {
             const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
@@ -1107,7 +1129,7 @@
             }
         };
 
-        // Floating save button
+        
         let floatBtn = document.createElement("div");
         floatBtn.id = "floatingSavedBtn";
         floatBtn.innerHTML = "💾";
