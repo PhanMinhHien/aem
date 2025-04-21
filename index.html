@@ -942,14 +942,26 @@
             processAndAddCustomInput();
             const container = document.getElementById("savedCustomInputs");
         });
+        // Lưu input được chọn hiện tại
+        function saveSelectedInput(input) {
+            localStorage.setItem("selectedInput", input);
+        }
+
+        // Load input được chọn trước đó
+        function getSelectedInput() {
+            return localStorage.getItem("selectedInput") || "";
+        }
+
         window.clearRadioSelections = function () {
             const RadioSelections = document.getElementById("savedCustomInputs");
             RadioSelections.innerHTML = "";
             links.innerHTML = "";
             RadioSelections.style.display = "none";
             localStorage.removeItem("savedInputs");
+            localStorage.removeItem("selectedInput");
             document.getElementById("clearSavedLinksBtn").style.display = "none";
         };
+
         function processAndAddCustomInput() {
             let input = document.getElementById("customInput").value.trim();
             if (input !== lastGeneratedInput) {
@@ -961,15 +973,17 @@
             if (input) {
                 savedInputs.push(input);
                 localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+                saveSelectedInput(input);
                 const container = document.getElementById("savedCustomInputs");
-                addSavedInputToDOM(input, container);
+                addSavedInputToDOM(input, container, true);
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
                 document.getElementById("clearSavedLinksBtn").style.display = "block";
                 showOnlyDeleteButtonFor(input);
             }
         }
-        function addSavedInputToDOM(input, container) {
+
+        function addSavedInputToDOM(input, container, checked = false) {
             const div = document.createElement("div");
             div.style.display = "flex";
             div.style.alignItems = "center";
@@ -981,10 +995,11 @@
             radio.type = "radio";
             radio.name = "savedInput";
             radio.value = input;
-            radio.checked = true;
+            radio.checked = checked;
             radio.onchange = function () {
                 updateCustomInput(radio);
                 showOnlyDeleteButtonFor(radio.value);
+                saveSelectedInput(radio.value);
             };
             label.appendChild(radio);
             label.append(` ${input}`);
@@ -997,14 +1012,13 @@
             deleteBtn.style.border = "none";
             deleteBtn.style.color = "red";
             deleteBtn.style.cursor = "pointer";
-            deleteBtn.style.display = "inline";
+            deleteBtn.style.display = "none";
             deleteBtn.className = "delete-btn";
 
             div.appendChild(label);
             div.appendChild(deleteBtn);
             container.appendChild(div);
 
-            // 👉 Xử lý padding sau khi append
             const allDivs = container.querySelectorAll("div");
             allDivs.forEach((el, index) => {
                 el.style.paddingBottom = index === allDivs.length - 1 ? "0px" : "10px";
@@ -1031,7 +1045,9 @@
                 savedInputs[index] = radio.value;
             }
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+            saveSelectedInput(radio.value);
         }
+
         function showOnlyDeleteButtonFor(selectedValue) {
             const container = document.getElementById("savedCustomInputs");
             const divs = container.querySelectorAll("div");
@@ -1043,67 +1059,81 @@
                 }
             });
         }
+
         window.deleteSavedInput = function (value) {
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             savedInputs = savedInputs.filter(input => input !== value);
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+            if (getSelectedInput() === value) {
+                localStorage.removeItem("selectedInput");
+            }
             const container = document.getElementById("savedCustomInputs");
             container.innerHTML = "";
-            savedInputs.forEach(input => addSavedInputToDOM(input, container));
+            savedInputs.forEach(input => {
+                const isChecked = input === getSelectedInput();
+                addSavedInputToDOM(input, container, isChecked);
+            });
             if (savedInputs.length === 0) {
                 container.style.display = "none";
                 document.getElementById("clearSavedLinksBtn").style.display = "none";
                 document.getElementById("masterLanguage").disabled = true;
                 document.getElementById("customInput").value = "";
             } else {
-                showOnlyDeleteButtonFor(savedInputs[savedInputs.length - 1]);
+                const last = getSelectedInput() || savedInputs[savedInputs.length - 1];
+                showOnlyDeleteButtonFor(last);
             }
         };
+
         window.onload = function () {
             const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            const selected = getSelectedInput();
             const container = document.getElementById("savedCustomInputs");
+            const masterLanguage = document.getElementById("masterLanguage");
             const clearBtn = document.getElementById("clearSavedLinksBtn");
+
             if (savedInputs.length > 0) {
                 masterLanguage.disabled = false;
-                savedInputs.forEach((input, index) => {
-                    addSavedInputToDOM(input, container);
+                savedInputs.forEach(input => {
+                    addSavedInputToDOM(input, container, input === selected);
                 });
-                document.getElementById("customInput").value = savedInputs[savedInputs.length - 1];
+                const input = selected || savedInputs[savedInputs.length - 1];
+                document.getElementById("customInput").value = input;
                 generateLinks();
                 clearBtn.style.display = "block";
-                showOnlyDeleteButtonFor(savedInputs[savedInputs.length - 1]);
+                showOnlyDeleteButtonFor(input);
             } else {
-                clearBtn.style.display = "none";
                 masterLanguage.disabled = true;
+                clearBtn.style.display = "none";
             }
         };
+
+        // Floating save button
+        let floatBtn = document.createElement("div");
+        floatBtn.id = "floatingSavedBtn";
+        floatBtn.innerHTML = "💾";
+        floatBtn.onclick = function () {
+            const savedBox = document.getElementById("savedCustomInputs");
+            savedBox.style.display = savedBox.style.display === "block" ? "none" : "block";
+        };
+        document.body.appendChild(floatBtn);
+
+        const savedBox = document.getElementById("savedCustomInputs");
+        savedBox.style.position = "fixed";
+        savedBox.style.bottom = "100px";
+        savedBox.style.left = "20px";
+        savedBox.style.width = "300px";
+        savedBox.style.maxHeight = "300px";
+        savedBox.style.overflowY = "auto";
+        savedBox.style.background = "#fff";
+        savedBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+        savedBox.style.borderRadius = "12px";
+        savedBox.style.padding = "15px";
+        savedBox.style.zIndex = "999";
+
         function generateLinksFromInput(input) {
             return input.split("?")[0];
         }
-        window.onload = function () {
-            const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
-            const masterLanguage = document.getElementById("masterLanguage");
-            const clearBtn = document.getElementById("clearSavedLinksBtn");
-            if (savedInputs.length > 0) {
-                masterLanguage.disabled = false;
-            } else {
-                masterLanguage.disabled = true;
-            }
-            if (savedInputs.length > 0) {
-                const container = document.getElementById("savedCustomInputs");
-                savedInputs.forEach((input) => {
-                    const processedInput = generateLinksFromInput(input);
-                    const div = document.createElement("div");
-                    div.innerHTML = `<input type="radio" name="savedInput" onchange="updateCustomInput(this)" value="${processedInput}" /> ${processedInput}`;
-                    container.appendChild(div);
-                });
-                document.getElementById("customInput").value = savedInputs[savedInputs.length - 1];
-                generateLinks();
-                clearBtn.style.display = "block";
-            } else {
-                clearBtn.style.display = "none";
-            }
-        };
+
         document.addEventListener("DOMContentLoaded", function () {
             const masterCodes = Object.keys(localLanguages);
             const masterSelectionButton = document.createElement("button");
@@ -1249,26 +1279,7 @@
                 document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
             }
         }
-        let floatBtn = document.createElement("div");
-        floatBtn.id = "floatingSavedBtn";
-        floatBtn.innerHTML = "💾";
-        floatBtn.onclick = function () {
-            const savedBox = document.getElementById("savedCustomInputs");
-            savedBox.style.display = savedBox.style.display === "block" ? "none" : "block";
-        };
-        document.body.appendChild(floatBtn);
-        const savedBox = document.getElementById("savedCustomInputs");
-        savedBox.style.position = "fixed";
-        savedBox.style.bottom = "100px";
-        savedBox.style.left = "20px";
-        savedBox.style.width = "300px";
-        savedBox.style.maxHeight = "300px";
-        savedBox.style.overflowY = "auto";
-        savedBox.style.background = "#fff";
-        savedBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-        savedBox.style.borderRadius = "12px";
-        savedBox.style.padding = "15px";
-        savedBox.style.zIndex = "999";
+
         function applySearchInput() {
             const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
             const customInput = document.getElementById("customInput").value.trim();
