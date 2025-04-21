@@ -427,13 +427,29 @@
                 <!-- <button id="saveButton" onclick="processAndAddCustomInput()" style="display: none;">Save</button> -->
                 <!-- <button id="toggleSaveButton" onclick="toggleSavedInputs()" style="display: none">Toggle Saved
                     Inputs</button> -->
-                <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button>
+                <!-- <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button> -->
             </div>
             <div class="check"><a
                     href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB"
                     target="_blank">Wrong URL?</a> | <a href="https://www.grundfos.com/components" target="_blank">Brand
                     Components</a></div>
-            <div id="savedCustomInputs" style="display: none"></div>
+                    <div id="savedCustomInputs" style="display: none;">
+                        <div id="radioContainer"></div> <!-- nơi chứa các radio -->
+                        <button id="clearSavedLinksBtn" onclick="clearRadioSelections()" style="
+                          margin-top: 15px;
+                          background: #ffdddd;
+                          border: 1px solid #ff9999;
+                          padding: 6px 12px;
+                          border-radius: 8px;
+                          cursor: pointer;
+                          color: red;
+                          width: 100%;
+                          font-weight: bold;
+                        ">
+                          🧹 Clear Saved Links
+                        </button>
+                      </div>
+                      
             <div id="searchContainer" style="display: none">
                 <label for="searchInput">Search Language:</label>
                 <input type="text" id="searchInput" placeholder="Search Language" oninput="handleInputSearch()" />
@@ -940,7 +956,7 @@
             if (!customInput) return;
             await generateLinks();
             processAndAddCustomInput();
-            const container = document.getElementById("savedCustomInputs");
+            const container = document.getElementById("radioContainer");
         });
         
         function saveSelectedInput(input) {
@@ -974,7 +990,7 @@
                 savedInputs.push(input);
                 localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
                 saveSelectedInput(input);
-                const container = document.getElementById("savedCustomInputs");
+                const container = document.getElementById("radioContainer");
                 addSavedInputToDOM(input, container, true);
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
@@ -1049,7 +1065,7 @@
         }
 
         function showOnlyDeleteButtonFor(selectedValue) {
-            const container = document.getElementById("savedCustomInputs");
+            const container = document.getElementById("radioContainer");
             const divs = container.querySelectorAll("div");
             divs.forEach(div => {
                 const radio = div.querySelector('input[type="radio"]');
@@ -1068,7 +1084,7 @@
             savedInputs = savedInputs.filter(input => input !== value);
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
 
-            const container = document.getElementById("savedCustomInputs");
+            const container = document.getElementById("radioContainer");
             container.innerHTML = "";
 
             let newSelectedInput = getSelectedInput();
@@ -1109,7 +1125,7 @@
         window.onload = function () {
             const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             const selected = getSelectedInput();
-            const container = document.getElementById("savedCustomInputs");
+            const container = document.getElementById("radioContainer");
             const masterLanguage = document.getElementById("masterLanguage");
             const clearBtn = document.getElementById("clearSavedLinksBtn");
 
