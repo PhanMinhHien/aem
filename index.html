@@ -996,6 +996,11 @@
                 masterLanguage.disabled = false;
                 document.getElementById("clearSavedLinksBtn").style.display = "block";
                 showOnlyDeleteButtonFor(input);
+
+                const savedBox = document.getElementById("savedCustomInputs");
+                if (savedBox.style.display === "none" || savedBox.style.display === "") {
+                    savedBox.style.display = "block";
+                }
             }
         }
 
