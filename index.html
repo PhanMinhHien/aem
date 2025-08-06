@@ -35,30 +35,6 @@
                 box-sizing: border-box;
             }
 
-            /* Left Column */
-            .column-left {
-                flex: 1 1 48%;
-                max-width: 48%;
-                padding-right: 10px;
-            }
-
-            /* Right Column */
-            .column-right {
-                flex: 1 1 48%;
-                max-width: 48%;
-                padding-left: 10px;
-            }
-
-            /* Responsive for mobile */
-            @media (max-width: 1200px) {
-                .column-left,
-                .column-right {
-                    flex: 1 1 100%;
-                    max-width: 100%;
-                    padding: 0;
-                }
-            }
-
             /* Tiêu đề */
             h2 {
                 color: #003366;
@@ -209,7 +185,12 @@
                 word-wrap: break-word;
                 margin-bottom: 50px;
             }
-
+            #links:empty {
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                height: 90vh;
+            }
             #links a,
             #fragmentContainer a {
                 display: block;
@@ -294,7 +275,7 @@
             /* Floating button */
             #floatingSavedBtn {
                 position: fixed;
-                bottom: 20px;
+                top: 20px;
                 left: 20px;
                 width: 60px;
                 height: 60px;
@@ -321,13 +302,92 @@
             textarea {
                 resize: none;
             }
+            #floatingMenu {
+                position: fixed;
+                top: 50%;
+                left: 20px;
+                transform: translateY(-50%);
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                z-index: 9999;
+            }
+
+            .floating-btn {
+                background: #007aff;
+                color: white;
+                font-size: 20px;
+                border: none;
+                border-radius: 50%;
+                width: 46px;
+                height: 46px;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                transition: background 0.2s;
+            }
+
+            .floating-btn:hover {
+                background: #005bb5;
+            }
+
+            #floatingPanels {
+                position: fixed;
+                top: 50%;
+                left: 80px;
+                transform: translateY(-50%);
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                z-index: 9998;
+            }
+
+            .floating-panel {
+                display: none;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+                padding: 20px;
+                width: 650px;
+                max-height: 70vh;
+                overflow-y: auto;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            .floating-panel.show {
+                display: block;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .column-right {
+                margin-left: calc(700px + 60px);
+                width: 100%;
+            }
         </style>
     </head>
 
     <body>
         <div class="container">
-            <div class="column-left">
-                <div class="languageSection">
+            <!-- <div class="column-left"> -->
+            <div id="floatingMenu">
+                <button class="floating-btn" data-target="languageSection">🌐</button>
+                <button class="floating-btn" data-target="fixedMasterCodesContainer">📌</button>
+                <button class="floating-btn" data-target="savedCustomInputs">💾</button>
+                <button class="floating-btn" data-target="taskSection">🛠️</button>
+                <button class="floating-btn" data-target="fragmentSection">🧩</button>
+                <button class="floating-btn" data-target="buttonsSection">⚙️</button>
+                <button class="floating-btn" data-target="convertText">🔤</button>
+            </div>
+            <div id="floatingPanels">
+                <div class="floating-panel" id="languageSection">
                     <h2>Language & Link</h2>
                     <div class="form-group">
                         <label for="masterLanguage">Master Language:</label>
@@ -388,18 +448,18 @@
                     </div>
                 </div>
 
-                <div id="fixedMasterCodesContainer" style="margin-top: 20px">
+                <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
                     <h2>Key Markets</h2>
                     <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
                 </div>
 
-                <div id="savedCustomInputs" style="display: none">
+                <div class="floating-panel" id="savedCustomInputs">
                     <div id="radioContainer"></div>
                     <!-- nơi chứa các radio -->
                     <button id="clearSavedLinksBtn" onclick="clearRadioSelections()" style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹 Clear Saved Links</button>
                 </div>
 
-                <div class="taskSection">
+                <div class="floating-panel" id="taskSection">
                     <h2>Type Tasks</h2>
                     <div class="form-group">
                         <label>
@@ -416,7 +476,7 @@
                         >
                     </div>
                 </div>
-                <div id="fragmentSection" class="hidden">
+                <div class="floating-panel" id="fragmentSection" class="hidden">
                     <div class="form-group">
                         <input type="text" id="fragmentInput" placeholder="Enter fragment" />
                         <button id="addFragment">Add Fragment</button>
@@ -428,7 +488,7 @@
                     <button id="clearFragments">Clear Saved Fragments</button>
                     <button id="resetFragmentLinks">Reset Status Fragment Links</button>
                 </div>
-                <div class="buttonsSection">
+                <div class="floating-panel" id="buttonsSection">
                     <h2>Action</h2>
                     <button id="generateAndSaveBtn">Generate & Save</button>
                     <button onclick="generateLinks()">Generate</button>
@@ -441,16 +501,16 @@
                     <button id="toggleSearchButton" onclick="toggleSearchInput()">Show Search Input</button>
                     <button id="openModalButton">Show Table</button>
                 </div>
-                <!-- <div id="buttons">
-               
-            </div> -->
-                <div class="convertText">
+                <!-- <div id="buttons"> -->
+                <div class="floating-panel" id="convertText">
                     <h2>Convert text</h2>
                     <div class="form-group">
                         <textarea id="inputText" rows="1" placeholder="Enter text here..." oninput="convertText()"></textarea>
                     </div>
                 </div>
             </div>
+
+            <!-- </div> -->
             <div class="column-right">
                 <div id="links"></div>
                 <div id="fragmentContainer"></div>
@@ -916,6 +976,22 @@
                 GCA_FR: ["ca/fr"],
                 GMX: ["mx/es"],
             };
+
+            document.querySelectorAll(".floating-btn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const targetId = btn.dataset.target;
+                    const panel = document.getElementById(targetId);
+                    if (panel) {
+                        panel.classList.toggle("show");
+
+                        // Nếu là panel savedCustomInputs thì load lại nội dung
+                        if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
+                            loadSavedInputsFromStorage();
+                        }
+                    }
+                });
+            });
+
             document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
                 const customInput = document.getElementById("customInput").value.trim();
                 if (!customInput) return;
@@ -1053,6 +1129,27 @@
                 });
             }
 
+            function loadSavedInputsFromStorage() {
+                const container = document.getElementById("radioContainer");
+                if (!container) return;
+
+                container.innerHTML = ""; // Clear previous content
+
+                let savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
+
+                if (savedInputs.length === 0) {
+                    container.innerHTML = "<p>No saved inputs found.</p>";
+                    return;
+                }
+
+                const selectedInput = localStorage.getItem("selectedInput") || "";
+
+                savedInputs.forEach((input) => {
+                    const isChecked = input === selectedInput;
+                    addSavedInputToDOM(input, container, isChecked);
+                });
+            }
+
             function updateCustomInput(radio) {
                 const input = document.getElementById("customInput");
                 input.value = radio.value;
@@ -1146,35 +1243,41 @@
                     const input = selected || savedInputs[savedInputs.length - 1];
                     document.getElementById("customInput").value = input;
                     generateLinks();
+                    generateLanguageSuggestions();
+
                     clearBtn.style.display = "block";
                     showOnlyDeleteButtonFor(input);
                 } else {
                     masterLanguage.disabled = true;
                     clearBtn.style.display = "none";
                 }
+                const panel = document.getElementById("languageSection");
+                if (panel) {
+                    panel.classList.add("show");
+                }
             };
 
-            let floatBtn = document.createElement("div");
-            floatBtn.id = "floatingSavedBtn";
-            floatBtn.innerHTML = "💾";
-            floatBtn.onclick = function () {
-                const savedBox = document.getElementById("savedCustomInputs");
-                savedBox.style.display = savedBox.style.display === "block" ? "none" : "block";
-            };
-            document.body.appendChild(floatBtn);
+            // let floatBtn = document.createElement("div");
+            // floatBtn.id = "floatingSavedBtn";
+            // floatBtn.innerHTML = "💾";
+            // floatBtn.onclick = function () {
+            //     const savedBox = document.getElementById("savedCustomInputs");
+            //     savedBox.style.display = savedBox.style.display === "block" ? "none" : "block";
+            // };
+            // document.body.appendChild(floatBtn);
 
-            const savedBox = document.getElementById("savedCustomInputs");
-            savedBox.style.position = "fixed";
-            savedBox.style.bottom = "100px";
-            savedBox.style.left = "20px";
-            savedBox.style.width = "300px";
-            savedBox.style.maxHeight = "300px";
-            savedBox.style.overflowY = "auto";
-            savedBox.style.background = "#fff";
-            savedBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-            savedBox.style.borderRadius = "12px";
-            savedBox.style.padding = "15px";
-            savedBox.style.zIndex = "999";
+            // const savedBox = document.getElementById("savedCustomInputs");
+            // savedBox.style.position = "fixed";
+            // savedBox.style.bottom = "100px";
+            // savedBox.style.left = "20px";
+            // savedBox.style.width = "300px";
+            // savedBox.style.maxHeight = "300px";
+            // savedBox.style.overflowY = "auto";
+            // savedBox.style.background = "#fff";
+            // savedBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+            // savedBox.style.borderRadius = "12px";
+            // savedBox.style.padding = "15px";
+            // savedBox.style.zIndex = "999";
 
             function generateLinksFromInput(input) {
                 return input.split("?")[0];
@@ -2300,6 +2403,10 @@
                     masterLanguage.disabled = customInput.value.trim() === "";
                 });
             });
+            // document.addEventListener("DOMContentLoaded", function () {
+            //     generateLanguageSuggestions();
+            // });
+
             document.querySelectorAll('input[name="condition"]').forEach((checkbox) => {
                 checkbox.addEventListener("change", function () {
                     const fragmentSection = document.getElementById("fragmentSection");
