@@ -945,6 +945,15 @@
                     updateLocalLanguages();
                 };
                 fixedContainer.appendChild(button);
+                button.onmouseover = function () {
+                    button.style.backgroundColor = "#007bff";
+                    button.style.color = "#fff";
+                };
+
+                button.onmouseout = function () {
+                    button.style.backgroundColor = "#fff";
+                    button.style.color = "#007bff";
+                };
             });
             window.clearRadioSelections = function () {
                 const RadioSelections = document.getElementById("savedCustomInputs");
