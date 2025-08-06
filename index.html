@@ -370,6 +370,9 @@
             #floatingSavedBtn:hover {
                 background-color: #0056b3;
             }
+            #fixedMasterCodes button {
+    background-color: #b3b3b3;
+            }
         </style>
     </head>
 
@@ -418,6 +421,11 @@
                 <div id="localLanguages" class="local-languages"></div>
                 <label for="customInput">Custom Input:</label>
                 <input type="text" id="customInput" />
+
+                <div id="fixedMasterCodesContainer" style="margin-top: 20px;">
+    <h3>Select from Key Markets</h3>
+    <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+</div>
                 <div id="buttons-input">
                     <button id="generateAndSaveBtn">Generate & Save</button>
                     <button onclick="generateLinks()">Generate</button>
@@ -953,7 +961,24 @@
             function getSelectedInput() {
                 return localStorage.getItem("selectedInput") || "";
             }
+ const fixedMasterCodes = ["zh-CN", "da-DK", "fr-FR", "de-DE", "hu-HU", "es-ES", "sr-RS"];
 
+    const fixedContainer = document.getElementById("fixedMasterCodes");
+
+    fixedMasterCodes.forEach((code) => {
+        const button = document.createElement("button");
+        button.textContent = code;
+        button.style.backgroundColor = "#919191"; 
+    button.style.border = "1px solid #999";
+    button.style.padding = "8px 12px";
+    button.style.borderRadius = "4px";
+    button.style.cursor = "pointer";
+        button.onclick = function () {
+            document.getElementById("masterLanguage").value = code;
+            updateLocalLanguages();
+        };
+        fixedContainer.appendChild(button);
+    });
             window.clearRadioSelections = function () {
                 const RadioSelections = document.getElementById("savedCustomInputs");
                 const container = document.getElementById("radioContainer");
