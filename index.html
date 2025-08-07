@@ -1271,27 +1271,6 @@
         };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         function generateLinksFromInput(input) {
             return input.split("?")[0];
         }
@@ -2445,8 +2424,6 @@
         });
 
 
-
-
         document.querySelectorAll('input[name="condition"]').forEach((checkbox) => {
             checkbox.addEventListener("change", function () {
                 const fragmentSection = document.getElementById("fragmentSection");
@@ -2599,27 +2576,41 @@
             localStorage.setItem("selectedLocalLanguages", JSON.stringify(selectedLocalLanguages));
             localStorage.setItem("selectedTaskTypes", JSON.stringify(selectedTasks));
         }
-        function loadSelectionsFromLocalStorage() {
-            const masterLanguage = localStorage.getItem("selectedMasterLanguage");
-            const selectedLocalLanguages = JSON.parse(localStorage.getItem("selectedLocalLanguages") || "[]");
-            const selectedTasks = JSON.parse(localStorage.getItem("selectedTaskTypes") || "[]");
+       function loadSelectionsFromLocalStorage() {
+  const masterSelect = document.getElementById("masterLanguage");
+  if (masterSelect) {
+    const masterLanguage = localStorage.getItem("selectedMasterLanguage");
+    if (masterLanguage) {
+      masterSelect.value = masterLanguage;
+      masterSelect.dispatchEvent(new Event("change"));
+    }
+  }
 
-            if (masterLanguage) {
-                const masterSelect = document.getElementById("masterLanguage");
-                masterSelect.value = masterLanguage;
-                masterSelect.dispatchEvent(new Event("change"));
-            }
+  const customInput = document.getElementById("customInput");
+  if (customInput) {
+    const savedCustomInput = localStorage.getItem("customInputValue") || "";
+    customInput.value = savedCustomInput;
+  }
 
-            const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
-            localLanguageCheckboxes.forEach(cb => {
-                cb.checked = selectedLocalLanguages.includes(cb.value);
-            });
+  const fragmentInput = document.getElementById("fragmentInput");
+  if (fragmentInput) {
+    const savedFragmentInput = localStorage.getItem("fragmentInputValue") || "";
+    fragmentInput.value = savedFragmentInput;
+  }
 
-            const taskCheckboxes = document.querySelectorAll('input[name="condition"]');
-            taskCheckboxes.forEach(cb => {
-                cb.checked = selectedTasks.includes(cb.value);
-            });
-        }
+  const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+  const selectedLocalLanguages = JSON.parse(localStorage.getItem("selectedLocalLanguages") || "[]");
+  localLanguageCheckboxes.forEach(cb => {
+    cb.checked = selectedLocalLanguages.includes(cb.value);
+  });
+
+  const taskCheckboxes = document.querySelectorAll('input[name="condition"]');
+  const selectedTasks = JSON.parse(localStorage.getItem("selectedTaskTypes") || "[]");
+  taskCheckboxes.forEach(cb => {
+    cb.checked = selectedTasks.includes(cb.value);
+  });
+}
+
 
     </script>
 </body>
