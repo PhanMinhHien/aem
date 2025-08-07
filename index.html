@@ -1673,10 +1673,10 @@
             linksDiv.innerHTML = "";
 
             let input = customInputEl.value.trim();
-            if (!input) {
-                alert("Please enter a valid input before generating links!");
-                return;
-            }
+            // if (!input) {
+            //     alert("Please enter a valid input before generating links!");
+            //     return;
+            // }
 
             let result = extractPathFromUrl(input);
             result = cleanUpPath(result);
