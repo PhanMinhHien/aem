@@ -1674,7 +1674,7 @@
                 const customInputEl = document.getElementById("customInput");
                 const fragmentInput = document.getElementById("fragmentInput").value;
                 const linksDiv = document.getElementById("links");
-                const condition = document.querySelector('input[name="condition"]:checked').value;
+const conditions = Array.from(document.querySelectorAll('input[name="condition"]:checked')).map(cb => cb.value);
                 const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
                 const localLanguagesChecked = Array.from(checkboxes).map((cb) => cb.value);
 
@@ -1693,20 +1693,22 @@
                 customInputEl.value = result;
                 lastGeneratedInput = result;
 
-                switch (condition) {
-                    case "radio1":
-                        generateLinksForCondition1(masterLanguage, localLanguagesChecked, result, linksDiv);
-                        break;
-                    case "radio2":
-                        generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
-                        break;
-                    case "radio3":
-                        generateLinksForCondition3();
-                        break;
-                    case "radio4":
-                        generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
-                        break;
-                }
+                conditions.forEach(condition => {
+    switch (condition) {
+        case "radio1":
+            generateLinksForCondition1(masterLanguage, localLanguagesChecked, result, linksDiv);
+            break;
+        case "radio2":
+            generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
+            break;
+        case "radio3":
+            generateLinksForCondition3();
+            break;
+        case "radio4":
+            generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
+            break;
+    }
+});
 
                 console.log("Generated input:", lastGeneratedInput);
             }
