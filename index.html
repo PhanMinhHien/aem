@@ -2103,8 +2103,9 @@
                     }
                     remainingLanguages.forEach((language) => {
                         linksHTML += generateLocalLanguageLinksTagging(language, customInput);
-                        linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
+                        
                     });
+                    linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
                 } else if (localLanguagesChecked.length > 0) {
                     linksHTML += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
                     localLanguagesChecked.forEach((selectedLocalLanguage) => {
