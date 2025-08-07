@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic_Links_Generator_AEM</title>
     <style>
-        /* Layout Container */
         .taskSection .form-group {
             flex-direction: row;
             justify-content: space-between;
         }
-
         .check {
             margin-bottom: 20px;
         }
-
         .link-part {
             background-color: #007bff;
             padding: 10px;
             color: #fff;
             display: inline-block;
         }
-
         #applySearchButton,
         #addFragment,
         #clearFragments {
             margin-top: 20px;
         }
-
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -37,15 +31,12 @@
             background-color: #f0f8ff;
             box-sizing: border-box;
         }
-
         h2 {
             color: #003366;
             border-bottom: 3px solid #007bff;
             padding-bottom: 6px;
             margin-top: 40px;
         }
-
-        /* Button */
         button {
             padding: 10px 0.5vw;
             background-color: #007bff;
@@ -55,52 +46,38 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         #localLanguages:not(:empty) {
             margin-bottom: 20px;
         }
-
         #localLanguages {
             column-count: 5;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
-        /* Link style */
         a {
             color: #007bff;
             text-decoration: none;
         }
-
         a:hover {
             text-decoration: underline;
         }
-
         a.previous {
             color: #05a769 !important;
         }
-
         a.active {
             color: red !important;
         }
-
-        /* Container for each input group */
         .form-group {
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
         }
-
-        /* Label styling */
         .form-group label {
             margin-bottom: 6px;
             font-weight: 600;
             color: #003366;
         }
-
-        /* Input / select / textarea */
         .form-group input[type="text"],
         .form-group input[type="number"],
         .form-group input[type="email"],
@@ -115,7 +92,6 @@
             width: 100%;
             box-sizing: border-box;
         }
-
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
@@ -123,29 +99,23 @@
             background-color: #fff;
             outline: none;
         }
-
-        /* Checkbox group horizontal */
         .checkbox-group {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-top: 10px;
         }
-
         .checkbox-group input[type="checkbox"] {
             width: 20px;
             height: 20px;
             accent-color: #4caf50;
         }
-
-        /* Inline radio buttons */
         .radio-group {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             margin-top: 10px;
         }
-
         .radio-group label {
             font-weight: 500;
             color: #003366;
@@ -153,14 +123,10 @@
             align-items: center;
             gap: 8px;
         }
-
-        /* Better textareas */
         textarea {
             resize: vertical;
             min-height: 100px;
         }
-
-        /* Buttons inside form */
         .form-group button {
             width: fit-content;
             padding: 10px 20px;
@@ -171,12 +137,9 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .form-group button:hover {
             background-color: #0056b3;
         }
-
-        /* Output display boxes */
         #links:not(:empty),
         #fragmentContainer:not(:empty) {
             background-color: #f9f9f9;
@@ -186,21 +149,17 @@
             word-wrap: break-word;
             margin-bottom: 50px;
         }
-
         #links:empty {
             background-color: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 5px;
             height: 90vh;
         }
-
         #links a,
         #fragmentContainer a {
             display: block;
             margin-bottom: 8px;
         }
-
-        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -208,7 +167,6 @@
             background-color: #fff;
             font-family: Arial, sans-serif;
         }
-
         th {
             background-color: #007bff;
             color: white;
@@ -216,23 +174,18 @@
             text-align: left;
             font-weight: bold;
         }
-
         td {
             padding: 12px 15px;
             text-align: left;
             border: 1px solid #ddd;
             font-size: 14px;
         }
-
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-
         tr:hover {
             background-color: #f1f1f1;
         }
-
-        /* Popup & Modal */
         .popup,
         .modal {
             display: none;
@@ -244,7 +197,6 @@
             width: 100%;
             height: 100%;
         }
-
         .modal-content {
             background-color: #fff;
             margin: 0;
@@ -259,7 +211,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
         .close-button {
             color: #aaa;
             font-size: 28px;
@@ -269,13 +220,10 @@
             right: 15px;
             cursor: pointer;
         }
-
         .close-button:hover,
         .close-button:focus {
             color: black;
         }
-
-        /* Floating button */
         #floatingSavedBtn {
             position: fixed;
             top: 20px;
@@ -292,20 +240,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s;
         }
-
         #floatingSavedBtn:hover {
             background-color: #0056b3;
         }
-
-        /* Misc */
         .hidden {
             display: none;
         }
-
         textarea {
             resize: none;
         }
-
         #floatingMenu {
             position: fixed;
             top: 50%;
@@ -316,7 +259,6 @@
             gap: 12px;
             z-index: 9999;
         }
-
         .floating-btn {
             background: #007aff;
             color: white;
@@ -329,11 +271,9 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: background 0.2s;
         }
-
         .floating-btn:hover {
             background: #005bb5;
         }
-
         #floatingPanels {
             position: fixed;
             top: 50%;
@@ -344,7 +284,6 @@
             gap: 12px;
             z-index: 9998;
         }
-
         .floating-panel {
             display: none;
             background: #fff;
@@ -356,33 +295,27 @@
             overflow-y: auto;
             animation: fadeIn 0.3s ease-in-out;
         }
-
         .floating-panel.show {
             display: block;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         .column-right {
             margin-left: calc(700px + 60px);
             width: 100%;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <!-- <div class="column-left"> -->
         <div id="floatingMenu">
             <button class="floating-btn" data-target="languageSection" title="Language Settings">🌐</button>
             <button class="floating-btn" data-target="fixedMasterCodesContainer" title="Fixed Master Codes">📌</button>
@@ -392,7 +325,6 @@
             <button class="floating-btn" data-target="buttonsSection" title="Action Buttons">⚙️</button>
             <button class="floating-btn" data-target="convertText" title="Text Tools">🔤</button>
         </div>
-
         <div id="floatingPanels">
             <div class="floating-panel" id="languageSection">
                 <h2>Language & Link</h2>
@@ -438,7 +370,6 @@
                     </select>
                 </div>
                 <div id="localLanguages" class="local-languages"></div>
-
                 <div class="form-group">
                     <label for="customInput">Custom Input:</label>
                     <input type="text" id="customInput" />
@@ -458,20 +389,16 @@
                     <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
                 </div>
             </div>
-
             <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
                 <h2>Key Markets</h2>
                 <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
             </div>
-
             <div class="floating-panel" id="savedCustomInputs">
                 <div id="radioContainer"></div>
-                <!-- nơi chứa các radio -->
                 <button id="clearSavedLinksBtn" onclick="clearRadioSelections()"
                     style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹
                     Clear Saved Links</button>
             </div>
-
             <div class="floating-panel" id="taskSection">
                 <h2>Type Tasks</h2>
                 <div class="form-group">
@@ -505,15 +432,11 @@
                 <button onclick="generateLinks()">Generate</button>
                 <button id="resetLinks">Reset Status Links</button>
                 <button onclick="generateLanguageSuggestions()">Suggest Language</button>
-                <!-- <button id="saveButton" onclick="processAndAddCustomInput()" style="display: none;">Save</button> -->
-                <!-- <button id="toggleSaveButton" onclick="toggleSavedInputs()" style="display: none">Toggle Saved
                     Inputs</button> -->
-                <!-- <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button> -->
                 <button id="toggleSearchButton" onclick="toggleSearchInput()">Show Search Input</button>
                 <button id="openModalButton">Show Table</button>
                 <div id="buttons"></div>
             </div>
-
             <div class="floating-panel" id="convertText">
                 <h2>Convert text</h2>
                 <div class="form-group">
@@ -522,16 +445,12 @@
                 </div>
             </div>
         </div>
-
-        <!-- </div> -->
         <div class="column-right">
             <div id="links"></div>
             <div id="fragmentContainer"></div>
         </div>
     </div>
-    <!-- Modal Container -->
     <div id="modal" class="modal">
-        <!-- Modal Content -->
         <div class="modal-content">
             <span class="close-button" id="closeModalButton">x</span>
             <div class="table-container">
@@ -989,7 +908,6 @@
             GCA_FR: ["ca/fr"],
             GMX: ["mx/es"],
         };
-
         document.querySelectorAll(".floating-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
                 const targetId = btn.dataset.target;
@@ -997,7 +915,6 @@
                 if (panel) {
                     panel.classList.toggle("show");
                     savePanelShowState(targetId, panel.classList.contains("show"));
-
                     if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
                         loadSavedInputsFromStorage();
                     }
@@ -1022,7 +939,6 @@
                 }
             }
         });
-
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
@@ -1030,18 +946,14 @@
             processAndAddCustomInput();
             const container = document.getElementById("radioContainer");
         });
-
         function saveSelectedInput(input) {
             localStorage.setItem("selectedInput", input);
         }
-
         function getSelectedInput() {
             return localStorage.getItem("selectedInput") || "";
         }
         const fixedMasterCodes = ["zh-CN", "da-DK", "fr-FR", "de-DE", "hu-HU", "es-ES", "sr-RS"];
-
         const fixedContainer = document.getElementById("fixedMasterCodes");
-
         fixedMasterCodes.forEach((code) => {
             const button = document.createElement("button");
             button.textContent = code;
@@ -1049,7 +961,6 @@
             button.style.border = "1px solid #007bff";
             button.style.padding = "10px 0.5vw";
             button.style.color = "#007bff";
-
             button.style.borderRadius = "5px";
             button.style.cursor = "pointer";
             button.onclick = function () {
@@ -1061,7 +972,6 @@
                 button.style.backgroundColor = "#007bff";
                 button.style.color = "#fff";
             };
-
             button.onmouseout = function () {
                 button.style.backgroundColor = "#fff";
                 button.style.color = "#007bff";
@@ -1071,59 +981,47 @@
             const RadioSelections = document.getElementById("savedCustomInputs");
             const container = document.getElementById("radioContainer");
             const clearBtn = document.getElementById("clearSavedLinksBtn");
-
             if (RadioSelections) RadioSelections.style.display = "none";
             if (container) container.innerHTML = "";
             if (clearBtn) clearBtn.style.display = "none";
-
             localStorage.removeItem("savedInputs");
             localStorage.removeItem("selectedInput");
             if (typeof links !== "undefined") links.innerHTML = "";
         };
-
         function processAndAddCustomInput() {
             let input = document.getElementById("customInput").value.trim();
             if (input !== lastGeneratedInput) {
                 alert("Please generate links for this input before saving!");
                 return;
             }
-
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             if (savedInputs.includes(input)) return;
-
             if (input) {
                 savedInputs.push(input);
                 localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
                 saveSelectedInput(input);
-
                 const container = document.getElementById("radioContainer");
                 if (!container) {
                     alert("Cannot find container to save radio input.");
                     return;
                 }
-
                 addSavedInputToDOM(input, container, true);
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
-
                 const clearBtn = document.getElementById("clearSavedLinksBtn");
                 if (clearBtn) clearBtn.style.display = "block";
-
                 showOnlyDeleteButtonFor(input);
-
                 const savedBox = document.getElementById("savedCustomInputs");
                 if (savedBox && (savedBox.style.display === "none" || savedBox.style.display === "")) {
                     savedBox.style.display = "block";
                 }
             }
         }
-
         function addSavedInputToDOM(input, container, checked = false) {
             const div = document.createElement("div");
             div.style.display = "flex";
             div.style.alignItems = "center";
             div.style.justifyContent = "space-between";
-
             const label = document.createElement("label");
             label.style.flex = "1";
             const radio = document.createElement("input");
@@ -1138,7 +1036,6 @@
             };
             label.appendChild(radio);
             label.append(` ${input}`);
-
             const deleteBtn = document.createElement("button");
             deleteBtn.innerText = "❌";
             deleteBtn.onclick = () => deleteSavedInput(input);
@@ -1149,38 +1046,29 @@
             deleteBtn.style.cursor = "pointer";
             deleteBtn.style.display = "none";
             deleteBtn.className = "delete-btn";
-
             div.appendChild(label);
             div.appendChild(deleteBtn);
             container.appendChild(div);
-
             const allDivs = container.querySelectorAll("div");
             allDivs.forEach((el, index) => {
                 el.style.paddingBottom = index === allDivs.length - 1 ? "0px" : "10px";
             });
         }
-
         function loadSavedInputsFromStorage() {
             const container = document.getElementById("radioContainer");
             if (!container) return;
-
             container.innerHTML = "";
-
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
-
             if (savedInputs.length === 0) {
                 container.innerHTML = "<p>No saved inputs found.</p>";
                 return;
             }
-
             const selectedInput = localStorage.getItem("selectedInput") || "";
-
             savedInputs.forEach((input) => {
                 const isChecked = input === selectedInput;
                 addSavedInputToDOM(input, container, isChecked);
             });
         }
-
         function updateCustomInput(radio) {
             const input = document.getElementById("customInput");
             input.value = radio.value;
@@ -1203,7 +1091,6 @@
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
             saveSelectedInput(radio.value);
         }
-
         function showOnlyDeleteButtonFor(selectedValue) {
             const container = document.getElementById("radioContainer");
             const divs = container.querySelectorAll("div");
@@ -1215,20 +1102,15 @@
                 }
             });
         }
-
         window.deleteSavedInput = function (value) {
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             const indexToRemove = savedInputs.indexOf(value);
             const isCurrentSelected = getSelectedInput() === value;
-
             savedInputs = savedInputs.filter((input) => input !== value);
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
-
             const container = document.getElementById("radioContainer");
             container.innerHTML = "";
-
             let newSelectedInput = getSelectedInput();
-
             if (isCurrentSelected) {
                 if (savedInputs.length > 0) {
                     const newIndex = Math.max(0, indexToRemove - 1);
@@ -1239,12 +1121,10 @@
                     localStorage.removeItem("selectedInput");
                 }
             }
-
             savedInputs.forEach((input) => {
                 const isChecked = input === newSelectedInput;
                 addSavedInputToDOM(input, container, isChecked);
             });
-
             if (savedInputs.length === 0) {
                 container.style.display = "none";
                 document.getElementById("clearSavedLinksBtn").style.display = "none";
@@ -1258,14 +1138,12 @@
                 document.getElementById("clearSavedLinksBtn").style.display = "block";
             }
         };
-
         window.onload = function () {
             const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             const selected = getSelectedInput();
             const container = document.getElementById("radioContainer");
             const masterLanguage = document.getElementById("masterLanguage");
             const clearBtn = document.getElementById("clearSavedLinksBtn");
-
             if (savedInputs.length > 0) {
                 masterLanguage.disabled = false;
                 savedInputs.forEach((input) => {
@@ -1274,8 +1152,6 @@
                 const input = selected || savedInputs[savedInputs.length - 1];
                 document.getElementById("customInput").value = input;
                 generateLinks();
-                // generateLanguageSuggestions();
-
                 clearBtn.style.display = "block";
                 showOnlyDeleteButtonFor(input);
             } else {
@@ -1287,91 +1163,9 @@
                 panel.classList.add("show");
             }
         };
-
-
         function generateLinksFromInput(input) {
             return input.split("?")[0];
         }
-
-        //     document.addEventListener("DOMContentLoaded", function () {
-        //         const masterCodes = Object.keys(localLanguages);
-        //         // const masterSelectionButton = document.createElement("button");
-        //         // masterSelectionButton.textContent = "Select Master Code";
-        //         // masterSelectionButton.onclick = showMasterCodePopup;
-        //         // document.getElementById("buttons").appendChild(masterSelectionButton);
-        // //         const columnLeft = document.querySelector(".column-left");
-        // //         let popup = document.createElement("div");
-        // //         popup.id = "masterCodePopup";
-        // //         popup.className = "popup-content";
-        // //         popup.style.display = "none";
-        // //         popup.innerHTML = `
-        // //     <h3>Select Master Language</h3>
-        // //     <input type="text" id="masterCodeInput" placeholder="Enter master codes (comma separated)" />
-        // //     <div id="masterCheckboxContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;"></div>
-        // //     <button onclick="generateMasterCheckboxes()">Submit</button>
-        // //     <button onclick="clearMasterSelections()">Clear</button>
-        // // `;
-        // //         columnLeft.appendChild(popup);
-        //         function showMasterCodePopup() {
-        //             if (popup.style.display === "none") {
-        //                 popup.style.display = "block";
-        //             } else {
-        //                 popup.style.display = "none";
-        //             }
-        //         }
-        //         window.generateMasterCheckboxes = function () {
-        //             const inputElement = document.getElementById("masterCodeInput");
-        //             let input = inputElement.value;
-        //             const codes = input
-        //                 .split(",")
-        //                 .map((code) =>
-        //                     code
-        //                         .trim()
-        //                         .toLowerCase()
-        //                         .replace(/([a-zA-Z]{2})-([a-zA-Z]{2})/, (match, p1, p2) => `${p1.toLowerCase()}-${p2.toUpperCase()}`)
-        //                 )
-        //                 .filter((code) => masterCodes.includes(code));
-        //             const container = document.getElementById("masterCheckboxContainer");
-        //             let firstCheckbox = null;
-        //             codes.forEach((code, index) => {
-        //                 if (!document.querySelector(`#masterCheckboxContainer input[value='${code}']`)) {
-        //                     const checkboxWrapper = document.createElement("div");
-        //                     checkboxWrapper.style.display = "flex";
-        //                     checkboxWrapper.style.alignItems = "center";
-        //                     checkboxWrapper.style.marginBottom = "25px";
-        //                     const checkbox = document.createElement("input");
-        //                     checkbox.type = "checkbox";
-        //                     checkbox.value = code;
-        //                     checkbox.onchange = updateMasterSelection;
-        //                     const label = document.createElement("label");
-        //                     label.textContent = code;
-        //                     label.style.marginLeft = "5px";
-        //                     checkboxWrapper.appendChild(checkbox);
-        //                     checkboxWrapper.appendChild(label);
-        //                     container.appendChild(checkboxWrapper);
-        //                     if (firstCheckbox === null) {
-        //                         firstCheckbox = checkbox;
-        //                     }
-        //                 }
-        //             });
-        //             if (firstCheckbox) {
-        //                 firstCheckbox.checked = true;
-        //                 updateMasterSelection();
-        //             }
-        //             inputElement.value = "";
-        //         };
-        //         function updateMasterSelection() {
-        //             const selectedCodes = Array.from(document.querySelectorAll("#masterCheckboxContainer input:checked")).map((input) => input.value);
-        //             if (selectedCodes.length > 0) {
-        //                 document.getElementById("masterLanguage").value = selectedCodes[0];
-        //                 updateLocalLanguages();
-        //             }
-        //         }
-        //         window.clearMasterSelections = function () {
-        //             const container = document.getElementById("masterCheckboxContainer");
-        //             container.innerHTML = "";
-        //         };
-        //     });
         document.getElementById("customInput").addEventListener("input", function () {
             let inputValue = this.value;
             if (inputValue.startsWith("/")) {
@@ -1432,7 +1226,6 @@
                 document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
             }
         }
-
         function applySearchInput() {
             const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
             const customInput = document.getElementById("customInput").value.trim();
@@ -1444,7 +1237,6 @@
                 alert("Please enter data into the Search Language before proceeding.");
                 return;
             }
-
             if (languageMapping[searchInput]) {
                 const localLang = languageMapping[searchInput][0];
                 let found = false;
@@ -1687,22 +1479,12 @@
             const conditions = Array.from(document.querySelectorAll('input[name="condition"]:checked')).map(cb => cb.value);
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
             const localLanguagesChecked = Array.from(checkboxes).map((cb) => cb.value);
-
             linksDiv.innerHTML = "";
-
             let input = customInputEl.value.trim();
-            // if (!input) {
-            //     alert("Please enter a valid input before generating links!");
-            //     return;
-            // }
-
             let result = extractPathFromUrl(input);
             result = cleanUpPath(result);
-
-
             customInputEl.value = result;
             lastGeneratedInput = result;
-
             conditions.forEach(condition => {
                 switch (condition) {
                     case "radio1":
@@ -1719,7 +1501,6 @@
                         break;
                 }
             });
-
             console.log("Generated input:", lastGeneratedInput);
         }
         function extractPathFromUrl(url) {
@@ -1731,22 +1512,16 @@
                 { old: "about-us/media", new: "media" },
                 { old: "about-us/careers", new: "careers" },
             ];
-
             url = url.split("?")[0];
-
-
             const lmIndex = url.indexOf("language-masters/");
             if (lmIndex !== -1) {
                 let path = url.substring(lmIndex + "language-masters/".length);
                 const firstSlashIndex = path.indexOf("/");
                 return firstSlashIndex !== -1 ? path.substring(firstSlashIndex + 1) : path;
             }
-
-
             const grundfosMatch = url.match(/^.*grundfos\/([^/]+\/[^/]+\/.*)/);
             if (grundfosMatch) {
                 let path = grundfosMatch[1];
-
                 if (url.includes("www/en")) {
                     mappings.forEach(({ old, new: n }) => {
                         if (!(path.includes("solutions/learn/") && old === "products")) {
@@ -1760,11 +1535,8 @@
                         }
                     });
                 }
-
                 return path;
             }
-
-
             const domainPattern = /https:\/\/(www|product-selection)\.grundfos\.com\/([a-z]{2})\//;
             const match = url.match(domainPattern);
             if (match) {
@@ -1776,27 +1548,19 @@
                 }
                 return path;
             }
-
-
             let baseIndex = url.indexOf("www.grundfos.com/") !== -1 ? url.indexOf("www.grundfos.com/") : url.indexOf("product-selection.grundfos.com/");
             if (baseIndex !== -1) {
                 let path = url.substring(baseIndex + (url.indexOf("www.grundfos.com/") !== -1 ? "www.grundfos.com/".length : "product-selection.grundfos.com/".length));
-
                 if (url.includes("product-selection.grundfos.com/")) {
                     path = "products/" + path;
                 }
-
-
                 mappings.forEach(({ old, new: n }) => {
                     if (!(path.includes("solutions/learn/") && old === "products")) {
                         if (path.includes(n)) path = path.replace(n, old);
                     }
                 });
-
                 return path;
             }
-
-
             return url;
         }
         function cleanUpPath(path) {
@@ -1805,7 +1569,6 @@
             if (path.startsWith("/")) path = path.slice(1);
             return path;
         }
-
         function generateAdditionalLinks(masterLanguage, localLanguage, customInput, localLanguages, liveSiteLanguage, linksDiv) {
             let linksHTML = "";
             let result = "";
@@ -2220,7 +1983,6 @@
                 if (fragmentValue && !savedFragmentInputs.includes(fragmentValue)) {
                     savedFragmentInputs.push(fragmentValue);
                     saveFragmentsToLocalStorage();
-
                     currentSelectedFragments = [fragmentValue];
                     updateSavedFragmentsCheckboxes();
                     selectNewlyAddedCheckbox(fragmentValue);
@@ -2234,12 +1996,10 @@
         function saveFragmentsToLocalStorage() {
             localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
         }
-
         function updateSavedFragmentsCheckboxes() {
             const savedFragmentContainer = document.getElementById("savedFragments");
             savedFragmentContainer.innerHTML = "";
             const checkedSavedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
-
             savedFragmentInputs.forEach((fragment) => {
                 const fragmentsIndex = fragment.indexOf("/fragments");
                 let fragmentPath = fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
@@ -2249,21 +2009,11 @@
                 if (fragmentPath.endsWith("/")) {
                     fragmentPath = fragmentPath.slice(0, -1);
                 }
-
                 const label = document.createElement("label");
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
                 checkbox.checked = checkedSavedFragments.includes(fragment);
-                // checkbox.addEventListener("change", function () {
-                //     handleSavedFragmentChange();
-                //     toggleRemoveButton(checkbox, removeButton);
-                //     saveSavedFragmentsState();
-                // });
-                // checkbox.checked = checkedSavedFragments.length > 0
-                //     ? checkedSavedFragments.includes(fragment)
-                //     : currentSelectedFragments.includes(fragment);
-
                 checkbox.addEventListener("change", function () {
                     handleSavedFragmentChange();
                     toggleRemoveButton(checkbox, removeButton);
@@ -2346,25 +2096,19 @@
         }
         document.addEventListener("DOMContentLoaded", () => {
             loadSelectionsFromLocalStorage();
-
             const saved = localStorage.getItem("savedFragments");
             if (saved) {
                 savedFragmentInputs = JSON.parse(saved);
             }
-
             updateSavedFragmentsCheckboxes();
             const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
             savedFragmentCheckboxes.forEach((checkbox) => {
                 checkbox.addEventListener("change", handleSavedFragmentChange);
             });
-
-
             document.getElementById("masterLanguage").addEventListener("change", saveSelectionsToLocalStorage);
-
             document.querySelectorAll('#localLanguages input[type="checkbox"]').forEach(cb => {
                 cb.addEventListener("change", saveSelectionsToLocalStorage);
             });
-
             document.querySelectorAll('input[name="condition"]').forEach(cb => {
                 cb.addEventListener("change", saveSelectionsToLocalStorage);
             });
@@ -2456,8 +2200,6 @@
                 masterLanguage.disabled = customInput.value.trim() === "";
             });
         });
-
-
         document.querySelectorAll('input[name="condition"]').forEach((checkbox) => {
             checkbox.addEventListener("change", function () {
                 const fragmentSection = document.getElementById("fragmentSection");
@@ -2602,10 +2344,8 @@
             const masterLanguage = document.getElementById("masterLanguage").value;
             const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
             const taskCheckboxes = document.querySelectorAll('input[name="condition"]:checked');
-
             const selectedLocalLanguages = Array.from(localLanguageCheckboxes).map(cb => cb.value);
             const selectedTasks = Array.from(taskCheckboxes).map(cb => cb.value);
-
             localStorage.setItem("selectedMasterLanguage", masterLanguage);
             localStorage.setItem("selectedLocalLanguages", JSON.stringify(selectedLocalLanguages));
             localStorage.setItem("selectedTaskTypes", JSON.stringify(selectedTasks));
@@ -2619,25 +2359,21 @@
                     masterSelect.dispatchEvent(new Event("change"));
                 }
             }
-
             const customInput = document.getElementById("customInput");
             if (customInput) {
                 const savedCustomInput = localStorage.getItem("customInputValue") || "";
                 customInput.value = savedCustomInput;
             }
-
             const fragmentInput = document.getElementById("fragmentInput");
             if (fragmentInput) {
                 const savedFragmentInput = localStorage.getItem("fragmentInputValue") || "";
                 fragmentInput.value = savedFragmentInput;
             }
-
             const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
             const selectedLocalLanguages = JSON.parse(localStorage.getItem("selectedLocalLanguages") || "[]");
             localLanguageCheckboxes.forEach(cb => {
                 cb.checked = selectedLocalLanguages.includes(cb.value);
             });
-
             const taskCheckboxes = document.querySelectorAll('input[name="condition"]');
             const selectedTasks = JSON.parse(localStorage.getItem("selectedTaskTypes") || "[]");
             taskCheckboxes.forEach(cb => {
@@ -2652,9 +2388,6 @@
             });
             localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
         }
-
-
     </script>
 </body>
-
 </html>
