@@ -2643,7 +2643,7 @@
             });
         }
         function saveSavedFragmentsState() {
-            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]:checked');
             const checkedFragments = [];
             savedFragmentCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) checkedFragments.push(checkbox.value);
