@@ -380,6 +380,13 @@
             display: block;
         }
 
+        .floating-btn.active {
+            background-color: #007bff;
+            color: white;
+            box-shadow: 0 0 8px #007bff;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -1015,12 +1022,27 @@
                 if (panel) {
                     panel.classList.toggle("show");
                     savePanelShowState(targetId, panel.classList.contains("show"));
+
+                    updateActiveButtons();
+
+
                     if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
                         loadSavedInputsFromStorage();
                     }
                 }
             });
         });
+        function updateActiveButtons() {
+            document.querySelectorAll(".floating-btn").forEach((btn) => {
+                const panelId = btn.dataset.target;
+                const panel = document.getElementById(panelId);
+                if (panel && panel.classList.contains("show")) {
+                    btn.classList.add("active");
+                } else {
+                    btn.classList.remove("active");
+                }
+            });
+        }
         function savePanelShowState(panelId, isShown) {
             let panelsState = JSON.parse(localStorage.getItem("panelsShowState") || "{}");
             panelsState[panelId] = isShown;
@@ -1038,6 +1060,8 @@
                     }
                 }
             }
+            updateActiveButtons();
+
         });
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
