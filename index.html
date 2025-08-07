@@ -24,8 +24,7 @@
         }
 
         #applySearchButton,
-        #addFragment,
-        #clearFragments {
+        #addFragment, #clearFragments {
             margin-top: 20px;
         }
 
@@ -35,16 +34,20 @@
             gap: 20px;
             padding: 20px;
             background-color: #f0f8ff;
+            /* Nền xanh nhẹ */
             box-sizing: border-box;
         }
 
+        /* Tiêu đề */
         h2 {
             color: #003366;
+            /* Xanh đậm */
             border-bottom: 3px solid #007bff;
             padding-bottom: 6px;
             margin-top: 40px;
         }
 
+        /* Button */
         button {
             padding: 10px 0.5vw;
             background-color: #007bff;
@@ -993,7 +996,6 @@
                 const panel = document.getElementById(targetId);
                 if (panel) {
                     panel.classList.toggle("show");
-                    savePanelShowState(targetId, panel.classList.contains("show"));
 
 
                     if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
@@ -1002,11 +1004,7 @@
                 }
             });
         });
-        function savePanelShowState(panelId, isShown) {
-            let panelsState = JSON.parse(localStorage.getItem("panelsShowState") || "{}");
-            panelsState[panelId] = isShown;
-            localStorage.setItem("panelsShowState", JSON.stringify(panelsState));
-        }
+
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
@@ -2219,49 +2217,51 @@
             localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
         }
 
-        function updateSavedFragmentsCheckboxes() {
-            const savedFragmentContainer = document.getElementById("savedFragments");
-            savedFragmentContainer.innerHTML = "";
+       function updateSavedFragmentsCheckboxes() {
+  const savedFragmentContainer = document.getElementById("savedFragments");
+  savedFragmentContainer.innerHTML = "";
 
-            const checkedSavedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
+  // Lấy danh sách saved checked fragments từ localStorage
+  const checkedSavedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
 
-            savedFragmentInputs.forEach((fragment) => {
+  savedFragmentInputs.forEach((fragment) => {
+    // xử lý fragmentPath như bạn có
 
-                const label = document.createElement("label");
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.value = fragment;
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = fragment;
 
-                checkbox.checked = checkedSavedFragments.length > 0
-                    ? checkedSavedFragments.includes(fragment)
-                    : currentSelectedFragments.includes(fragment);
+    checkbox.checked = checkedSavedFragments.length > 0
+      ? checkedSavedFragments.includes(fragment)
+      : currentSelectedFragments.includes(fragment);
 
-                checkbox.addEventListener("change", function () {
-                    handleSavedFragmentChange();
-                    toggleRemoveButton(checkbox, removeButton);
-                    saveSavedFragmentsState();
-                });
+    checkbox.addEventListener("change", function () {
+      handleSavedFragmentChange();
+      toggleRemoveButton(checkbox, removeButton);
+      saveSavedFragmentsState(); 
+    });
 
-                const removeButton = document.createElement("button");
-                removeButton.textContent = "X";
-                removeButton.style.marginLeft = "10px";
-                removeButton.style.marginTop = "0px";
-                removeButton.style.cursor = "pointer";
-                removeButton.style.padding = "5px";
-                removeButton.style.display = checkbox.checked ? "inline-block" : "none";
-                removeButton.addEventListener("click", function () {
-                    removeFragment(fragment);
-                    saveSavedFragmentsState();
-                });
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "X";
+    removeButton.style.marginLeft = "10px";
+    removeButton.style.marginTop = "0px";
+    removeButton.style.cursor = "pointer";
+    removeButton.style.padding = "5px";
+    removeButton.style.display = checkbox.checked ? "inline-block" : "none";
+    removeButton.addEventListener("click", function () {
+      removeFragment(fragment);
+      saveSavedFragmentsState(); 
+    });
 
-                label.appendChild(checkbox);
-                label.appendChild(document.createTextNode(` ${fragmentPath}`));
-                const fragmentDiv = document.createElement("div");
-                fragmentDiv.appendChild(label);
-                fragmentDiv.appendChild(removeButton);
-                savedFragmentContainer.appendChild(fragmentDiv);
-            });
-        }
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(` ${fragmentPath}`));
+    const fragmentDiv = document.createElement("div");
+    fragmentDiv.appendChild(label);
+    fragmentDiv.appendChild(removeButton);
+    savedFragmentContainer.appendChild(fragmentDiv);
+  });
+}
 
         function toggleRemoveButton(checkbox, removeButton) {
             removeButton.style.display = checkbox.checked ? "inline-block" : "none";
@@ -2273,7 +2273,7 @@
             }
             currentSelectedFragments = currentSelectedFragments.filter((f) => f !== fragment);
             updateSavedFragmentsCheckboxes();
-            saveSavedFragmentsState();
+            saveSavedFragmentsState(); 
             if (currentSelectedFragments.length === 0) {
                 fragmentContainer.innerHTML = "";
             } else {
@@ -2476,11 +2476,11 @@
             });
             document.getElementById("resetLinks").addEventListener("click", () => {
                 resetLinks("#links");
-                alert("The link status in #links has been reset!");
+                alert("Trạng thái liên kết trong #links đã được reset!");
             });
             document.getElementById("resetFragmentLinks").addEventListener("click", () => {
                 resetLinks("#fragmentContainer");
-                alert("The link state in #fragmentContainer has been reset!");
+                alert("Trạng thái liên kết trong #fragmentContainer đã được reset!");
             });
             function saveLinkState(lang, href, state) {
                 const storageKey = `linkStates_${lang}`;
@@ -2584,62 +2584,49 @@
             localStorage.setItem("selectedLocalLanguages", JSON.stringify(selectedLocalLanguages));
             localStorage.setItem("selectedTaskTypes", JSON.stringify(selectedTasks));
         }
-        function loadSelectionsFromLocalStorage() {
-            const masterSelect = document.getElementById("masterLanguage");
-            if (masterSelect) {
-                const masterLanguage = localStorage.getItem("selectedMasterLanguage");
-                if (masterLanguage) {
-                    masterSelect.value = masterLanguage;
-                    masterSelect.dispatchEvent(new Event("change"));
-                }
-            }
+       function loadSelectionsFromLocalStorage() {
+  const masterSelect = document.getElementById("masterLanguage");
+  if (masterSelect) {
+    const masterLanguage = localStorage.getItem("selectedMasterLanguage");
+    if (masterLanguage) {
+      masterSelect.value = masterLanguage;
+      masterSelect.dispatchEvent(new Event("change"));
+    }
+  }
 
-            const customInput = document.getElementById("customInput");
-            if (customInput) {
-                const savedCustomInput = localStorage.getItem("customInputValue") || "";
-                customInput.value = savedCustomInput;
-            }
+  const customInput = document.getElementById("customInput");
+  if (customInput) {
+    const savedCustomInput = localStorage.getItem("customInputValue") || "";
+    customInput.value = savedCustomInput;
+  }
 
-            const fragmentInput = document.getElementById("fragmentInput");
-            if (fragmentInput) {
-                const savedFragmentInput = localStorage.getItem("fragmentInputValue") || "";
-                fragmentInput.value = savedFragmentInput;
-            }
+  const fragmentInput = document.getElementById("fragmentInput");
+  if (fragmentInput) {
+    const savedFragmentInput = localStorage.getItem("fragmentInputValue") || "";
+    fragmentInput.value = savedFragmentInput;
+  }
 
-            const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
-            const selectedLocalLanguages = JSON.parse(localStorage.getItem("selectedLocalLanguages") || "[]");
-            localLanguageCheckboxes.forEach(cb => {
-                cb.checked = selectedLocalLanguages.includes(cb.value);
-            });
+  const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+  const selectedLocalLanguages = JSON.parse(localStorage.getItem("selectedLocalLanguages") || "[]");
+  localLanguageCheckboxes.forEach(cb => {
+    cb.checked = selectedLocalLanguages.includes(cb.value);
+  });
 
-            const taskCheckboxes = document.querySelectorAll('input[name="condition"]');
-            const selectedTasks = JSON.parse(localStorage.getItem("selectedTaskTypes") || "[]");
-            taskCheckboxes.forEach(cb => {
-                cb.checked = selectedTasks.includes(cb.value);
-            });
-        }
-        function saveSavedFragmentsState() {
-            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
-            const checkedFragments = [];
-            savedFragmentCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) checkedFragments.push(checkbox.value);
-            });
-            localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
-        }
+  const taskCheckboxes = document.querySelectorAll('input[name="condition"]');
+  const selectedTasks = JSON.parse(localStorage.getItem("selectedTaskTypes") || "[]");
+  taskCheckboxes.forEach(cb => {
+    cb.checked = selectedTasks.includes(cb.value);
+  });
+}
+function saveSavedFragmentsState() {
+  const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+  const checkedFragments = [];
+  savedFragmentCheckboxes.forEach(checkbox => {
+    if (checkbox.checked) checkedFragments.push(checkbox.value);
+  });
+  localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
+}
 
-        window.addEventListener("DOMContentLoaded", () => {
-            const panelsState = JSON.parse(localStorage.getItem("panelsShowState") || "{}");
-            for (const [panelId, isShown] of Object.entries(panelsState)) {
-                const panel = document.getElementById(panelId);
-                if (panel) {
-                    if (isShown) {
-                        panel.classList.add("show");
-                    } else {
-                        panel.classList.remove("show");
-                    }
-                }
-            }
-        });
 
     </script>
 </body>
