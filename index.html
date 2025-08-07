@@ -24,7 +24,8 @@
         }
 
         #applySearchButton,
-        #addFragment, #clearFragments {
+        #addFragment,
+        #clearFragments {
             margin-top: 20px;
         }
 
@@ -509,7 +510,7 @@
                 <!-- <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button> -->
                 <button id="toggleSearchButton" onclick="toggleSearchInput()">Show Search Input</button>
                 <button id="openModalButton">Show Table</button>
-                            <div id="buttons"></div>
+                <div id="buttons"></div>
             </div>
 
             <div class="floating-panel" id="convertText">
@@ -994,7 +995,7 @@
                 const panel = document.getElementById(targetId);
                 if (panel) {
                     panel.classList.toggle("show");
-
+                    savePanelShowState(targetId, panel.classList.contains("show"));
 
                     if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
                         loadSavedInputsFromStorage();
@@ -1291,85 +1292,85 @@
             return input.split("?")[0];
         }
 
-    //     document.addEventListener("DOMContentLoaded", function () {
-    //         const masterCodes = Object.keys(localLanguages);
-    //         // const masterSelectionButton = document.createElement("button");
-    //         // masterSelectionButton.textContent = "Select Master Code";
-    //         // masterSelectionButton.onclick = showMasterCodePopup;
-    //         // document.getElementById("buttons").appendChild(masterSelectionButton);
-    // //         const columnLeft = document.querySelector(".column-left");
-    // //         let popup = document.createElement("div");
-    // //         popup.id = "masterCodePopup";
-    // //         popup.className = "popup-content";
-    // //         popup.style.display = "none";
-    // //         popup.innerHTML = `
-    // //     <h3>Select Master Language</h3>
-    // //     <input type="text" id="masterCodeInput" placeholder="Enter master codes (comma separated)" />
-    // //     <div id="masterCheckboxContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;"></div>
-    // //     <button onclick="generateMasterCheckboxes()">Submit</button>
-    // //     <button onclick="clearMasterSelections()">Clear</button>
-    // // `;
-    // //         columnLeft.appendChild(popup);
-    //         function showMasterCodePopup() {
-    //             if (popup.style.display === "none") {
-    //                 popup.style.display = "block";
-    //             } else {
-    //                 popup.style.display = "none";
-    //             }
-    //         }
-    //         window.generateMasterCheckboxes = function () {
-    //             const inputElement = document.getElementById("masterCodeInput");
-    //             let input = inputElement.value;
-    //             const codes = input
-    //                 .split(",")
-    //                 .map((code) =>
-    //                     code
-    //                         .trim()
-    //                         .toLowerCase()
-    //                         .replace(/([a-zA-Z]{2})-([a-zA-Z]{2})/, (match, p1, p2) => `${p1.toLowerCase()}-${p2.toUpperCase()}`)
-    //                 )
-    //                 .filter((code) => masterCodes.includes(code));
-    //             const container = document.getElementById("masterCheckboxContainer");
-    //             let firstCheckbox = null;
-    //             codes.forEach((code, index) => {
-    //                 if (!document.querySelector(`#masterCheckboxContainer input[value='${code}']`)) {
-    //                     const checkboxWrapper = document.createElement("div");
-    //                     checkboxWrapper.style.display = "flex";
-    //                     checkboxWrapper.style.alignItems = "center";
-    //                     checkboxWrapper.style.marginBottom = "25px";
-    //                     const checkbox = document.createElement("input");
-    //                     checkbox.type = "checkbox";
-    //                     checkbox.value = code;
-    //                     checkbox.onchange = updateMasterSelection;
-    //                     const label = document.createElement("label");
-    //                     label.textContent = code;
-    //                     label.style.marginLeft = "5px";
-    //                     checkboxWrapper.appendChild(checkbox);
-    //                     checkboxWrapper.appendChild(label);
-    //                     container.appendChild(checkboxWrapper);
-    //                     if (firstCheckbox === null) {
-    //                         firstCheckbox = checkbox;
-    //                     }
-    //                 }
-    //             });
-    //             if (firstCheckbox) {
-    //                 firstCheckbox.checked = true;
-    //                 updateMasterSelection();
-    //             }
-    //             inputElement.value = "";
-    //         };
-    //         function updateMasterSelection() {
-    //             const selectedCodes = Array.from(document.querySelectorAll("#masterCheckboxContainer input:checked")).map((input) => input.value);
-    //             if (selectedCodes.length > 0) {
-    //                 document.getElementById("masterLanguage").value = selectedCodes[0];
-    //                 updateLocalLanguages();
-    //             }
-    //         }
-    //         window.clearMasterSelections = function () {
-    //             const container = document.getElementById("masterCheckboxContainer");
-    //             container.innerHTML = "";
-    //         };
-    //     });
+        //     document.addEventListener("DOMContentLoaded", function () {
+        //         const masterCodes = Object.keys(localLanguages);
+        //         // const masterSelectionButton = document.createElement("button");
+        //         // masterSelectionButton.textContent = "Select Master Code";
+        //         // masterSelectionButton.onclick = showMasterCodePopup;
+        //         // document.getElementById("buttons").appendChild(masterSelectionButton);
+        // //         const columnLeft = document.querySelector(".column-left");
+        // //         let popup = document.createElement("div");
+        // //         popup.id = "masterCodePopup";
+        // //         popup.className = "popup-content";
+        // //         popup.style.display = "none";
+        // //         popup.innerHTML = `
+        // //     <h3>Select Master Language</h3>
+        // //     <input type="text" id="masterCodeInput" placeholder="Enter master codes (comma separated)" />
+        // //     <div id="masterCheckboxContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px;"></div>
+        // //     <button onclick="generateMasterCheckboxes()">Submit</button>
+        // //     <button onclick="clearMasterSelections()">Clear</button>
+        // // `;
+        // //         columnLeft.appendChild(popup);
+        //         function showMasterCodePopup() {
+        //             if (popup.style.display === "none") {
+        //                 popup.style.display = "block";
+        //             } else {
+        //                 popup.style.display = "none";
+        //             }
+        //         }
+        //         window.generateMasterCheckboxes = function () {
+        //             const inputElement = document.getElementById("masterCodeInput");
+        //             let input = inputElement.value;
+        //             const codes = input
+        //                 .split(",")
+        //                 .map((code) =>
+        //                     code
+        //                         .trim()
+        //                         .toLowerCase()
+        //                         .replace(/([a-zA-Z]{2})-([a-zA-Z]{2})/, (match, p1, p2) => `${p1.toLowerCase()}-${p2.toUpperCase()}`)
+        //                 )
+        //                 .filter((code) => masterCodes.includes(code));
+        //             const container = document.getElementById("masterCheckboxContainer");
+        //             let firstCheckbox = null;
+        //             codes.forEach((code, index) => {
+        //                 if (!document.querySelector(`#masterCheckboxContainer input[value='${code}']`)) {
+        //                     const checkboxWrapper = document.createElement("div");
+        //                     checkboxWrapper.style.display = "flex";
+        //                     checkboxWrapper.style.alignItems = "center";
+        //                     checkboxWrapper.style.marginBottom = "25px";
+        //                     const checkbox = document.createElement("input");
+        //                     checkbox.type = "checkbox";
+        //                     checkbox.value = code;
+        //                     checkbox.onchange = updateMasterSelection;
+        //                     const label = document.createElement("label");
+        //                     label.textContent = code;
+        //                     label.style.marginLeft = "5px";
+        //                     checkboxWrapper.appendChild(checkbox);
+        //                     checkboxWrapper.appendChild(label);
+        //                     container.appendChild(checkboxWrapper);
+        //                     if (firstCheckbox === null) {
+        //                         firstCheckbox = checkbox;
+        //                     }
+        //                 }
+        //             });
+        //             if (firstCheckbox) {
+        //                 firstCheckbox.checked = true;
+        //                 updateMasterSelection();
+        //             }
+        //             inputElement.value = "";
+        //         };
+        //         function updateMasterSelection() {
+        //             const selectedCodes = Array.from(document.querySelectorAll("#masterCheckboxContainer input:checked")).map((input) => input.value);
+        //             if (selectedCodes.length > 0) {
+        //                 document.getElementById("masterLanguage").value = selectedCodes[0];
+        //                 updateLocalLanguages();
+        //             }
+        //         }
+        //         window.clearMasterSelections = function () {
+        //             const container = document.getElementById("masterCheckboxContainer");
+        //             container.innerHTML = "";
+        //         };
+        //     });
         document.getElementById("customInput").addEventListener("input", function () {
             let inputValue = this.value;
             if (inputValue.startsWith("/")) {
@@ -2236,7 +2237,7 @@
         function updateSavedFragmentsCheckboxes() {
             const savedFragmentContainer = document.getElementById("savedFragments");
             savedFragmentContainer.innerHTML = "";
-              const checkedSavedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
+            const checkedSavedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
 
             savedFragmentInputs.forEach((fragment) => {
                 const fragmentsIndex = fragment.indexOf("/fragments");
@@ -2247,7 +2248,7 @@
                 if (fragmentPath.endsWith("/")) {
                     fragmentPath = fragmentPath.slice(0, -1);
                 }
-             
+
                 const label = document.createElement("label");
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
@@ -2258,7 +2259,7 @@
                     toggleRemoveButton(checkbox, removeButton);
                     saveSavedFragmentsState();
                 });
-                   checkbox.checked = checkedSavedFragments.length > 0
+                checkbox.checked = checkedSavedFragments.length > 0
                     ? checkedSavedFragments.includes(fragment)
                     : currentSelectedFragments.includes(fragment);
 
