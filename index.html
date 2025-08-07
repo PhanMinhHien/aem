@@ -384,14 +384,15 @@
     <div class="container">
         <!-- <div class="column-left"> -->
         <div id="floatingMenu">
-            <button class="floating-btn" data-target="languageSection">🌐</button>
-            <button class="floating-btn" data-target="fixedMasterCodesContainer">📌</button>
-            <button class="floating-btn" data-target="savedCustomInputs">💾</button>
-            <button class="floating-btn" data-target="taskSection">🛠️</button>
-            <button class="floating-btn" data-target="fragmentSection">🧩</button>
-            <button class="floating-btn" data-target="buttonsSection">⚙️</button>
-            <button class="floating-btn" data-target="convertText">🔤</button>
+            <button class="floating-btn" data-target="languageSection" title="Language Settings">🌐</button>
+            <button class="floating-btn" data-target="fixedMasterCodesContainer" title="Fixed Master Codes">📌</button>
+            <button class="floating-btn" data-target="savedCustomInputs" title="Saved Inputs">💾</button>
+            <button class="floating-btn" data-target="taskSection" title="Task Types">🛠️</button>
+            <button class="floating-btn" data-target="fragmentSection" title="Fragments">🧩</button>
+            <button class="floating-btn" data-target="buttonsSection" title="Action Buttons">⚙️</button>
+            <button class="floating-btn" data-target="convertText" title="Text Tools">🔤</button>
         </div>
+
         <div id="floatingPanels">
             <div class="floating-panel" id="languageSection">
                 <h2>Language & Link</h2>
@@ -2344,7 +2345,7 @@
             }
         }
         document.addEventListener("DOMContentLoaded", () => {
-                        loadSelectionsFromLocalStorage();
+            loadSelectionsFromLocalStorage();
 
             const saved = localStorage.getItem("savedFragments");
             if (saved) {
