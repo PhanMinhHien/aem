@@ -2254,11 +2254,11 @@
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
                 checkbox.checked = checkedSavedFragments.includes(fragment);
-                checkbox.addEventListener("change", function () {
-                    handleSavedFragmentChange();
-                    toggleRemoveButton(checkbox, removeButton);
-                    saveSavedFragmentsState();
-                });
+                // checkbox.addEventListener("change", function () {
+                //     handleSavedFragmentChange();
+                //     toggleRemoveButton(checkbox, removeButton);
+                //     saveSavedFragmentsState();
+                // });
                 // checkbox.checked = checkedSavedFragments.length > 0
                 //     ? checkedSavedFragments.includes(fragment)
                 //     : currentSelectedFragments.includes(fragment);
@@ -2344,6 +2344,8 @@
             }
         }
         document.addEventListener("DOMContentLoaded", () => {
+                        loadSelectionsFromLocalStorage();
+
             const saved = localStorage.getItem("savedFragments");
             if (saved) {
                 savedFragmentInputs = JSON.parse(saved);
@@ -2354,7 +2356,6 @@
             savedFragmentCheckboxes.forEach((checkbox) => {
                 checkbox.addEventListener("change", handleSavedFragmentChange);
             });
-            loadSelectionsFromLocalStorage();
 
 
             document.getElementById("masterLanguage").addEventListener("change", saveSelectionsToLocalStorage);
