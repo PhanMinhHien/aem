@@ -509,8 +509,9 @@
                 <!-- <button id="clearSavedLinksBtn" onclick="clearRadioSelections()">Clear Saved Links</button> -->
                 <button id="toggleSearchButton" onclick="toggleSearchInput()">Show Search Input</button>
                 <button id="openModalButton">Show Table</button>
+                            <div id="buttons"></div>
             </div>
-            <!-- <div id="buttons"> -->
+
             <div class="floating-panel" id="convertText">
                 <h2>Convert text</h2>
                 <div class="form-group">
@@ -2244,20 +2245,21 @@
                 if (fragmentPath.endsWith("/")) {
                     fragmentPath = fragmentPath.slice(0, -1);
                 }
-                checkbox.checked = checkedSavedFragments.length > 0
-                    ? checkedSavedFragments.includes(fragment)
-                    : currentSelectedFragments.includes(fragment);
-
-                checkbox.addEventListener("change", function () {
-                    handleSavedFragmentChange();
-                    toggleRemoveButton(checkbox, removeButton);
-                    saveSavedFragmentsState();
-                });
+             
                 const label = document.createElement("label");
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
                 checkbox.checked = currentSelectedFragments.includes(fragmentPath);
+                checkbox.addEventListener("change", function () {
+                    handleSavedFragmentChange();
+                    toggleRemoveButton(checkbox, removeButton);
+                    saveSavedFragmentsState();
+                });
+                   checkbox.checked = checkedSavedFragments.length > 0
+                    ? checkedSavedFragments.includes(fragment)
+                    : currentSelectedFragments.includes(fragment);
+
                 checkbox.addEventListener("change", function () {
                     handleSavedFragmentChange();
                     toggleRemoveButton(checkbox, removeButton);
@@ -2495,7 +2497,7 @@
             });
             document.getElementById("resetLinks").addEventListener("click", () => {
                 resetLinks("#links");
-                alert("Trạng thái liên kết trong #links đã được reset!");
+                alert("The link status in #links has been reset!");
             });
             document.getElementById("resetFragmentLinks").addEventListener("click", () => {
                 resetLinks("#fragmentContainer");
