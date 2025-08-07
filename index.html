@@ -318,15 +318,21 @@
                 background-color: #007bff;
                 color: white;
                 border: none;
-                padding: 10px;
-                border-radius: 50%;
-                font-size: 18px;
+                border-radius: 25px;
+                font-size: 16px;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
-                overflow: hidden;
-                /* transition: width 0.3s ease; */
+                padding: 10px;
                 width: 44px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .floating-btn .icon {
+                width: 24px;
+                text-align: center;
+                flex-shrink: 0;
             }
 
             .floating-btn .btn-label {
@@ -335,21 +341,32 @@
                 margin-left: 10px;
                 transition: opacity 0.3s ease;
                 pointer-events: none;
-                width: 100%;
+                color: white;
             }
 
             .floating-btn:hover {
-                width: 10vw;
+                width: 15vw;
+                max-width: 300px;
+                background: #005bb5;
                 border-radius: 25px;
-                padding-right: 20px;
             }
 
             .floating-btn:hover .btn-label {
                 opacity: 1;
             }
 
-            .floating-btn:hover {
-                background: #005bb5;
+            .floating-btn.active {
+                background-color: #ffffff;
+                color: #007bff;
+                box-shadow: 0 0 8px #007bff;
+            }
+
+            .floating-btn.active .btn-label {
+                color: #007bff;
+            }
+
+            .floating-btn.active:hover {
+                background-color: #ffffff;
             }
 
             #floatingPanels {
@@ -377,17 +394,6 @@
 
             .floating-panel.show {
                 display: block;
-            }
-
-            .floating-btn.active {
-                background-color: #ffffff;
-                color: white;
-                box-shadow: 0 0 8px #007bff;
-                transition: background-color 0.3s, box-shadow 0.3s;
-            }
-
-            .floating-btn.active:hover .btn-label {
-                color: #007bff;
             }
 
             @keyframes fadeIn {
@@ -437,19 +443,25 @@
             #floatingMenuContainer::-webkit-scrollbar-thumb:hover {
                 background-color: rgba(100, 100, 100, 0.8);
             }
+            .group-buttons {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+                margin-top: 16px;
+            }
         </style>
     </head>
 
     <body>
         <div class="container">
             <div id="floatingMenu">
-                <button class="floating-btn" data-target="languageSection">🌐<span class="btn-label">Language</span></button>
-                <button class="floating-btn" data-target="fixedMasterCodesContainer">📌<span class="btn-label">Master Codes</span></button>
-                <button class="floating-btn" data-target="savedCustomInputs">💾<span class="btn-label">Saved Inputs</span></button>
-                <button class="floating-btn" data-target="taskSection">🛠️<span class="btn-label">Tasks</span></button>
-                <button class="floating-btn" data-target="fragmentSection">🧩<span class="btn-label">Fragments</span></button>
-                <button class="floating-btn" data-target="buttonsSection">⚙️<span class="btn-label">Settings</span></button>
-                <button class="floating-btn" data-target="convertText">🔤<span class="btn-label">Text Tools</span></button>
+                <button class="floating-btn" data-target="languageSection"><span class="icon"> 🌐</span><span class="btn-label">Language & Link</span></button>
+                <button class="floating-btn" data-target="fixedMasterCodesContainer"><span class="icon">📌</span><span class="btn-label">Key Markets</span></button>
+                <button class="floating-btn" data-target="savedCustomInputs"><span class="icon">💾</span><span class="btn-label">Saved Links</span></button>
+                <button class="floating-btn" data-target="taskSection"><span class="icon">🛠️</span><span class="btn-label">Tasks</span></button>
+                <button class="floating-btn" data-target="fragmentSection"><span class="icon">🧩</span><span class="btn-label">Fragments</span></button>
+                <button class="floating-btn" data-target="buttonsSection"><span class="icon">⚙️</span><span class="btn-label">Actions</span></button>
+                <button class="floating-btn" data-target="convertText"><span class="icon">🔤</span><span class="btn-label">Convert text</span></button>
             </div>
 
             <div id="floatingPanels">
@@ -518,11 +530,12 @@
                         <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
                     </div>
                     <div class="floating-panel" id="savedCustomInputs">
+                        <h2>Save Links</h2>
                         <div id="radioContainer"></div>
                         <button id="clearSavedLinksBtn" onclick="clearRadioSelections()" style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹 Clear Saved Links</button>
                     </div>
                     <div class="floating-panel" id="taskSection">
-                        <h2>Type Tasks</h2>
+                        <h2>Tasks</h2>
                         <div class="form-group">
                             <label>
                                 <input type="checkbox" name="condition" value="radio1" checked />
@@ -539,6 +552,7 @@
                         </div>
                     </div>
                     <div class="floating-panel" id="fragmentSection" class="hidden">
+                        <h2>Fragments</h2>
                         <div class="form-group">
                             <input type="text" id="fragmentInput" placeholder="Enter fragment" />
                             <button id="addFragment">Add Fragment</button>
@@ -553,7 +567,7 @@
                         </div>
                     </div>
                     <div class="floating-panel" id="buttonsSection">
-                        <h2>Action</h2>
+                        <h2>Actions</h2>
                         <div class="group-buttons">
                             <button id="generateAndSaveBtn">Generate & Save</button>
                             <button onclick="generateLinks()">Generate</button>
