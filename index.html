@@ -2209,6 +2209,8 @@ const conditions = Array.from(document.querySelectorAll('input[name="condition"]
                     const fragmentValue = fragmentInput.value.trim();
                     if (fragmentValue && !savedFragmentInputs.includes(fragmentValue)) {
                         savedFragmentInputs.push(fragmentValue);
+                                saveFragmentsToLocalStorage(); 
+
                         currentSelectedFragments = [fragmentValue];
                         updateSavedFragmentsCheckboxes();
                         selectNewlyAddedCheckbox(fragmentValue);
@@ -2219,6 +2221,10 @@ const conditions = Array.from(document.querySelectorAll('input[name="condition"]
                     }
                 });
             });
+            function saveFragmentsToLocalStorage() {
+    localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
+}
+
             function updateSavedFragmentsCheckboxes() {
                 const savedFragmentContainer = document.getElementById("savedFragments");
                 savedFragmentContainer.innerHTML = "";
@@ -2273,6 +2279,7 @@ const conditions = Array.from(document.querySelectorAll('input[name="condition"]
                 } else {
                     handleSavedFragmentChange();
                 }
+                saveFragmentsToLocalStorage();
             }
             function selectNewlyAddedCheckbox(fragmentValue) {
                 const checkbox = document.querySelector(`#savedFragments input[type="checkbox"][value="${fragmentValue}"]`);
@@ -2313,6 +2320,12 @@ const conditions = Array.from(document.querySelectorAll('input[name="condition"]
                 }
             }
             document.addEventListener("DOMContentLoaded", () => {
+                 const saved = localStorage.getItem("savedFragments");
+    if (saved) {
+        savedFragmentInputs = JSON.parse(saved);
+    }
+
+    updateSavedFragmentsCheckboxes();
                 const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
                 savedFragmentCheckboxes.forEach((checkbox) => {
                     checkbox.addEventListener("change", handleSavedFragmentChange);
