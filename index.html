@@ -992,6 +992,7 @@
                 const panel = document.getElementById(targetId);
                 if (panel) {
                     panel.classList.toggle("show");
+      savePanelShowState(targetId, panel.classList.contains("show"));
 
 
                     if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
@@ -1000,7 +1001,11 @@
                 }
             });
         });
-
+function savePanelShowState(panelId, isShown) {
+  let panelsState = JSON.parse(localStorage.getItem("panelsShowState") || "{}");
+  panelsState[panelId] = isShown;
+  localStorage.setItem("panelsShowState", JSON.stringify(panelsState));
+}
         document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) return;
@@ -2623,6 +2628,19 @@ function saveSavedFragmentsState() {
   localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
 }
 
+window.addEventListener("DOMContentLoaded", () => {
+  const panelsState = JSON.parse(localStorage.getItem("panelsShowState") || "{}");
+  for (const [panelId, isShown] of Object.entries(panelsState)) {
+    const panel = document.getElementById(panelId);
+    if (panel) {
+      if (isShown) {
+        panel.classList.add("show");
+      } else {
+        panel.classList.remove("show");
+      }
+    }
+  }
+});
 
     </script>
 </body>
