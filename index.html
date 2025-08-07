@@ -408,6 +408,13 @@
             margin-left: calc(700px + 60px);
             width: 100%;
         }
+
+        #floatingMenuContainer {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 
@@ -438,122 +445,123 @@
         </div>
 
         <div id="floatingPanels">
-            <div class="floating-panel" id="languageSection">
-                <h2>Language & Link</h2>
-                <div class="form-group">
-                    <label for="masterLanguage">Master Language:</label>
-                    <select id="masterLanguage" onchange="updateLocalLanguages()">
-                        <option value="" selected disabled hidden>Choose here</option>
-                        <option value="en-GB">en-GB (Master)</option>
-                        <option value="bs-BS">bs-BS (Bosnia)</option>
-                        <option value="bg-BG">bg-BG (Bulgaria)</option>
-                        <option value="hr-HR">hr-HR (Croatia)</option>
-                        <option value="cs-CZ">cs-CZ (Czech)</option>
-                        <option value="da-DK">da-DK (Denmark)</option>
-                        <option value="et-EE">et-EE (Estonian)</option>
-                        <option value="fi-FI">fi-FI (Finland)</option>
-                        <option value="el-GR">el-GR (Greek)</option>
-                        <option value="hu-HU">hu-HU (Hungary)</option>
-                        <option value="it-IT">it-IT (Italy)</option>
-                        <option value="ja-JP">ja-JP (Japan)</option>
-                        <option value="ko-KR">ko-KR (Korea)</option>
-                        <option value="lv-LV">lv-LV (Latvia)</option>
-                        <option value="lt-LT">lt-LT (Lithuania)</option>
-                        <option value="no-NO">no-NO (Norway)</option>
-                        <option value="pl-PL">pl-PL (Poland)</option>
-                        <option value="ro-RO">ro-RO (Romania)</option>
-                        <option value="ru-RU">ru-RU (Russia)</option>
-                        <option value="sr-RS">sr-RS (Serbia)</option>
-                        <option value="sk-SK">sk-SK (Slovakia)</option>
-                        <option value="sl-SI">sl-SI (Slovenia)</option>
-                        <option value="sv-SE">sv-SE (Sweden)</option>
-                        <option value="th-TH">th-TH (Thailand)</option>
-                        <option value="tr-TR">tr-TR (Turkey)</option>
-                        <option value="uk-UA">uk-UA (Ukraine)</option>
-                        <option value="vi-VI">vi-VI (Vietnamese)</option>
-                        <option value="en-AU">en-AU (English (Australia))</option>
-                        <option value="en-US">en-US (English (USA))</option>
-                        <option value="de-DE">de-DE (Germany)</option>
-                        <option value="fr-FR">fr-FR (France)</option>
-                        <option value="pt-PT">pt-PT (Portugal)</option>
-                        <option value="es-ES">es-ES (Spain)</option>
-                        <option value="nl-NL">nl-NL (Netherlands)</option>
-                        <option value="zh-CN">zh-CN (China)</option>
-                    </select>
-                </div>
-                <div id="localLanguages" class="local-languages"></div>
-                <div class="form-group">
-                    <label for="customInput">Custom Input:</label>
-                    <input type="text" id="customInput" />
-                </div>
-                <div class="check"><a
-                        href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB"
-                        target="_blank">Wrong URL?</a> | <a href="https://www.grundfos.com/components"
-                        target="_blank">Brand Components</a></div>
-                <div id="searchContainer" style="display: none">
+            <div class="floatingMenuContainer">
+                <div class="floating-panel" id="languageSection">
+                    <h2>Language & Link</h2>
                     <div class="form-group">
-                        <label for="searchInput">Search Language:</label>
-                        <input type="text" id="searchInput" placeholder="Search Language"
-                            oninput="handleInputSearch()" />
+                        <label for="masterLanguage">Master Language:</label>
+                        <select id="masterLanguage" onchange="updateLocalLanguages()">
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option value="en-GB">en-GB (Master)</option>
+                            <option value="bs-BS">bs-BS (Bosnia)</option>
+                            <option value="bg-BG">bg-BG (Bulgaria)</option>
+                            <option value="hr-HR">hr-HR (Croatia)</option>
+                            <option value="cs-CZ">cs-CZ (Czech)</option>
+                            <option value="da-DK">da-DK (Denmark)</option>
+                            <option value="et-EE">et-EE (Estonian)</option>
+                            <option value="fi-FI">fi-FI (Finland)</option>
+                            <option value="el-GR">el-GR (Greek)</option>
+                            <option value="hu-HU">hu-HU (Hungary)</option>
+                            <option value="it-IT">it-IT (Italy)</option>
+                            <option value="ja-JP">ja-JP (Japan)</option>
+                            <option value="ko-KR">ko-KR (Korea)</option>
+                            <option value="lv-LV">lv-LV (Latvia)</option>
+                            <option value="lt-LT">lt-LT (Lithuania)</option>
+                            <option value="no-NO">no-NO (Norway)</option>
+                            <option value="pl-PL">pl-PL (Poland)</option>
+                            <option value="ro-RO">ro-RO (Romania)</option>
+                            <option value="ru-RU">ru-RU (Russia)</option>
+                            <option value="sr-RS">sr-RS (Serbia)</option>
+                            <option value="sk-SK">sk-SK (Slovakia)</option>
+                            <option value="sl-SI">sl-SI (Slovenia)</option>
+                            <option value="sv-SE">sv-SE (Sweden)</option>
+                            <option value="th-TH">th-TH (Thailand)</option>
+                            <option value="tr-TR">tr-TR (Turkey)</option>
+                            <option value="uk-UA">uk-UA (Ukraine)</option>
+                            <option value="vi-VI">vi-VI (Vietnamese)</option>
+                            <option value="en-AU">en-AU (English (Australia))</option>
+                            <option value="en-US">en-US (English (USA))</option>
+                            <option value="de-DE">de-DE (Germany)</option>
+                            <option value="fr-FR">fr-FR (France)</option>
+                            <option value="pt-PT">pt-PT (Portugal)</option>
+                            <option value="es-ES">es-ES (Spain)</option>
+                            <option value="nl-NL">nl-NL (Netherlands)</option>
+                            <option value="zh-CN">zh-CN (China)</option>
+                        </select>
                     </div>
-                    <div id="masterLanguageInfo">Master Language:</div>
-                    <div id="localLanguagesInfo">Local Languages:</div>
-                    <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
+                    <div id="localLanguages" class="local-languages"></div>
+                    <div class="form-group">
+                        <label for="customInput">Custom Input:</label>
+                        <input type="text" id="customInput" />
+                    </div>
+                    <div class="check"><a
+                            href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB"
+                            target="_blank">Wrong URL?</a> | <a href="https://www.grundfos.com/components"
+                            target="_blank">Brand Components</a></div>
+                    <div id="searchContainer" style="display: none">
+                        <div class="form-group">
+                            <label for="searchInput">Search Language:</label>
+                            <input type="text" id="searchInput" placeholder="Search Language"
+                                oninput="handleInputSearch()" />
+                        </div>
+                        <div id="masterLanguageInfo">Master Language:</div>
+                        <div id="localLanguagesInfo">Local Languages:</div>
+                        <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
+                    </div>
                 </div>
-            </div>
-            <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
-                <h2>Key Markets</h2>
-                <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
-            </div>
-            <div class="floating-panel" id="savedCustomInputs">
-                <div id="radioContainer"></div>
-                <button id="clearSavedLinksBtn" onclick="clearRadioSelections()"
-                    style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹
-                    Clear Saved Links</button>
-            </div>
-            <div class="floating-panel" id="taskSection">
-                <h2>Type Tasks</h2>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" name="condition" value="radio1" checked />
-                        Normal task</label>
-                    <label>
-                        <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
-                        Fragment Reskin task
-                    </label>
-                    <label>
-                        <input type="checkbox" name="condition" value="radio2" />
-                        Tagging task (Unit)</label>
+                <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
+                    <h2>Key Markets</h2>
+                    <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
                 </div>
-            </div>
-            <div class="floating-panel" id="fragmentSection" class="hidden">
-                <div class="form-group">
-                    <input type="text" id="fragmentInput" placeholder="Enter fragment" />
-                    <button id="addFragment">Add Fragment</button>
+                <div class="floating-panel" id="savedCustomInputs">
+                    <div id="radioContainer"></div>
+                    <button id="clearSavedLinksBtn" onclick="clearRadioSelections()"
+                        style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹
+                        Clear Saved Links</button>
                 </div>
-                <div id="savedFragmentsContainer">
-                    <h4>Saved Fragments</h4>
-                    <div id="savedFragments"></div>
+                <div class="floating-panel" id="taskSection">
+                    <h2>Type Tasks</h2>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="condition" value="radio1" checked />
+                            Normal task</label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
+                            Fragment Reskin task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio2" />
+                            Tagging task (Unit)</label>
+                    </div>
                 </div>
-                <button id="clearFragments">Clear Saved Fragments</button>
-                <button id="resetFragmentLinks">Reset Status Fragment Links</button>
-            </div>
-            <div class="floating-panel" id="buttonsSection">
-                <h2>Action</h2>
-                <button id="generateAndSaveBtn">Generate & Save</button>
-                <button onclick="generateLinks()">Generate</button>
-                <button id="resetLinks">Reset Status Links</button>
-                <button onclick="generateLanguageSuggestions()">Suggest Language</button>
-                Inputs</button> -->
-                <button id="toggleSearchButton" onclick="toggleSearchInput()">Show Search Input</button>
-                <button id="openModalButton">Show Table</button>
-                <div id="buttons"></div>
-            </div>
-            <div class="floating-panel" id="convertText">
-                <h2>Convert text</h2>
-                <div class="form-group">
-                    <textarea id="inputText" rows="1" placeholder="Enter text here..."
-                        oninput="convertText()"></textarea>
+                <div class="floating-panel" id="fragmentSection" class="hidden">
+                    <div class="form-group">
+                        <input type="text" id="fragmentInput" placeholder="Enter fragment" />
+                        <button id="addFragment">Add Fragment</button>
+                    </div>
+                    <div id="savedFragmentsContainer">
+                        <h4>Saved Fragments</h4>
+                        <div id="savedFragments"></div>
+                    </div>
+                    <button id="clearFragments">Clear Saved Fragments</button>
+                    <button id="resetFragmentLinks">Reset Status Fragment Links</button>
+                </div>
+                <div class="floating-panel" id="buttonsSection">
+                    <h2>Action</h2>
+                    <button id="generateAndSaveBtn">Generate & Save</button>
+                    <button onclick="generateLinks()">Generate</button>
+                    <button id="resetLinks">Reset Status Links</button>
+                    <button onclick="generateLanguageSuggestions()">Suggest Language Inputs</button>
+                    <button id="toggleSearchButton" onclick="toggleSearchInput()">Show Search Input</button>
+                    <button id="openModalButton">Show Table</button>
+                    <div id="buttons"></div>
+                </div>
+                <div class="floating-panel" id="convertText">
+                    <h2>Convert text</h2>
+                    <div class="form-group">
+                        <textarea id="inputText" rows="1" placeholder="Enter text here..."
+                            oninput="convertText()"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
