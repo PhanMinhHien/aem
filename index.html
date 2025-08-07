@@ -2253,15 +2253,15 @@
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
-                checkbox.checked = currentSelectedFragments.includes(fragmentPath);
+                checkbox.checked = checkedSavedFragments.includes(fragment);
                 checkbox.addEventListener("change", function () {
                     handleSavedFragmentChange();
                     toggleRemoveButton(checkbox, removeButton);
                     saveSavedFragmentsState();
                 });
-                checkbox.checked = checkedSavedFragments.length > 0
-                    ? checkedSavedFragments.includes(fragment)
-                    : currentSelectedFragments.includes(fragment);
+                // checkbox.checked = checkedSavedFragments.length > 0
+                //     ? checkedSavedFragments.includes(fragment)
+                //     : currentSelectedFragments.includes(fragment);
 
                 checkbox.addEventListener("change", function () {
                     handleSavedFragmentChange();
@@ -2643,7 +2643,7 @@
             });
         }
         function saveSavedFragmentsState() {
-            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]:checked');
+            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
             const checkedFragments = [];
             savedFragmentCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) checkedFragments.push(checkbox.value);
