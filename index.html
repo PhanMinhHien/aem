@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic_Links_Generator_AEM</title>
     <style>
+        .openTagging,
+        .closeTagging {
+            background-color: #007bff;
+            padding: 15px;
+            display: inline-block;
+            color: #ffff;
+            border-radius: 5px;
+        }
+
         .taskSection .form-group {
             flex-direction: row;
             justify-content: space-between;
@@ -14,9 +23,11 @@
         .check {
             margin-bottom: 20px;
         }
-        .delete-btn{
+
+        .delete-btn {
             padding: 0;
         }
+
         .link-part {
             background-color: #007bff;
             padding: 10px;
@@ -2016,7 +2027,7 @@
                 const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
                 const sitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
                 const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-                linksHTML += "<p><strong>*************Start Tagging*************</strong></p>";
+                linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
                 linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
                 linksHTML += `Site Live: <a href="${sitesLink}" target="_blank">${sitesLink}</a><br>`;
                 linksHTML += `Rollout: <a href="${Rollout}" target="_blank">${Rollout}</a><br>`;
@@ -2031,13 +2042,13 @@
                     }
                     remainingLanguages.forEach((language) => {
                         linksHTML += generateLocalLanguageLinksTagging(language, customInput);
-                        linksHTML += "<p><strong>*************End Tagging*************</strong></p>";
+                        linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
                     });
                 } else if (localLanguagesChecked.length > 0) {
                     linksHTML += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
                     localLanguagesChecked.forEach((selectedLocalLanguage) => {
                         linksHTML += generateLocalLanguageLinksTagging(selectedLocalLanguage, customInput);
-                        linksHTML += "<p><strong>*************End Tagging*************</strong></p>";
+                        linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
                     });
                 } else {
                     linksHTML += `<p><strong>No local languages selected.</strong></p>`;
