@@ -2217,45 +2217,52 @@
             localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
         }
 
-        function updateSavedFragmentsCheckboxes() {
-            const savedFragmentContainer = document.getElementById("savedFragments");
-            savedFragmentContainer.innerHTML = "";
-            savedFragmentInputs.forEach((fragment) => {
-                const fragmentsIndex = fragment.indexOf("/fragments");
-                let fragmentPath = fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
-                if (fragmentPath.endsWith(".html")) {
-                    fragmentPath = fragmentPath.slice(0, -5);
-                }
-                if (fragmentPath.endsWith("/")) {
-                    fragmentPath = fragmentPath.slice(0, -1);
-                }
-                const label = document.createElement("label");
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.value = fragment;
-                checkbox.checked = currentSelectedFragments.includes(fragmentPath);
-                checkbox.addEventListener("change", function () {
-                    handleSavedFragmentChange();
-                    toggleRemoveButton(checkbox, removeButton);
-                });
-                const removeButton = document.createElement("button");
-                removeButton.textContent = "X";
-                removeButton.style.marginLeft = "10px";
-                removeButton.style.marginTop = "0px";
-                removeButton.style.cursor = "pointer";
-                removeButton.style.padding = "5px";
-                removeButton.style.display = checkbox.checked ? "inline-block" : "none";
-                removeButton.addEventListener("click", function () {
-                    removeFragment(fragment);
-                });
-                label.appendChild(checkbox);
-                label.appendChild(document.createTextNode(` ${fragmentPath}`));
-                const fragmentDiv = document.createElement("div");
-                fragmentDiv.appendChild(label);
-                fragmentDiv.appendChild(removeButton);
-                savedFragmentContainer.appendChild(fragmentDiv);
-            });
-        }
+       function updateSavedFragmentsCheckboxes() {
+  const savedFragmentContainer = document.getElementById("savedFragments");
+  savedFragmentContainer.innerHTML = "";
+
+  // Lấy danh sách saved checked fragments từ localStorage
+  const checkedSavedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
+
+  savedFragmentInputs.forEach((fragment) => {
+    // xử lý fragmentPath như bạn có
+
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = fragment;
+
+    checkbox.checked = checkedSavedFragments.length > 0
+      ? checkedSavedFragments.includes(fragment)
+      : currentSelectedFragments.includes(fragment);
+
+    checkbox.addEventListener("change", function () {
+      handleSavedFragmentChange();
+      toggleRemoveButton(checkbox, removeButton);
+      saveSavedFragmentsState(); 
+    });
+
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "X";
+    removeButton.style.marginLeft = "10px";
+    removeButton.style.marginTop = "0px";
+    removeButton.style.cursor = "pointer";
+    removeButton.style.padding = "5px";
+    removeButton.style.display = checkbox.checked ? "inline-block" : "none";
+    removeButton.addEventListener("click", function () {
+      removeFragment(fragment);
+      saveSavedFragmentsState(); 
+    });
+
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(` ${fragmentPath}`));
+    const fragmentDiv = document.createElement("div");
+    fragmentDiv.appendChild(label);
+    fragmentDiv.appendChild(removeButton);
+    savedFragmentContainer.appendChild(fragmentDiv);
+  });
+}
+
         function toggleRemoveButton(checkbox, removeButton) {
             removeButton.style.display = checkbox.checked ? "inline-block" : "none";
         }
@@ -2266,6 +2273,7 @@
             }
             currentSelectedFragments = currentSelectedFragments.filter((f) => f !== fragment);
             updateSavedFragmentsCheckboxes();
+            saveSavedFragmentsState(); 
             if (currentSelectedFragments.length === 0) {
                 fragmentContainer.innerHTML = "";
             } else {
@@ -2609,6 +2617,14 @@
   taskCheckboxes.forEach(cb => {
     cb.checked = selectedTasks.includes(cb.value);
   });
+}
+function saveSavedFragmentsState() {
+  const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+  const checkedFragments = [];
+  savedFragmentCheckboxes.forEach(checkbox => {
+    if (checkbox.checked) checkedFragments.push(checkbox.value);
+  });
+  localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
 }
 
 
