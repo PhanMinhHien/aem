@@ -2135,9 +2135,12 @@
              function openLinks() {
             var links = document.querySelectorAll('a.publish');
             
-            links.forEach(function(link) {
-                window.open(link.href, '_blank');
-            });
+            // links.forEach(function(link) {
+            //     window.open(link.href, '_blank');
+            // });
+            for (var i = 0; i < links.length - 1; i++) {
+                window.open(links[i].href, '_blank');
+            }
         }
             let currentMasterLanguage = "";
             let currentLocalLanguages = [];
