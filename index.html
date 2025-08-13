@@ -548,8 +548,9 @@
                             <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
                         </div>
                         <div class="group-buttons" style="margin-bottom: 20px">
-                            <button onclick="openLinksMaster()">Open new tabs Master</button>
-                            <button onclick="openLinks()">Open new tabs all publish link</button>
+                            <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>
+                            <button onclick="openLinks()">Open new tabs all publish link</button> -->
+                            <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
                         </div>
 
                         <div class="form-group-1">
@@ -2163,23 +2164,65 @@
                 fragmentContainer.innerHTML = "";
                 saveFragmentsToLocalStorage();
             });
-            function openLinks() {
-                var links = document.querySelectorAll("a.publish");
+            // function openLinks() {
+            //     var links = document.querySelectorAll("a.publish");
 
-                // links.forEach(function(link) {
-                //     window.open(link.href, '_blank');
-                // });
-                for (var i = 0; i < links.length - 1; i++) {
-                    window.open(links[i].href, "_blank");
+            //     // links.forEach(function(link) {
+            //     //     window.open(link.href, '_blank');
+            //     // });
+            //     for (var i = 0; i < links.length - 1; i++) {
+            //         window.open(links[i].href, "_blank");
+            //     }
+            // }
+            // function openLinksMaster() {
+            //     var links = document.querySelectorAll("a.siteliveMaster, a.rolloutMaster");
+
+            //     links.forEach(function (link) {
+            //         window.open(link.href, "_blank");
+            //     });
+            // }
+
+            // let currentRadioIndex = 0;
+            let toggleState = 0; // 0 = Master, 1 = Publish
+
+            function runSingleRadio() {
+                const radios = document.querySelectorAll("#radioContainer input[type='radio']");
+
+                if (currentRadioIndex >= radios.length) {
+                    alert("All radios processed.");
+                    return;
                 }
-            }
-            function openLinksMaster() {
-                var links = document.querySelectorAll("a.siteliveMaster, a.rolloutMaster");
 
-                links.forEach(function (link) {
-                    window.open(link.href, "_blank");
-                });
+                // Select current radio
+                radios[currentRadioIndex].checked = true;
+                updateCustomInput(radios[currentRadioIndex]); // your existing function
+
+                setTimeout(() => {
+                    if (toggleState === 0) {
+                        // Master mode
+                        document.querySelectorAll("#links .siteliveMaster, #links .rolloutMaster").forEach((a) => {
+                            window.open(a.href, "_blank");
+                        });
+                    } else {
+                        // Publish mode
+                        document.querySelectorAll("#links a.publish").forEach((a) => {
+                            window.open(a.href, "_blank");
+                        });
+                    }
+
+                    // Move to next radio
+                    currentRadioIndex++;
+
+                    // Toggle state
+                    toggleState = (toggleState + 1) % 2;
+
+                    // Update button text
+                    const btn = document.getElementById("toggleOpenLinksBtn");
+                    btn.textContent = toggleState === 0 ? "Run Master" : "Run Publish";
+                }, 800); // delay to let links generate
             }
+
+            document.getElementById("toggleOpenLinksBtn").addEventListener("click", runSingleRadio);
 
             let currentRadioIndex = 0;
 
