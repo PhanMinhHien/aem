@@ -106,6 +106,28 @@
                 color: #003366;
             }
 
+            .form-group-1 input[type="text"],
+            .form-group-1 input[type="number"],
+            .form-group-1 input[type="email"],
+            .form-group-1 select,
+            .form-group-1 textarea {
+                padding: 7px 14px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 16px;
+                background-color: #f9f9f9;
+                transition: all 0.3s ease;
+                box-sizing: border-box;
+            }
+
+            .form-group-1 input:focus,
+            .form-group-1 select:focus,
+            .form-group-1 textarea:focus {
+                border-color: #007bff;
+                background-color: #fff;
+                outline: none;
+            }
+
             .form-group input[type="text"],
             .form-group input[type="number"],
             .form-group input[type="email"],
@@ -525,9 +547,15 @@
                             <div id="localLanguagesInfo">Local Languages:</div>
                             <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
                         </div>
-                        <button onclick="openLinksMaster()">Open new tabs Master</button>
-                        <button onclick="openLinks()">Open new tabs all publish link</button>
-                        <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
+                        <div class="group-buttons" style="margin-bottom: 20px">
+                            <button onclick="openLinksMaster()">Open new tabs Master</button>
+                            <button onclick="openLinks()">Open new tabs all publish link</button>
+                        </div>
+
+                        <div class="form-group-1">
+                            <input type="number" id="batchSizeInput" value="10" min="1" />
+                            <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
+                        </div>
                     </div>
                     <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
                         <h2>Key Markets</h2>
@@ -2155,14 +2183,14 @@
 
             let currentRadioIndex = 0;
 
-            function generateAndOpenBatch(batchSize = 10) {
+            function generateAndOpenBatch(batchSize) {
                 const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-                const delay = 500;
+                const delay = 1000;
                 let processed = 0;
 
                 function processNext() {
                     if (currentRadioIndex >= radios.length || processed >= batchSize) {
-                        console.log(`Đã xử lý xong ${processed} radio trong batch này`);
+                        console.log(`${processed} radios have been processed in this batch`);
                         return;
                     }
 
@@ -2182,7 +2210,11 @@
 
                 processNext();
             }
-            document.getElementById("autoGenerateBtn").addEventListener("click", () => generateAndOpenBatch(10));
+
+            document.getElementById("autoGenerateBtn").addEventListener("click", () => {
+                const batchSize = parseInt(document.getElementById("batchSizeInput").value, 10) || 1;
+                generateAndOpenBatch(batchSize);
+            });
 
             let currentMasterLanguage = "";
             let currentLocalLanguages = [];
