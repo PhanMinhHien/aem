@@ -2132,9 +2132,9 @@
                 fragmentContainer.innerHTML = "";
                 saveFragmentsToLocalStorage();
             });
-            function openLinks() {
-            var links = document.querySelectorAll('.publish');
-        
+             function openLinks() {
+            var links = document.querySelectorAll('a.publish');
+            
             links.forEach(function(link) {
                 window.open(link.href, '_blank');
             });
