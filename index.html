@@ -472,6 +472,10 @@
                 gap: 12px;
                 margin-top: 16px;
             }
+
+            .button-auto {
+                display: none;
+            }
         </style>
     </head>
 
@@ -547,15 +551,17 @@
                             <div id="localLanguagesInfo">Local Languages:</div>
                             <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
                         </div>
-                        <div class="group-buttons" style="margin-bottom: 20px">
-                            <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>
+                        <div class="button-auto">
+                            <div class="group-buttons" style="margin-bottom: 20px">
+                                <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>
                             <button onclick="openLinks()">Open new tabs all publish link</button> -->
-                            <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
-                        </div>
+                                <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
+                            </div>
 
-                        <div class="form-group-1">
-                            <input type="number" id="batchSizeInput" value="10" min="1" />
-                            <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
+                            <div class="form-group-1">
+                                <input type="number" id="batchSizeInput" value="10" min="1" />
+                                <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
+                            </div>
                         </div>
                     </div>
                     <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
@@ -582,6 +588,10 @@
                                 <input type="checkbox" name="condition" value="radio2" />
                                 Tagging task (Unit)</label
                             >
+                            <label>
+                                <input type="checkbox" name="condition" value="autoTask" />
+                                Auto Task
+                            </label>
                         </div>
                     </div>
                     <div class="floating-panel" id="fragmentSection" class="hidden">
@@ -1082,6 +1092,19 @@
                 GCA_FR: ["ca/fr"],
                 GMX: ["mx/es"],
             };
+
+            const autoTaskCheckbox = document.querySelector('input[name="condition"][value="autoTask"]');
+            const buttonAutoDiv = document.querySelector(".button-auto");
+
+            function toggleAutoTaskButtons() {
+                if (!autoTaskCheckbox || !buttonAutoDiv) return;
+                buttonAutoDiv.style.display = autoTaskCheckbox.checked ? "block" : "none";
+            }
+
+            autoTaskCheckbox.addEventListener("change", toggleAutoTaskButtons);
+
+            window.addEventListener("load", toggleAutoTaskButtons);
+
             document.querySelectorAll(".floating-btn").forEach((btn) => {
                 btn.addEventListener("click", () => {
                     const targetId = btn.dataset.target;
@@ -1692,6 +1715,12 @@
                 });
                 console.log("Generated input:", lastGeneratedInput);
             }
+            document.querySelectorAll('input[name="condition"]').forEach((cb) => {
+                cb.addEventListener("change", () => {
+                    generateLinks();
+                });
+            });
+
             function extractPathFromUrl(url) {
                 const mappings = [
                     { old: "products", new: "solutions" },
