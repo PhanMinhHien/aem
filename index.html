@@ -1403,6 +1403,7 @@
             if (panel) {
                 panel.classList.add("show");
             }
+             initializeCheckboxes();
         };
         function generateLinksFromInput(input) {
             return input.split("?")[0];
@@ -1623,20 +1624,19 @@
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
-                    const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
-                    const savedState = savedStates.find(state => state.id === code);
-                    if (savedState) {
-                        checkbox.checked = savedState.checked;
-                        checkbox.disabled = savedState.disabled;
-                    }
-                    if (index === 0) {
-                        checkbox.checked = true;
-                        checkbox.dispatchEvent(new Event("change"));
-                        // checkbox.disabled = false;
-                    } else {
-                        // checkbox.disabled = true;
-                        checkbox.dispatchEvent(new Event("change"));
-                    }
+                  
+ const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
+        const savedState = savedStates.find(state => state.id === code);
+        
+        if (savedState) {
+            checkbox.checked = savedState.checked;
+            checkbox.disabled = savedState.disabled;
+        }
+
+                  if (index === 0 && !savedState) {
+            checkbox.checked = true;  
+            checkbox.dispatchEvent(new Event("change")); 
+        }
                 });
             }
             applyDisabledStyles();
@@ -1681,36 +1681,65 @@
                 }
             });
         }
-        function handleLocalLanguageChange() {
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
-            const firstCheckbox = checkboxes[0];
+       function handleLocalLanguageChange() {
+    const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+    const firstCheckbox = checkboxes[0];
 
-            const checkboxStates = Array.from(checkboxes).map((checkbox) => ({
-                id: checkbox.id,
-                checked: checkbox.checked,
-                disabled: checkbox.disabled
-            }));
-            localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
-            if (firstCheckbox.checked) {
-                checkboxes.forEach((checkbox, index) => {
-                    if (index > 0) {
-                        checkbox.disabled = true;
-                        checkbox.checked = false;
-                    }
-                });
-            } else {
-                checkboxes.forEach((checkbox, index) => {
-                    if (index > 0) {
-                        checkbox.disabled = false;
-                    }
-                });
+    const checkboxStates = Array.from(checkboxes).map((checkbox) => ({
+        id: checkbox.id,
+        checked: checkbox.checked,
+        disabled: checkbox.disabled
+    }));
+    localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
+
+    if (firstCheckbox.checked) {
+        checkboxes.forEach((checkbox, index) => {
+            if (index > 0) {
+                checkbox.disabled = true;
+                checkbox.checked = false;
             }
-            applyDisabledStyles();
-            const selectedLocalLanguages = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map((checkbox) => checkbox.value);
-            currentLocalLanguages = selectedLocalLanguages;
-            generateLinksForCondition3();
-            generateLinks();
+        });
+    } else {
+        checkboxes.forEach((checkbox, index) => {
+            if (index > 0) {
+                checkbox.disabled = false;
+            }
+        });
+    }
+
+    applyDisabledStyles();
+
+    const selectedLocalLanguages = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map((checkbox) => checkbox.value);
+    currentLocalLanguages = selectedLocalLanguages;
+
+    generateLinksForCondition3();
+    generateLinks();
+}
+function initializeCheckboxes() {
+    const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+    const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
+
+    checkboxes.forEach((checkbox) => {
+        const savedState = savedStates.find(state => state.id === checkbox.id);
+        if (savedState) {
+            checkbox.checked = savedState.checked;
+            checkbox.disabled = savedState.disabled;
         }
+    });
+
+    const firstCheckbox = checkboxes[0];
+    if (firstCheckbox.checked) {
+        checkboxes.forEach((checkbox, index) => {
+            if (index > 0) {
+                checkbox.disabled = true;
+                checkbox.checked = false;
+            }
+        });
+    }
+
+    applyDisabledStyles();
+}
+
         function removeDuplicateLinks(linksDiv) {
             const linkElements = linksDiv.querySelectorAll("p a");
             const seenURLs = new Set();
