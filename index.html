@@ -47,6 +47,7 @@
             padding: 20px;
             background-color: #f0f8ff;
             box-sizing: border-box;
+            height: 100vh;
         }
 
         h2 {
@@ -581,7 +582,8 @@
                     <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
                 </div>
                 <div class="floating-panel" id="savedCustomInputs">
-                    <h2>Save Links</h2>
+                    <h2>Save Links (<span id="linkCount">0</span>)</h2>
+
                     <div id="radioContainer"></div>
                     <button id="clearSavedLinksBtn" onclick="clearRadioSelections()"
                         style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹
@@ -1202,6 +1204,12 @@
                 button.style.color = "#007bff";
             };
         });
+        let savedLinksCount = 0;
+
+        function updateSavedLinksCount() {
+            const linkCountElement = document.getElementById("linkCount");
+            linkCountElement.textContent = savedLinksCount;
+        }
         window.clearRadioSelections = function () {
             const RadioSelections = document.getElementById("savedCustomInputs");
             const container = document.getElementById("radioContainer");
@@ -1211,6 +1219,8 @@
             if (clearBtn) clearBtn.style.display = "none";
             localStorage.removeItem("savedInputs");
             localStorage.removeItem("selectedInput");
+            savedLinksCount = 0;
+            updateSavedLinksCount();
             if (typeof links !== "undefined") links.innerHTML = "";
         };
         function processAndAddCustomInput() {
@@ -1231,6 +1241,8 @@
                     return;
                 }
                 addSavedInputToDOM(input, container, true);
+                savedLinksCount++;
+                updateSavedLinksCount();
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
                 const clearBtn = document.getElementById("clearSavedLinksBtn");
@@ -1346,6 +1358,8 @@
                     localStorage.removeItem("selectedInput");
                 }
             }
+            savedLinksCount--;
+            updateSavedLinksCount();
             savedInputs.forEach((input) => {
                 const isChecked = input === newSelectedInput;
                 addSavedInputToDOM(input, container, isChecked);
@@ -1365,6 +1379,8 @@
         };
         window.onload = function () {
             const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            savedLinksCount = savedInputs.length;
+            updateSavedLinksCount();
             const selected = getSelectedInput();
             const container = document.getElementById("radioContainer");
             const masterLanguage = document.getElementById("masterLanguage");
