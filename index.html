@@ -47,7 +47,6 @@
             padding: 20px;
             background-color: #f0f8ff;
             box-sizing: border-box;
-                height: 100vh;
         }
 
         h2 {
@@ -1614,14 +1613,14 @@
                         checkbox.checked = savedState.checked;
                         checkbox.disabled = savedState.disabled;
                     }
-                    // if (index === 0) {
-                    //     checkbox.checked = true;
-                    //     checkbox.dispatchEvent(new Event("change"));
-                    //     checkbox.disabled = false;
-                    // } else {
-                    //     checkbox.disabled = true;
-                    //     checkbox.dispatchEvent(new Event("change"));
-                    // }
+                    if (index === 0) {
+                        checkbox.checked = true;
+                        checkbox.dispatchEvent(new Event("change"));
+                        // checkbox.disabled = false;
+                    } else {
+                        // checkbox.disabled = true;
+                        checkbox.dispatchEvent(new Event("change"));
+                    }
                 });
             }
             applyDisabledStyles();
