@@ -2172,6 +2172,7 @@
                         linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): No additional locales available to display.</strong></p>`;
                     }
                     remainingLanguages.forEach((language) => {
+                        if (language === "www/en") { }
                         linksHTML += generateLocalLanguageLinksTagging(language, customInput);
                     });
                     linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
@@ -2190,11 +2191,37 @@
         }
 
         function generateLocalLanguageLinksTagging(language, customInput) {
-            const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${customInput}`];
-            const localsitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${customInput}`;
-            const localProperties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/${language}/${customInput}`;
-            return `<p><strong>Local Language (${language}):</strong></p>` + `Properties: <a href="${localProperties}" target="_blank">${localProperties}</a><br>` + `Publish: <a href="${localpublishLinks}" class="publish" target="_blank">${localpublishLinks}</a><br>`;
+            function applyReplacements(input) {
+                const replacements = [
+                    { old: "products", new: "solutions" },
+                    { old: "learn", new: "solutions/learn" },
+                    { old: "support", new: "solutions/support" },
+                    { old: "about-us/sustainability", new: "sustainability" },
+                    { old: "about-us/media", new: "media" },
+                    { old: "about-us/careers", new: "careers" }
+                ];
+
+                let updatedInput = input;
+                replacements.forEach((replacement) => {
+                    updatedInput = updatedInput.replace(new RegExp(replacement.old, "g"), replacement.new);
+                });
+                return updatedInput;
+            }
+
+            let updatedCustomInput = customInput;
+            if (language === "www/en") {
+                updatedCustomInput = applyReplacements(customInput);
+            }
+
+            const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedCustomInput}`];
+            const localsitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedCustomInput}`;
+            const localProperties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/${language}/${updatedCustomInput}`;
+
+            return `<p><strong>Local Language (${language}):</strong></p>` +
+                `Properties: <a href="${localProperties}" target="_blank">${localProperties}</a><br>` +
+                `Publish: <a href="${localpublishLinks}" class="publish" target="_blank">${localpublishLinks}</a><br>`;
         }
+
         let savedFragmentInputs = [];
         const fragmentInput = document.getElementById("fragmentInput");
         const savedFragmentsContainer = document.getElementById("savedFragments");
@@ -2235,48 +2262,46 @@
                 return;
             }
 
-            // Select current radio
             radios[currentRadioIndex].checked = true;
-            updateCustomInput(radios[currentRadioIndex]); // your existing function
+            updateCustomInput(radios[currentRadioIndex]);
 
-            // Function to open all links (Master or Publish)
-            const openLinks = (links) => {
-                return new Promise((resolve) => {
-                    links.forEach((a, index) => {
-                        setTimeout(() => {
-                            window.open(a.href, "_blank");
-                            // If it's the last link, resolve the promise
-                            if (index === links.length - 1) {
-                                resolve();
-                            }
-                        }, index * 500); // Delay between opening links to avoid browser blocking popups
-                    });
-                });
-            };
-
-            setTimeout(async () => {
-                // Mở Master links
-                const masterLinks = document.querySelectorAll("#links .siteliveMaster, #links .rolloutMaster");
-                await openLinks(masterLinks);  // Wait until all Master links are opened
-
-                // Mở Publish links sau khi Master xong
-                const publishLinks = document.querySelectorAll("#links a.publish");
-                await openLinks(publishLinks);  // Wait until all Publish links are opened
-
-                // Move to next radio after opening links
-                currentRadioIndex++;
-
-                // Toggle state for next operation
-                toggleState = (toggleState + 1) % 2;
-
-                // Update button text
+            setTimeout(() => {
                 const btn = document.getElementById("toggleOpenLinksBtn");
-                btn.textContent = toggleState === 0 ? "Run Master" : "Run Publish";
-            }, 800); // delay to let links generate
+
+                if (toggleState === 0) {
+                    const masterLinks = document.querySelectorAll("#links .siteliveMaster, #links .rolloutMaster");
+                    openLinks(masterLinks).then(() => {
+                        toggleState = 1;
+                        btn.textContent = "Run Publish";
+                    });
+                } else {
+                    const publishLinks = document.querySelectorAll("#links a.publish");
+                    openLinks(publishLinks).then(() => {
+                        currentRadioIndex++;
+                        toggleState = 0;
+                        btn.textContent = "Run Master";
+
+                        if (currentRadioIndex < radios.length) {
+                            radios[currentRadioIndex].checked = true;
+                            updateCustomInput(radios[currentRadioIndex]);
+                        }
+                    });
+                }
+            }, 800);
         }
 
-
-
+        function openLinks(links) {
+            return new Promise((resolve) => {
+                links.forEach((a, index) => {
+                    setTimeout(() => {
+                        window.open(a.href, "_blank");
+                        if (index === links.length - 1) {
+                            resolve();
+                        }
+                    }, index * 500);
+                });
+            });
+        }
         document.getElementById("toggleOpenLinksBtn").addEventListener("click", runSingleRadio);
 
         let currentRadioIndex = 0;
