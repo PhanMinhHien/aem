@@ -1594,7 +1594,6 @@
             const masterLanguage = document.getElementById("masterLanguage").value;
             const localLanguagesDiv = document.getElementById("localLanguages");
             localLanguagesDiv.innerHTML = "";
-
             if (localLanguages[masterLanguage]) {
                 localLanguages[masterLanguage].forEach((code, index) => {
                     const checkbox = document.createElement("input");
@@ -1602,21 +1601,18 @@
                     checkbox.id = code;
                     checkbox.value = code;
                     checkbox.onchange = handleLocalLanguageChange;
-
                     const label = document.createElement("label");
                     label.setAttribute("for", code);
                     label.textContent = code;
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
-
                     const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
                     const savedState = savedStates.find(state => state.id === code);
                     if (savedState) {
                         checkbox.checked = savedState.checked;
                         checkbox.disabled = savedState.disabled;
                     }
-
                     // if (index === 0) {
                     //     checkbox.checked = true;
                     //     checkbox.dispatchEvent(new Event("change"));
@@ -1629,7 +1625,6 @@
             }
             applyDisabledStyles();
         }
-
         function updateLocalLanguages1() {
             const masterLanguage = document.getElementById("masterLanguage").value;
             const localLanguagesDiv = document.getElementById("localLanguages");
@@ -1679,9 +1674,7 @@
                 checked: checkbox.checked,
                 disabled: checkbox.disabled
             }));
-
             localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
-
             if (firstCheckbox.checked) {
                 checkboxes.forEach((checkbox, index) => {
                     if (index > 0) {
@@ -1696,15 +1689,12 @@
                     }
                 });
             }
-
             applyDisabledStyles();
-
             const selectedLocalLanguages = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map((checkbox) => checkbox.value);
             currentLocalLanguages = selectedLocalLanguages;
             generateLinksForCondition3();
             generateLinks();
         }
-
         function removeDuplicateLinks(linksDiv) {
             const linkElements = linksDiv.querySelectorAll("p a");
             const seenURLs = new Set();
@@ -2283,21 +2273,20 @@
 
         // let currentRadioIndex = 0;
         let toggleState = 0; // 0 = Master, 1 = Publish
-
         function runSingleRadio() {
             const radios = document.querySelectorAll("#radioContainer input[type='radio']");
+            const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
 
-            if (currentRadioIndex >= radios.length) {
-                alert("All radios processed.");
+            if (!currentRadio) {
+                alert("No radio is selected.");
                 return;
             }
 
-            radios[currentRadioIndex].checked = true;
-            updateCustomInput(radios[currentRadioIndex]);
+            const currentRadioIndex = Array.from(radios).indexOf(currentRadio);
+
+            const btn = document.getElementById("toggleOpenLinksBtn");
 
             setTimeout(() => {
-                const btn = document.getElementById("toggleOpenLinksBtn");
-
                 if (toggleState === 0) {
                     const masterLinks = document.querySelectorAll("#links .siteliveMaster, #links .rolloutMaster");
                     openLinks(masterLinks).then(() => {
@@ -2307,17 +2296,16 @@
                 } else {
                     const publishLinks = document.querySelectorAll("#links a.publish");
                     openLinks(publishLinks).then(() => {
-                        currentRadioIndex++;
                         toggleState = 0;
                         btn.textContent = "Run Master";
 
-                        if (currentRadioIndex < radios.length) {
-                            radios[currentRadioIndex].checked = true;
-                            updateCustomInput(radios[currentRadioIndex]);
+                        if (currentRadioIndex + 1 < radios.length) {
+                            radios[currentRadioIndex + 1].checked = true;
+                            updateCustomInput(radios[currentRadioIndex + 1]);
                         }
                     });
                 }
-            }, 800);
+            }, 500);
         }
 
         function openLinks(links) {
@@ -2332,14 +2320,24 @@
                 });
             });
         }
+
         document.getElementById("toggleOpenLinksBtn").addEventListener("click", runSingleRadio);
 
-        let currentRadioIndex = 0;
+
 
         function generateAndOpenBatch(batchSize) {
             const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-            const delay = 1000;
+            const delay = 500;
             let processed = 0;
+
+            const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
+
+            if (!currentRadio) {
+                console.log("No radio is selected.");
+                return;
+            }
+
+            let currentRadioIndex = Array.from(radios).indexOf(currentRadio);
 
             function processNext() {
                 if (currentRadioIndex >= radios.length || processed >= batchSize) {
