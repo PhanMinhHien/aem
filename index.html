@@ -1607,6 +1607,14 @@
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
+                                const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
+            const savedState = savedStates.find(state => state.id === code);
+            if (savedState) {
+                checkbox.checked = savedState.checked;
+                checkbox.disabled = savedState.disabled;
+            }
+
+
                     if (index === 0) {
                         checkbox.checked = true;
                         checkbox.dispatchEvent(new Event("change"));
@@ -1656,6 +1664,13 @@
         function handleLocalLanguageChange() {
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
             const firstCheckbox = checkboxes[0];
+
+               const checkboxStates = Array.from(checkboxes).map((checkbox) => ({
+        id: checkbox.id,
+        checked: checkbox.checked,
+        disabled: checkbox.disabled
+    }));
+    localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
             if (firstCheckbox.checked) {
                 checkboxes.forEach((checkbox, index) => {
                     if (index > 0) {
