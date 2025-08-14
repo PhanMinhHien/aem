@@ -1594,6 +1594,7 @@
             const masterLanguage = document.getElementById("masterLanguage").value;
             const localLanguagesDiv = document.getElementById("localLanguages");
             localLanguagesDiv.innerHTML = "";
+
             if (localLanguages[masterLanguage]) {
                 localLanguages[masterLanguage].forEach((code, index) => {
                     const checkbox = document.createElement("input");
@@ -1601,32 +1602,34 @@
                     checkbox.id = code;
                     checkbox.value = code;
                     checkbox.onchange = handleLocalLanguageChange;
+
                     const label = document.createElement("label");
                     label.setAttribute("for", code);
                     label.textContent = code;
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
-                                const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
-            const savedState = savedStates.find(state => state.id === code);
-            if (savedState) {
-                checkbox.checked = savedState.checked;
-                checkbox.disabled = savedState.disabled;
-            }
 
-
-                    if (index === 0) {
-                        checkbox.checked = true;
-                        checkbox.dispatchEvent(new Event("change"));
-                        checkbox.disabled = false;
-                    } else {
-                        checkbox.disabled = true;
-                        checkbox.dispatchEvent(new Event("change"));
+                    const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
+                    const savedState = savedStates.find(state => state.id === code);
+                    if (savedState) {
+                        checkbox.checked = savedState.checked;
+                        checkbox.disabled = savedState.disabled;
                     }
+
+                    // if (index === 0) {
+                    //     checkbox.checked = true;
+                    //     checkbox.dispatchEvent(new Event("change"));
+                    //     checkbox.disabled = false;
+                    // } else {
+                    //     checkbox.disabled = true;
+                    //     checkbox.dispatchEvent(new Event("change"));
+                    // }
                 });
             }
             applyDisabledStyles();
         }
+
         function updateLocalLanguages1() {
             const masterLanguage = document.getElementById("masterLanguage").value;
             const localLanguagesDiv = document.getElementById("localLanguages");
@@ -1644,6 +1647,12 @@
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
+                    const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
+                    const savedState = savedStates.find(state => state.id === code);
+                    if (savedState) {
+                        checkbox.checked = savedState.checked;
+                        checkbox.disabled = savedState.disabled;
+                    }
                 });
             }
             applyDisabledStyles();
@@ -1665,12 +1674,14 @@
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
             const firstCheckbox = checkboxes[0];
 
-               const checkboxStates = Array.from(checkboxes).map((checkbox) => ({
-        id: checkbox.id,
-        checked: checkbox.checked,
-        disabled: checkbox.disabled
-    }));
-    localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
+            const checkboxStates = Array.from(checkboxes).map((checkbox) => ({
+                id: checkbox.id,
+                checked: checkbox.checked,
+                disabled: checkbox.disabled
+            }));
+
+            localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
+
             if (firstCheckbox.checked) {
                 checkboxes.forEach((checkbox, index) => {
                     if (index > 0) {
@@ -1685,12 +1696,15 @@
                     }
                 });
             }
+
             applyDisabledStyles();
+
             const selectedLocalLanguages = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map((checkbox) => checkbox.value);
             currentLocalLanguages = selectedLocalLanguages;
             generateLinksForCondition3();
             generateLinks();
         }
+
         function removeDuplicateLinks(linksDiv) {
             const linkElements = linksDiv.querySelectorAll("p a");
             const seenURLs = new Set();
@@ -2166,44 +2180,44 @@
         function generateLinksForCondition2(masterLanguage, localLanguagesChecked, customInput, linksDiv) {
             const uniqueLinks = new Set();
             const uniqueTexts = new Set();
-            localLanguagesChecked.forEach((localLanguage) => {
-                const parts = localLanguage.split("/");
-                const liveSiteLanguage = parts[0];
-                let linksHTML = ``;
-                const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-                const sitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-                const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-                linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
-                linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
-                linksHTML += `Site Live: <a href="${sitesLink}" class="siteliveMaster" target="_blank">${sitesLink}</a><br>`;
-                linksHTML += `Rollout: <a href="${Rollout}" class="rolloutMaster" target="_blank">${Rollout}</a><br>`;
-                linksHTML += `Properties: <a href="${Properties}" target="_blank">${Properties}</a><br>`;
-                const localLanguagesList = localLanguages[masterLanguage] || [];
-                if (localLanguagesChecked.includes(masterLanguage)) {
-                    const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
-                    if (remainingLanguages.length > 0) {
-                        linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): ${remainingLanguages.join(", ")}</strong></p>`;
-                    } else {
-                        linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): No additional locales available to display.</strong></p>`;
-                    }
-                    remainingLanguages.forEach((language) => {
-                        if (language === "www/en") { }
-                        linksHTML += generateLocalLanguageLinksTagging(language, customInput);
-                    });
-                    linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
-                } else if (localLanguagesChecked.length > 0) {
-                    linksHTML += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
-                    localLanguagesChecked.forEach((selectedLocalLanguage) => {
-                        linksHTML += generateLocalLanguageLinksTagging(selectedLocalLanguage, customInput);
-                    });
-                    linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
+            let linksHTML = ``;
+            const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+            const sitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+            const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+            linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
+            linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
+            linksHTML += `Site Live: <a href="${sitesLink}" class="siteliveMaster" target="_blank">${sitesLink}</a><br>`;
+            linksHTML += `Rollout: <a href="${Rollout}" class="rolloutMaster" target="_blank">${Rollout}</a><br>`;
+            linksHTML += `Properties: <a href="${Properties}" target="_blank">${Properties}</a><br>`;
+            // localLanguagesChecked.forEach((localLanguage) => {
 
+
+            const localLanguagesList = localLanguages[masterLanguage] || [];
+            if (localLanguagesChecked.includes(masterLanguage)) {
+                const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
+                if (remainingLanguages.length > 0) {
+                    linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): ${remainingLanguages.join(", ")}</strong></p>`;
                 } else {
-                    linksHTML += `<p><strong>No local languages selected.</strong></p>`;
+                    linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): No additional locales available to display.</strong></p>`;
                 }
-                linksHTML += generateAdditionalLinks(masterLanguage, localLanguage, customInput, localLanguages, liveSiteLanguage, linksDiv);
-                linksDiv.innerHTML += linksHTML;
-            });
+                remainingLanguages.forEach((language) => {
+                    linksHTML += generateLocalLanguageLinksTagging(language, customInput);
+                    // linksHTML += generateAdditionalLinks();
+
+                });
+                linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
+            } else if (localLanguagesChecked.length > 0) {
+                linksHTML += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
+                localLanguagesChecked.forEach((selectedLocalLanguage) => {
+                    linksHTML += generateLocalLanguageLinksTagging(selectedLocalLanguage, customInput);
+                });
+                linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
+
+            } else {
+                linksHTML += `<p><strong>No local languages selected.</strong></p>`;
+            }
+            linksDiv.innerHTML += linksHTML;
+            // });
         }
 
         function generateLocalLanguageLinksTagging(language, customInput) {
