@@ -549,14 +549,14 @@
 <body>
     <div class="container">
         <div id="floatingMenu">
+            <button class="floating-btn" data-target="taskSection"><span class="icon">🛠️</span><span
+                    class="btn-label">Tasks</span></button>
             <button class="floating-btn" data-target="languageSection"><span class="icon"> 🌐</span><span
                     class="btn-label">Language & Link</span></button>
             <button class="floating-btn" data-target="fixedMasterCodesContainer"><span class="icon">📌</span><span
                     class="btn-label">Key Markets</span></button>
             <button class="floating-btn" data-target="savedCustomInputs"><span class="icon">💾</span><span
                     class="btn-label">Saved Links</span></button>
-            <button class="floating-btn" data-target="taskSection"><span class="icon">🛠️</span><span
-                    class="btn-label">Tasks</span></button>
             <button class="floating-btn" data-target="fragmentSection"><span class="icon">🧩</span><span
                     class="btn-label">Fragments</span></button>
             <button class="floating-btn" data-target="buttonsSection"><span class="icon">⚙️</span><span
@@ -566,6 +566,29 @@
         </div>
         <div id="floatingPanels">
             <div id="floatingMenuContainer">
+                <div class="floating-panel" id="taskSection">
+                    <h2>Tasks</h2>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="condition" value="radio1" checked />
+                            Normal task</label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
+                            Fragment Reskin task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio2" />
+                            Tagging task (Unit)</label>
+                        <label>
+                            <input type="checkbox" name="condition" value="autoTask" />
+                            Auto Task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="autoAddLinks" />
+                            Auto Add Links
+                        </label>
+                    </div>
+                </div>
                 <div class="floating-panel" id="languageSection">
                     <h2>Language & Link</h2>
                     <div class="form-group">
@@ -667,29 +690,7 @@
                         style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹
                         Clear Saved Links</button>
                 </div>
-                <div class="floating-panel" id="taskSection">
-                    <h2>Tasks</h2>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="condition" value="radio1" checked />
-                            Normal task</label>
-                        <label>
-                            <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
-                            Fragment Reskin task
-                        </label>
-                        <label>
-                            <input type="checkbox" name="condition" value="radio2" />
-                            Tagging task (Unit)</label>
-                        <label>
-                            <input type="checkbox" name="condition" value="autoTask" />
-                            Auto Task
-                        </label>
-                        <label>
-                            <input type="checkbox" name="condition" value="autoAddLinks" />
-                            Auto Add Links
-                        </label>
-                    </div>
-                </div>
+
                 <div class="floating-panel" id="fragmentSection" class="hidden">
                     <h2>Fragments</h2>
                     <div class="form-group">
@@ -2443,6 +2444,7 @@
                         if (currentRadioIndex + 1 < radios.length) {
                             radios[currentRadioIndex + 1].checked = true;
                             updateCustomInput(radios[currentRadioIndex + 1]);
+                            updateSavedLinksCount()
                         }
                     });
                 }
