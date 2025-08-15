@@ -479,6 +479,68 @@
         .button-auto {
             display: none;
         }
+
+        .autoTasks {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .autoTasks h3 {
+            text-align: center;
+            margin: 0 0 15px;
+        }
+
+        .button-auto {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+
+        }
+
+        .form-group-1 {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+
+        .form-group-1 label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #batchSizeInput {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 120px;
+        }
+
+        .btn-generate-batch {
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-generate-batch:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -565,16 +627,23 @@
                         <div id="localLanguagesInfo">Local Languages:</div>
                         <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
                     </div>
-                    <div class="button-auto">
-                        <div class="group-buttons" style="margin-bottom: 20px">
-                            <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>
+                    <div class="autoTasks">
+                        <h3>Auto Tasks</h3>
+                        <div class="button-auto">
+                            <div class="form-group-1">
+                                <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>
                             <button onclick="openLinks()">Open new tabs all publish link</button> -->
-                            <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
-                        </div>
+                                <label for="searchInput">Properties <br>(Live Site and Rollout):</label>
+                                <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
+                            </div>
 
-                        <div class="form-group-1">
-                            <input type="number" id="batchSizeInput" value="10" min="1" />
-                            <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
+                            <div class="form-group-1">
+                                <div class="group">
+                                    <label for="batchSizeInput">Open Live Site:</label>
+                                    <input type="number" id="batchSizeInput" value="10" min="1" />
+                                </div>
+                                <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
+                            </div>
                         </div>
                     </div>
                 </div>
