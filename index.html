@@ -497,7 +497,6 @@
             display: grid !important;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-
         }
 
         .form-group-1 {
@@ -508,7 +507,6 @@
             border-radius: 8px;
             border: 1px solid #ddd;
         }
-
 
         .form-group-1 label {
             margin-bottom: 8px;
@@ -551,14 +549,14 @@
 <body>
     <div class="container">
         <div id="floatingMenu">
-            <button class="floating-btn" data-target="taskSection"><span class="icon">🛠️</span><span
-                    class="btn-label">Tasks</span></button>
             <button class="floating-btn" data-target="languageSection"><span class="icon"> 🌐</span><span
                     class="btn-label">Language & Link</span></button>
             <button class="floating-btn" data-target="fixedMasterCodesContainer"><span class="icon">📌</span><span
                     class="btn-label">Key Markets</span></button>
             <button class="floating-btn" data-target="savedCustomInputs"><span class="icon">💾</span><span
                     class="btn-label">Saved Links</span></button>
+            <button class="floating-btn" data-target="taskSection"><span class="icon">🛠️</span><span
+                    class="btn-label">Tasks</span></button>
             <button class="floating-btn" data-target="fragmentSection"><span class="icon">🧩</span><span
                     class="btn-label">Fragments</span></button>
             <button class="floating-btn" data-target="buttonsSection"><span class="icon">⚙️</span><span
@@ -568,29 +566,6 @@
         </div>
         <div id="floatingPanels">
             <div id="floatingMenuContainer">
-                <div class="floating-panel" id="taskSection">
-                    <h2>Tasks</h2>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="condition" value="radio1" checked />
-                            Normal task</label>
-                        <label>
-                            <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
-                            Fragment Reskin task
-                        </label>
-                        <label>
-                            <input type="checkbox" name="condition" value="radio2" />
-                            Tagging task (Unit)</label>
-                        <label>
-                            <input type="checkbox" name="condition" value="autoTask" />
-                            Auto Task
-                        </label>
-                        <label>
-                            <input type="checkbox" name="condition" value="autoAddLinks" />
-                            Auto Add Links
-                        </label>
-                    </div>
-                </div>
                 <div class="floating-panel" id="languageSection">
                     <h2>Language & Link</h2>
                     <div class="form-group">
@@ -671,7 +646,6 @@
                                 <label for="searchInput">Properties <br>(Live Site and Rollout):</label>
                                 <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
                             </div>
-
                             <div class="form-group-1">
                                 <div class="group">
                                     <label for="batchSizeInput">Open Live Site:</label>
@@ -682,20 +656,40 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
                     <h2>Key Markets</h2>
                     <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
                 </div>
                 <div class="floating-panel" id="savedCustomInputs">
                     <h2>Save Links (<span id="linkCount">0</span>)</h2>
-
                     <div id="radioContainer"></div>
                     <button id="clearSavedLinksBtn" onclick="clearRadioSelections()"
                         style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹
                         Clear Saved Links</button>
                 </div>
-
+                <div class="floating-panel" id="taskSection">
+                    <h2>Tasks</h2>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="condition" value="radio1" checked />
+                            Normal task</label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
+                            Fragment Reskin task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio2" />
+                            Tagging task (Unit)</label>
+                        <label>
+                            <input type="checkbox" name="condition" value="autoTask" />
+                            Auto Task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="autoAddLinks" />
+                            Auto Add Links
+                        </label>
+                    </div>
+                </div>
                 <div class="floating-panel" id="fragmentSection" class="hidden">
                     <h2>Fragments</h2>
                     <div class="form-group">
@@ -1197,16 +1191,12 @@
         };
         function processLinks() {
             let links = document.getElementById('linkTextarea').value.trim().split('\n');
-
             if (links.length > 0) {
                 let index = 0;
-
                 function autoFillAndSubmit() {
                     if (index < links.length) {
                         let link = links[index].trim();
-
                         document.getElementById('customInput').value = link;
-
                         let event = new KeyboardEvent('keydown', {
                             bubbles: true,
                             cancelable: true,
@@ -1214,17 +1204,13 @@
                             keyCode: 13,
                             code: 'Enter'
                         });
-
                         document.getElementById('customInput').dispatchEvent(event);
-
                         index++;
-
                         setTimeout(autoFillAndSubmit, 1000);
                     } else {
                         document.getElementById('linkTextarea').value = '';
                     }
                 }
-
                 autoFillAndSubmit();
             } else {
                 alert("Please paste at least one link!");
@@ -1232,29 +1218,20 @@
         }
         const autoTaskCheckbox = document.querySelector('input[name="condition"][value="autoTask"]');
         const autoTasks = document.querySelector(".autoTasks");
-
         function toggleAutoTaskButtons() {
             if (!autoTaskCheckbox || !autoTasks) return;
             autoTasks.style.display = autoTaskCheckbox.checked ? "block" : "none";
         }
-
         autoTaskCheckbox.addEventListener("change", toggleAutoTaskButtons);
-
         window.addEventListener("load", toggleAutoTaskButtons);
-
-
-
         const autoAddlinksCheckbox = document.querySelector('input[name="condition"][value="autoAddLinks"]');
         const autoAddlinks = document.querySelector(".autoAddlinks");
-
         function toggleAutoAddLinkButtons() {
             if (!autoAddlinksCheckbox || !autoAddlinks) return;
             autoAddlinks.style.display = autoAddlinksCheckbox.checked ? "block" : "none";
         }
         autoAddlinksCheckbox.addEventListener("change", toggleAutoAddLinkButtons);
-
         window.addEventListener("load", toggleAutoAddLinkButtons);
-
         document.querySelectorAll(".floating-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
                 const targetId = btn.dataset.target;
@@ -1262,9 +1239,7 @@
                 if (panel) {
                     panel.classList.toggle("show");
                     savePanelShowState(targetId, panel.classList.contains("show"));
-
                     updateActiveButtons();
-
                     if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
                         loadSavedInputsFromStorage();
                     }
@@ -1340,10 +1315,20 @@
             };
         });
         let savedLinksCount = 0;
-
+        // function updateSavedLinksCount() {
+        //     const linkCountElement = document.getElementById("linkCount");
+        //     linkCountElement.textContent = savedLinksCount;
+        // }
+        function getSelectedInput() {
+            return localStorage.getItem("selectedInput") || "";
+        }
         function updateSavedLinksCount() {
             const linkCountElement = document.getElementById("linkCount");
-            linkCountElement.textContent = savedLinksCount;
+            const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            const selectedInput = getSelectedInput();
+            const checkedIndex = savedInputs.indexOf(selectedInput);
+            const checkedPosition = checkedIndex !== -1 ? checkedIndex + 1 : 0;
+            linkCountElement.textContent = `${checkedPosition} / ${savedInputs.length}`;
         }
         window.clearRadioSelections = function () {
             const RadioSelections = document.getElementById("savedCustomInputs");
@@ -1404,6 +1389,8 @@
             radio.value = input;
             radio.checked = checked;
             radio.onchange = function () {
+                saveSelectedInput(radio.value);
+                updateSavedLinksCount();
                 updateCustomInput(radio);
                 showOnlyDeleteButtonFor(radio.value);
                 saveSelectedInput(radio.value);
@@ -1422,7 +1409,6 @@
             deleteBtn.style.position = "absolute";
             deleteBtn.style.top = "0";
             deleteBtn.style.right = "0";
-
             deleteBtn.className = "delete-btn";
             div.appendChild(label);
             div.appendChild(deleteBtn);
@@ -1430,7 +1416,6 @@
             const allDivs = container.querySelectorAll("div");
             allDivs.forEach((el, index) => {
                 el.style.paddingBottom = index === allDivs.length - 1 ? "0px" : "10px";
-
             });
         }
         function loadSavedInputsFromStorage() {
@@ -1766,15 +1751,12 @@
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
-
                     const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
                     const savedState = savedStates.find(state => state.id === code);
-
                     if (savedState) {
                         checkbox.checked = savedState.checked;
                         checkbox.disabled = savedState.disabled;
                     }
-
                     if (index === 0 && !savedState) {
                         checkbox.checked = true;
                         checkbox.dispatchEvent(new Event("change"));
@@ -1826,14 +1808,12 @@
         function handleLocalLanguageChange() {
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
             const firstCheckbox = checkboxes[0];
-
             const checkboxStates = Array.from(checkboxes).map((checkbox) => ({
                 id: checkbox.id,
                 checked: checkbox.checked,
                 disabled: checkbox.disabled
             }));
             localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
-
             if (firstCheckbox.checked) {
                 checkboxes.forEach((checkbox, index) => {
                     if (index > 0) {
@@ -1848,19 +1828,15 @@
                     }
                 });
             }
-
             applyDisabledStyles();
-
             const selectedLocalLanguages = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map((checkbox) => checkbox.value);
             currentLocalLanguages = selectedLocalLanguages;
-
             generateLinksForCondition3();
             generateLinks();
         }
         function initializeCheckboxes() {
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
             const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || [];
-
             checkboxes.forEach((checkbox) => {
                 const savedState = savedStates.find(state => state.id === checkbox.id);
                 if (savedState) {
@@ -1868,7 +1844,6 @@
                     checkbox.disabled = savedState.disabled;
                 }
             });
-
             const firstCheckbox = checkboxes[0];
             if (firstCheckbox.checked) {
                 checkboxes.forEach((checkbox, index) => {
@@ -1878,10 +1853,8 @@
                     }
                 });
             }
-
             applyDisabledStyles();
         }
-
         function removeDuplicateLinks(linksDiv) {
             const linkElements = linksDiv.querySelectorAll("p a");
             const seenURLs = new Set();
@@ -1939,7 +1912,6 @@
                 generateLinks();
             });
         });
-
         function extractPathFromUrl(url) {
             const mappings = [
                 { old: "products", new: "solutions" },
@@ -2367,8 +2339,6 @@
             linksHTML += `Rollout: <a href="${Rollout}" class="rolloutMaster" target="_blank">${Rollout}</a><br>`;
             linksHTML += `Properties: <a href="${Properties}" target="_blank">${Properties}</a><br>`;
             // localLanguagesChecked.forEach((localLanguage) => {
-
-
             const localLanguagesList = localLanguages[masterLanguage] || [];
             if (localLanguagesChecked.includes(masterLanguage)) {
                 const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
@@ -2380,7 +2350,6 @@
                 remainingLanguages.forEach((language) => {
                     linksHTML += generateLocalLanguageLinksTagging(language, customInput);
                     // linksHTML += generateAdditionalLinks();
-
                 });
                 linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
             } else if (localLanguagesChecked.length > 0) {
@@ -2389,14 +2358,12 @@
                     linksHTML += generateLocalLanguageLinksTagging(selectedLocalLanguage, customInput);
                 });
                 linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
-
             } else {
                 linksHTML += `<p><strong>No local languages selected.</strong></p>`;
             }
             linksDiv.innerHTML += linksHTML;
             // });
         }
-
         function generateLocalLanguageLinksTagging(language, customInput) {
             function applyReplacements(input) {
                 const replacements = [
@@ -2407,28 +2374,23 @@
                     { old: "about-us/media", new: "media" },
                     { old: "about-us/careers", new: "careers" }
                 ];
-
                 let updatedInput = input;
                 replacements.forEach((replacement) => {
                     updatedInput = updatedInput.replace(new RegExp(replacement.old, "g"), replacement.new);
                 });
                 return updatedInput;
             }
-
             let updatedCustomInput = customInput;
             if (language === "www/en") {
                 updatedCustomInput = applyReplacements(customInput);
             }
-
             const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedCustomInput}`];
             const localsitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedCustomInput}`;
             const localProperties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/${language}/${updatedCustomInput}`;
-
             return `<p><strong>Local Language (${language}):</strong></p>` +
                 `Properties: <a href="${localProperties}" target="_blank">${localProperties}</a><br>` +
                 `Publish: <a href="${localpublishLinks}" class="publish" target="_blank">${localpublishLinks}</a><br>`;
         }
-
         let savedFragmentInputs = [];
         const fragmentInput = document.getElementById("fragmentInput");
         const savedFragmentsContainer = document.getElementById("savedFragments");
@@ -2442,7 +2404,6 @@
         });
         // function openLinks() {
         //     var links = document.querySelectorAll("a.publish");
-
         //     // links.forEach(function(link) {
         //     //     window.open(link.href, '_blank');
         //     // });
@@ -2452,27 +2413,21 @@
         // }
         // function openLinksMaster() {
         //     var links = document.querySelectorAll("a.siteliveMaster, a.rolloutMaster");
-
         //     links.forEach(function (link) {
         //         window.open(link.href, "_blank");
         //     });
         // }
-
         // let currentRadioIndex = 0;
         let toggleState = 0; // 0 = Master, 1 = Publish
         function runSingleRadio() {
             const radios = document.querySelectorAll("#radioContainer input[type='radio']");
             const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
-
             if (!currentRadio) {
                 alert("No radio is selected.");
                 return;
             }
-
             const currentRadioIndex = Array.from(radios).indexOf(currentRadio);
-
             const btn = document.getElementById("toggleOpenLinksBtn");
-
             setTimeout(() => {
                 if (toggleState === 0) {
                     const masterLinks = document.querySelectorAll("#links .siteliveMaster, #links .rolloutMaster");
@@ -2485,7 +2440,6 @@
                     openLinks(publishLinks).then(() => {
                         toggleState = 0;
                         btn.textContent = "Run Master";
-
                         if (currentRadioIndex + 1 < radios.length) {
                             radios[currentRadioIndex + 1].checked = true;
                             updateCustomInput(radios[currentRadioIndex + 1]);
@@ -2494,7 +2448,6 @@
                 }
             }, 500);
         }
-
         function openLinks(links) {
             return new Promise((resolve) => {
                 links.forEach((a, index) => {
@@ -2507,53 +2460,39 @@
                 });
             });
         }
-
         document.getElementById("toggleOpenLinksBtn").addEventListener("click", runSingleRadio);
-
-
-
         function generateAndOpenBatch(batchSize) {
             const radios = document.querySelectorAll("#radioContainer input[type='radio']");
             const delay = 500;
             let processed = 0;
-
             const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
-
             if (!currentRadio) {
                 console.log("No radio is selected.");
                 return;
             }
-
             let currentRadioIndex = Array.from(radios).indexOf(currentRadio);
-
             function processNext() {
                 if (currentRadioIndex >= radios.length || processed >= batchSize) {
                     console.log(`${processed} radios have been processed in this batch`);
                     return;
                 }
-
                 radios[currentRadioIndex].checked = true;
                 updateCustomInput(radios[currentRadioIndex]);
-
                 setTimeout(() => {
                     document.querySelectorAll("#links .siteliveMaster").forEach((a) => {
                         window.open(a.href, "_blank");
                     });
-
                     currentRadioIndex++;
                     processed++;
                     processNext();
                 }, delay);
             }
-
             processNext();
         }
-
         document.getElementById("autoGenerateBtn").addEventListener("click", () => {
             const batchSize = parseInt(document.getElementById("batchSizeInput").value, 10) || 1;
             generateAndOpenBatch(batchSize);
         });
-
         let currentMasterLanguage = "";
         let currentLocalLanguages = [];
         let currentSelectedFragments = [];
