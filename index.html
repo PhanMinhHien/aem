@@ -551,10 +551,11 @@
 <body>
     <div class="container">
         <div id="floatingMenu">
+                    <button class="floating-btn" data-target="buttonsSection"><span class="icon">⚙️</span><span
+                    class="btn-label">Actions</span></button>
             <button class="floating-btn" data-target="languageSection"><span class="icon"> 🌐</span><span
                     class="btn-label">Language & Link</span></button>
-            <button class="floating-btn" data-target="buttonsSection"><span class="icon">⚙️</span><span
-                    class="btn-label">Actions</span></button>
+    
             <button class="floating-btn" data-target="fixedMasterCodesContainer"><span class="icon">📌</span><span
                     class="btn-label">Key Markets</span></button>
             <button class="floating-btn" data-target="savedCustomInputs"><span class="icon">💾</span><span
@@ -570,6 +571,29 @@
 
         <div id="floatingPanels">
             <div id="floatingMenuContainer">
+                <div class="floating-panel" id="taskSection">
+                    <h2>Tasks</h2>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="condition" value="radio1" checked />
+                            Normal task</label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
+                            Fragment Reskin task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="radio2" />
+                            Tagging task (Unit)</label>
+                        <label>
+                            <input type="checkbox" name="condition" value="autoTask" />
+                            Auto Task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="autoAddLinks" />
+                            Auto Add Links
+                        </label>
+                    </div>
+                </div>
                 <div class="floating-panel" id="languageSection">
                     <h2>Language & Link</h2>
                     <div class="form-group">
@@ -661,29 +685,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="floating-panel" id="taskSection">
-                    <h2>Tasks</h2>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="condition" value="radio1" checked />
-                            Normal task</label>
-                        <label>
-                            <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
-                            Fragment Reskin task
-                        </label>
-                        <label>
-                            <input type="checkbox" name="condition" value="radio2" />
-                            Tagging task (Unit)</label>
-                        <label>
-                            <input type="checkbox" name="condition" value="autoTask" />
-                            Auto Task
-                        </label>
-                        <label>
-                            <input type="checkbox" name="condition" value="autoAddLinks" />
-                            Auto Add Links
-                        </label>
-                    </div>
-                </div>
+                
                 <div class="floating-panel" id="fixedMasterCodesContainer" style="margin-top: 20px">
                     <h2>Key Markets</h2>
                     <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
