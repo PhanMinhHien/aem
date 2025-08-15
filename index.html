@@ -476,7 +476,7 @@
             margin-top: 16px;
         }
 
-        .button-auto {
+        .autoTasks {
             display: none;
         }
 
@@ -540,6 +540,10 @@
 
         .btn-generate-batch:hover {
             background-color: #0056b3;
+        }
+
+        #linkTextarea {
+            font-size: 12px;
         }
     </style>
 </head>
@@ -609,6 +613,15 @@
                         </select>
                     </div>
                     <div id="localLanguages" class="local-languages"></div>
+                    <div class="autoAddlinks">
+                        <div class="form-group">
+                            <label for="linkTextarea">Auto add multiple links:</label>
+                            <textarea id="linkTextarea" rows="10"
+                                placeholder="Paste multiple links here, each on a new line..."></textarea>
+                            <button id="startButton" style="margin-top: 20px;" onclick="processLinks()">Start
+                                Processing</button>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="customInput">Custom Input:</label>
                         <input type="text" id="customInput" />
@@ -675,6 +688,10 @@
                         <label>
                             <input type="checkbox" name="condition" value="autoTask" />
                             Auto Task
+                        </label>
+                        <label>
+                            <input type="checkbox" name="condition" value="autoAddLinks" />
+                            Auto Add Links
                         </label>
                     </div>
                 </div>
@@ -1177,18 +1194,65 @@
             GCA_FR: ["ca/fr"],
             GMX: ["mx/es"],
         };
+        function processLinks() {
+            let links = document.getElementById('linkTextarea').value.trim().split('\n');
 
+            if (links.length > 0) {
+                let index = 0;
+
+                function autoFillAndSubmit() {
+                    if (index < links.length) {
+                        let link = links[index].trim();
+
+                        document.getElementById('customInput').value = link;
+
+                        let event = new KeyboardEvent('keydown', {
+                            bubbles: true,
+                            cancelable: true,
+                            key: 'Enter',
+                            keyCode: 13,
+                            code: 'Enter'
+                        });
+
+                        document.getElementById('customInput').dispatchEvent(event);
+
+                        index++;
+
+                        setTimeout(autoFillAndSubmit, 1000);
+                    } else {
+                        alert("Finished processing all links!");
+                    }
+                }
+
+                autoFillAndSubmit();
+            } else {
+                alert("Please paste at least one link!");
+            }
+        }
         const autoTaskCheckbox = document.querySelector('input[name="condition"][value="autoTask"]');
-        const buttonAutoDiv = document.querySelector(".button-auto");
+        const autoTasks = document.querySelector(".autoTasks");
 
         function toggleAutoTaskButtons() {
-            if (!autoTaskCheckbox || !buttonAutoDiv) return;
-            buttonAutoDiv.style.display = autoTaskCheckbox.checked ? "block" : "none";
+            if (!autoTaskCheckbox || !autoTasks) return;
+            autoTasks.style.display = autoTaskCheckbox.checked ? "block" : "none";
         }
 
         autoTaskCheckbox.addEventListener("change", toggleAutoTaskButtons);
 
         window.addEventListener("load", toggleAutoTaskButtons);
+
+
+
+        const autoAddlinksCheckbox = document.querySelector('input[name="condition"][value="autoAddLinks"]');
+        const autoAddlinks = document.querySelector(".autoAddlinks");
+
+        function toggleAutoAddLinkButtons() {
+            if (!autoAddlinksCheckbox || !autoAddlinks) return;
+            autoAddlinks.style.display = autoAddlinksCheckbox.checked ? "block" : "none";
+        }
+        autoAddlinksCheckbox.addEventListener("change", toggleAutoAddLinkButtons);
+
+        window.addEventListener("load", toggleAutoAddLinkButtons);
 
         document.querySelectorAll(".floating-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
