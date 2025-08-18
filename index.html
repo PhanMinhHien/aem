@@ -2473,7 +2473,7 @@
         document.getElementById("toggleOpenLinksBtn").addEventListener("click", runSingleRadio);
         function generateAndOpenBatch(batchSize) {
             const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-            const delay = 500;
+            const delay = 200;
             let processed = 0;
             const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
             if (!currentRadio) {
