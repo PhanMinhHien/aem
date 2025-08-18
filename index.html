@@ -676,11 +676,12 @@
                                 </div>
                                 <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
                             </div>
-                             <div class="form-group-1">
+                            <div class="form-group-1">
                                 <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>-->
-                            <!-- <button onclick="openLinksLiveLocal()">Open new tabs all publish link</button>  -->
+                                <!-- <button onclick="openLinksLiveLocal()">Open new tabs all publish link</button>  -->
                                 <label for="searchInput">Properties<br> Open Live Site Local:</label>
-                            <button onclick="openLinksLiveLocal()" class="btn-generate-batch">Open Live Site Local</button> 
+                                <button onclick="openLinksLiveLocal()" class="btn-generate-batch">Open Live Site
+                                    Local</button>
                             </div>
                         </div>
                     </div>
@@ -2413,7 +2414,7 @@
         });
         function openLinksLiveLocal() {
             var links = document.querySelectorAll("a.liveSiteLocal");
-            links.forEach(function(link) {
+            links.forEach(function (link) {
                 window.open(link.href, '_blank');
             });
             // for (var i = 0; i < links.length - 1; i++) {
@@ -2477,33 +2478,35 @@
             let processed = 0;
             const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
             if (!currentRadio) {
-                console.log("No radio is selected.");
-                
+                // console.log("No radio is selected.");
                 return;
             }
             let currentRadioIndex = Array.from(radios).indexOf(currentRadio);
+
             function processNext() {
                 if (currentRadioIndex >= radios.length || processed >= batchSize) {
-                    console.log(`${processed} radios have been processed in this batch`);
-                    radios[currentRadioIndex + 1].checked = true;
-                            updateCustomInput(radios[currentRadioIndex + 1]);
-                            updateSavedLinksCount()
+                    // console.log(`${processed} radios have been processed in this batch`);
+                        radios[currentRadioIndex ].checked = true;
+                        updateCustomInput(radios[currentRadioIndex ]);
                     return;
                 }
+
                 radios[currentRadioIndex].checked = true;
                 updateCustomInput(radios[currentRadioIndex]);
+
                 setTimeout(() => {
                     document.querySelectorAll("#links .siteliveMaster").forEach((a) => {
                         window.open(a.href, "_blank");
                     });
-                    // currentRadioIndex++;
                     processed++;
+                    currentRadioIndex++;
                     processNext();
-                    updateSavedLinksCount()
+                    updateSavedLinksCount();
                 }, delay);
             }
             processNext();
         }
+
         document.getElementById("autoGenerateBtn").addEventListener("click", () => {
             const batchSize = parseInt(document.getElementById("batchSizeInput").value, 10) || 1;
             generateAndOpenBatch(batchSize);
