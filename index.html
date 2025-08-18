@@ -2473,17 +2473,21 @@
         document.getElementById("toggleOpenLinksBtn").addEventListener("click", runSingleRadio);
         function generateAndOpenBatch(batchSize) {
             const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-            const delay = 200;
+            const delay = 500;
             let processed = 0;
             const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
             if (!currentRadio) {
                 console.log("No radio is selected.");
+                
                 return;
             }
             let currentRadioIndex = Array.from(radios).indexOf(currentRadio);
             function processNext() {
                 if (currentRadioIndex >= radios.length || processed >= batchSize) {
                     console.log(`${processed} radios have been processed in this batch`);
+                    radios[currentRadioIndex + 1].checked = true;
+                            updateCustomInput(radios[currentRadioIndex + 1]);
+                            updateSavedLinksCount()
                     return;
                 }
                 radios[currentRadioIndex].checked = true;
@@ -2492,7 +2496,7 @@
                     document.querySelectorAll("#links .siteliveMaster").forEach((a) => {
                         window.open(a.href, "_blank");
                     });
-                    currentRadioIndex++;
+                    // currentRadioIndex++;
                     processed++;
                     processNext();
                     updateSavedLinksCount()
