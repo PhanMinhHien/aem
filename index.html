@@ -2433,8 +2433,8 @@
             const btn = document.getElementById("toggleOpenLinksBtn");
             setTimeout(() => {
                 if (toggleState === 0) {
-                    const masterLinks = document.querySelectorAll("#links .editMaster, #links .rolloutMaster");
-                    openLinks(masterLinks).then(() => {
+                    const editMaster = document.querySelectorAll("#links .editMaster, #links .rolloutMaster");
+                    openLinks(editMaster).then(() => {
                         toggleState = 1;
                         btn.textContent = "Run Publish";
                     });
