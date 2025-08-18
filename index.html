@@ -671,10 +671,16 @@
                             </div>
                             <div class="form-group-1">
                                 <div class="group">
-                                    <label for="batchSizeInput">Open Live Site:</label>
+                                    <label for="batchSizeInput">Open Live Site Master:</label>
                                     <input type="number" id="batchSizeInput" value="10" min="1" />
                                 </div>
                                 <button id="autoGenerateBtn" class="btn-generate-batch">Generate & Open Batch</button>
+                            </div>
+                             <div class="form-group-1">
+                                <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>-->
+                            <!-- <button onclick="openLinksLiveLocal()">Open new tabs all publish link</button>  -->
+                                <label for="searchInput">Properties<br> Open Live Site Local:</label>
+                            <button onclick="openLinksLiveLocal()" class="btn-generate-batch">Open Live Site Local</button> 
                             </div>
                         </div>
                     </div>
@@ -2094,7 +2100,7 @@
                                 modifiedLinkBase = modifiedLinkBase.replace(replacement.old, replacement.new);
                             }
                         });
-                        linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
+                        linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                         const originalLinkBase = linkBase;
@@ -2138,7 +2144,7 @@
                             newLink = newLink.replace("solutions/learn", "learn");
                             let updatedLinkBase = linkBase;
                             updatedLinkBase = updatedLinkBase.replace("solutions/learn", "learn");
-                            linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
+                            linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled</a></p>`;
                             linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
@@ -2149,7 +2155,7 @@
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
-                            linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${modifiedLinkBase}</a></p>
+                            linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                             linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
@@ -2190,7 +2196,7 @@
                                 modifiedLinkBase = modifiedLinkBase.replace(replacement.old, replacement.new);
                             }
                         });
-                        linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
+                        linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                         const originalLinkBase = linkBase;
@@ -2206,7 +2212,7 @@
                         }
                         linksHTML += `<p>Live Site Link: <a href="${finalLink}" target="_blank">${finalLink}</a></p>`;
                     } else {
-                        linksHTML += `<p>Site Live: <a href="${localLinkSitesLocal}" target="_blank">${localLinkSitesLocal}</a></p>`;
+                        linksHTML += `<p>Site Live: <a href="${localLinkSitesLocal}" class="liveSiteLocal" target="_blank">${localLinkSitesLocal}</a></p>`;
                         linksHTML += `<p>Editor: <a href="${localLinkEditorLocal}" target="_blank">${localLinkEditorLocal}</a></p>`;
                         linksHTML += `<p>Preview: <a href="${localLinkDisabledLocal}" target="_blank">${localLinkDisabledLocal}</a></p>`;
                         const localePrefix = selectedLocalLanguage.split("/")[0];
@@ -2405,15 +2411,15 @@
             fragmentContainer.innerHTML = "";
             saveFragmentsToLocalStorage();
         });
-        // function openLinks() {
-        //     var links = document.querySelectorAll("a.publish");
-        //     // links.forEach(function(link) {
-        //     //     window.open(link.href, '_blank');
-        //     // });
-        //     for (var i = 0; i < links.length - 1; i++) {
-        //         window.open(links[i].href, "_blank");
-        //     }
-        // }
+        function openLinksLiveLocal() {
+            var links = document.querySelectorAll("a.liveSiteLocal");
+            links.forEach(function(link) {
+                window.open(link.href, '_blank');
+            });
+            // for (var i = 0; i < links.length - 1; i++) {
+            //     window.open(links[i].href, "_blank");
+            // }
+        }
         // function openLinksMaster() {
         //     var links = document.querySelectorAll("a.siteliveMaster, a.rolloutMaster");
         //     links.forEach(function (link) {
