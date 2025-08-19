@@ -2596,10 +2596,18 @@
             const editLink = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
             const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
             linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
-            linksHTML += `<p><strong>Master Language:</strong> en-GB</p>`;
-            linksHTML += `Site Live: <a href="${sitesENLink}" class="siteliveEngbMaster" target="_blank">${sitesENLink}</a><br>`;
+
+            if (masterLanguage !== "en-GB") {
+                linksHTML += `<p><strong>Master Language:</strong> en-GB</p>`;
+                linksHTML += `Site Live: <a href="${sitesENLink}" class="siteliveEngbMaster" target="_blank">${sitesENLink}</a><br>`;
+            }
             linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
-            linksHTML += `Site Live: <a href="${sitesLink}" class="siteliveMaster" target="_blank">${sitesLink}</a><br>`;
+            if (masterLanguage == "en-GB") {
+                linksHTML += `Site Live: <a href="${sitesENLink}" class="siteliveEngbMaster" target="_blank">${sitesENLink}</a><br>`;
+            } else {
+                linksHTML += `Site Live: <a href="${sitesLink}" class="siteliveMaster" target="_blank">${sitesLink}</a><br>`;
+
+            }
             linksHTML += `Editor: <a href="${editLink}" class="editMaster" target="_blank">${editLink}</a><br>`;
             linksHTML += `Rollout: <a href="${Rollout}" class="rolloutMaster" target="_blank">${Rollout}</a><br>`;
             linksHTML += `Properties: <a href="${Properties}" target="_blank">${Properties}</a><br>`;
