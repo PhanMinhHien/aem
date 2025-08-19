@@ -1312,8 +1312,8 @@
 
             const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
             let savedStatuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
-            console.log("Saved statuses:", savedStatuses);
-            console.log("Radios:", radios.map(r => r.value));
+            // console.log("Saved statuses:", savedStatuses);
+            // console.log("Radios:", radios.map(r => r.value));
 
             const radiosToProcess = radios.filter(radio => savedStatuses[radio.value] === statusToRun);
 
@@ -2153,7 +2153,7 @@
                         generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
                         break;
                     case "radio3":
-                        generateLinksForCondition3();
+                        generateLinksForCondition3(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
                         break;
                     case "radio4":
                         generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
@@ -2778,6 +2778,7 @@
                     fragmentInput.value = "";
                     fragmentContainer.innerHTML = "";
                     generateLinksForCondition3();
+                   
                 } else {
                 }
             });
@@ -2906,15 +2907,20 @@
         function generateLinksForCondition3() {
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
             const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
+            currentLocalLanguages = localLanguagesChecked;
+
             let masterLanguage = document.getElementById("masterLanguage").value;
             fragmentContainer.innerHTML = "";
             if (!Array.isArray(localLanguagesChecked)) {
                 localLanguagesChecked = [];
             }
             if (currentSelectedFragments.length === 0 || currentLocalLanguages.length === 0) {
-                return;
+          
+                console.log("No fragments or local languages selected.");
+                      return;
             }
             currentSelectedFragments.forEach((fragment) => {
+              
                 const fragmentsIndex = fragment.indexOf("/fragments");
                 let fragmentPath = fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
                 if (fragmentPath.endsWith(".html")) {
@@ -2923,6 +2929,8 @@
                 if (fragmentPath.endsWith("/")) {
                     fragmentPath = fragmentPath.slice(0, -1);
                 }
+                             console.log("Fragment fragmentPath:", fragmentPath);
+
                 const masterLinkEditor = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}${fragmentPath}`;
                 const masterLinkSites = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}${fragmentPath}`;
                 const masterLinkPreview = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/${masterLanguage}${fragmentPath}?wcmmode=disabled`;
@@ -2990,16 +2998,16 @@
                 masterLanguage.disabled = customInput.value.trim() === "";
             });
         });
-        document.querySelectorAll('input[name="condition"]').forEach((checkbox) => {
-            checkbox.addEventListener("change", function () {
-                const fragmentSection = document.getElementById("fragmentSection");
-                if (this.value === "radio3" && this.checked) {
-                    fragmentSection.classList.remove("hidden");
-                } else if (this.value === "radio3" && !this.checked) {
-                    fragmentSection.classList.add("hidden");
-                }
-            });
-        });
+        // document.querySelectorAll('input[name="condition"]').forEach((checkbox) => {
+        //     checkbox.addEventListener("change", function () {
+        //         const fragmentSection = document.getElementById("fragmentSection");
+        //         if (this.value === "radio3" && this.checked) {
+        //             fragmentSection.classList.remove("hidden");
+        //         } else if (this.value === "radio3" && !this.checked) {
+        //             fragmentSection.classList.add("hidden");
+        //         }
+        //     });
+        // });
         function convertText() {
             const input = document.getElementById("inputText").value.trim();
             if (input.length === 0) {
