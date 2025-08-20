@@ -2785,10 +2785,10 @@
                 if (fragmentValue && !savedFragmentInputs.includes(fragmentValue)) {
                     // Add to saved fragments
                     savedFragmentInputs.push(fragmentValue);
-                    
+
                     // Update local storage first
                     saveFragmentsToLocalStorage();
-                    
+
                     // Clear existing selection
                     currentSelectedFragments = [];
                     const existingCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
@@ -2797,14 +2797,14 @@
                         const removeBtn = cb.parentElement.nextElementSibling;
                         if (removeBtn) removeBtn.style.display = "none";
                     });
-                    
+
                     // Clear input and container
                     fragmentInput.value = "";
                     fragmentContainer.innerHTML = "";
-                    
+
                     // Update UI with new fragment
                     updateSavedFragmentsCheckboxes();
-                    
+
                     // Select only the new fragment
                     const newCheckbox = document.querySelector(`#savedFragments input[type="checkbox"][value="${fragmentValue}"]`);
                     if (newCheckbox) {
@@ -2815,7 +2815,7 @@
                         }
                         currentSelectedFragments = [fragmentValue];
                     }
-                    
+
                     // Generate links only if we have selected languages
                     const localLanguagesChecked = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map(cb => cb.value);
                     if (localLanguagesChecked.length > 0) {
@@ -2832,10 +2832,10 @@
         function updateSavedFragmentsCheckboxes() {
             const savedFragmentContainer = document.getElementById("savedFragments");
             savedFragmentContainer.innerHTML = "";
-            
+
             // Get current selected fragments
             const currentChecked = currentSelectedFragments;
-            
+
             savedFragmentInputs.forEach((fragment) => {
                 const fragmentsIndex = fragment.indexOf("/fragments");
                 let fragmentPath = fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
@@ -2845,20 +2845,20 @@
                 if (fragmentPath.endsWith("/")) {
                     fragmentPath = fragmentPath.slice(0, -1);
                 }
-                
+
                 // Create container div for each fragment
                 const fragmentDiv = document.createElement("div");
                 fragmentDiv.style.display = "flex";
                 fragmentDiv.style.alignItems = "center";
                 fragmentDiv.style.marginBottom = "5px";
-                
+
                 // Create label and checkbox
                 const label = document.createElement("label");
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
                 checkbox.checked = currentChecked.includes(fragment);
-                
+
                 // Create remove button
                 const removeButton = document.createElement("button");
                 removeButton.textContent = "X";
@@ -2866,18 +2866,18 @@
                 removeButton.style.cursor = "pointer";
                 removeButton.style.padding = "5px";
                 removeButton.style.display = checkbox.checked ? "inline-block" : "none";
-                
+
                 // Add event listeners
-                checkbox.addEventListener("change", function() {
+                checkbox.addEventListener("change", function () {
                     toggleRemoveButton(checkbox, removeButton);
                     handleSavedFragmentChange();
                     saveSavedFragmentsState();
                 });
-                
-                removeButton.addEventListener("click", function() {
+
+                removeButton.addEventListener("click", function () {
                     removeFragment(fragment);
                 });
-                
+
                 // Assemble the elements
                 label.appendChild(checkbox);
                 label.appendChild(document.createTextNode(` ${fragmentPath}`));
@@ -2885,7 +2885,7 @@
                 fragmentDiv.appendChild(removeButton);
                 savedFragmentContainer.appendChild(fragmentDiv);
             });
-            
+
             // Save the current state
             saveSavedFragmentsState();
         }
@@ -2917,7 +2917,7 @@
             // Update selected fragments
             const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]:checked');
             currentSelectedFragments = Array.from(savedFragmentCheckboxes).map(checkbox => checkbox.value);
-            
+
             // Update remove buttons visibility
             document.querySelectorAll('#savedFragments input[type="checkbox"]').forEach(checkbox => {
                 const removeButton = checkbox.parentElement.nextElementSibling;
@@ -2925,13 +2925,13 @@
                     removeButton.style.display = checkbox.checked ? "inline-block" : "none";
                 }
             });
-            
+
             // Clear and regenerate links
             fragmentContainer.innerHTML = "";
             if (currentSelectedFragments.length > 0) {
                 generateLinksForCondition3();
             }
-            
+
             // Save state to localStorage
             saveSavedFragmentsState();
         }
@@ -2939,24 +2939,43 @@
             const masterLanguage = document.getElementById("masterLanguage").value;
             if (currentMasterLanguage !== masterLanguage) {
                 currentMasterLanguage = masterLanguage;
+                
+                // Reset search UI
                 const searchContainer = document.getElementById("searchContainer");
                 const button = document.getElementById("toggleSearchButton");
                 searchContainer.style.display = "none";
                 button.textContent = "Show Search Input";
+                
+                // Reset all local language checkboxes
                 const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
                 localLanguageCheckboxes.forEach((checkbox) => {
                     checkbox.checked = false;
                 });
+                
+                // Reset fragment checkboxes
                 const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
                 savedFragmentCheckboxes.forEach((checkbox) => {
                     checkbox.checked = false;
                 });
+                
+                // Reset current states
                 currentLocalLanguages = [];
                 currentSelectedFragments = [];
-                            currentLocalLanguages = localLanguagesChecked;
-
-                generateLinksForCondition3();
+                
+                // Update local languages UI
                 updateLocalLanguages();
+                
+                // Check the first checkbox after languages are updated
+                setTimeout(() => {
+                    const firstCheckbox = document.querySelector('#localLanguages input[type="checkbox"]');
+                    if (firstCheckbox) {
+                        firstCheckbox.checked = true;
+                        firstCheckbox.dispatchEvent(new Event('change'));
+                    }
+                    
+                    // Generate links if needed
+                    generateLinksForCondition3();
+                }, 100);
             }
         }
         document.addEventListener("DOMContentLoaded", () => {
@@ -2981,31 +3000,31 @@
         function generateLinksForCondition3() {
             // Clear existing content first
             fragmentContainer.innerHTML = "";
-            
+
             // Get current selections
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
             const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
             const masterLanguage = document.getElementById("masterLanguage").value;
-            
+
             // Update current state
             currentLocalLanguages = localLanguagesChecked;
-            
+
             // Validate selections
             if (!masterLanguage) {
                 console.log("No master language selected");
                 return;
             }
-            
+
             if (currentSelectedFragments.length === 0) {
                 console.log("No fragments selected");
                 return;
             }
-            
+
             if (localLanguagesChecked.length === 0) {
                 console.log("No local languages selected");
                 return;
             }
-            
+
             // Generate links for each selected fragment
             currentSelectedFragments.forEach((fragment) => {
 
@@ -3022,6 +3041,7 @@
                 const masterLinkEditor = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}${fragmentPath}`;
                 const masterLinkSites = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}${fragmentPath}`;
                 const masterLinkPreview = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/${masterLanguage}${fragmentPath}?wcmmode=disabled`;
+
                 let fragmentHtml = `<p class="link-part"><strong>Selected Fragment:</strong> "${fragmentPath}"</p>`;
                 if (masterLanguage !== "en-GB") {
                     fragmentHtml += `<p><strong>Master Language:</strong> en-GB</p>`;
@@ -3059,10 +3079,13 @@
             const localLinkEditorLocal = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}${fragmentPath}`;
             const localLinkSitesLocal = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}${fragmentPath}`;
             const localLinkDisabledLocal = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}${fragmentPath}?wcmmode=disabled`;
+            const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${fragmentPath}`];
+
             return (
                 `<p><strong>Local Language (${language}):</strong></p>` +
                 `Site Live: <a href="${localLinkSitesLocal}" target="_blank">${localLinkSitesLocal}</a><br>` +
                 `Editor: <a href="${localLinkEditorLocal}" target="_blank">${localLinkEditorLocal}</a><br>` +
+                `Editor: <a href="${localpublishLinks}" target="_blank">${localpublishLinks}</a><br>` +
                 `Preview: <a href="${localLinkDisabledLocal}" target="_blank">${localLinkDisabledLocal}</a><br>`
             );
         }
