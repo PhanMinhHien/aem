@@ -2979,16 +2979,32 @@
             }
         }
         document.addEventListener("DOMContentLoaded", () => {
+            // Load all saved data from localStorage
             loadSelectionsFromLocalStorage();
-            const saved = localStorage.getItem("savedFragments");
-            if (saved) {
-                savedFragmentInputs = JSON.parse(saved);
+            
+            // Load saved fragments
+            const savedFragments = localStorage.getItem("savedFragments");
+            if (savedFragments) {
+                savedFragmentInputs = JSON.parse(savedFragments);
+                // Load checked state for fragments
+                const checkedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
+                currentSelectedFragments = checkedFragments;
             }
+            
+            // Update UI with saved fragments
             updateSavedFragmentsCheckboxes();
+            
+            // Add event listeners
             const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
             savedFragmentCheckboxes.forEach((checkbox) => {
                 checkbox.addEventListener("change", handleSavedFragmentChange);
             });
+            
+            // Regenerate links if we have selected fragments and languages
+            if (currentSelectedFragments.length > 0) {
+                generateLinksForCondition3();
+            }
+            
             document.getElementById("masterLanguage").addEventListener("change", saveSelectionsToLocalStorage);
             document.querySelectorAll('#localLanguages input[type="checkbox"]').forEach((cb) => {
                 cb.addEventListener("change", saveSelectionsToLocalStorage);
@@ -3281,12 +3297,19 @@
             });
         }
         function saveSavedFragmentsState() {
+            // Save checked fragments
             const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
             const checkedFragments = [];
             savedFragmentCheckboxes.forEach((checkbox) => {
                 if (checkbox.checked) checkedFragments.push(checkbox.value);
             });
             localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
+            
+            // Also update currentSelectedFragments to match
+            currentSelectedFragments = checkedFragments;
+            
+            // Save all fragments
+            localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
         }
     </script>
 </body>
