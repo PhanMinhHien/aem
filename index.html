@@ -2783,16 +2783,46 @@
             document.getElementById("addFragment").addEventListener("click", () => {
                 const fragmentValue = fragmentInput.value.trim();
                 if (fragmentValue && !savedFragmentInputs.includes(fragmentValue)) {
+                    // Add to saved fragments
                     savedFragmentInputs.push(fragmentValue);
+                    
+                    // Update local storage first
                     saveFragmentsToLocalStorage();
-                    currentSelectedFragments = [fragmentValue];
-                    updateSavedFragmentsCheckboxes();
-                    selectNewlyAddedCheckbox(fragmentValue);
+                    
+                    // Clear existing selection
+                    currentSelectedFragments = [];
+                    const existingCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+                    existingCheckboxes.forEach(cb => {
+                        cb.checked = false;
+                        const removeBtn = cb.parentElement.nextElementSibling;
+                        if (removeBtn) removeBtn.style.display = "none";
+                    });
+                    
+                    // Clear input and container
                     fragmentInput.value = "";
                     fragmentContainer.innerHTML = "";
-                    generateLinksForCondition3();
-
+                    
+                    // Update UI with new fragment
+                    updateSavedFragmentsCheckboxes();
+                    
+                    // Select only the new fragment
+                    const newCheckbox = document.querySelector(`#savedFragments input[type="checkbox"][value="${fragmentValue}"]`);
+                    if (newCheckbox) {
+                        newCheckbox.checked = true;
+                        const removeButton = newCheckbox.parentElement.nextElementSibling;
+                        if (removeButton) {
+                            removeButton.style.display = "inline-block";
+                        }
+                        currentSelectedFragments = [fragmentValue];
+                    }
+                    
+                    // Generate links only if we have selected languages
+                    const localLanguagesChecked = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map(cb => cb.value);
+                    if (localLanguagesChecked.length > 0) {
+                        generateLinksForCondition3();
+                    }
                 } else {
+                    alert("Fragment already exists or is empty!");
                 }
             });
         });
@@ -2802,7 +2832,10 @@
         function updateSavedFragmentsCheckboxes() {
             const savedFragmentContainer = document.getElementById("savedFragments");
             savedFragmentContainer.innerHTML = "";
-            const checkedSavedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
+            
+            // Get current selected fragments
+            const currentChecked = currentSelectedFragments;
+            
             savedFragmentInputs.forEach((fragment) => {
                 const fragmentsIndex = fragment.indexOf("/fragments");
                 let fragmentPath = fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
@@ -2812,35 +2845,49 @@
                 if (fragmentPath.endsWith("/")) {
                     fragmentPath = fragmentPath.slice(0, -1);
                 }
+                
+                // Create container div for each fragment
+                const fragmentDiv = document.createElement("div");
+                fragmentDiv.style.display = "flex";
+                fragmentDiv.style.alignItems = "center";
+                fragmentDiv.style.marginBottom = "5px";
+                
+                // Create label and checkbox
                 const label = document.createElement("label");
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
-                checkbox.checked = checkedSavedFragments.includes(fragment);
-                checkbox.addEventListener("change", function () {
-                    handleSavedFragmentChange();
-                    toggleRemoveButton(checkbox, removeButton);
-                    saveSavedFragmentsState();
-                });
+                checkbox.checked = currentChecked.includes(fragment);
+                
+                // Create remove button
                 const removeButton = document.createElement("button");
                 removeButton.textContent = "X";
                 removeButton.style.marginLeft = "10px";
-                removeButton.style.marginTop = "0px";
                 removeButton.style.cursor = "pointer";
                 removeButton.style.padding = "5px";
                 removeButton.style.display = checkbox.checked ? "inline-block" : "none";
-                removeButton.addEventListener("click", function () {
-                    removeFragment(fragment);
+                
+                // Add event listeners
+                checkbox.addEventListener("change", function() {
+                    toggleRemoveButton(checkbox, removeButton);
+                    handleSavedFragmentChange();
                     saveSavedFragmentsState();
                 });
+                
+                removeButton.addEventListener("click", function() {
+                    removeFragment(fragment);
+                });
+                
+                // Assemble the elements
                 label.appendChild(checkbox);
                 label.appendChild(document.createTextNode(` ${fragmentPath}`));
-                const fragmentDiv = document.createElement("div");
                 fragmentDiv.appendChild(label);
                 fragmentDiv.appendChild(removeButton);
                 savedFragmentContainer.appendChild(fragmentDiv);
-                handleSavedFragmentChange();
             });
+            
+            // Save the current state
+            saveSavedFragmentsState();
         }
         function toggleRemoveButton(checkbox, removeButton) {
             removeButton.style.display = checkbox.checked ? "inline-block" : "none";
@@ -2867,14 +2914,26 @@
             }
         }
         function handleSavedFragmentChange() {
-            const selectedFragments = [];
+            // Update selected fragments
             const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]:checked');
-            savedFragmentCheckboxes.forEach((checkbox) => {
-                selectedFragments.push(checkbox.value);
+            currentSelectedFragments = Array.from(savedFragmentCheckboxes).map(checkbox => checkbox.value);
+            
+            // Update remove buttons visibility
+            document.querySelectorAll('#savedFragments input[type="checkbox"]').forEach(checkbox => {
+                const removeButton = checkbox.parentElement.nextElementSibling;
+                if (removeButton) {
+                    removeButton.style.display = checkbox.checked ? "inline-block" : "none";
+                }
             });
-            currentSelectedFragments = selectedFragments;
+            
+            // Clear and regenerate links
             fragmentContainer.innerHTML = "";
-            generateLinksForCondition3();
+            if (currentSelectedFragments.length > 0) {
+                generateLinksForCondition3();
+            }
+            
+            // Save state to localStorage
+            saveSavedFragmentsState();
         }
         function handleMasterLanguageChange() {
             const masterLanguage = document.getElementById("masterLanguage").value;
@@ -2894,6 +2953,8 @@
                 });
                 currentLocalLanguages = [];
                 currentSelectedFragments = [];
+                            currentLocalLanguages = localLanguagesChecked;
+
                 generateLinksForCondition3();
                 updateLocalLanguages();
             }
@@ -2918,20 +2979,34 @@
             });
         });
         function generateLinksForCondition3() {
+            // Clear existing content first
+            fragmentContainer.innerHTML = "";
+            
+            // Get current selections
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
             const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
+            const masterLanguage = document.getElementById("masterLanguage").value;
+            
+            // Update current state
             currentLocalLanguages = localLanguagesChecked;
-
-            let masterLanguage = document.getElementById("masterLanguage").value;
-            fragmentContainer.innerHTML = "";
-            if (!Array.isArray(localLanguagesChecked)) {
-                localLanguagesChecked = [];
-            }
-            if (currentSelectedFragments.length === 0 || currentLocalLanguages.length === 0) {
-
-                console.log("No fragments or local languages selected.");
+            
+            // Validate selections
+            if (!masterLanguage) {
+                console.log("No master language selected");
                 return;
             }
+            
+            if (currentSelectedFragments.length === 0) {
+                console.log("No fragments selected");
+                return;
+            }
+            
+            if (localLanguagesChecked.length === 0) {
+                console.log("No local languages selected");
+                return;
+            }
+            
+            // Generate links for each selected fragment
             currentSelectedFragments.forEach((fragment) => {
 
                 const fragmentsIndex = fragment.indexOf("/fragments");
