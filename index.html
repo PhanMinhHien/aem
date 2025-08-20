@@ -2337,6 +2337,7 @@
                     const localLinkEditorLocal = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${linkBase}`;
                     const localLinkSitesLocal = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${linkBase}`;
                     const localLinkDisabledLocal = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${linkBase}?wcmmode=disabled`;
+                    const localpublishLinks = `https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}${linkBase}`;
                     linksDiv.querySelectorAll("p").forEach((p) => {
                         if (p.querySelector("strong") && p.querySelector("strong").textContent.includes(`Local Language (${language})`)) {
                             localLanguageExists = true;
@@ -2355,7 +2356,8 @@
                         });
                         linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
-                                    <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
+                                    <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}</a></p>
+                                    <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                         const originalLinkBase = linkBase;
                         let finalLink = null;
                         for (let key in linkMapping) {
@@ -2391,6 +2393,7 @@
                             newLink = newLink.replace("/gb/", "/uk/");
                             linksHTML += `<p>Site Live: <a href="${localLinkSitesLocal}" target="_blank">${localLinkSitesLocal}</a></p>`;
                             linksHTML += `<p>Editor: <a href="${localLinkEditorLocal}" target="_blank">${localLinkEditorLocal}</a></p>`;
+                            linksHTML += `<p>Publish: <a href="${localpublishLinks}" target="_blank">${localpublishLinks}</a></p>`;
                             linksHTML += `<p>Preview: <a href="${localLinkDisabledLocal}" target="_blank">${localLinkDisabledLocal}</a></p>`;
                             linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
                         } else if (newLink.includes("solutions/learn")) {
@@ -2399,6 +2402,7 @@
                             updatedLinkBase = updatedLinkBase.replace("solutions/learn", "learn");
                             linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
+                                    <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled</a></p>`;
                             linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
                         } else {
@@ -2410,6 +2414,7 @@
                             newLink = newLink.replace("/gb/", "/uk/");
                             linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}</a></p>
+                                    <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                             linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
                         }
@@ -2430,6 +2435,7 @@
                 localLanguagesChecked.forEach((selectedLocalLanguage) => {
                     const localLinkEditorLocal = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${selectedLocalLanguage}/${linkBase}`;
                     const localLinkSitesLocal = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${selectedLocalLanguage}/${linkBase}`;
+                    const localpublishLinks = `https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${selectedLocalLanguage}${linkBase}`;
                     const localLinkDisabledLocal = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${selectedLocalLanguage}/${linkBase}?wcmmode=disabled`;
                     let localLanguageExists = false;
                     linksDiv.querySelectorAll("p").forEach((p) => {
@@ -2451,6 +2457,8 @@
                         });
                         linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
+                                    <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}</a></p>
+
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                         const originalLinkBase = linkBase;
                         let finalLink = null;
@@ -2467,6 +2475,7 @@
                     } else {
                         linksHTML += `<p>Site Live: <a href="${localLinkSitesLocal}" class="liveSiteLocal" target="_blank">${localLinkSitesLocal}</a></p>`;
                         linksHTML += `<p>Editor: <a href="${localLinkEditorLocal}" target="_blank">${localLinkEditorLocal}</a></p>`;
+                        linksHTML += `<p>Publish: <a href="${localpublishLinks}" target="_blank">${localpublishLinks}</a></p>`;
                         linksHTML += `<p>Preview: <a href="${localLinkDisabledLocal}" target="_blank">${localLinkDisabledLocal}</a></p>`;
                         const localePrefix = selectedLocalLanguage.split("/")[0];
                         const localeSuffix = selectedLocalLanguage.split("/")[1];
@@ -2524,6 +2533,8 @@
                 const previewLinkMaster = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB/${customInput}?wcmmode=disabled`;
                 const sitesLinkMaster = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB/${customInput}`;
                 const liveLink = `https://www.grundfos.com/${liveSiteLanguage}/${customInput}`;
+
+
                 if (!PartLinkExists) {
                     linksHTML = `<p class="link-part"><strong>Part of the link:</strong> "${customInput}"</p>`;
                     PartLinkExists = true;
@@ -2782,8 +2793,13 @@
             document.getElementById("masterLanguage").addEventListener("change", handleMasterLanguageChange);
             document.getElementById("addFragment").addEventListener("click", () => {
                 const fragmentValue = fragmentInput.value.trim();
-                if (fragmentValue && !savedFragmentInputs.includes(fragmentValue)) {
-                    // Add to saved fragments
+                const normalizedNewFragment = extractFragmentPath(fragmentValue);
+
+                // Normalize all saved fragments to detect duplicates
+                const normalizedSavedFragments = savedFragmentInputs.map(extractFragmentPath);
+
+                if (normalizedNewFragment && !normalizedSavedFragments.includes(normalizedNewFragment)) {
+                    // Add to saved fragments (original value)
                     savedFragmentInputs.push(fragmentValue);
 
                     // Update local storage first
@@ -2860,7 +2876,7 @@
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
-                
+
                 // Set checkbox state and create remove button accordingly
                 const isChecked = currentChecked.includes(fragment);
                 checkbox.checked = isChecked;
@@ -2872,20 +2888,20 @@
                 removeButton.style.cursor = "pointer";
                 removeButton.style.padding = "5px";
                 removeButton.style.display = "none"; // Initially hidden
-                
+
                 if (isChecked) {
                     removeButton.style.display = "inline-block";
                 }
 
                 // Add event listeners
-                checkbox.addEventListener("change", function(e) {
+                checkbox.addEventListener("change", function (e) {
                     // Update remove button visibility immediately
                     removeButton.style.display = e.target.checked ? "inline-block" : "none";
                     handleSavedFragmentChange();
                     saveSavedFragmentsState();
                 });
 
-                removeButton.addEventListener("click", function() {
+                removeButton.addEventListener("click", function () {
                     removeFragment(fragment);
                 });
 
@@ -2899,7 +2915,7 @@
 
             // Save the current state
             saveSavedFragmentsState();
-            
+
             // Force update all remove buttons visibility
             const allCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
             allCheckboxes.forEach(checkbox => {
@@ -2914,6 +2930,17 @@
                 }
             });
         }
+        function extractFragmentPath(value) {
+            const fragmentsIndex = value.indexOf("/fragments");
+            if (fragmentsIndex !== -1) {
+                let fragment = value.substring(fragmentsIndex);
+                if (fragment.endsWith(".html")) fragment = fragment.slice(0, -5);
+                if (fragment.endsWith("/")) fragment = fragment.slice(0, -1);
+                return fragment.toLowerCase();
+            }
+            return "";
+        }
+
         function toggleRemoveButton(checkbox, removeButton) {
             removeButton.style.display = checkbox.checked ? "inline-block" : "none";
         }
@@ -2964,19 +2991,19 @@
             const masterLanguage = document.getElementById("masterLanguage").value;
             if (currentMasterLanguage !== masterLanguage) {
                 currentMasterLanguage = masterLanguage;
-                
+
                 // Reset search UI
                 const searchContainer = document.getElementById("searchContainer");
                 const button = document.getElementById("toggleSearchButton");
                 searchContainer.style.display = "none";
                 button.textContent = "Show Search Input";
-                
+
                 // Reset all local language checkboxes
                 const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
                 localLanguageCheckboxes.forEach((checkbox) => {
                     checkbox.checked = false;
                 });
-                
+
                 // Reset fragment checkboxes and hide X buttons
                 const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
                 savedFragmentCheckboxes.forEach((checkbox) => {
@@ -2986,14 +3013,14 @@
                         removeButton.style.display = 'none';
                     }
                 });
-                
+
                 // Reset current states
                 currentLocalLanguages = [];
                 currentSelectedFragments = [];
-                
+
                 // Update local languages UI
                 updateLocalLanguages();
-                
+
                 // Check the first checkbox after languages are updated
                 setTimeout(() => {
                     const firstCheckbox = document.querySelector('#localLanguages input[type="checkbox"]');
@@ -3001,7 +3028,7 @@
                         firstCheckbox.checked = true;
                         firstCheckbox.dispatchEvent(new Event('change'));
                     }
-                    
+
                     // Generate links if needed
                     generateLinksForCondition3();
                 }, 100);
@@ -3010,7 +3037,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             // Load all saved data from localStorage
             loadSelectionsFromLocalStorage();
-            
+
             // Load saved fragments
             const savedFragments = localStorage.getItem("savedFragments");
             if (savedFragments) {
@@ -3019,21 +3046,21 @@
                 const checkedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
                 currentSelectedFragments = checkedFragments;
             }
-            
+
             // Update UI with saved fragments
             updateSavedFragmentsCheckboxes();
-            
+
             // Add event listeners
             const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
             savedFragmentCheckboxes.forEach((checkbox) => {
                 checkbox.addEventListener("change", handleSavedFragmentChange);
             });
-            
+
             // Regenerate links if we have selected fragments and languages
             if (currentSelectedFragments.length > 0) {
                 generateLinksForCondition3();
             }
-            
+
             document.getElementById("masterLanguage").addEventListener("change", saveSelectionsToLocalStorage);
             document.querySelectorAll('#localLanguages input[type="checkbox"]').forEach((cb) => {
                 cb.addEventListener("change", saveSelectionsToLocalStorage);
@@ -3333,10 +3360,10 @@
                 if (checkbox.checked) checkedFragments.push(checkbox.value);
             });
             localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
-            
+
             // Also update currentSelectedFragments to match
             currentSelectedFragments = checkedFragments;
-            
+
             // Save all fragments
             localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
         }
