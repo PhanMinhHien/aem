@@ -3079,13 +3079,13 @@
             const localLinkEditorLocal = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}${fragmentPath}`;
             const localLinkSitesLocal = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}${fragmentPath}`;
             const localLinkDisabledLocal = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}${fragmentPath}?wcmmode=disabled`;
-            const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${fragmentPath}`];
+            const localpublishLinks = `https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${fragmentPath}`;
 
             return (
                 `<p><strong>Local Language (${language}):</strong></p>` +
                 `Site Live: <a href="${localLinkSitesLocal}" target="_blank">${localLinkSitesLocal}</a><br>` +
                 `Editor: <a href="${localLinkEditorLocal}" target="_blank">${localLinkEditorLocal}</a><br>` +
-                `Editor: <a href="${localpublishLinks}" target="_blank">${localpublishLinks}</a><br>` +
+                `Publish: <a href="${localpublishLinks}" target="_blank">${localpublishLinks}</a><br>` +
                 `Preview: <a href="${localLinkDisabledLocal}" target="_blank">${localLinkDisabledLocal}</a><br>`
             );
         }
