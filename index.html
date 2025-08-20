@@ -2833,7 +2833,10 @@
             const savedFragmentContainer = document.getElementById("savedFragments");
             savedFragmentContainer.innerHTML = "";
 
-            // Get current selected fragments
+            // Ensure currentSelectedFragments is initialized
+            if (!Array.isArray(currentSelectedFragments)) {
+                currentSelectedFragments = [];
+            }
             const currentChecked = currentSelectedFragments;
 
             savedFragmentInputs.forEach((fragment) => {
@@ -2857,24 +2860,32 @@
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
-                checkbox.checked = currentChecked.includes(fragment);
+                
+                // Set checkbox state and create remove button accordingly
+                const isChecked = currentChecked.includes(fragment);
+                checkbox.checked = isChecked;
 
-                // Create remove button
+                // Create and setup remove button
                 const removeButton = document.createElement("button");
                 removeButton.textContent = "X";
                 removeButton.style.marginLeft = "10px";
                 removeButton.style.cursor = "pointer";
                 removeButton.style.padding = "5px";
-                removeButton.style.display = checkbox.checked ? "inline-block" : "none";
+                removeButton.style.display = "none"; // Initially hidden
+                
+                if (isChecked) {
+                    removeButton.style.display = "inline-block";
+                }
 
                 // Add event listeners
-                checkbox.addEventListener("change", function () {
-                    toggleRemoveButton(checkbox, removeButton);
+                checkbox.addEventListener("change", function(e) {
+                    // Update remove button visibility immediately
+                    removeButton.style.display = e.target.checked ? "inline-block" : "none";
                     handleSavedFragmentChange();
                     saveSavedFragmentsState();
                 });
 
-                removeButton.addEventListener("click", function () {
+                removeButton.addEventListener("click", function() {
                     removeFragment(fragment);
                 });
 
@@ -2888,6 +2899,20 @@
 
             // Save the current state
             saveSavedFragmentsState();
+            
+            // Force update all remove buttons visibility
+            const allCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+            allCheckboxes.forEach(checkbox => {
+                const removeButton = checkbox.parentElement.nextElementSibling;
+                if (removeButton) {
+                    if (!checkbox.checked || !currentSelectedFragments.includes(checkbox.value)) {
+                        removeButton.style.display = 'none';
+                        checkbox.checked = false;
+                    } else {
+                        removeButton.style.display = 'inline-block';
+                    }
+                }
+            });
         }
         function toggleRemoveButton(checkbox, removeButton) {
             removeButton.style.display = checkbox.checked ? "inline-block" : "none";
@@ -2952,10 +2977,14 @@
                     checkbox.checked = false;
                 });
                 
-                // Reset fragment checkboxes
+                // Reset fragment checkboxes and hide X buttons
                 const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
                 savedFragmentCheckboxes.forEach((checkbox) => {
                     checkbox.checked = false;
+                    const removeButton = checkbox.parentElement.nextElementSibling;
+                    if (removeButton) {
+                        removeButton.style.display = 'none';
+                    }
                 });
                 
                 // Reset current states
@@ -3095,7 +3124,7 @@
             const localLinkEditorLocal = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}${fragmentPath}`;
             const localLinkSitesLocal = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}${fragmentPath}`;
             const localLinkDisabledLocal = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}${fragmentPath}?wcmmode=disabled`;
-            const localpublishLinks = `https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${fragmentPath}`;
+            const localpublishLinks = `https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}${fragmentPath}`;
 
             return (
                 `<p><strong>Local Language (${language}):</strong></p>` +
