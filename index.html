@@ -1357,8 +1357,12 @@
                 waitForLinksAndProcess(radio, (links) => {
                     if (links.length > 0) {
                         links.forEach(link => window.open(link.href, "_blank"));
-
-                        savedStatuses[radio.value] = "Processed";
+                        
+                        if (statusToRun === "None") {
+                            savedStatuses[radio.value] = "Already has a page";
+                        } else {
+                            savedStatuses[radio.value] = "Processed";
+                        }
                         localStorage.setItem("savedStatuses", JSON.stringify(savedStatuses));
 
                         processed++;
