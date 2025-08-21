@@ -1396,7 +1396,12 @@
 
             document.getElementById("alreadyBatchRunBtn").addEventListener("click", () => {
                 const batchSizeAlready = parseInt(document.getElementById("alreadyBatchSizeInput").value, 10) || 1;
-                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".liveSiteLink", ".editMaster"]);
+                console.log("Running Already has a page batch...");
+                // Log current statuses
+                const savedStatuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
+                console.log("Current saved statuses:", savedStatuses);
+                // Adjusted selector to target all possible links
+                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".siteliveEngbMaster", ".editMaster"]);
             });
         });
 
