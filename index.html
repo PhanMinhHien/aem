@@ -1380,7 +1380,7 @@
 
             document.getElementById("alreadyBatchRunBtn").addEventListener("click", () => {
                 const batchSizeAlready = parseInt(document.getElementById("alreadyBatchSizeInput").value, 10) || 1;
-                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".editMaster"]);
+                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".liveSiteLink", ".editMaster"]);
             });
         });
 
@@ -2395,7 +2395,7 @@
                             linksHTML += `<p>Editor: <a href="${localLinkEditorLocal}" target="_blank">${localLinkEditorLocal}</a></p>`;
                             linksHTML += `<p>Publish: <a href="${localpublishLinks}" target="_blank">${localpublishLinks}</a></p>`;
                             linksHTML += `<p>Preview: <a href="${localLinkDisabledLocal}" target="_blank">${localLinkDisabledLocal}</a></p>`;
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink"  target="_blank">${newLink}</a><br></p>`;
                         } else if (newLink.includes("solutions/learn")) {
                             newLink = newLink.replace("solutions/learn", "learn");
                             let updatedLinkBase = linkBase;
@@ -2404,7 +2404,7 @@
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled</a></p>`;
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a><br></p>`;
                         } else {
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
@@ -2416,7 +2416,7 @@
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a><br></p>`;
                         }
                     }
                 });
@@ -2458,7 +2458,6 @@
                         linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}</a></p>
-
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                         const originalLinkBase = linkBase;
                         let finalLink = null;
@@ -2496,7 +2495,7 @@
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink"  target="_blank">${newLink}</a><br></p>`;
                         } else if (newLink.includes("solutions/learn")) {
                             newLink = newLink.replace("solutions/learn", "learn");
                             linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
@@ -2507,7 +2506,7 @@
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink"  target="_blank">${newLink}</a><br></p>`;
                         }
                     }
                 });
