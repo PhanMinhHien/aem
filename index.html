@@ -1329,6 +1329,18 @@
                     let selectors = Array.isArray(linkClass) ? linkClass : [linkClass];
                     let links = document.querySelectorAll("#links " + selectors.join(", #links "));
                     if (links.length > 0 || attempts >= maxAttempts) {
+                        // Cập nhật status ngay khi tìm thấy links
+                        if (links.length > 0) {
+                            if (statusToRun === "None") {
+                                savedStatuses[radio.value] = "Already has a page";
+                            } else {
+                                savedStatuses[radio.value] = "Processed";
+                            }
+                            localStorage.setItem("savedStatuses", JSON.stringify(savedStatuses));
+                            
+                            // Cập nhật UI
+                            updateStatusTextareaRawFromSaved();
+                        }
                         callback(links);
                     } else {
                         attempts++;
@@ -1357,13 +1369,13 @@
                 waitForLinksAndProcess(radio, (links) => {
                     if (links.length > 0) {
                         links.forEach(link => window.open(link.href, "_blank"));
-                        
-                        if (statusToRun === "None") {
-                            savedStatuses[radio.value] = "Already has a page";
-                        } else {
-                            savedStatuses[radio.value] = "Processed";
-                        }
-                        localStorage.setItem("savedStatuses", JSON.stringify(savedStatuses));
+
+                        // if (statusToRun === "None") {
+                        //     savedStatuses[radio.value] = "Already has a page";
+                        // } else {
+                        //     savedStatuses[radio.value] = "Processed";
+                        // }
+                        // localStorage.setItem("savedStatuses", JSON.stringify(savedStatuses));
 
                         processed++;
                     }
@@ -1379,7 +1391,7 @@
             restoreStatusTextareaRaw();
             document.getElementById("noneBatchRunBtn").addEventListener("click", () => {
                 const batchSizeNone = parseInt(document.getElementById("noneBatchSizeInput").value, 10) || 1;
-                autoRunStatusBatch(batchSizeNone, "None", ".siteliveEngbMaster");
+                autoRunStatusBatch(batchSizeNone, "None", [".siteliveEngbMaster", ".rolloutMaster"]);
             });
 
             document.getElementById("alreadyBatchRunBtn").addEventListener("click", () => {
