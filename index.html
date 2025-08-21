@@ -1383,7 +1383,7 @@
                 const savedStatuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
                 console.log("Current saved statuses:", savedStatuses);
                 // Adjusted selector to target all possible links
-                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".siteliveEngbMaster", ".editMaster"]);
+                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".liveSiteLink", ".editMaster"]);
             });
         });
 
