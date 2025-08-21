@@ -1303,90 +1303,72 @@
         console.log('radio values', radios.map(r => r.value));
 
         function autoRunStatusBatch(batchSize = 1, statusToRun = "None", linkClass = ".siteliveEngbMaster") {
-            // Clear existing radio buttons first to prevent duplicates
-            // const radioContainer = document.getElementById("radioContainer");
-            // if (radioContainer) {
-            //     radioContainer.innerHTML = '';
-            //     loadSavedInputsFromStorage(); // Reload the radio buttons fresh from storage
-            // }
-
-            const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
-            let savedStatuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
-            // console.log("Saved statuses:", savedStatuses);
-            // console.log("Radios:", radios.map(r => r.value));
-
-            const radiosToProcess = radios.filter(radio => savedStatuses[radio.value] === statusToRun);
-
-            const delay = 300;
             let processed = 0;
-            let currentIndex = 0;
+            const processedRadios = new Set();  // ✅ Track radios processed in this batch
 
-            function waitForLinksAndProcess(radio, callback) {
+            function waitForLinksAndProcess(radio, onDone) {
                 const maxAttempts = 10;
                 let attempts = 0;
 
-                function check() {
-                    let selectors = Array.isArray(linkClass) ? linkClass : [linkClass];
-                    let links = document.querySelectorAll("#links " + selectors.join(", #links "));
+                function checkLinks() {
+                    const selectors = Array.isArray(linkClass) ? linkClass : [linkClass];
+                    const links = document.querySelectorAll("#links " + selectors.join(", #links "));
                     if (links.length > 0 || attempts >= maxAttempts) {
-                        // Cập nhật status ngay khi tìm thấy links
+                        const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
+
                         if (links.length > 0) {
-                            if (statusToRun === "None") {
-                                savedStatuses[radio.value] = "Already has a page";
-                            } else {
-                                savedStatuses[radio.value] = "Processed";
-                            }
-                            localStorage.setItem("savedStatuses", JSON.stringify(savedStatuses));
-                            
-                            // Cập nhật UI
+                            statuses[radio.value] = statusToRun === "None" ? "Already has a page" : "Processed";
+                            localStorage.setItem("savedStatuses", JSON.stringify(statuses));
+
+                            links.forEach(link => window.open(link.href, "_blank"));
                             updateStatusTextareaRawFromSaved();
                         }
-                        callback(links);
+
+                        onDone(links);
                     } else {
                         attempts++;
-                        setTimeout(check, delay);
+                        setTimeout(checkLinks, 300);
                     }
                 }
 
-                check();
+                checkLinks();
             }
 
             function processNext() {
-                if (processed >= batchSize || currentIndex >= radiosToProcess.length) {
-                    if (currentIndex < radiosToProcess.length) {
-                        radiosToProcess[currentIndex].checked = true;
-                        updateCustomInput(radiosToProcess[currentIndex]);
-                    }
+                if (processed >= batchSize) {
                     updateSavedLinksCount();
                     updateStatusTextareaRawFromSaved();
                     return;
                 }
 
-                const radio = radiosToProcess[currentIndex];
-                radio.checked = true;
-                updateCustomInput(radio);
+                const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
+                const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
 
-                waitForLinksAndProcess(radio, (links) => {
+                // ✅ Find the next unprocessed radio matching the target status
+                const nextRadio = radios.find(radio =>
+                    statuses[radio.value] === statusToRun && !processedRadios.has(radio.value)
+                );
+
+                if (!nextRadio) {
+                    updateSavedLinksCount();
+                    updateStatusTextareaRawFromSaved();
+                    return;
+                }
+
+                nextRadio.checked = true;
+                updateCustomInput(nextRadio);
+                processedRadios.add(nextRadio.value);  // ✅ Track it
+
+                waitForLinksAndProcess(nextRadio, (links) => {
                     if (links.length > 0) {
-                        links.forEach(link => window.open(link.href, "_blank"));
-
-                        // if (statusToRun === "None") {
-                        //     savedStatuses[radio.value] = "Already has a page";
-                        // } else {
-                        //     savedStatuses[radio.value] = "Processed";
-                        // }
-                        // localStorage.setItem("savedStatuses", JSON.stringify(savedStatuses));
-
                         processed++;
                     }
-                    currentIndex++;
                     processNext();
                 });
             }
 
             processNext();
         }
-
         window.addEventListener("DOMContentLoaded", () => {
             restoreStatusTextareaRaw();
             document.getElementById("noneBatchRunBtn").addEventListener("click", () => {
