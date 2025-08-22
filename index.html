@@ -678,13 +678,7 @@
                     <div class="autoTasks">
                         <h3>Auto Tasks</h3>
                         <div class="button-auto">
-                            <div class="form-group-1">
-                                <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>
-                            <button onclick="openLinks()">Open new tabs all publish link</button> -->
-                                <label for="searchInput">Properties <br>(Live Site and Rollout):</label>
-                                <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
-                            </div>
-                            <div class="form-group-1">
+                             <div class="form-group-1">
                                 <div class="group">
                                     <label for="noneBatchSizeInput">Open Live Site EN Master:</label>
                                     <input type="number" id="noneBatchSizeInput" value="1" min="1" />
@@ -702,7 +696,12 @@
                                     Auto Run for "Already has a page" Only
                                 </button>
                             </div>
-
+                            <div class="form-group-1">
+                                <!-- <button onclick="openLinksMaster()">Open new tabs Master</button>
+                            <button onclick="openLinks()">Open new tabs all publish link</button> -->
+                                <label for="searchInput">Properties <br>(Live Site and Rollout):</label>
+                                <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
+                            </div>
                             <div class="form-group-1">
                                 <div class="group">
                                     <label for="batchSizeInput">Open Live Site Master:</label>
@@ -1383,7 +1382,9 @@
                 const savedStatuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
                 console.log("Current saved statuses:", savedStatuses);
                 // Adjusted selector to target all possible links
-                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".liveSiteLink", ".editMaster"]);
+                // autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".liveSiteLink", ".editMaster"]);
+                autoRunStatusBatch(batchSizeAlready, "Already has a page", [".publish", ".liveSiteLink"]);
+
             });
         });
 
