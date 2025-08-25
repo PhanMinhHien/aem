@@ -1615,14 +1615,13 @@
                 },
             };
 
-            // ===== Dispatcher =====
             function runAutoTask(type, options = {}) {
                 switch (type) {
                     case "noneBatch":
                         TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "None", [".siteliveEngbMaster", ".rolloutMaster"]);
                         break;
                     case "alreadyBatch":
-                        TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".publish", ".liveSiteLink"]);
+                        TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".publish", "editMaster", ".liveSiteLink"]);
                         break;
                     case "toggle":
                         TaskHandlers.runSingleRadio();
@@ -1638,7 +1637,6 @@
                 }
             }
 
-            // ===== Bind UI =====
             window.addEventListener("DOMContentLoaded", () => {
                 restoreStatusTextareaRaw();
 
