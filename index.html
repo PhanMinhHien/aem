@@ -584,15 +584,6 @@
                 gap: 5px;
                 margin-bottom: 10px;
             }
-            .btn.primary {
-                background-color: #4a90e2;
-                color: #fff;
-            }
-
-            .btn.primary:hover {
-                background-color: #3578c6;
-            }
-
             .btn.danger {
                 background-color: #e74c3c;
                 color: #fff;
@@ -764,7 +755,7 @@
                                     <label for="newTaskInput">New Task:</label>
                                     <div class="input-group" style="display: flex; gap: 10px">
                                         <input type="text" id="newTaskInput" placeholder="Enter task name..." style="flex: 1" />
-                                        <button type="button" id="addTypeTaskBtn" class="btn primary">+ Add TypeTask</button>
+                                        <button type="button" id="addTypeTaskBtn" class="btn primary">Add TypeTask</button>
                                     </div>
                                 </div>
 
@@ -773,7 +764,7 @@
                                     <label for="taskTypeSelect"><b>Select Task:</b></label>
                                     <div class="input-group" style="display: flex; gap: 10px">
                                         <select id="taskTypeSelect" style="flex: 1"></select>
-                                        <button id="deleteTypeTaskBtn" class="btn danger">🗑 Delete Task</button>
+                                        <button id="deleteTypeTaskBtn" class="btn danger">Delete Task</button>
                                     </div>
                                 </div>
 
@@ -781,13 +772,14 @@
                                 <div id="stepsContainer" style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px"></div>
 
                                 <!-- Batch size -->
-                                <div class="form-group" style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px">
-                                    <label for="classBatchSize"><b>Batch size:</b></label>
-                                    <input type="number" id="classBatchSize" value="1" min="1" style="width: 80px" />
+                                <div class="form-group">
+                                    <div class="group" style="margin-bottom: 15px">
+                                        <label for="classBatchSize"><b>Batch size:</b></label>
+                                        <input type="number" id="classBatchSize" value="1" min="1" style="width: 80px" />
+                                    </div>
+                                    <!-- Auto Run Button -->
+                                    <button id="runClassAutoBtn" class="btn primary full">Auto Run All</button>
                                 </div>
-
-                                <!-- Auto Run Button -->
-                                <button id="runClassAutoBtn" class="btn primary full" style="width: 100%">Auto Run All</button>
                             </div>
 
                             <datalist id="classNameOptions"></datalist>
