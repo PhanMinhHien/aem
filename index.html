@@ -1854,12 +1854,12 @@
 
                 setTimeout(async () => {
                     if (TaskHandlers.toggleState === 0) {
-                        const editMaster = document.querySelectorAll("#links .editMaster, #links .rolloutMaster");
+                        const editMaster = document.querySelectorAll("#links .editlocalMaster, #links .rolloutlocalMaster");
                         await TaskHandlers.openLinks(editMaster);
                         TaskHandlers.toggleState = 1;
                         btn.textContent = "Run Publish";
                     } else {
-                        const publishLinks = document.querySelectorAll("#links a.publish");
+                        const publishLinks = document.querySelectorAll("#links a.pulishSiteLocal");
                         await TaskHandlers.openLinks(publishLinks);
                         TaskHandlers.toggleState = 0;
                         btn.textContent = "Run Master";
@@ -1903,7 +1903,7 @@
                     updateCustomInput(radios[currentRadioIndex]);
 
                     setTimeout(() => {
-                        document.querySelectorAll("#links .siteliveMaster").forEach((a) => {
+                        document.querySelectorAll("#links .sitelivelocalMaster").forEach((a) => {
                             window.open(a.href, "_blank");
                         });
                         processed++;
@@ -1919,11 +1919,11 @@
         function runAutoTask(type, options = {}) {
             switch (type) {
                 case "noneBatch":
-                    TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "None", [".siteliveEngbMaster", ".rolloutMaster"]);
+                    TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "None", [".siteliveEngbMaster", ".rolloutlocalMaster"]);
                     break;
                 case "alreadyBatch":
                     // TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".publish", ".editMaster", ".liveSiteLink"]);
-                    TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".publish", ".liveSiteLink"]);
+                    TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".pulishSiteLocal", ".liveSiteLink"]);
 
                     break;
                 case "toggle":
