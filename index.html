@@ -578,6 +578,7 @@
             color: white;
             cursor: pointer;
             font-weight: bold;
+                padding: 4px;
         }
 
         .step {
@@ -1350,7 +1351,7 @@
                         selectedTags.splice(idx, 1);
                         renderTags();
                         updateDatalist();
-                        renderSteps();
+updateAllDatalists();
                         saveStateToLocal();
                     };
                     tagEl.appendChild(btn);
@@ -1369,6 +1370,8 @@
                     if (classMappings[val] && !selectedTags.includes(val) && !usedTags.includes(val)) {
                         selectedTags.push(val);
                         renderTags();
+                        updateAllDatalists();
+                        saveStateToLocal();
                     }
                     input.value = "";
                 }
@@ -1380,13 +1383,38 @@
                 if (classMappings[val] && !selectedTags.includes(val) && !usedTags.includes(val)) {
                     selectedTags.push(val);
                     renderTags();
+                    updateAllDatalists();
+                    saveStateToLocal();
                 }
                 input.value = "";
             });
-
             renderTags();
             return wrapper;
         }
+        function updateAllDatalists() {
+            const allSteps = document.querySelectorAll("#stepsContainer .step");
+            allSteps.forEach((stepEl, idx) => {
+                const wrapper = stepEl.querySelector(".tags-input");
+                const dl = wrapper.querySelector("datalist");
+                const input = wrapper.querySelector("input");
+                if (!dl || !input) return;
+
+                const selectedTags = Array.from(wrapper.querySelectorAll(".tag")).map(
+                    (tagEl) => tagEl.childNodes[0].nodeValue.trim()
+                );
+                const usedTags = getUsedTagsExceptCurrentStep(idx);
+
+                dl.innerHTML = "";
+                Object.keys(classMappings).forEach((tag) => {
+                    if (!selectedTags.includes(tag) && !usedTags.includes(tag)) {
+                        const opt = document.createElement("option");
+                        opt.value = tag;
+                        dl.appendChild(opt);
+                    }
+                });
+            });
+        }
+
 
         // Render steps
         function renderSteps() {
@@ -1409,7 +1437,6 @@
                 // Tags input full width
                 const tagsInput = createTagsInput(names, idx);
                 // tagsInput.style.width = "100%";
-                // Bỏ mũi tên của datalist (chrome)
                 tagsInput.querySelector("input").style.appearance = "none";
                 tagsInput.querySelector("input").style.webkitAppearance = "none";
 
