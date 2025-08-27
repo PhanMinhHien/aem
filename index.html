@@ -553,32 +553,56 @@
             border: 1px solid #ccc;
             padding: 5px;
             border-radius: 4px;
+            align-items: center;
+            min-height: 36px;
         }
 
         .tags-input input {
-            flex: 1;
+            flex: 0 1 80px;
             border: none;
             outline: none;
+            background: transparent;
+            font-size: 14px;
+            padding: 4px;
             min-width: 100px;
         }
 
+        /* Remove datalist dropdown arrow */
+        .tags-input input::-webkit-calendar-picker-indicator {
+            display: none !important;
+            opacity: 0;
+        }
+
         .tag {
-            background-color: #44a8ff;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            padding: 2px 8px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             gap: 5px;
+            font-size: 14px;
         }
 
         .tag button {
             background: transparent;
             border: none;
-            color: white;
+            color: #1a73e8;
             cursor: pointer;
             font-weight: bold;
-                padding: 4px;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 4px;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 12px;
+        }
+        
+        .tag button:hover {
+            background-color: #d2e3fc;
         }
 
         .step {
@@ -595,6 +619,27 @@
 
         .btn.danger:hover {
             background-color: #c0392b;
+        }
+        /* Remove spinner from input */
+        .tag-input-field {
+            -moz-appearance: textfield !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+        }
+        
+        /* For Webkit browsers like Chrome/Safari/Edge */
+        .tag-input-field::-webkit-inner-spin-button,
+        .tag-input-field::-webkit-outer-spin-button,
+        .tag-input-field::-webkit-search-cancel-button {
+            -webkit-appearance: none !important;
+            appearance: none !important;
+            display: none !important;
+            margin: 0 !important;
+        }
+        
+        /* For Firefox */
+        .tag-input-field[type="number"] {
+            -moz-appearance: textfield !important;
         }
     </style>
 </head>
@@ -1320,6 +1365,7 @@
             const input = document.createElement("input");
             const dlId = "classNameOptionsStep" + stepIdx;
             input.setAttribute("list", dlId);
+            input.className = "tag-input-field";
             wrapper.appendChild(input);
 
             const dl = document.createElement("datalist");
