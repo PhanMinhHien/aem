@@ -146,9 +146,6 @@
             box-sizing: border-box;
         }
 
-        .form-group textarea {
-            font-size: 11px;
-        }
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
@@ -603,7 +600,7 @@
             height: 16px;
             font-size: 12px;
         }
-        
+
         .tag button:hover {
             background-color: #d2e3fc;
         }
@@ -623,13 +620,14 @@
         .btn.danger:hover {
             background-color: #c0392b;
         }
+
         /* Remove spinner from input */
         .tag-input-field {
             -moz-appearance: textfield !important;
             -webkit-appearance: none !important;
             appearance: none !important;
         }
-        
+
         /* For Webkit browsers like Chrome/Safari/Edge */
         .tag-input-field::-webkit-inner-spin-button,
         .tag-input-field::-webkit-outer-spin-button,
@@ -639,7 +637,7 @@
             display: none !important;
             margin: 0 !important;
         }
-        
+
         /* For Firefox */
         .tag-input-field[type="number"] {
             -moz-appearance: textfield !important;
@@ -677,9 +675,9 @@
                             <input type="checkbox" name="condition" value="radio3" id="fragmentRadio" />
                             Fragment Reskin task
                         </label>
-                        <label>
+                        <!-- <label>
                             <input type="checkbox" name="condition" value="radio2" />
-                            Tagging task (Unit)</label>
+                            Tagging task (Unit)</label> -->
                         <label>
                             <input type="checkbox" name="condition" value="autoTask" />
                             Auto Task
@@ -1400,7 +1398,7 @@
                         selectedTags.splice(idx, 1);
                         renderTags();
                         updateDatalist();
-updateAllDatalists();
+                        updateAllDatalists();
                         saveStateToLocal();
                     };
                     tagEl.appendChild(btn);
@@ -2817,9 +2815,9 @@ updateAllDatalists();
                     case "radio1":
                         generateLinksForCondition1(masterLanguage, localLanguagesChecked, result, linksDiv);
                         break;
-                    case "radio2":
-                        generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
-                        break;
+                    // case "radio2":
+                    //     generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
+                    //     break;
                     case "radio3":
                         generateLinksForCondition3();
                         break;
@@ -3189,11 +3187,15 @@ updateAllDatalists();
                 const liveSiteLanguage = parts[0];
                 let linksHTML = ``;
                 const editorLink = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+                const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+                const localProperties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/${masterLanguage}/${customInput}`;
                 const sitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
                 const previewLink = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/${masterLanguage}/${customInput}?wcmmode=disabled`;
                 const editorLinkMaster = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/${customInput}`;
                 const previewLinkMaster = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB/${customInput}?wcmmode=disabled`;
                 const sitesLinkMaster = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB/${customInput}`;
+                const RolloutMaster = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/en-GB/${customInput}`;
+                const localPropertiesMaster = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/en-GB/${customInput}`;
                 const liveLink = `https://www.grundfos.com/${liveSiteLanguage}/${customInput}`;
 
                 if (!PartLinkExists) {
@@ -3213,10 +3215,19 @@ updateAllDatalists();
                         linksHTML += `<p><strong>Editor (en_GB)</strong>: <a href="${editorLinkMaster}" class="editliveEngbMaster"  target="_blank">${editorLinkMaster}</a></p>`;
                         uniqueLinks.add(editorLinkMaster);
                     }
+                    if (!uniqueLinks.has(RolloutMaster)) {
+                        linksHTML += `<p><strong>Rollout (en_GB)</strong>: <a href="${RolloutMaster}" class="rolloutlocalMaster"  target="_blank">${RolloutMaster}</a></p>`;
+                        uniqueLinks.add(RolloutMaster);
+                    }
+                    if (!uniqueLinks.has(localPropertiesMaster)) {
+                        linksHTML += `<p><strong>Properties (en_GB)</strong>: <a href="${localPropertiesMaster}" class="propertieslocalMaster" target="_blank">${localPropertiesMaster}</a></p>`;
+                        uniqueLinks.add(localPropertiesMaster);
+                    }
                     if (!uniqueLinks.has(previewLinkMaster)) {
                         linksHTML += `<p><strong>Preview (en_GB)</strong>: <a href="${previewLinkMaster}" class="previewliveEngbMaster" target="_blank">${previewLinkMaster}</a><br></p>`;
                         uniqueLinks.add(previewLinkMaster);
                     }
+
                 } else {
                     if (!MasterenGBExists) {
                         linksHTML += `<p><strong>Master Language:</strong> (en-GB)</p>`;
@@ -3230,6 +3241,10 @@ updateAllDatalists();
                         linksHTML += `<p><strong>Editor (en_GB)</strong>: <a href="${editorLinkMaster}" class="editliveEngbMaster" target="_blank">${editorLinkMaster}</a></p>`;
                         uniqueLinks.add(editorLinkMaster);
                     }
+                    // if (!uniqueLinks.has(Rollout)) {
+                    //     linksHTML += `<p><strong>Rollout (en_GB)</strong>: <a href="${Rollout}" class="rolloutlocalMaster"  target="_blank">${Rollout}</a></p>`;
+                    //     uniqueLinks.add(Rollout);
+                    // }
                     if (!uniqueLinks.has(previewLinkMaster)) {
                         linksHTML += `<p><strong>Preview (en_GB)</strong>: <a href="${previewLinkMaster}" class="previewliveEngbMaster"  target="_blank">${previewLinkMaster}</a><br></p>`;
                         uniqueLinks.add(previewLinkMaster);
@@ -3248,6 +3263,14 @@ updateAllDatalists();
                         linksHTML += `<p><strong>Editor (${masterLanguage})</strong>: <a href="${editorLink}" class="editlocalMaster" target="_blank">${editorLink}</a></p>`;
                         uniqueLinks.add(editorLink);
                     }
+                    if (!uniqueLinks.has(Rollout)) {
+                        linksHTML += `<p><strong>Rollout (${masterLanguage})</strong>: <a href="${Rollout}" class="rolloutlocalMaster"  target="_blank">${Rollout}</a></p>`;
+                        uniqueLinks.add(Rollout);
+                    }
+                    if (!uniqueLinks.has(localProperties)) {
+                        linksHTML += `<p><strong>Properties (${masterLanguage})</strong>: <a href="${localProperties}" class="propertieslocalMaster" target="_blank">${localProperties}</a></p>`;
+                        uniqueLinks.add(localProperties);
+                    }
                     if (!uniqueLinks.has(previewLink)) {
                         linksHTML += `<p><strong>Preview (${masterLanguage})</strong>: <a href="${previewLink}" class="previewlocalMaster" target="_blank">${previewLink}</a></p>`;
                         uniqueLinks.add(previewLink);
@@ -3258,83 +3281,71 @@ updateAllDatalists();
                 removeDuplicateLinks(linksDiv);
             });
         }
-        function generateLinksForCondition2(masterLanguage, localLanguagesChecked, customInput, linksDiv) {
-            const uniqueLinks = new Set();
-            const uniqueTexts = new Set();
-            let linksHTML = ``;
-            const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-            const sitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-            const sitesENLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB/${customInput}`;
-            const editLink = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-            const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-            linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
+        // function generateLinksForCondition2(masterLanguage, localLanguagesChecked, customInput, linksDiv) {
+        //     const uniqueLinks = new Set();
+        //     const uniqueTexts = new Set();
+        //     let linksHTML = ``;
+        //     const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+        //     const sitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+        //     const sitesENLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB/${customInput}`;
+        //     const editLink = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+        //     const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
+        //     linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
 
-            // if (masterLanguage !== "en-GB") {
-            //     linksHTML += `<p><strong>Master Language:</strong> en-GB</p>`;
-            //     linksHTML += `Site Live: <a href="${sitesENLink}" class="siteliveEngbMaster" target="_blank">${sitesENLink}</a><br>`;
-            // }
-            // linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
-            // if (masterLanguage == "en-GB") {
-            //     linksHTML += `Site Live: <a href="${sitesENLink}" class="siteliveEngbMaster" target="_blank">${sitesENLink}</a><br>`;
-            // } else {
-            //     linksHTML += `Site Live: <a href="${sitesLink}" class="sitelivelocalMaster" target="_blank">${sitesLink}</a><br>`;
-            // }
-            linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
-            linksHTML += `Site Live: <a href="${sitesLink}" class="sitelivelocalMaster" target="_blank">${sitesLink}</a><br>`;
-            linksHTML += `Editor: <a href="${editLink}" class="editlocalMaster" target="_blank">${editLink}</a><br>`;
-            linksHTML += `Rollout: <a href="${Rollout}" class="rolloutlocalMaster" target="_blank">${Rollout}</a><br>`;
-            linksHTML += `Properties: <a href="${Properties}" class="propertieslocalMaster" target="_blank">${Properties}</a><br>`;
-            // localLanguagesChecked.forEach((localLanguage) => {
-            const localLanguagesList = localLanguages[masterLanguage] || [];
-            if (localLanguagesChecked.includes(masterLanguage)) {
-                const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
-                if (remainingLanguages.length > 0) {
-                    linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): ${remainingLanguages.join(", ")}</strong></p>`;
-                } else {
-                    linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): No additional locales available to display.</strong></p>`;
-                }
-                remainingLanguages.forEach((language) => {
-                    linksHTML += generateLocalLanguageLinksTagging(language, customInput);
-                    // linksHTML += generateAdditionalLinks();
-                });
-                linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
-            } else if (localLanguagesChecked.length > 0) {
-                linksHTML += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
-                localLanguagesChecked.forEach((selectedLocalLanguage) => {
-                    linksHTML += generateLocalLanguageLinksTagging(selectedLocalLanguage, customInput);
-                });
-                linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
-            } else {
-                linksHTML += `<p><strong>No local languages selected.</strong></p>`;
-            }
-            linksDiv.innerHTML += linksHTML;
-            // });
-        }
-        function generateLocalLanguageLinksTagging(language, customInput) {
-            function applyReplacements(input) {
-                const replacements = [
-                    { old: "products", new: "solutions" },
-                    { old: "learn", new: "solutions/learn" },
-                    { old: "support", new: "solutions/support" },
-                    { old: "about-us/sustainability", new: "sustainability" },
-                    { old: "about-us/media", new: "media" },
-                    { old: "about-us/careers", new: "careers" },
-                ];
-                let updatedInput = input;
-                replacements.forEach((replacement) => {
-                    updatedInput = updatedInput.replace(new RegExp(replacement.old, "g"), replacement.new);
-                });
-                return updatedInput;
-            }
-            let updatedCustomInput = customInput;
-            if (language === "www/en") {
-                updatedCustomInput = applyReplacements(customInput);
-            }
-            const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedCustomInput}`];
-            const localsitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedCustomInput}`;
-            const localProperties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/${language}/${updatedCustomInput}`;
-            return `<p><strong>Local Language (${language}):</strong></p>` + `Properties: <a href="${localProperties}" target="_blank">${localProperties}</a><br>` + `Publish: <a href="${localpublishLinks}" class="publish" target="_blank">${localpublishLinks}</a><br>`;
-        }
+       
+        //     linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
+        //     linksHTML += `Site Live: <a href="${sitesLink}" class="sitelivelocalMaster" target="_blank">${sitesLink}</a><br>`;
+        //     linksHTML += `Editor: <a href="${editLink}" class="editlocalMaster" target="_blank">${editLink}</a><br>`;
+        //     linksHTML += `Rollout: <a href="${Rollout}" class="rolloutlocalMaster" target="_blank">${Rollout}</a><br>`;
+        //     linksHTML += `Properties: <a href="${Properties}" class="propertieslocalMaster" target="_blank">${Properties}</a><br>`;
+        //     const localLanguagesList = localLanguages[masterLanguage] || [];
+        //     if (localLanguagesChecked.includes(masterLanguage)) {
+        //         const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
+        //         if (remainingLanguages.length > 0) {
+        //             linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): ${remainingLanguages.join(", ")}</strong></p>`;
+        //         } else {
+        //             linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): No additional locales available to display.</strong></p>`;
+        //         }
+        //         remainingLanguages.forEach((language) => {
+        //             linksHTML += generateLocalLanguageLinksTagging(language, customInput);
+        //         });
+        //         linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
+        //     } else if (localLanguagesChecked.length > 0) {
+        //         linksHTML += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
+        //         localLanguagesChecked.forEach((selectedLocalLanguage) => {
+        //             linksHTML += generateLocalLanguageLinksTagging(selectedLocalLanguage, customInput);
+        //         });
+        //         linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
+        //     } else {
+        //         linksHTML += `<p><strong>No local languages selected.</strong></p>`;
+        //     }
+        //     linksDiv.innerHTML += linksHTML;
+        // }
+        // function generateLocalLanguageLinksTagging(language, customInput) {
+        //     function applyReplacements(input) {
+        //         const replacements = [
+        //             { old: "products", new: "solutions" },
+        //             { old: "learn", new: "solutions/learn" },
+        //             { old: "support", new: "solutions/support" },
+        //             { old: "about-us/sustainability", new: "sustainability" },
+        //             { old: "about-us/media", new: "media" },
+        //             { old: "about-us/careers", new: "careers" },
+        //         ];
+        //         let updatedInput = input;
+        //         replacements.forEach((replacement) => {
+        //             updatedInput = updatedInput.replace(new RegExp(replacement.old, "g"), replacement.new);
+        //         });
+        //         return updatedInput;
+        //     }
+        //     let updatedCustomInput = customInput;
+        //     if (language === "www/en") {
+        //         updatedCustomInput = applyReplacements(customInput);
+        //     }
+        //     const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedCustomInput}`];
+        //     const localsitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedCustomInput}`;
+        //     const localProperties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/${language}/${updatedCustomInput}`;
+        //     return `<p><strong>Local Language (${language}):</strong></p>` + `Properties: <a href="${localProperties}" target="_blank">${localProperties}</a><br>` + `Publish: <a href="${localpublishLinks}" class="publish" target="_blank">${localpublishLinks}</a><br>`;
+        // }
         let savedFragmentInputs = [];
         const fragmentInput = document.getElementById("fragmentInput");
         const savedFragmentsContainer = document.getElementById("savedFragments");
