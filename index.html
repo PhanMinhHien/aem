@@ -781,7 +781,7 @@
                     <div class="autoTasks">
                         <h3>Auto Tasks</h3>
                         <div class="button-auto">
-                            <div class="form-group-1">
+                            <!-- <div class="form-group-1">
                                 <div class="group">
                                     <label for="noneBatchSizeInput">Open Live Site EN Master:</label>
                                     <input type="number" id="noneBatchSizeInput" value="1" min="1" />
@@ -796,7 +796,7 @@
                                 </div>
                                 <button id="alreadyBatchRunBtn" class="btn-generate-batch">Auto Run for "Already has a
                                     page" Only</button>
-                            </div>
+                            </div> -->
                             <!-- <div class="form-group-1">
                                     <label for="searchInput">Properties <br />(Live Site and Rollout):</label>
                                     <button id="toggleOpenLinksBtn" class="btn-generate-batch">Run Master</button>
@@ -1859,206 +1859,206 @@
             document.getElementById("statusTextarea").value = rawText;
         }
 
-        const TaskHandlers = {
-            autoRunStatusBatch(batchSize = 1, statusToRun = "None", linkClass = ".siteliveEngbMaster") {
-                let processed = 0;
-                const processedRadios = new Set();
+        // const TaskHandlers = {
+        //     autoRunStatusBatch(batchSize = 1, statusToRun = "None", linkClass = ".siteliveEngbMaster") {
+        //         let processed = 0;
+        //         const processedRadios = new Set();
 
-                function waitForLinksAndProcess(radio, onDone) {
-                    const maxAttempts = 10;
-                    let attempts = 0;
+        //         function waitForLinksAndProcess(radio, onDone) {
+        //             const maxAttempts = 10;
+        //             let attempts = 0;
 
-                    function checkLinks() {
-                        const selectors = Array.isArray(linkClass) ? linkClass : [linkClass];
-                        const links = document.querySelectorAll("#links " + selectors.join(", #links "));
-                        if (links.length > 0 || attempts >= maxAttempts) {
-                            const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
+        //             function checkLinks() {
+        //                 const selectors = Array.isArray(linkClass) ? linkClass : [linkClass];
+        //                 const links = document.querySelectorAll("#links " + selectors.join(", #links "));
+        //                 if (links.length > 0 || attempts >= maxAttempts) {
+        //                     const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
 
-                            if (links.length > 0) {
-                                statuses[radio.value] = statusToRun === "None" ? "Already has a page" : "Processed";
-                                localStorage.setItem("savedStatuses", JSON.stringify(statuses));
+        //                     if (links.length > 0) {
+        //                         statuses[radio.value] = statusToRun === "None" ? "Already has a page" : "Processed";
+        //                         localStorage.setItem("savedStatuses", JSON.stringify(statuses));
 
-                                links.forEach((link) => window.open(link.href, "_blank"));
-                                updateStatusTextareaRawFromSaved();
-                            }
+        //                         links.forEach((link) => window.open(link.href, "_blank"));
+        //                         updateStatusTextareaRawFromSaved();
+        //                     }
 
-                            onDone(links);
-                        } else {
-                            attempts++;
-                            setTimeout(checkLinks, 300);
-                        }
-                    }
+        //                     onDone(links);
+        //                 } else {
+        //                     attempts++;
+        //                     setTimeout(checkLinks, 300);
+        //                 }
+        //             }
 
-                    checkLinks();
-                }
+        //             checkLinks();
+        //         }
 
-                function processNext() {
-                    if (processed >= batchSize) {
-                        updateSavedLinksCount();
-                        updateStatusTextareaRawFromSaved();
-                        return;
-                    }
+        //         function processNext() {
+        //             if (processed >= batchSize) {
+        //                 updateSavedLinksCount();
+        //                 updateStatusTextareaRawFromSaved();
+        //                 return;
+        //             }
 
-                    const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
-                    const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
+        //             const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
+        //             const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
 
-                    const nextRadio = radios.find((radio) => statuses[radio.value] === statusToRun && !processedRadios.has(radio.value));
+        //             const nextRadio = radios.find((radio) => statuses[radio.value] === statusToRun && !processedRadios.has(radio.value));
 
-                    if (!nextRadio) {
-                        updateSavedLinksCount();
-                        updateStatusTextareaRawFromSaved();
-                        return;
-                    }
+        //             if (!nextRadio) {
+        //                 updateSavedLinksCount();
+        //                 updateStatusTextareaRawFromSaved();
+        //                 return;
+        //             }
 
-                    nextRadio.checked = true;
-                    updateCustomInput(nextRadio);
-                    processedRadios.add(nextRadio.value);
+        //             nextRadio.checked = true;
+        //             updateCustomInput(nextRadio);
+        //             processedRadios.add(nextRadio.value);
 
-                    waitForLinksAndProcess(nextRadio, (links) => {
-                        if (links.length > 0) processed++;
-                        processNext();
-                    });
-                }
+        //             waitForLinksAndProcess(nextRadio, (links) => {
+        //                 if (links.length > 0) processed++;
+        //                 processNext();
+        //             });
+        //         }
 
-                processNext();
-            },
+        //         processNext();
+        //     },
 
-            openLinksLiveLocal() {
-                const links = document.querySelectorAll("a.liveSiteLocal");
-                links.forEach((link) => {
-                    window.open(link.href, "_blank");
-                });
-            },
+        //     openLinksLiveLocal() {
+        //         const links = document.querySelectorAll("a.liveSiteLocal");
+        //         links.forEach((link) => {
+        //             window.open(link.href, "_blank");
+        //         });
+        //     },
 
-            toggleState: 0, // 0 = Master, 1 = Publish
-            async runSingleRadio() {
-                const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-                const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
-                if (!currentRadio) {
-                    alert("No radio is selected.");
-                    return;
-                }
-                const currentRadioIndex = Array.from(radios).indexOf(currentRadio);
-                const btn = document.getElementById("toggleOpenLinksBtn");
+        //     toggleState: 0, // 0 = Master, 1 = Publish
+        //     async runSingleRadio() {
+        //         const radios = document.querySelectorAll("#radioContainer input[type='radio']");
+        //         const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
+        //         if (!currentRadio) {
+        //             alert("No radio is selected.");
+        //             return;
+        //         }
+        //         const currentRadioIndex = Array.from(radios).indexOf(currentRadio);
+        //         const btn = document.getElementById("toggleOpenLinksBtn");
 
-                setTimeout(async () => {
-                    if (TaskHandlers.toggleState === 0) {
-                        const editMaster = document.querySelectorAll("#links .editlocalMaster, #links .rolloutlocalMaster");
-                        await TaskHandlers.openLinks(editMaster);
-                        TaskHandlers.toggleState = 1;
-                        btn.textContent = "Run Publish";
-                    } else {
-                        const publishLinks = document.querySelectorAll("#links a.pulishSiteLocal");
-                        await TaskHandlers.openLinks(publishLinks);
-                        TaskHandlers.toggleState = 0;
-                        btn.textContent = "Run Master";
-                        if (currentRadioIndex + 1 < radios.length) {
-                            radios[currentRadioIndex + 1].checked = true;
-                            updateCustomInput(radios[currentRadioIndex + 1]);
-                            updateSavedLinksCount();
-                        }
-                    }
-                }, 200);
-            },
+        //         setTimeout(async () => {
+        //             if (TaskHandlers.toggleState === 0) {
+        //                 const editMaster = document.querySelectorAll("#links .editlocalMaster, #links .rolloutlocalMaster");
+        //                 await TaskHandlers.openLinks(editMaster);
+        //                 TaskHandlers.toggleState = 1;
+        //                 btn.textContent = "Run Publish";
+        //             } else {
+        //                 const publishLinks = document.querySelectorAll("#links a.pulishSiteLocal");
+        //                 await TaskHandlers.openLinks(publishLinks);
+        //                 TaskHandlers.toggleState = 0;
+        //                 btn.textContent = "Run Master";
+        //                 if (currentRadioIndex + 1 < radios.length) {
+        //                     radios[currentRadioIndex + 1].checked = true;
+        //                     updateCustomInput(radios[currentRadioIndex + 1]);
+        //                     updateSavedLinksCount();
+        //                 }
+        //             }
+        //         }, 200);
+        //     },
 
-            openLinks(links) {
-                return new Promise((resolve) => {
-                    links.forEach((a, index) => {
-                        setTimeout(() => {
-                            window.open(a.href, "_blank");
-                            if (index === links.length - 1) resolve();
-                        }, index * 200);
-                    });
-                });
-            },
+        //     openLinks(links) {
+        //         return new Promise((resolve) => {
+        //             links.forEach((a, index) => {
+        //                 setTimeout(() => {
+        //                     window.open(a.href, "_blank");
+        //                     if (index === links.length - 1) resolve();
+        //                 }, index * 200);
+        //             });
+        //         });
+        //     },
 
-            generateAndOpenBatch(batchSize) {
-                const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-                const delay = 500;
-                let processed = 0;
-                const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
-                if (!currentRadio) return;
+        //     generateAndOpenBatch(batchSize) {
+        //         const radios = document.querySelectorAll("#radioContainer input[type='radio']");
+        //         const delay = 500;
+        //         let processed = 0;
+        //         const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
+        //         if (!currentRadio) return;
 
-                let currentRadioIndex = Array.from(radios).indexOf(currentRadio);
+        //         let currentRadioIndex = Array.from(radios).indexOf(currentRadio);
 
-                function processNext() {
-                    if (currentRadioIndex >= radios.length || processed >= batchSize) {
-                        radios[currentRadioIndex].checked = true;
-                        updateCustomInput(radios[currentRadioIndex]);
-                        return;
-                    }
+        //         function processNext() {
+        //             if (currentRadioIndex >= radios.length || processed >= batchSize) {
+        //                 radios[currentRadioIndex].checked = true;
+        //                 updateCustomInput(radios[currentRadioIndex]);
+        //                 return;
+        //             }
 
-                    radios[currentRadioIndex].checked = true;
-                    updateCustomInput(radios[currentRadioIndex]);
+        //             radios[currentRadioIndex].checked = true;
+        //             updateCustomInput(radios[currentRadioIndex]);
 
-                    setTimeout(() => {
-                        document.querySelectorAll("#links .sitelivelocalMaster").forEach((a) => {
-                            window.open(a.href, "_blank");
-                        });
-                        processed++;
-                        currentRadioIndex++;
-                        processNext();
-                        updateSavedLinksCount();
-                    }, delay);
-                }
-                processNext();
-            },
-        };
+        //             setTimeout(() => {
+        //                 document.querySelectorAll("#links .sitelivelocalMaster").forEach((a) => {
+        //                     window.open(a.href, "_blank");
+        //                 });
+        //                 processed++;
+        //                 currentRadioIndex++;
+        //                 processNext();
+        //                 updateSavedLinksCount();
+        //             }, delay);
+        //         }
+        //         processNext();
+        //     },
+        // };
 
-        function runAutoTask(type, options = {}) {
-            switch (type) {
-                case "noneBatch":
-                    TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "None", [".siteliveEngbMaster", ".rolloutlocalMaster"]);
-                    break;
-                case "alreadyBatch":
-                    // TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".publish", ".editMaster", ".liveSiteLink"]);
-                    TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".pulishSiteLocal", ".liveSiteLink"]);
+        // function runAutoTask(type, options = {}) {
+        //     switch (type) {
+        //         case "noneBatch":
+        //             TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "None", [".siteliveEngbMaster", ".rolloutlocalMaster"]);
+        //             break;
+        //         case "alreadyBatch":
+        //             // TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".publish", ".editMaster", ".liveSiteLink"]);
+        //             TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".pulishSiteLocal", ".liveSiteLink"]);
 
-                    break;
-                case "toggle":
-                    TaskHandlers.runSingleRadio();
-                    break;
-                case "batch":
-                    TaskHandlers.generateAndOpenBatch(options.batchSize || 1);
-                    break;
-                case "local":
-                    TaskHandlers.openLinksLiveLocal();
-                    break;
-                default:
-                    console.warn("Unknown task:", type);
-            }
-        }
+        //             break;
+        //         case "toggle":
+        //             TaskHandlers.runSingleRadio();
+        //             break;
+        //         case "batch":
+        //             TaskHandlers.generateAndOpenBatch(options.batchSize || 1);
+        //             break;
+        //         case "local":
+        //             TaskHandlers.openLinksLiveLocal();
+        //             break;
+        //         default:
+        //             console.warn("Unknown task:", type);
+        //     }
+        // }
 
-        window.addEventListener("DOMContentLoaded", () => {
-            restoreStatusTextareaRaw();
+        // window.addEventListener("DOMContentLoaded", () => {
+        //     restoreStatusTextareaRaw();
 
-            document.getElementById("noneBatchRunBtn").addEventListener("click", () => {
-                runAutoTask("noneBatch", {
-                    batchSize: parseInt(document.getElementById("noneBatchSizeInput").value, 10),
-                });
-            });
+        //     document.getElementById("noneBatchRunBtn").addEventListener("click", () => {
+        //         runAutoTask("noneBatch", {
+        //             batchSize: parseInt(document.getElementById("noneBatchSizeInput").value, 10),
+        //         });
+        //     });
 
-            document.getElementById("alreadyBatchRunBtn").addEventListener("click", () => {
-                runAutoTask("alreadyBatch", {
-                    batchSize: parseInt(document.getElementById("alreadyBatchSizeInput").value, 10),
-                });
-            });
+        //     document.getElementById("alreadyBatchRunBtn").addEventListener("click", () => {
+        //         runAutoTask("alreadyBatch", {
+        //             batchSize: parseInt(document.getElementById("alreadyBatchSizeInput").value, 10),
+        //         });
+        //     });
 
-            document.getElementById("toggleOpenLinksBtn").addEventListener("click", () => {
-                runAutoTask("toggle");
-            });
+        //     document.getElementById("toggleOpenLinksBtn").addEventListener("click", () => {
+        //         runAutoTask("toggle");
+        //     });
 
-            document.getElementById("autoGenerateBtn").addEventListener("click", () => {
-                runAutoTask("batch", {
-                    batchSize: parseInt(document.getElementById("batchSizeInput").value, 10),
-                });
-            });
+        //     document.getElementById("autoGenerateBtn").addEventListener("click", () => {
+        //         runAutoTask("batch", {
+        //             batchSize: parseInt(document.getElementById("batchSizeInput").value, 10),
+        //         });
+        //     });
 
-            document.querySelector("button[onclick='openLinksLiveLocal()']").addEventListener("click", (e) => {
-                e.preventDefault();
-                runAutoTask("local");
-            });
-        });
+        //     document.querySelector("button[onclick='openLinksLiveLocal()']").addEventListener("click", (e) => {
+        //         e.preventDefault();
+        //         runAutoTask("local");
+        //     });
+        // });
 
         function processLinks() {
             let links = document.getElementById("linkTextarea").value.trim().split("\n");
