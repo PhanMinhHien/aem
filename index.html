@@ -114,7 +114,7 @@
         .form-group-1 input[type="email"],
         .form-group-1 select,
         .form-group-1 textarea {
-           padding: 12px 14px;
+            padding: 12px 14px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 16px;
@@ -123,7 +123,7 @@
             width: 100%;
             box-sizing: border-box;
         }
-       
+
         .form-group-1 input:focus,
         .form-group-1 select:focus,
         .form-group-1 textarea:focus {
@@ -154,9 +154,11 @@
             background-color: #fff;
             outline: none;
         }
- .form-group textarea{
+
+        .form-group textarea {
             font-size: 11px;
         }
+
         .checkbox-group {
             display: flex;
             align-items: center;
@@ -754,8 +756,10 @@
                             <textarea id="statusTextarea" rows="10"
                                 placeholder="Paste status links here, each on a new line..."></textarea>
                             <div style="display: flex; gap: 10px; margin-top: 20px">
-                                <button id="startButton" style="flex: 1" onclick="syncStatusFromTextarea()">Start Processing</button>
-                                <button id="clearStatusBtn" style="flex: 1; background-color: #e74c3c;" onclick="clearStatusData()">Clear Status</button>
+                                <button id="startButton" style="flex: 1" onclick="syncStatusFromTextarea()">Start
+                                    Processing</button>
+                                <button id="clearStatusBtn" style="flex: 1; background-color: #e74c3c;"
+                                    onclick="clearStatusData()">Clear Status</button>
                             </div>
                         </div>
                     </div>
@@ -1269,9 +1273,9 @@
     </div>
     <script>
         const classMappings = {
-            "Live Site EN Master": ".siteliveEngbMaster",
-            "Edit Site EN Master": ".editliveEngbMaster",
-            "Preview Site EN Master": ".previewliveEngbMaster",
+            "Live Site en-GB": ".siteliveEngbMaster",
+            "Edit Site en-GB": ".editliveEngbMaster",
+            "Preview Site en-GB": ".previewliveEngbMaster",
             "Site Live Local Master": ".sitelivelocalMaster",
             "Edit Site Local Master": ".editlocalMaster",
             "Preview Site Local Master": ".previewlocalMaster",
@@ -1332,29 +1336,29 @@
             renderSteps();
         }
         // Initialize default links and states
-function initializeDefaultState() {
-    let savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
-    if (savedInputs.length === 0) {
-        // Add default about-us link
-        savedInputs = ["about-us"];
-        localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
-        localStorage.setItem("selectedInput", "about-us");
-        
-        // Add to UI
-        const container = document.getElementById("radioContainer");
-        if (container) {
-            addSavedInputToDOM("about-us", container, true);
-            document.getElementById("savedCustomInputs").style.display = "block";
-            document.getElementById("clearSavedLinksBtn").style.display = "block";
+        function initializeDefaultState() {
+            let savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
+            if (savedInputs.length === 0) {
+                // Add default about-us link
+                savedInputs = ["about-us"];
+                localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+                localStorage.setItem("selectedInput", "about-us");
+
+                // Add to UI
+                const container = document.getElementById("radioContainer");
+                if (container) {
+                    addSavedInputToDOM("about-us", container, true);
+                    document.getElementById("savedCustomInputs").style.display = "block";
+                    document.getElementById("clearSavedLinksBtn").style.display = "block";
+                }
+                savedLinksCount = 1;
+                updateSavedLinksCount();
+            }
         }
-        savedLinksCount = 1;
-        updateSavedLinksCount();
-    }
-}
         window.addEventListener("DOMContentLoaded", () => {
-    restoreStateFromLocal();
-    initializeDefaultState();
-});
+            restoreStateFromLocal();
+            initializeDefaultState();
+        });
 
         // Task type management
         document.getElementById("addTypeTaskBtn").addEventListener("click", () => {
@@ -1704,7 +1708,7 @@ function initializeDefaultState() {
         // Function to clear status data from localStorage and textarea
         function clearStatusData() {
             if (!confirm("Are you sure you want to clear all status data?")) return;
-            
+
             localStorage.removeItem("savedStatuses");
             localStorage.removeItem("statusTextareaRaw");
             document.getElementById("statusTextarea").value = "";
@@ -2237,31 +2241,31 @@ function initializeDefaultState() {
             linkCountElement.textContent = `${checkedPosition} / ${savedInputs.length}`;
         }
         window.clearRadioSelections = function () {
-    const RadioSelections = document.getElementById("savedCustomInputs");
-    const container = document.getElementById("radioContainer");
-    const clearBtn = document.getElementById("clearSavedLinksBtn");
-    
-    // Reset to default about-us
-    const defaultInput = "about-us";
-    if (container) {
-        container.innerHTML = "";
-        addSavedInputToDOM(defaultInput, container, true);
-    }
-    if (RadioSelections) RadioSelections.style.display = "block";
-    if (clearBtn) clearBtn.style.display = "block";
-    
-    localStorage.setItem("savedInputs", JSON.stringify([defaultInput]));
-    localStorage.setItem("selectedInput", defaultInput);
-    
-    savedLinksCount = 1;
-    updateSavedLinksCount();
-    
-    if (typeof links !== "undefined") links.innerHTML = "";
-    
-    // Generate links for default about-us
-    document.getElementById("customInput").value = defaultInput;
-    generateLinks();
-};
+            const RadioSelections = document.getElementById("savedCustomInputs");
+            const container = document.getElementById("radioContainer");
+            const clearBtn = document.getElementById("clearSavedLinksBtn");
+
+            // Reset to default about-us
+            const defaultInput = "about-us";
+            if (container) {
+                container.innerHTML = "";
+                addSavedInputToDOM(defaultInput, container, true);
+            }
+            if (RadioSelections) RadioSelections.style.display = "block";
+            if (clearBtn) clearBtn.style.display = "block";
+
+            localStorage.setItem("savedInputs", JSON.stringify([defaultInput]));
+            localStorage.setItem("selectedInput", defaultInput);
+
+            savedLinksCount = 1;
+            updateSavedLinksCount();
+
+            if (typeof links !== "undefined") links.innerHTML = "";
+
+            // Generate links for default about-us
+            document.getElementById("customInput").value = defaultInput;
+            generateLinks();
+        };
         /**
          * Processes a custom input URL and adds it to the saved list
          * - Validates if links were generated for the input
@@ -2276,13 +2280,13 @@ function initializeDefaultState() {
                 return;
             }
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
-            
+
             // Check if this is the first custom input being added
             if (savedInputs.length === 1 && savedInputs[0] === "about-us") {
                 // Remove the default "about-us" link
                 savedInputs = [];
             }
-            
+
             if (savedInputs.includes(input)) return;
             if (input) {
                 savedInputs.push(input);
@@ -2293,15 +2297,15 @@ function initializeDefaultState() {
                     alert("Cannot find container to save radio input.");
                     return;
                 }
-                
+
                 // Clear the container before adding new radio buttons
                 container.innerHTML = "";
-                
+
                 // Add all radio buttons, with the new one checked
                 savedInputs.forEach((savedInput, index) => {
                     addSavedInputToDOM(savedInput, container, index === savedInputs.length - 1);
                 });
-                
+
                 savedLinksCount = savedInputs.length;
                 updateSavedLinksCount();
                 document.getElementById("customInput").value = input;
@@ -3274,11 +3278,11 @@ function initializeDefaultState() {
                         MasterenGBExists = true;
                     }
                     if (!uniqueLinks.has(sitesLinkMaster)) {
-                        linksHTML += `<p><strong>Site Live (en_GB)</strong>: <a href="${sitesLinkMaster}" class="siteliveEngbMaster" target="_blank">${sitesLinkMaster}</a></p>`;
+                        linksHTML += `<p><strong>Site Live (en_GB)</strong>: <a href="${sitesLinkMaster}" class="sitelivelocalMaster" target="_blank">${sitesLinkMaster}</a></p>`;
                         uniqueLinks.add(sitesLinkMaster);
                     }
                     if (!uniqueLinks.has(editorLinkMaster)) {
-                        linksHTML += `<p><strong>Editor (en_GB)</strong>: <a href="${editorLinkMaster}" class="editliveEngbMaster"  target="_blank">${editorLinkMaster}</a></p>`;
+                        linksHTML += `<p><strong>Editor (en_GB)</strong>: <a href="${editorLinkMaster}" class="editlocalMaster"  target="_blank">${editorLinkMaster}</a></p>`;
                         uniqueLinks.add(editorLinkMaster);
                     }
                     if (!uniqueLinks.has(RolloutMaster)) {
@@ -3290,7 +3294,7 @@ function initializeDefaultState() {
                         uniqueLinks.add(localPropertiesMaster);
                     }
                     if (!uniqueLinks.has(previewLinkMaster)) {
-                        linksHTML += `<p><strong>Preview (en_GB)</strong>: <a href="${previewLinkMaster}" class="previewliveEngbMaster" target="_blank">${previewLinkMaster}</a><br></p>`;
+                        linksHTML += `<p><strong>Preview (en_GB)</strong>: <a href="${previewLinkMaster}" class="previewlocalMaster" target="_blank">${previewLinkMaster}</a><br></p>`;
                         uniqueLinks.add(previewLinkMaster);
                     }
 
@@ -3358,7 +3362,7 @@ function initializeDefaultState() {
         //     const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
         //     linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
 
-       
+
         //     linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
         //     linksHTML += `Site Live: <a href="${sitesLink}" class="sitelivelocalMaster" target="_blank">${sitesLink}</a><br>`;
         //     linksHTML += `Editor: <a href="${editLink}" class="editlocalMaster" target="_blank">${editLink}</a><br>`;
