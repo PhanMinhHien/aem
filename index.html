@@ -1331,7 +1331,30 @@
             refreshTaskSelect();
             renderSteps();
         }
-        window.addEventListener("DOMContentLoaded", restoreStateFromLocal);
+        // Initialize default links and states
+function initializeDefaultState() {
+    let savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
+    if (savedInputs.length === 0) {
+        // Add default about-us link
+        savedInputs = ["about-us"];
+        localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+        localStorage.setItem("selectedInput", "about-us");
+        
+        // Add to UI
+        const container = document.getElementById("radioContainer");
+        if (container) {
+            addSavedInputToDOM("about-us", container, true);
+            document.getElementById("savedCustomInputs").style.display = "block";
+            document.getElementById("clearSavedLinksBtn").style.display = "block";
+        }
+        savedLinksCount = 1;
+        updateSavedLinksCount();
+    }
+}
+        window.addEventListener("DOMContentLoaded", () => {
+    restoreStateFromLocal();
+    initializeDefaultState();
+});
 
         // Task type management
         document.getElementById("addTypeTaskBtn").addEventListener("click", () => {
@@ -2214,18 +2237,31 @@
             linkCountElement.textContent = `${checkedPosition} / ${savedInputs.length}`;
         }
         window.clearRadioSelections = function () {
-            const RadioSelections = document.getElementById("savedCustomInputs");
-            const container = document.getElementById("radioContainer");
-            const clearBtn = document.getElementById("clearSavedLinksBtn");
-            if (RadioSelections) RadioSelections.style.display = "none";
-            if (container) container.innerHTML = "";
-            if (clearBtn) clearBtn.style.display = "none";
-            localStorage.removeItem("savedInputs");
-            localStorage.removeItem("selectedInput");
-            savedLinksCount = 0;
-            updateSavedLinksCount();
-            if (typeof links !== "undefined") links.innerHTML = "";
-        };
+    const RadioSelections = document.getElementById("savedCustomInputs");
+    const container = document.getElementById("radioContainer");
+    const clearBtn = document.getElementById("clearSavedLinksBtn");
+    
+    // Reset to default about-us
+    const defaultInput = "about-us";
+    if (container) {
+        container.innerHTML = "";
+        addSavedInputToDOM(defaultInput, container, true);
+    }
+    if (RadioSelections) RadioSelections.style.display = "block";
+    if (clearBtn) clearBtn.style.display = "block";
+    
+    localStorage.setItem("savedInputs", JSON.stringify([defaultInput]));
+    localStorage.setItem("selectedInput", defaultInput);
+    
+    savedLinksCount = 1;
+    updateSavedLinksCount();
+    
+    if (typeof links !== "undefined") links.innerHTML = "";
+    
+    // Generate links for default about-us
+    document.getElementById("customInput").value = defaultInput;
+    generateLinks();
+};
         /**
          * Processes a custom input URL and adds it to the saved list
          * - Validates if links were generated for the input
@@ -2240,6 +2276,13 @@
                 return;
             }
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            
+            // Check if this is the first custom input being added
+            if (savedInputs.length === 1 && savedInputs[0] === "about-us") {
+                // Remove the default "about-us" link
+                savedInputs = [];
+            }
+            
             if (savedInputs.includes(input)) return;
             if (input) {
                 savedInputs.push(input);
@@ -2250,8 +2293,16 @@
                     alert("Cannot find container to save radio input.");
                     return;
                 }
-                addSavedInputToDOM(input, container, true);
-                savedLinksCount++;
+                
+                // Clear the container before adding new radio buttons
+                container.innerHTML = "";
+                
+                // Add all radio buttons, with the new one checked
+                savedInputs.forEach((savedInput, index) => {
+                    addSavedInputToDOM(savedInput, container, index === savedInputs.length - 1);
+                });
+                
+                savedLinksCount = savedInputs.length;
                 updateSavedLinksCount();
                 document.getElementById("customInput").value = input;
                 masterLanguage.disabled = false;
