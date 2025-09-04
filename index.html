@@ -1276,17 +1276,32 @@
             "Live Site en-GB": ".siteliveEngbMaster",
             "Edit Site en-GB": ".editliveEngbMaster",
             "Preview Site en-GB": ".previewliveEngbMaster",
+
             "Site Live Local Master": ".sitelivelocalMaster",
             "Edit Site Local Master": ".editlocalMaster",
             "Preview Site Local Master": ".previewlocalMaster",
             "Rollout Local Master": ".rolloutlocalMaster",
             "Properties Local Master": ".propertieslocalMaster",
-            // "Publish": ".publish",
+
             "Live Site Local": ".liveSiteLocal",
             "Edit Site Local": ".editSiteLocal",
             "Publish Site Local": ".pulishSiteLocal",
             "Preview Site Local": ".previewSiteLocal",
             "Live Site Link": ".liveSiteLink",
+
+            "Fragment Live Site en-GB": ".fragment-sitelive-enGB",
+            "Fragment Edit Site en-GB": ".fragment-edit-enGB",
+            "Fragment Preview Site en-GB": ".fragment-preview-enGB",
+
+            "Fragment Site Live Local Master": ".fragment-sitelive-localMaster",
+            "Fragment Edit Site Local Master": ".fragment-edit-localMaster",
+            "Fragment Preview Site Local Master": ".fragment-preview-localMaster",
+            "Fragment Rollout Local Master": ".fragment-rollout-localMaster",
+
+            "Fragment Live Site Local": ".fragment-sitelive-livesitelocal",
+            "Fragment Edit Site Local": ".fragment-edit-livesitelocal",
+            "Fragment Publish Site Local": ".fragment-publish-livesitelocal",
+            "Fragment Preview Site Local": ".fragment-preview-livesitelocal",
         };
 
         function renderClassNameOptions() {
@@ -1638,7 +1653,14 @@
                     stepTags.forEach((tag) => {
                         const sel = classMappings[tag];
                         if (!sel) return;
-                        document.querySelectorAll("#links " + sel).forEach((a) => window.open(a.href, "_blank"));
+
+                        const elements = document.querySelectorAll(`#links ${sel}, #fragmentContainer ${sel}`);
+
+                        elements.forEach((a) => {
+                            if (a.href) {
+                                window.open(a.href, "_blank");
+                            }
+                        });
                     });
 
                     processed++;
@@ -3278,11 +3300,11 @@
                         MasterenGBExists = true;
                     }
                     if (!uniqueLinks.has(sitesLinkMaster)) {
-                        linksHTML += `<p><strong>Site Live (en_GB)</strong>: <a href="${sitesLinkMaster}" class="sitelivelocalMaster" target="_blank">${sitesLinkMaster}</a></p>`;
+                        linksHTML += `<p><strong>Site Live (en_GB)</strong>: <a href="${sitesLinkMaster}" class="siteliveEngbMaster" target="_blank">${sitesLinkMaster}</a></p>`;
                         uniqueLinks.add(sitesLinkMaster);
                     }
                     if (!uniqueLinks.has(editorLinkMaster)) {
-                        linksHTML += `<p><strong>Editor (en_GB)</strong>: <a href="${editorLinkMaster}" class="editlocalMaster"  target="_blank">${editorLinkMaster}</a></p>`;
+                        linksHTML += `<p><strong>Editor (en_GB)</strong>: <a href="${editorLinkMaster}" class="editliveEngbMaster"  target="_blank">${editorLinkMaster}</a></p>`;
                         uniqueLinks.add(editorLinkMaster);
                     }
                     if (!uniqueLinks.has(RolloutMaster)) {
@@ -3294,7 +3316,7 @@
                         uniqueLinks.add(localPropertiesMaster);
                     }
                     if (!uniqueLinks.has(previewLinkMaster)) {
-                        linksHTML += `<p><strong>Preview (en_GB)</strong>: <a href="${previewLinkMaster}" class="previewlocalMaster" target="_blank">${previewLinkMaster}</a><br></p>`;
+                        linksHTML += `<p><strong>Preview (en_GB)</strong>: <a href="${previewLinkMaster}" class="previewliveEngbMaster" target="_blank">${previewLinkMaster}</a><br></p>`;
                         uniqueLinks.add(previewLinkMaster);
                     }
 
@@ -3754,18 +3776,20 @@
                 const masterLinkEditor = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}${fragmentPath}`;
                 const masterLinkSites = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}${fragmentPath}`;
                 const masterLinkPreview = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/${masterLanguage}${fragmentPath}?wcmmode=disabled`;
-
+                const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}${fragmentPath}`;
                 let fragmentHtml = `<p class="link-part"><strong>Selected Fragment:</strong> "${fragmentPath}"</p>`;
                 if (masterLanguage !== "en-GB") {
                     fragmentHtml += `<p><strong>Master Language:</strong> en-GB</p>`;
-                    fragmentHtml += `Site Live (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB${fragmentPath}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB${fragmentPath}</a><br>`;
-                    fragmentHtml += `Editor (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB${fragmentPath}" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB${fragmentPath}</a><br>`;
-                    fragmentHtml += `Preview (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB${fragmentPath}?wcmmode=disabled" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB${fragmentPath}?wcmmode=disabled</a><br>`;
+                    fragmentHtml += `Site Live (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB${fragmentPath}" class="fragment-sitelive-enGB" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB${fragmentPath}</a><br>`;
+                    fragmentHtml += `Editor (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB${fragmentPath}" class="fragment-edit-enGB" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB${fragmentPath}</a><br>`;
+                    // fragmentHtml += `Rollout(en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${fragmentPath}" class="fragment-rollout-localMaster" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${fragmentPath}</a><br>`;
+                    fragmentHtml += `Preview (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB${fragmentPath}?wcmmode=disabled" class="fragment-preview-enGB" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB${fragmentPath}?wcmmode=disabled</a><br>`;
                 }
                 fragmentHtml += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
-                fragmentHtml += `Site Live: <a href="${masterLinkSites}" target="_blank">${masterLinkSites}</a><br>`;
-                fragmentHtml += `Editor: <a href="${masterLinkEditor}" target="_blank">${masterLinkEditor}</a><br>`;
-                fragmentHtml += `Preview: <a href="${masterLinkPreview}" target="_blank">${masterLinkPreview}</a><br>`;
+                fragmentHtml += `Site Live: <a href="${masterLinkSites}" target="_blank"  class="fragment-sitelive-localMaster">${masterLinkSites}</a><br>`;
+                fragmentHtml += `Editor: <a href="${masterLinkEditor}" target="_blank" class="fragment-edit-localMaster">${masterLinkEditor}</a><br>`;
+                fragmentHtml += `Rollout: <a href="${Rollout}" target="_blank" class="fragment-rollout-localMaster">${Rollout}</a><br>`;
+                fragmentHtml += `Preview: <a href="${masterLinkPreview}" target="_blank" class="fragment-preview-localMaster">${masterLinkPreview}</a><br>`;
                 const localLanguagesList = localLanguages[masterLanguage] || [];
                 if (localLanguagesChecked.includes(masterLanguage)) {
                     const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
@@ -3796,10 +3820,10 @@
 
             return (
                 `<p><strong>Local Language (${language}):</strong></p>` +
-                `Site Live: <a href="${localLinkSitesLocal}" target="_blank">${localLinkSitesLocal}</a><br>` +
-                `Editor: <a href="${localLinkEditorLocal}" target="_blank">${localLinkEditorLocal}</a><br>` +
-                `Publish: <a href="${localpublishLinks}" target="_blank">${localpublishLinks}</a><br>` +
-                `Preview: <a href="${localLinkDisabledLocal}" target="_blank">${localLinkDisabledLocal}</a><br>`
+                `Site Live: <a href="${localLinkSitesLocal}"  class="fragment-sitelive-livesitelocal" target="_blank">${localLinkSitesLocal}</a><br>` +
+                `Editor: <a href="${localLinkEditorLocal}"  class="fragment-edit-livesitelocal" target="_blank">${localLinkEditorLocal}</a><br>` +
+                `Publish: <a href="${localpublishLinks}"  class="fragment-publish-livesitelocal" target="_blank">${localpublishLinks}</a><br>` +
+                `Preview: <a href="${localLinkDisabledLocal}"  class="fragment-preview-livesitelocal" target="_blank">${localLinkDisabledLocal}</a><br>`
             );
         }
         document.addEventListener("DOMContentLoaded", function () {
