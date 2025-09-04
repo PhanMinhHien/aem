@@ -3812,19 +3812,21 @@
                     checkbox.checked = false;
                 });
 
-                // Reset fragment checkboxes and hide X buttons
+                // Reset all fragment checkboxes except first one
                 const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
-                savedFragmentCheckboxes.forEach((checkbox) => {
-                    checkbox.checked = false;
+                savedFragmentCheckboxes.forEach((checkbox, index) => {
+                    // Check only the first checkbox, uncheck others
+                    checkbox.checked = index === 0;
                     const removeButton = checkbox.parentElement.nextElementSibling;
                     if (removeButton) {
-                        removeButton.style.display = "none";
+                        removeButton.style.display = index === 0 ? "inline-block" : "none";
                     }
                 });
 
-                // Reset current states
+                // Update current states
                 currentLocalLanguages = [];
-                currentSelectedFragments = [];
+                currentSelectedFragments = savedFragmentCheckboxes.length > 0 ? 
+                    [savedFragmentCheckboxes[0].value] : [];
 
                 // Update local languages UI
                 updateLocalLanguages();
