@@ -1307,13 +1307,62 @@
         function renderClassNameOptions() {
             const dl = document.getElementById("classNameOptions");
             dl.innerHTML = "";
+
+            // Group the options by type
+            const groups = {
+                engb: [],
+                localMaster: [],
+                siteLocal: [],
+                fragmentEngb: [],
+                fragmentLocalMaster: [],
+                fragmentSiteLocal: []
+            };
+
             Object.keys(classMappings).forEach((name) => {
-                const opt = document.createElement("option");
-                opt.value = name;
-                dl.appendChild(opt);
+                if (name.includes("en-GB") && !name.includes("Fragment")) {
+                    groups.engb.push(name);
+                } else if (name.includes("Local Master") && !name.includes("Fragment")) {
+                    groups.localMaster.push(name);
+                } else if ((name.includes("Site Local") || name.includes("Link")) && !name.includes("Fragment")) {
+                    groups.siteLocal.push(name);
+                } else if (name.includes("Fragment") && name.includes("en-GB")) {
+                    groups.fragmentEngb.push(name);
+                } else if (name.includes("Fragment") && name.includes("Local Master")) {
+                    groups.fragmentLocalMaster.push(name);
+                } else if (name.includes("Fragment") && name.includes("Site Local")) {
+                    groups.fragmentSiteLocal.push(name);
+                }
             });
+
+            // Helper function to add options with a divider
+            function addOptionsGroup(options, dividerText) {
+                if (options.length) {
+                    const divider = document.createElement("option");
+                    divider.disabled = true;
+                    divider.style.fontWeight = "bold";
+                    divider.style.backgroundColor = "#f0f0f0";
+                    divider.text = "──── " + dividerText + " ────";
+                    dl.appendChild(divider);
+
+                    options.forEach(name => {
+                        const opt = document.createElement("option");
+                        opt.value = name;
+                        dl.appendChild(opt);
+                    });
+                }
+            }
+
+            // Add each group with a divider
+            addOptionsGroup(groups.engb, "English GB Links");
+            addOptionsGroup(groups.localMaster, "Local Master Links");
+            addOptionsGroup(groups.siteLocal, "Site Local Links");
+            addOptionsGroup(groups.fragmentEngb, "Fragment English GB");
+            addOptionsGroup(groups.fragmentLocalMaster, "Fragment Local Master");
+            addOptionsGroup(groups.fragmentSiteLocal, "Fragment Site Local");
         }
         renderClassNameOptions();
+
+
         document.getElementById("deleteTypeTaskBtn").addEventListener("click", () => {
             if (!currentTask) return alert("No task selected!");
             if (!confirm(`Are you sure you want to delete type task "${currentTask}"? This will remove all its steps.`)) return;
@@ -1423,13 +1472,61 @@
             function updateDatalist() {
                 dl.innerHTML = "";
                 const usedTags = getUsedTagsExceptCurrentStep(stepIdx);
-                Object.keys(classMappings).forEach((tag) => {
-                    if (!usedTags.includes(tag) && !selectedTags.includes(tag)) {
-                        const opt = document.createElement("option");
-                        opt.value = tag;
-                        dl.appendChild(opt);
+
+                // Group the options by type
+                const groups = {
+                    engb: [],
+                    localMaster: [],
+                    siteLocal: [],
+                    fragmentEngb: [],
+                    fragmentLocalMaster: [],
+                    fragmentSiteLocal: []
+                };
+
+                // Sort available tags into groups
+                Object.keys(classMappings).forEach((name) => {
+                    if (usedTags.includes(name) || selectedTags.includes(name)) return;
+
+                    if (name.includes("en-GB") && !name.includes("Fragment")) {
+                        groups.engb.push(name);
+                    } else if (name.includes("Local Master") && !name.includes("Fragment")) {
+                        groups.localMaster.push(name);
+                    } else if ((name.includes("Site Local") || name.includes("Link")) && !name.includes("Fragment")) {
+                        groups.siteLocal.push(name);
+                    } else if (name.includes("Fragment") && name.includes("en-GB")) {
+                        groups.fragmentEngb.push(name);
+                    } else if (name.includes("Fragment") && name.includes("Local Master")) {
+                        groups.fragmentLocalMaster.push(name);
+                    } else if (name.includes("Fragment") && name.includes("Site Local")) {
+                        groups.fragmentSiteLocal.push(name);
                     }
                 });
+
+                // Helper function to add options with a divider
+                function addOptionsGroup(options, dividerText) {
+                    if (options.length) {
+                        const divider = document.createElement("option");
+                        // divider.disabled = true;
+                        divider.style.pointerEvents = "none";
+                        divider.style.fontWeight = "bold";
+                        divider.style.backgroundColor = "#f0f0f0";
+                        divider.text = "──── " + dividerText + " ────";
+                        dl.appendChild(divider);
+                        options.forEach(name => {
+                            const opt = document.createElement("option");
+                            opt.value = name;
+                            dl.appendChild(opt);
+                        });
+                    }
+                }
+
+                // Add each group with a divider
+                addOptionsGroup(groups.engb, "English GB Links");
+                addOptionsGroup(groups.localMaster, "Local Master Links");
+                addOptionsGroup(groups.siteLocal, "Site Local Links");
+                addOptionsGroup(groups.fragmentEngb, "Fragment English GB");
+                addOptionsGroup(groups.fragmentLocalMaster, "Fragment Local Master");
+                addOptionsGroup(groups.fragmentSiteLocal, "Fragment Site Local");
             }
 
             function renderTags() {
@@ -1499,13 +1596,60 @@
                 const usedTags = getUsedTagsExceptCurrentStep(idx);
 
                 dl.innerHTML = "";
-                Object.keys(classMappings).forEach((tag) => {
-                    if (!selectedTags.includes(tag) && !usedTags.includes(tag)) {
-                        const opt = document.createElement("option");
-                        opt.value = tag;
-                        dl.appendChild(opt);
+                // Group the options by type
+                const groups = {
+                    engb: [],
+                    localMaster: [],
+                    siteLocal: [],
+                    fragmentEngb: [],
+                    fragmentLocalMaster: [],
+                    fragmentSiteLocal: []
+                };
+
+                // Sort available tags into groups
+                Object.keys(classMappings).forEach((name) => {
+                    if (usedTags.includes(name) || selectedTags.includes(name)) return;
+
+                    if (name.includes("en-GB") && !name.includes("Fragment")) {
+                        groups.engb.push(name);
+                    } else if (name.includes("Local Master") && !name.includes("Fragment")) {
+                        groups.localMaster.push(name);
+                    } else if ((name.includes("Site Local") || name.includes("Link")) && !name.includes("Fragment")) {
+                        groups.siteLocal.push(name);
+                    } else if (name.includes("Fragment") && name.includes("en-GB")) {
+                        groups.fragmentEngb.push(name);
+                    } else if (name.includes("Fragment") && name.includes("Local Master")) {
+                        groups.fragmentLocalMaster.push(name);
+                    } else if (name.includes("Fragment") && name.includes("Site Local")) {
+                        groups.fragmentSiteLocal.push(name);
                     }
                 });
+
+                // Helper function to add options with a divider
+                function addOptionsGroup(options, dividerText) {
+                    if (options.length) {
+                        const divider = document.createElement("option");
+                        // divider.disabled = true;
+                        divider.style.pointerEvents = "none";
+                        divider.style.fontWeight = "bold";
+                        divider.style.backgroundColor = "#f0f0f0";
+                        divider.text = "──── " + dividerText + " ────";
+                        dl.appendChild(divider);
+                        options.forEach(name => {
+                            const opt = document.createElement("option");
+                            opt.value = name;
+                            dl.appendChild(opt);
+                        });
+                    }
+                }
+
+                // Add each group with a divider
+                addOptionsGroup(groups.engb, "English GB Links");
+                addOptionsGroup(groups.localMaster, "Local Master Links");
+                addOptionsGroup(groups.siteLocal, "Site Local Links");
+                addOptionsGroup(groups.fragmentEngb, "Fragment English GB");
+                addOptionsGroup(groups.fragmentLocalMaster, "Fragment Local Master");
+                addOptionsGroup(groups.fragmentSiteLocal, "Fragment Site Local")
             });
         }
 
