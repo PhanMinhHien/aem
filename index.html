@@ -2606,7 +2606,10 @@
 
         masterLanguageInput.addEventListener("change", () => {
             const val = masterLanguageInput.value.trim();
-            if (val && !selectedTags.includes(val)) {
+            // Check if the value exists in the select options
+            const isValidMasterCode = Array.from(selectElement.options).some(option => option.value === val);
+            
+            if (val && !selectedTags.includes(val) && isValidMasterCode) {
                 selectedTags.push(val);
                 const tag = createTag(val);
                 tagsContainer.insertBefore(tag, masterLanguageInput);
