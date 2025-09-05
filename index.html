@@ -2496,12 +2496,16 @@
 
         function loadSelectToDatalist() {
             datalistElement.innerHTML = '';
-            Array.from(selectElement.options).forEach(option => {
-                if (option.value && !selectedTags.includes(option.value)) {
-                    const newOption = document.createElement("option");
-                    newOption.value = option.value;
-                    datalistElement.appendChild(newOption);
-                }
+            // Convert options to array, filter and sort alphabetically
+            const sortedOptions = Array.from(selectElement.options)
+                .filter(option => option.value && !selectedTags.includes(option.value))
+                .sort((a, b) => a.value.localeCompare(b.value));
+            
+            // Add sorted options to datalist
+            sortedOptions.forEach(option => {
+                const newOption = document.createElement("option");
+                newOption.value = option.value;
+                datalistElement.appendChild(newOption);
             });
         }
 
