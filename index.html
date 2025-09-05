@@ -653,20 +653,27 @@
 <body>
     <div class="container">
         <div id="floatingMenu">
-            <button class="floating-btn" data-target="taskSection"><span class="icon">🛠️</span><span
-                    class="btn-label">Tasks</span></button>
-            <button class="floating-btn" data-target="languageSection"><span class="icon"> 🌐</span><span
-                    class="btn-label">Language & Link</span></button>
-            <button class="floating-btn" data-target="fixedMasterCodesContainer"><span class="icon">📌</span><span
-                    class="btn-label">Master code</span></button>
-            <button class="floating-btn" data-target="savedCustomInputs"><span class="icon">💾</span><span
-                    class="btn-label">Saved Links</span></button>
-            <button class="floating-btn" data-target="fragmentSection"><span class="icon">🧩</span><span
-                    class="btn-label">Fragments</span></button>
-            <button class="floating-btn" data-target="buttonsSection"><span class="icon">⚙️</span><span
-                    class="btn-label">Actions</span></button>
-            <button class="floating-btn" data-target="convertText"><span class="icon">🔤</span><span
-                    class="btn-label">Convert text</span></button>
+            <button class="floating-btn" data-target="taskSection">
+                <span class="icon">🛠️</span><span class="btn-label">Tasks</span>
+            </button>
+            <button class="floating-btn" data-target="languageSection">
+                <span class="icon"> 🌐</span><span class="btn-label">Language & Link</span>
+            </button>
+            <button class="floating-btn" data-target="fixedMasterCodesContainer">
+                <span class="icon">📌</span><span class="btn-label">Master code</span>
+            </button>
+            <button class="floating-btn" data-target="savedCustomInputs">
+                <span class="icon">💾</span><span class="btn-label">Saved Links</span>
+            </button>
+            <button class="floating-btn" data-target="fragmentSection">
+                <span class="icon">🧩</span><span class="btn-label">Fragments</span>
+            </button>
+            <button class="floating-btn" data-target="buttonsSection">
+                <span class="icon">⚙️</span><span class="btn-label">Actions</span>
+            </button>
+            <button class="floating-btn" data-target="convertText">
+                <span class="icon">🔤</span><span class="btn-label">Convert text</span>
+            </button>
         </div>
         <div id="floatingPanels">
             <div id="floatingMenuContainer">
@@ -746,8 +753,9 @@
                             <label for="linkTextarea">Auto add multiple links:</label>
                             <textarea id="linkTextarea" rows="10"
                                 placeholder="Paste multiple links here, each on a new line..."></textarea>
-                            <button id="startButton" style="margin-top: 20px" onclick="processLinks()">Start
-                                Processing</button>
+                            <button id="startButton" style="margin-top: 20px" onclick="processLinks()">
+                                Start Processing
+                            </button>
                         </div>
                     </div>
                     <div class="autoAddsttlinks">
@@ -756,10 +764,13 @@
                             <textarea id="statusTextarea" rows="10"
                                 placeholder="Paste status links here, each on a new line..."></textarea>
                             <div style="display: flex; gap: 10px; margin-top: 20px">
-                                <button id="startButton" style="flex: 1" onclick="syncStatusFromTextarea()">Start
-                                    Processing</button>
+                                <button id="startButton" style="flex: 1" onclick="syncStatusFromTextarea()">
+                                    Start Processing
+                                </button>
                                 <button id="clearStatusBtn" style="flex: 1; background-color: #e74c3c"
-                                    onclick="clearStatusData()">Clear Status</button>
+                                    onclick="clearStatusData()">
+                                    Clear Status
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -767,10 +778,12 @@
                         <label for="customInput">Custom Input:</label>
                         <input type="text" id="customInput" />
                     </div>
-                    <div class="check"><a
-                            href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB"
-                            target="_blank">Wrong URL?</a> | <a href="https://www.grundfos.com/components"
-                            target="_blank">Brand Components</a></div>
+                    <div class="check">
+                        <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB"
+                            target="_blank">Wrong URL?</a>
+                        |
+                        <a href="https://www.grundfos.com/components" target="_blank">Brand Components</a>
+                    </div>
                     <div id="searchContainer" style="display: none">
                         <div class="form-group">
                             <label for="searchInput">Search Language:</label>
@@ -779,7 +792,9 @@
                         </div>
                         <div id="masterLanguageInfo">Master Language:</div>
                         <div id="localLanguagesInfo">Local Languages:</div>
-                        <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
+                        <button id="applySearchButton" onclick="applySearchInput()">
+                            Apply Search
+                        </button>
                     </div>
 
                     <div class="autoTasks">
@@ -821,8 +836,14 @@
                                     <button onclick="openLinksLiveLocal()" class="btn-generate-batch">Open Live Site Local</button>
                                 </div> -->
                         </div>
-                        <div class="autoOpenLinksByClass"
-                            style="max-width: 700px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background: #f9f9f9">
+                        <div class="autoOpenLinksByClass" style="
+                  max-width: 700px;
+                  margin: 20px auto;
+                  padding: 20px;
+                  border: 1px solid #ccc;
+                  border-radius: 10px;
+                  background: #f9f9f9;
+                ">
                             <h3>Auto Open Links By Task</h3>
 
                             <!-- New TypeTask -->
@@ -831,7 +852,9 @@
                                 <div class="input-group" style="display: flex; gap: 10px">
                                     <input type="text" id="newTaskInput" placeholder="Enter task name..."
                                         style="flex: 1" />
-                                    <button type="button" id="addTypeTaskBtn" class="btn primary">Add TypeTask</button>
+                                    <button type="button" id="addTypeTaskBtn" class="btn primary">
+                                        Add TypeTask
+                                    </button>
                                 </div>
                             </div>
 
@@ -840,13 +863,19 @@
                                 <label for="taskTypeSelect"><b>Select Task:</b></label>
                                 <div class="input-group" style="display: flex; gap: 10px">
                                     <select id="taskTypeSelect" style="flex: 1"></select>
-                                    <button id="deleteTypeTaskBtn" class="btn danger">Delete Task</button>
+                                    <button id="deleteTypeTaskBtn" class="btn danger">
+                                        Delete Task
+                                    </button>
                                 </div>
                             </div>
 
                             <!-- Steps Container -->
-                            <div id="stepsContainer"
-                                style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px"></div>
+                            <div id="stepsContainer" style="
+                    margin-bottom: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                  "></div>
 
                             <!-- Batch size -->
                             <div class="form-group">
@@ -855,7 +884,9 @@
                                     <input type="number" id="classBatchSize" value="1" min="1" style="width: 80px" />
                                 </div>
                                 <!-- Auto Run Button -->
-                                <button id="runClassAutoBtn" class="btn primary full">Auto Run All</button>
+                                <button id="runClassAutoBtn" class="btn primary full">
+                                    Auto Run All
+                                </button>
                             </div>
                         </div>
                         <h3 style="text-align: left">Backup & Restore</h3>
@@ -869,21 +900,32 @@
                     <h2>Key Markets</h2>
                     <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
                     <h2>Country</h2>
-                    <div id="customMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+                    <div id="customMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
 
-                    <input list="masterLanguages" id="masterLanguageInput" name="masterLanguage">
-                    <datalist id="masterLanguages">
-                    </datalist>
+                    <input list="masterLanguages" id="masterLanguageInput" name="masterLanguage" />
+                    <datalist id="masterLanguages"> </datalist>
 
-                    <button id="addCustomMasterCode" style="margin-top: 20px;">Add Custom Master Code</button>
+                    <button id="addCustomMasterCode" style="margin-top: 20px">
+                        Add Custom Master Code
+                    </button>
                 </div>
 
                 <div class="floating-panel" id="savedCustomInputs">
                     <h2>Save Links (<span id="linkCount">0</span>)</h2>
                     <div id="radioContainer"></div>
-                    <button id="clearSavedLinksBtn" onclick="clearRadioSelections()"
-                        style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹
-                        Clear Saved Links</button>
+                    <button id="clearSavedLinksBtn" onclick="clearRadioSelections()" style="
+                margin-top: 15px;
+                background: #ffdddd;
+                border: 1px solid #ff9999;
+                padding: 6px 12px;
+                border-radius: 8px;
+                cursor: pointer;
+                color: red;
+                width: 100%;
+                font-weight: bold;
+              ">
+                        🧹 Clear Saved Links
+                    </button>
                 </div>
 
                 <div class="floating-panel" id="fragmentSection" class="hidden">
@@ -898,7 +940,9 @@
                     </div>
                     <div class="group-buttons">
                         <button id="clearFragments">Clear Saved Fragments</button>
-                        <button id="resetFragmentLinks">Reset Status Fragment Links</button>
+                        <button id="resetFragmentLinks">
+                            Reset Status Fragment Links
+                        </button>
                     </div>
                 </div>
                 <div class="floating-panel" id="buttonsSection">
@@ -907,8 +951,12 @@
                         <button id="generateAndSaveBtn">Generate & Save</button>
                         <button onclick="generateLinks()">Generate</button>
                         <button id="resetLinks">Reset Status Links</button>
-                        <button onclick="generateLanguageSuggestions()">Suggest Language Inputs</button>
-                        <button id="toggleSearchButton" onclick="toggleSearchInput()">Show Search Input</button>
+                        <button onclick="generateLanguageSuggestions()">
+                            Suggest Language Inputs
+                        </button>
+                        <button id="toggleSearchButton" onclick="toggleSearchInput()">
+                            Show Search Input
+                        </button>
                         <button id="openModalButton">Show Table</button>
                     </div>
                     <!-- <div id="buttons"></div> -->
@@ -1313,30 +1361,34 @@
             "Fragment Preview Site Local": ".fragment-preview-livesitelocal",
         };
 
-        document.getElementById("deleteTypeTaskBtn").addEventListener("click", () => {
-            if (!currentTask) return alert("No task selected!");
-            if (!confirm(`Are you sure you want to delete type task "${currentTask}"? This will remove all its steps.`)) return;
+        document
+            .getElementById("deleteTypeTaskBtn")
+            .addEventListener("click", () => {
+                if (!currentTask) return alert("No task selected!");
+                if (
+                    !confirm(
+                        `Are you sure you want to delete type task "${currentTask}"? This will remove all its steps.`
+                    )
+                )
+                    return;
 
-            delete typeTasks[currentTask];
+                delete typeTasks[currentTask];
 
-            const remainingTasks = Object.keys(typeTasks);
-            currentTask = remainingTasks[0] || null;
+                const remainingTasks = Object.keys(typeTasks);
+                currentTask = remainingTasks[0] || null;
 
-            refreshTaskSelect();
-            renderSteps();
-            saveStateToLocal();
-        });
-
-        // Tasks
+                refreshTaskSelect();
+                renderSteps();
+                saveStateToLocal();
+            });
         const typeTasks = {};
         let currentTask = null;
-
-        // Save / Restore localStorage
         function saveStateToLocal() {
             const data = {
                 typeTasks,
                 currentTask,
-                batchSize: parseInt(document.getElementById("classBatchSize").value, 10) || 1,
+                batchSize:
+                    parseInt(document.getElementById("classBatchSize").value, 10) || 1,
             };
             localStorage.setItem("classTaskState", JSON.stringify(data));
         }
@@ -1349,37 +1401,27 @@
             refreshTaskSelect();
             renderSteps();
         }
-        // Initialize default links and states
-        function initializeDefaultState() {
-            let savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
-            if (savedInputs.length === 0) {
-                // Add default about-us link
-                savedInputs = ["about-us"];
-                localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
-                localStorage.setItem("selectedInput", "about-us");
 
-                // Add to UI
-                const container = document.getElementById("radioContainer");
-                if (container) {
-                    addSavedInputToDOM("about-us", container, true);
-                    document.getElementById("savedCustomInputs").style.display = "block";
-                    document.getElementById("clearSavedLinksBtn").style.display = "block";
-                }
-                savedLinksCount = 1;
-                updateSavedLinksCount();
+        function initializeDefaultState() {
+            const savedInputs = JSON.parse(
+                localStorage.getItem("savedInputs") || "[]"
+            );
+            if (savedInputs.length === 0) {
+                clearRadioSelections();
             }
         }
 
         let availableClassNamesCache = [];
 
-        // Quét DOM xem mapping nào thực sự đang có element
         function scanAvailableClassNames() {
             const links = document.querySelector("#links");
             const fragments = document.querySelector("#fragmentContainer");
 
             const result = [];
             Object.entries(classMappings).forEach(([name, selector]) => {
-                const present = (links && links.querySelector(selector)) || (fragments && fragments.querySelector(selector));
+                const present =
+                    (links && links.querySelector(selector)) ||
+                    (fragments && fragments.querySelector(selector));
                 if (present) result.push(name);
             });
             return result;
@@ -1394,8 +1436,6 @@
         function renderClassNameOptions() {
             const dl = document.getElementById("classNameOptions");
             dl.innerHTML = "";
-
-            // Group the options by type
             const groups = {
                 engb: [],
                 localMaster: [],
@@ -1408,20 +1448,27 @@
             getAvailableClassNames().forEach((name) => {
                 if (name.includes("en-GB") && !name.includes("Fragment")) {
                     groups.engb.push(name);
-                } else if (name.includes("Local Master") && !name.includes("Fragment")) {
+                } else if (
+                    name.includes("Local Master") &&
+                    !name.includes("Fragment")
+                ) {
                     groups.localMaster.push(name);
-                } else if ((name.includes("Site Local") || name.includes("Link")) && !name.includes("Fragment")) {
+                } else if (
+                    (name.includes("Site Local") || name.includes("Link")) &&
+                    !name.includes("Fragment")
+                ) {
                     groups.siteLocal.push(name);
                 } else if (name.includes("Fragment") && name.includes("en-GB")) {
                     groups.fragmentEngb.push(name);
-                } else if (name.includes("Fragment") && name.includes("Local Master")) {
+                } else if (
+                    name.includes("Fragment") &&
+                    name.includes("Local Master")
+                ) {
                     groups.fragmentLocalMaster.push(name);
                 } else if (name.includes("Fragment") && name.includes("Site Local")) {
                     groups.fragmentSiteLocal.push(name);
                 }
             });
-
-            // Helper function to add options with a divider
             function addOptionsGroup(options, dividerText) {
                 if (options.length) {
                     const divider = document.createElement("option");
@@ -1438,8 +1485,6 @@
                     });
                 }
             }
-
-            // Add each group with a divider
             addOptionsGroup(groups.engb, "English GB Links");
             addOptionsGroup(groups.localMaster, "Local Master Links");
             addOptionsGroup(groups.siteLocal, "Site Local Links");
@@ -1470,7 +1515,10 @@
         }
 
         function observeLinkZones() {
-            const targets = [document.querySelector("#links"), document.querySelector("#fragmentContainer")].filter(Boolean);
+            const targets = [
+                document.querySelector("#links"),
+                document.querySelector("#fragmentContainer"),
+            ].filter(Boolean);
 
             if (!targets.length) return;
 
@@ -1489,20 +1537,20 @@
                 });
             });
         }
-
-        // Task type management
-        document.getElementById("addTypeTaskBtn").addEventListener("click", () => {
-            const input = document.getElementById("newTaskInput");
-            const name = input.value.trim();
-            if (!name) return alert("Enter type task name!");
-            if (typeTasks[name]) return alert("Type task already exists!");
-            typeTasks[name] = [];
-            currentTask = name;
-            input.value = "";
-            refreshTaskSelect();
-            renderSteps();
-            saveStateToLocal();
-        });
+        document
+            .getElementById("addTypeTaskBtn")
+            .addEventListener("click", () => {
+                const input = document.getElementById("newTaskInput");
+                const name = input.value.trim();
+                if (!name) return alert("Enter type task name!");
+                if (typeTasks[name]) return alert("Type task already exists!");
+                typeTasks[name] = [];
+                currentTask = name;
+                input.value = "";
+                refreshTaskSelect();
+                renderSteps();
+                saveStateToLocal();
+            });
         function refreshTaskSelect() {
             const select = document.getElementById("taskTypeSelect");
             select.innerHTML = "";
@@ -1514,13 +1562,13 @@
                 select.appendChild(opt);
             });
         }
-        document.getElementById("taskTypeSelect").addEventListener("change", (e) => {
-            currentTask = e.target.value;
-            renderSteps();
-            saveStateToLocal();
-        });
-
-        // Multi-tag input for step
+        document
+            .getElementById("taskTypeSelect")
+            .addEventListener("change", (e) => {
+                currentTask = e.target.value;
+                renderSteps();
+                saveStateToLocal();
+            });
         function createTagsInput(selectedTags, stepIdx) {
             const wrapper = document.createElement("div");
             wrapper.className = "tags-input";
@@ -1538,8 +1586,6 @@
             function updateDatalist() {
                 dl.innerHTML = "";
                 const usedTags = getUsedTagsExceptCurrentStep(stepIdx);
-
-                // Group the options by type
                 const groups = {
                     engb: [],
                     localMaster: [],
@@ -1556,24 +1602,34 @@
 
                     if (name.includes("en-GB") && !name.includes("Fragment")) {
                         groups.engb.push(name);
-                    } else if (name.includes("Local Master") && !name.includes("Fragment")) {
+                    } else if (
+                        name.includes("Local Master") &&
+                        !name.includes("Fragment")
+                    ) {
                         groups.localMaster.push(name);
-                    } else if ((name.includes("Site Local") || name.includes("Link")) && !name.includes("Fragment")) {
+                    } else if (
+                        (name.includes("Site Local") || name.includes("Link")) &&
+                        !name.includes("Fragment")
+                    ) {
                         groups.siteLocal.push(name);
                     } else if (name.includes("Fragment") && name.includes("en-GB")) {
                         groups.fragmentEngb.push(name);
-                    } else if (name.includes("Fragment") && name.includes("Local Master")) {
+                    } else if (
+                        name.includes("Fragment") &&
+                        name.includes("Local Master")
+                    ) {
                         groups.fragmentLocalMaster.push(name);
-                    } else if (name.includes("Fragment") && name.includes("Site Local")) {
+                    } else if (
+                        name.includes("Fragment") &&
+                        name.includes("Site Local")
+                    ) {
                         groups.fragmentSiteLocal.push(name);
                     }
                 });
-
-                // Helper function to add options with a divider
                 function addOptionsGroup(options, dividerText) {
                     if (options.length) {
                         const divider = document.createElement("option");
-                        // divider.disabled = true;
+
                         divider.style.pointerEvents = "none";
                         divider.style.fontWeight = "bold";
                         divider.style.backgroundColor = "#f0f0f0";
@@ -1586,8 +1642,6 @@
                         });
                     }
                 }
-
-                // Add each group with a divider
                 addOptionsGroup(groups.engb, "English GB Links");
                 addOptionsGroup(groups.localMaster, "Local Master Links");
                 addOptionsGroup(groups.siteLocal, "Site Local Links");
@@ -1625,7 +1679,11 @@
                     e.preventDefault();
                     const val = input.value.trim();
                     const usedTags = getUsedTagsExceptCurrentStep(stepIdx);
-                    if (classMappings[val] && !selectedTags.includes(val) && !usedTags.includes(val)) {
+                    if (
+                        classMappings[val] &&
+                        !selectedTags.includes(val) &&
+                        !usedTags.includes(val)
+                    ) {
                         selectedTags.push(val);
                         renderTags();
                         updateAllDatalists();
@@ -1638,7 +1696,11 @@
             input.addEventListener("change", () => {
                 const val = input.value.trim();
                 const usedTags = getUsedTagsExceptCurrentStep(stepIdx);
-                if (classMappings[val] && !selectedTags.includes(val) && !usedTags.includes(val)) {
+                if (
+                    classMappings[val] &&
+                    !selectedTags.includes(val) &&
+                    !usedTags.includes(val)
+                ) {
                     selectedTags.push(val);
                     renderTags();
                     updateAllDatalists();
@@ -1657,11 +1719,13 @@
                 const input = wrapper.querySelector("input");
                 if (!dl || !input) return;
 
-                const selectedTags = Array.from(wrapper.querySelectorAll(".tag")).map((tagEl) => tagEl.childNodes[0].nodeValue.trim());
+                const selectedTags = Array.from(wrapper.querySelectorAll(".tag")).map(
+                    (tagEl) => tagEl.childNodes[0].nodeValue.trim()
+                );
                 const usedTags = getUsedTagsExceptCurrentStep(idx);
 
                 dl.innerHTML = "";
-                // Group the options by type
+
                 const groups = {
                     engb: [],
                     localMaster: [],
@@ -1678,24 +1742,34 @@
 
                     if (name.includes("en-GB") && !name.includes("Fragment")) {
                         groups.engb.push(name);
-                    } else if (name.includes("Local Master") && !name.includes("Fragment")) {
+                    } else if (
+                        name.includes("Local Master") &&
+                        !name.includes("Fragment")
+                    ) {
                         groups.localMaster.push(name);
-                    } else if ((name.includes("Site Local") || name.includes("Link")) && !name.includes("Fragment")) {
+                    } else if (
+                        (name.includes("Site Local") || name.includes("Link")) &&
+                        !name.includes("Fragment")
+                    ) {
                         groups.siteLocal.push(name);
                     } else if (name.includes("Fragment") && name.includes("en-GB")) {
                         groups.fragmentEngb.push(name);
-                    } else if (name.includes("Fragment") && name.includes("Local Master")) {
+                    } else if (
+                        name.includes("Fragment") &&
+                        name.includes("Local Master")
+                    ) {
                         groups.fragmentLocalMaster.push(name);
-                    } else if (name.includes("Fragment") && name.includes("Site Local")) {
+                    } else if (
+                        name.includes("Fragment") &&
+                        name.includes("Site Local")
+                    ) {
                         groups.fragmentSiteLocal.push(name);
                     }
                 });
-
-                // Helper function to add options with a divider
                 function addOptionsGroup(options, dividerText) {
                     if (options.length) {
                         const divider = document.createElement("option");
-                        // divider.disabled = true;
+
                         divider.style.pointerEvents = "none";
                         divider.style.fontWeight = "bold";
                         divider.style.backgroundColor = "#f0f0f0";
@@ -1708,8 +1782,6 @@
                         });
                     }
                 }
-
-                // Add each group with a divider
                 addOptionsGroup(groups.engb, "English GB Links");
                 addOptionsGroup(groups.localMaster, "Local Master Links");
                 addOptionsGroup(groups.siteLocal, "Site Local Links");
@@ -1718,8 +1790,6 @@
                 addOptionsGroup(groups.fragmentSiteLocal, "Fragment Site Local");
             });
         }
-
-        // Render steps
         function renderSteps() {
             const container = document.getElementById("stepsContainer");
             container.innerHTML = "";
@@ -1736,21 +1806,15 @@
                 div.style.border = "1px solid #ccc";
                 div.style.borderRadius = "8px";
                 div.style.background = "#fff";
-
-                // Tags input full width
                 const tagsInput = createTagsInput(names, idx);
-                // tagsInput.style.width = "100%";
+
                 tagsInput.querySelector("input").style.appearance = "none";
                 tagsInput.querySelector("input").style.webkitAppearance = "none";
 
                 div.appendChild(tagsInput);
-
-                // Button group container (Run + Delete)
                 const btnGroup = document.createElement("div");
                 btnGroup.style.display = "flex";
                 btnGroup.style.gap = "10px";
-
-                // Run step button
                 const runBtn = document.createElement("button");
                 runBtn.textContent = `Run Step ${idx + 1}`;
                 runBtn.className = "btn primary";
@@ -1760,12 +1824,16 @@
                         .filter((el) => el.classList.contains("tag"))
                         .map((tagEl) => tagEl.childNodes[0].nodeValue.trim());
                     if (!currentTags.length) return alert("Step has no tags!");
-                    const batchSize = parseInt(document.getElementById("classBatchSize").value, 10) || 1;
+                    const batchSize =
+                        parseInt(document.getElementById("classBatchSize").value, 10) ||
+                        1;
 
                     await runStepWithBatch(currentTags, batchSize);
 
                     if (idx === typeTasks[currentTask].length - 1) {
-                        const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
+                        const radios = Array.from(
+                            document.querySelectorAll("#radioContainer input[type='radio']")
+                        );
                         const currentRadio = radios.find((r) => r.checked) || radios[0];
                         const nextIndex = radios.indexOf(currentRadio) + 1;
                         if (nextIndex < radios.length) {
@@ -1777,8 +1845,6 @@
                 };
 
                 btnGroup.appendChild(runBtn);
-
-                // Delete step button
                 const delBtn = document.createElement("button");
                 delBtn.textContent = "Delete Step";
                 delBtn.className = "btn danger";
@@ -1793,8 +1859,6 @@
                 div.appendChild(btnGroup);
                 container.appendChild(div);
             });
-
-            // Add step button full width
             const addBtn = document.createElement("button");
             addBtn.type = "button";
             addBtn.textContent = "+ Add Step";
@@ -1807,42 +1871,51 @@
             };
             container.appendChild(addBtn);
         }
+        document
+            .getElementById("runClassAutoBtn")
+            .addEventListener("click", async () => {
+                if (!currentTask) return alert("Please select a type task!");
+                const steps = typeTasks[currentTask];
+                const batchSize =
+                    parseInt(document.getElementById("classBatchSize").value, 10) || 1;
 
-        // Auto run all steps
-        document.getElementById("runClassAutoBtn").addEventListener("click", async () => {
-            if (!currentTask) return alert("Please select a type task!");
-            const steps = typeTasks[currentTask];
-            const batchSize = parseInt(document.getElementById("classBatchSize").value, 10) || 1;
+                for (let stepIndex = 0; stepIndex < steps.length; stepIndex++) {
+                    const tagsInputDiv = document
+                        .querySelectorAll("#stepsContainer .step")
+                    [stepIndex].querySelector(".tags-input");
+                    const currentTags = Array.from(tagsInputDiv.children)
+                        .filter((el) => el.classList.contains("tag"))
+                        .map((tagEl) => tagEl.childNodes[0].nodeValue.trim());
 
-            for (let stepIndex = 0; stepIndex < steps.length; stepIndex++) {
-                const tagsInputDiv = document.querySelectorAll("#stepsContainer .step")[stepIndex].querySelector(".tags-input");
-                const currentTags = Array.from(tagsInputDiv.children)
-                    .filter((el) => el.classList.contains("tag"))
-                    .map((tagEl) => tagEl.childNodes[0].nodeValue.trim());
-
-                if (currentTags.length > 0) {
-                    await runStepWithBatch(currentTags, batchSize);
+                    if (currentTags.length > 0) {
+                        await runStepWithBatch(currentTags, batchSize);
+                    }
                 }
-            }
 
-            const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
-            const currentRadio = radios.find((r) => r.checked) || radios[0];
-            const nextIndex = radios.indexOf(currentRadio) + 1;
-            if (nextIndex < radios.length) {
-                radios[nextIndex].checked = true;
-                updateCustomInput(radios[nextIndex]);
-                updateSavedLinksCount();
-            }
-        });
+                const radios = Array.from(
+                    document.querySelectorAll("#radioContainer input[type='radio']")
+                );
+                const currentRadio = radios.find((r) => r.checked) || radios[0];
+                const nextIndex = radios.indexOf(currentRadio) + 1;
+                if (nextIndex < radios.length) {
+                    radios[nextIndex].checked = true;
+                    updateCustomInput(radios[nextIndex]);
+                    updateSavedLinksCount();
+                }
+            });
 
         function getUsedTagsExceptCurrentStep(currentStepIdx) {
             if (!currentTask) return [];
-            return typeTasks[currentTask].filter((_, idx) => idx !== currentStepIdx).flat();
+            return typeTasks[currentTask]
+                .filter((_, idx) => idx !== currentStepIdx)
+                .flat();
         }
 
         function runStepWithBatch(stepTags, batchSize = 1) {
             return new Promise((resolve) => {
-                const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
+                const radios = Array.from(
+                    document.querySelectorAll("#radioContainer input[type='radio']")
+                );
                 if (!radios.length) return resolve();
 
                 let currentRadioIdx = radios.findIndex((r) => r.checked);
@@ -1863,7 +1936,9 @@
                         const sel = classMappings[tag];
                         if (!sel) return;
 
-                        const elements = document.querySelectorAll(`#links ${sel}, #fragmentContainer ${sel}`);
+                        const elements = document.querySelectorAll(
+                            `#links ${sel}, #fragmentContainer ${sel}`
+                        );
 
                         elements.forEach((a) => {
                             if (a.href) {
@@ -1883,61 +1958,69 @@
             });
         }
 
-        document.getElementById("exportTasksBtn").addEventListener("click", () => {
-            const data = {
-                typeTasks,
-                currentTask,
-                batchSize: parseInt(document.getElementById("classBatchSize").value, 10) || 1,
-            };
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-            const url = URL.createObjectURL(blob);
+        document
+            .getElementById("exportTasksBtn")
+            .addEventListener("click", () => {
+                const data = {
+                    typeTasks,
+                    currentTask,
+                    batchSize:
+                        parseInt(document.getElementById("classBatchSize").value, 10) ||
+                        1,
+                };
+                const blob = new Blob([JSON.stringify(data, null, 2)], {
+                    type: "application/json",
+                });
+                const url = URL.createObjectURL(blob);
 
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "tasks.json";
-            a.click();
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "tasks.json";
+                a.click();
 
-            URL.revokeObjectURL(url);
-        });
-        document.getElementById("importTasksBtn").addEventListener("click", () => {
-            document.getElementById("importTasksFile").click();
-        });
+                URL.revokeObjectURL(url);
+            });
+        document
+            .getElementById("importTasksBtn")
+            .addEventListener("click", () => {
+                document.getElementById("importTasksFile").click();
+            });
 
-        document.getElementById("importTasksFile").addEventListener("change", (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
+        document
+            .getElementById("importTasksFile")
+            .addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                try {
-                    const data = JSON.parse(event.target.result);
-                    if (!data.typeTasks || typeof data.typeTasks !== "object") {
-                        return alert("Invalid file format!");
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (!data.typeTasks || typeof data.typeTasks !== "object") {
+                            return alert("Invalid file format!");
+                        }
+                        Object.keys(typeTasks).forEach((key) => delete typeTasks[key]);
+                        Object.assign(typeTasks, data.typeTasks);
+                        currentTask =
+                            data.currentTask || Object.keys(typeTasks)[0] || null;
+                        document.getElementById("classBatchSize").value =
+                            data.batchSize || 1;
+
+                        refreshTaskSelect();
+                        renderSteps();
+                        saveStateToLocal();
+
+                        alert("Tasks imported successfully!");
+                    } catch (err) {
+                        console.error(err);
+                        alert("Error reading JSON file!");
                     }
-
-                    // Overwrite existing state
-                    Object.keys(typeTasks).forEach((key) => delete typeTasks[key]); // clear
-                    Object.assign(typeTasks, data.typeTasks);
-                    currentTask = data.currentTask || Object.keys(typeTasks)[0] || null;
-                    document.getElementById("classBatchSize").value = data.batchSize || 1;
-
-                    refreshTaskSelect();
-                    renderSteps();
-                    saveStateToLocal();
-
-                    alert("Tasks imported successfully!");
-                } catch (err) {
-                    console.error(err);
-                    alert("Error reading JSON file!");
-                }
-            };
-            reader.readAsText(file);
-        });
-
-        // Save batch size when changed
-        document.getElementById("classBatchSize").addEventListener("change", saveStateToLocal);
-
-        // Function to clear status data from localStorage and textarea
+                };
+                reader.readAsText(file);
+            });
+        document
+            .getElementById("classBatchSize")
+            .addEventListener("change", saveStateToLocal);
         function clearStatusData() {
             if (!confirm("Are you sure you want to clear all status data?")) return;
 
@@ -1946,12 +2029,26 @@
             document.getElementById("statusTextarea").value = "";
             alert("Status data cleared successfully!");
         }
-
-        // Object mapping master languages to their corresponding local language codes
-        // For example: en-GB maps to various English variations used in different countries
         const localLanguages = {
-            // English (Global) - Used as master for multiple English variants
-            "en-GB": ["en-GB", "ie/en", "gb/en", "my/en", "hk/en", "id/en", "ph/en", "in/en", "sg/en", "gh/en", "eg/en", "al/en", "sa/en", "ke/en", "ae/en", "za/en", "www/en"],
+            "en-GB": [
+                "en-GB",
+                "ie/en",
+                "gb/en",
+                "my/en",
+                "hk/en",
+                "id/en",
+                "ph/en",
+                "in/en",
+                "sg/en",
+                "gh/en",
+                "eg/en",
+                "al/en",
+                "sa/en",
+                "ke/en",
+                "ae/en",
+                "za/en",
+                "www/en",
+            ],
             "bs-BS": ["ba/bs"],
             "bg-BG": ["bg/bg"],
             "hr-HR": ["hr/hr"],
@@ -2064,8 +2161,12 @@
          */
         function syncStatusFromTextarea() {
             const textarea = document.getElementById("statusTextarea");
-            const statusLines = textarea.value.split("\n").map((line) => line.trim());
-            const radios = document.querySelectorAll("#radioContainer input[type='radio']");
+            const statusLines = textarea.value
+                .split("\n")
+                .map((line) => line.trim());
+            const radios = document.querySelectorAll(
+                "#radioContainer input[type='radio']"
+            );
             const savedStatuses = {};
             const linesToSaveBack = [];
 
@@ -2108,219 +2209,26 @@
         }
 
         function updateStatusTextareaRawFromSaved() {
-            const savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
-            const savedStatuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
+            const savedInputs = JSON.parse(
+                localStorage.getItem("savedInputs") || "[]"
+            );
+            const savedStatuses = JSON.parse(
+                localStorage.getItem("savedStatuses") || "{}"
+            );
 
-            const lines = savedInputs.map((input) => `${input}: ${savedStatuses[input] || ""}`);
+            const lines = savedInputs.map(
+                (input) => `${input}: ${savedStatuses[input] || ""}`
+            );
             const rawText = lines.join("\n");
 
             localStorage.setItem("statusTextareaRaw", rawText);
             document.getElementById("statusTextarea").value = rawText;
         }
-
-        // const TaskHandlers = {
-        //     autoRunStatusBatch(batchSize = 1, statusToRun = "None", linkClass = ".siteliveEngbMaster") {
-        //         let processed = 0;
-        //         const processedRadios = new Set();
-
-        //         function waitForLinksAndProcess(radio, onDone) {
-        //             const maxAttempts = 10;
-        //             let attempts = 0;
-
-        //             function checkLinks() {
-        //                 const selectors = Array.isArray(linkClass) ? linkClass : [linkClass];
-        //                 const links = document.querySelectorAll("#links " + selectors.join(", #links "));
-        //                 if (links.length > 0 || attempts >= maxAttempts) {
-        //                     const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
-
-        //                     if (links.length > 0) {
-        //                         statuses[radio.value] = statusToRun === "None" ? "Already has a page" : "Processed";
-        //                         localStorage.setItem("savedStatuses", JSON.stringify(statuses));
-
-        //                         links.forEach((link) => window.open(link.href, "_blank"));
-        //                         updateStatusTextareaRawFromSaved();
-        //                     }
-
-        //                     onDone(links);
-        //                 } else {
-        //                     attempts++;
-        //                     setTimeout(checkLinks, 300);
-        //                 }
-        //             }
-
-        //             checkLinks();
-        //         }
-
-        //         function processNext() {
-        //             if (processed >= batchSize) {
-        //                 updateSavedLinksCount();
-        //                 updateStatusTextareaRawFromSaved();
-        //                 return;
-        //             }
-
-        //             const statuses = JSON.parse(localStorage.getItem("savedStatuses") || "{}");
-        //             const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
-
-        //             const nextRadio = radios.find((radio) => statuses[radio.value] === statusToRun && !processedRadios.has(radio.value));
-
-        //             if (!nextRadio) {
-        //                 updateSavedLinksCount();
-        //                 updateStatusTextareaRawFromSaved();
-        //                 return;
-        //             }
-
-        //             nextRadio.checked = true;
-        //             updateCustomInput(nextRadio);
-        //             processedRadios.add(nextRadio.value);
-
-        //             waitForLinksAndProcess(nextRadio, (links) => {
-        //                 if (links.length > 0) processed++;
-        //                 processNext();
-        //             });
-        //         }
-
-        //         processNext();
-        //     },
-
-        //     openLinksLiveLocal() {
-        //         const links = document.querySelectorAll("a.liveSiteLocal");
-        //         links.forEach((link) => {
-        //             window.open(link.href, "_blank");
-        //         });
-        //     },
-
-        //     toggleState: 0, // 0 = Master, 1 = Publish
-        //     async runSingleRadio() {
-        //         const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-        //         const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
-        //         if (!currentRadio) {
-        //             alert("No radio is selected.");
-        //             return;
-        //         }
-        //         const currentRadioIndex = Array.from(radios).indexOf(currentRadio);
-        //         const btn = document.getElementById("toggleOpenLinksBtn");
-
-        //         setTimeout(async () => {
-        //             if (TaskHandlers.toggleState === 0) {
-        //                 const editMaster = document.querySelectorAll("#links .editlocalMaster, #links .rolloutlocalMaster");
-        //                 await TaskHandlers.openLinks(editMaster);
-        //                 TaskHandlers.toggleState = 1;
-        //                 btn.textContent = "Run Publish";
-        //             } else {
-        //                 const publishLinks = document.querySelectorAll("#links a.pulishSiteLocal");
-        //                 await TaskHandlers.openLinks(publishLinks);
-        //                 TaskHandlers.toggleState = 0;
-        //                 btn.textContent = "Run Master";
-        //                 if (currentRadioIndex + 1 < radios.length) {
-        //                     radios[currentRadioIndex + 1].checked = true;
-        //                     updateCustomInput(radios[currentRadioIndex + 1]);
-        //                     updateSavedLinksCount();
-        //                 }
-        //             }
-        //         }, 200);
-        //     },
-
-        //     openLinks(links) {
-        //         return new Promise((resolve) => {
-        //             links.forEach((a, index) => {
-        //                 setTimeout(() => {
-        //                     window.open(a.href, "_blank");
-        //                     if (index === links.length - 1) resolve();
-        //                 }, index * 200);
-        //             });
-        //         });
-        //     },
-
-        //     generateAndOpenBatch(batchSize) {
-        //         const radios = document.querySelectorAll("#radioContainer input[type='radio']");
-        //         const delay = 500;
-        //         let processed = 0;
-        //         const currentRadio = document.querySelector("#radioContainer input[type='radio']:checked");
-        //         if (!currentRadio) return;
-
-        //         let currentRadioIndex = Array.from(radios).indexOf(currentRadio);
-
-        //         function processNext() {
-        //             if (currentRadioIndex >= radios.length || processed >= batchSize) {
-        //                 radios[currentRadioIndex].checked = true;
-        //                 updateCustomInput(radios[currentRadioIndex]);
-        //                 return;
-        //             }
-
-        //             radios[currentRadioIndex].checked = true;
-        //             updateCustomInput(radios[currentRadioIndex]);
-
-        //             setTimeout(() => {
-        //                 document.querySelectorAll("#links .sitelivelocalMaster").forEach((a) => {
-        //                     window.open(a.href, "_blank");
-        //                 });
-        //                 processed++;
-        //                 currentRadioIndex++;
-        //                 processNext();
-        //                 updateSavedLinksCount();
-        //             }, delay);
-        //         }
-        //         processNext();
-        //     },
-        // };
-
-        // function runAutoTask(type, options = {}) {
-        //     switch (type) {
-        //         case "noneBatch":
-        //             TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "None", [".siteliveEngbMaster", ".rolloutlocalMaster"]);
-        //             break;
-        //         case "alreadyBatch":
-        //             // TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".publish", ".editMaster", ".liveSiteLink"]);
-        //             TaskHandlers.autoRunStatusBatch(options.batchSize || 1, "Already has a page", [".pulishSiteLocal", ".liveSiteLink"]);
-
-        //             break;
-        //         case "toggle":
-        //             TaskHandlers.runSingleRadio();
-        //             break;
-        //         case "batch":
-        //             TaskHandlers.generateAndOpenBatch(options.batchSize || 1);
-        //             break;
-        //         case "local":
-        //             TaskHandlers.openLinksLiveLocal();
-        //             break;
-        //         default:
-        //             console.warn("Unknown task:", type);
-        //     }
-        // }
-
-        // window.addEventListener("DOMContentLoaded", () => {
-        //     restoreStatusTextareaRaw();
-
-        //     document.getElementById("noneBatchRunBtn").addEventListener("click", () => {
-        //         runAutoTask("noneBatch", {
-        //             batchSize: parseInt(document.getElementById("noneBatchSizeInput").value, 10),
-        //         });
-        //     });
-
-        //     document.getElementById("alreadyBatchRunBtn").addEventListener("click", () => {
-        //         runAutoTask("alreadyBatch", {
-        //             batchSize: parseInt(document.getElementById("alreadyBatchSizeInput").value, 10),
-        //         });
-        //     });
-
-        //     document.getElementById("toggleOpenLinksBtn").addEventListener("click", () => {
-        //         runAutoTask("toggle");
-        //     });
-
-        //     document.getElementById("autoGenerateBtn").addEventListener("click", () => {
-        //         runAutoTask("batch", {
-        //             batchSize: parseInt(document.getElementById("batchSizeInput").value, 10),
-        //         });
-        //     });
-
-        //     document.querySelector("button[onclick='openLinksLiveLocal()']").addEventListener("click", (e) => {
-        //         e.preventDefault();
-        //         runAutoTask("local");
-        //     });
-        // });
-
         function processLinks() {
-            let links = document.getElementById("linkTextarea").value.trim().split("\n");
+            let links = document
+                .getElementById("linkTextarea")
+                .value.trim()
+                .split("\n");
             if (links.length > 0) {
                 let index = 0;
                 function autoFillAndSubmit() {
@@ -2346,7 +2254,9 @@
                 alert("Please paste at least one link!");
             }
         }
-        const autoTaskCheckbox = document.querySelector('input[name="condition"][value="autoTask"]');
+        const autoTaskCheckbox = document.querySelector(
+            'input[name="condition"][value="autoTask"]'
+        );
         const autoTasks = document.querySelector(".autoTasks");
         function toggleAutoTaskButtons() {
             if (!autoTaskCheckbox || !autoTasks) return;
@@ -2354,23 +2264,34 @@
         }
         autoTaskCheckbox.addEventListener("change", toggleAutoTaskButtons);
         window.addEventListener("load", toggleAutoTaskButtons);
-        const autoAddlinksCheckbox = document.querySelector('input[name="condition"][value="autoAddLinks"]');
+        const autoAddlinksCheckbox = document.querySelector(
+            'input[name="condition"][value="autoAddLinks"]'
+        );
         const autoAddlinks = document.querySelector(".autoAddlinks");
         function toggleAutoAddLinkButtons() {
             if (!autoAddlinksCheckbox || !autoAddlinks) return;
-            autoAddlinks.style.display = autoAddlinksCheckbox.checked ? "block" : "none";
+            autoAddlinks.style.display = autoAddlinksCheckbox.checked
+                ? "block"
+                : "none";
         }
         autoAddlinksCheckbox.addEventListener("change", toggleAutoAddLinkButtons);
 
         window.addEventListener("load", toggleAutoAddLinkButtons);
 
-        const autoAddSttlinksCheckbox = document.querySelector('input[name="condition"][value="autoAddSttLinks"]');
+        const autoAddSttlinksCheckbox = document.querySelector(
+            'input[name="condition"][value="autoAddSttLinks"]'
+        );
         const autoAddSttlinks = document.querySelector(".autoAddsttlinks");
         function toggleAutoAddSttLinkButtons() {
             if (!autoAddSttlinksCheckbox || !autoAddSttlinks) return;
-            autoAddSttlinks.style.display = autoAddSttlinksCheckbox.checked ? "block" : "none";
+            autoAddSttlinks.style.display = autoAddSttlinksCheckbox.checked
+                ? "block"
+                : "none";
         }
-        autoAddSttlinksCheckbox.addEventListener("change", toggleAutoAddSttLinkButtons);
+        autoAddSttlinksCheckbox.addEventListener(
+            "change",
+            toggleAutoAddSttLinkButtons
+        );
 
         window.addEventListener("load", toggleAutoAddSttLinkButtons);
 
@@ -2382,7 +2303,10 @@
                     panel.classList.toggle("show");
                     savePanelShowState(targetId, panel.classList.contains("show"));
                     updateActiveButtons();
-                    if (targetId === "savedCustomInputs" && panel.classList.contains("show")) {
+                    if (
+                        targetId === "savedCustomInputs" &&
+                        panel.classList.contains("show")
+                    ) {
                         loadSavedInputsFromStorage();
                     }
                 }
@@ -2400,12 +2324,16 @@
             });
         }
         function savePanelShowState(panelId, isShown) {
-            let panelsState = JSON.parse(localStorage.getItem("panelsShowState") || "{}");
+            let panelsState = JSON.parse(
+                localStorage.getItem("panelsShowState") || "{}"
+            );
             panelsState[panelId] = isShown;
             localStorage.setItem("panelsShowState", JSON.stringify(panelsState));
         }
         window.addEventListener("DOMContentLoaded", () => {
-            const panelsState = JSON.parse(localStorage.getItem("panelsShowState") || "{}");
+            const panelsState = JSON.parse(
+                localStorage.getItem("panelsShowState") || "{}"
+            );
             for (const [panelId, isShown] of Object.entries(panelsState)) {
                 const panel = document.getElementById(panelId);
                 if (panel) {
@@ -2418,20 +2346,32 @@
             }
             updateActiveButtons();
         });
-        document.getElementById("generateAndSaveBtn").addEventListener("click", async function () {
-            const customInput = document.getElementById("customInput").value.trim();
-            if (!customInput) return;
-            await generateLinks();
-            processAndAddCustomInput();
-            const container = document.getElementById("radioContainer");
-        });
+        document
+            .getElementById("generateAndSaveBtn")
+            .addEventListener("click", async function () {
+                const customInput = document
+                    .getElementById("customInput")
+                    .value.trim();
+                if (!customInput) return;
+                await generateLinks();
+                processAndAddCustomInput();
+                const container = document.getElementById("radioContainer");
+            });
         function saveSelectedInput(input) {
             localStorage.setItem("selectedInput", input);
         }
         function getSelectedInput() {
             return localStorage.getItem("selectedInput") || "";
         }
-        const fixedMasterCodes = ["zh-CN", "da-DK", "fr-FR", "de-DE", "hu-HU", "es-ES", "sr-RS"];
+        const fixedMasterCodes = [
+            "zh-CN",
+            "da-DK",
+            "fr-FR",
+            "de-DE",
+            "hu-HU",
+            "es-ES",
+            "sr-RS",
+        ];
         const fixedContainer = document.getElementById("fixedMasterCodes");
         fixedMasterCodes.forEach((code) => {
             const button = document.createElement("button");
@@ -2459,11 +2399,14 @@
 
         const selectElement = document.getElementById("masterLanguage");
         const datalistElement = document.getElementById("masterLanguages");
-        const addCustomMasterCodeButton = document.getElementById("addCustomMasterCode");
-        const customMasterCodesContainer = document.getElementById("customMasterCodes");
-        const masterLanguageInput = document.getElementById("masterLanguageInput");
-
-        // Create tags input container
+        const addCustomMasterCodeButton = document.getElementById(
+            "addCustomMasterCode"
+        );
+        const customMasterCodesContainer =
+            document.getElementById("customMasterCodes");
+        const masterLanguageInput = document.getElementById(
+            "masterLanguageInput"
+        );
         const tagsContainer = document.createElement("div");
         tagsContainer.className = "tags-input";
         tagsContainer.style.display = "flex";
@@ -2474,9 +2417,10 @@
         tagsContainer.style.borderRadius = "4px";
         tagsContainer.style.marginTop = "20px";
         tagsContainer.style.alignItems = "center";
-        masterLanguageInput.parentNode.insertBefore(tagsContainer, masterLanguageInput);
-
-        // Style the input
+        masterLanguageInput.parentNode.insertBefore(
+            tagsContainer,
+            masterLanguageInput
+        );
         masterLanguageInput.style.appearance = "none";
         masterLanguageInput.style.webkitAppearance = "none";
         masterLanguageInput.style.border = "none";
@@ -2484,37 +2428,29 @@
         masterLanguageInput.style.minWidth = "60px";
         masterLanguageInput.style.flexGrow = "1";
         masterLanguageInput.style.padding = "4px";
-        
-        // Move input to tags container
         tagsContainer.appendChild(masterLanguageInput);
 
-        let selectedTags = JSON.parse(localStorage.getItem('selectedTags') || '[]');
+        let selectedTags = JSON.parse(
+            localStorage.getItem("selectedTags") || "[]"
+        );
 
         function saveSelectedTags() {
-            localStorage.setItem('selectedTags', JSON.stringify(selectedTags));
+            localStorage.setItem("selectedTags", JSON.stringify(selectedTags));
         }
 
         function loadSelectToDatalist() {
-            datalistElement.innerHTML = '';
-            // Convert options to array, filter and sort alphabetically
-            const sortedOptions = Array.from(selectElement.options)
-                .filter(option => option.value && !selectedTags.includes(option.value))
-                .sort((a, b) => a.value.localeCompare(b.value));
-            
-            // Add sorted options to datalist
-            sortedOptions.forEach(option => {
-                const newOption = document.createElement("option");
-                newOption.value = option.value;
-                datalistElement.appendChild(newOption);
+            datalistElement.innerHTML = "";
+            Array.from(selectElement.options).forEach((option) => {
+                if (option.value && !selectedTags.includes(option.value)) {
+                    const newOption = document.createElement("option");
+                    newOption.value = option.value;
+                    datalistElement.appendChild(newOption);
+                }
             });
         }
-
-        // Initialize tags from localStorage
-        selectedTags.forEach(code => {
+        selectedTags.forEach((code) => {
             const tag = createTag(code);
             tagsContainer.insertBefore(tag, masterLanguageInput);
-            
-            // Create and add corresponding button
             const button = document.createElement("button");
             button.textContent = code;
             button.style.backgroundColor = "#fff";
@@ -2524,16 +2460,15 @@
             button.style.borderRadius = "5px";
             button.style.cursor = "pointer";
             button.onclick = function () {
-                // Reset all buttons style first
-                Array.from(customMasterCodesContainer.children).forEach(btn => {
+                Array.from(customMasterCodesContainer.children).forEach((btn) => {
                     btn.style.backgroundColor = "#fff";
                     btn.style.color = "#007bff";
                 });
-                
+
                 document.getElementById("masterLanguage").value = code;
                 updateLocalLanguages();
             };
-            
+
             button.onmouseover = function () {
                 if (document.getElementById("masterLanguage").value !== code) {
                     button.style.backgroundColor = "#007bff";
@@ -2578,24 +2513,21 @@
                     tag.remove();
                     loadSelectToDatalist();
                     saveSelectedTags();
-                    
-                    // Select previous tag if exists, otherwise select the first available tag
                     if (selectedTags.length > 0) {
                         const prevTag = selectedTags[idx - 1] || selectedTags[0];
-                        
-                        // Find the previous button
-                        const prevButton = Array.from(customMasterCodesContainer.children)
-                            .find(btn => btn.textContent === prevTag);
-                            
+                        const prevButton = Array.from(
+                            customMasterCodesContainer.children
+                        ).find((btn) => btn.textContent === prevTag);
+
                         if (prevButton) {
-                            // Simulate clicking the button to handle all updates
                             prevButton.click();
                         }
                     }
                 }
-                // Remove corresponding button from customMasterCodesContainer
-                const button = Array.from(customMasterCodesContainer.children)
-                    .find(btn => btn.textContent === code);
+
+                const button = Array.from(customMasterCodesContainer.children).find(
+                    (btn) => btn.textContent === code
+                );
                 if (button) button.remove();
             };
 
@@ -2606,22 +2538,15 @@
 
         masterLanguageInput.addEventListener("change", () => {
             const val = masterLanguageInput.value.trim();
-            // Check if the value exists in the select options
-            const isValidMasterCode = Array.from(selectElement.options).some(option => option.value === val);
-            
-            if (val && !selectedTags.includes(val) && isValidMasterCode) {
+            if (val && !selectedTags.includes(val)) {
                 selectedTags.push(val);
                 const tag = createTag(val);
                 tagsContainer.insertBefore(tag, masterLanguageInput);
                 masterLanguageInput.value = "";
                 loadSelectToDatalist();
                 saveSelectedTags();
-                
-                // Select the newly added tag
                 document.getElementById("masterLanguage").value = val;
                 updateLocalLanguages();
-
-                // Create and add button (existing functionality)
                 const button = document.createElement("button");
                 button.textContent = val;
                 button.style.backgroundColor = "#fff";
@@ -2632,12 +2557,11 @@
                 button.style.cursor = "pointer";
 
                 button.onclick = function () {
-                    // Reset all buttons to default style
-                    Array.from(customMasterCodesContainer.children).forEach(btn => {
+                    Array.from(customMasterCodesContainer.children).forEach((btn) => {
                         btn.style.backgroundColor = "#fff";
                         btn.style.color = "#007bff";
                     });
-                    
+
                     document.getElementById("masterLanguage").value = val;
                     updateLocalLanguages();
                 };
@@ -2661,16 +2585,13 @@
         });
 
         let savedLinksCount = 0;
-        // function updateSavedLinksCount() {
-        //     const linkCountElement = document.getElementById("linkCount");
-        //     linkCountElement.textContent = savedLinksCount;
-        // }
         function getSelectedInput() {
             return localStorage.getItem("selectedInput") || "";
         }
         function updateSavedLinksCount() {
             const linkCountElement = document.getElementById("linkCount");
-            const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            const savedInputs =
+                JSON.parse(localStorage.getItem("savedInputs")) || [];
             const selectedInput = getSelectedInput();
             const checkedIndex = savedInputs.indexOf(selectedInput);
             const checkedPosition = checkedIndex !== -1 ? checkedIndex + 1 : 0;
@@ -2680,8 +2601,6 @@
             const RadioSelections = document.getElementById("savedCustomInputs");
             const container = document.getElementById("radioContainer");
             const clearBtn = document.getElementById("clearSavedLinksBtn");
-
-            // Reset to default about-us
             const defaultInput = "about-us";
             if (container) {
                 container.innerHTML = "";
@@ -2697,8 +2616,6 @@
             updateSavedLinksCount();
 
             if (typeof links !== "undefined") links.innerHTML = "";
-
-            // Generate links for default about-us
             document.getElementById("customInput").value = defaultInput;
             generateLinks();
         };
@@ -2716,10 +2633,7 @@
                 return;
             }
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
-
-            // Check if this is the first custom input being added
             if (savedInputs.length === 1 && savedInputs[0] === "about-us") {
-                // Remove the default "about-us" link
                 savedInputs = [];
             }
 
@@ -2733,13 +2647,13 @@
                     alert("Cannot find container to save radio input.");
                     return;
                 }
-
-                // Clear the container before adding new radio buttons
                 container.innerHTML = "";
-
-                // Add all radio buttons, with the new one checked
                 savedInputs.forEach((savedInput, index) => {
-                    addSavedInputToDOM(savedInput, container, index === savedInputs.length - 1);
+                    addSavedInputToDOM(
+                        savedInput,
+                        container,
+                        index === savedInputs.length - 1
+                    );
                 });
 
                 savedLinksCount = savedInputs.length;
@@ -2750,7 +2664,10 @@
                 if (clearBtn) clearBtn.style.display = "block";
                 showOnlyDeleteButtonFor(input);
                 const savedBox = document.getElementById("savedCustomInputs");
-                if (savedBox && (savedBox.style.display === "none" || savedBox.style.display === "")) {
+                if (
+                    savedBox &&
+                    (savedBox.style.display === "none" || savedBox.style.display === "")
+                ) {
                     savedBox.style.display = "block";
                 }
             }
@@ -2807,7 +2724,8 @@
             container.appendChild(div);
             const allDivs = container.querySelectorAll("div");
             allDivs.forEach((el, index) => {
-                el.style.paddingBottom = index === allDivs.length - 1 ? "0px" : "10px";
+                el.style.paddingBottom =
+                    index === allDivs.length - 1 ? "0px" : "10px";
             });
         }
         /**
@@ -2821,7 +2739,9 @@
             const container = document.getElementById("radioContainer");
             if (!container) return;
             container.innerHTML = "";
-            let savedInputs = JSON.parse(localStorage.getItem("savedInputs") || "[]");
+            let savedInputs = JSON.parse(
+                localStorage.getItem("savedInputs") || "[]"
+            );
             if (savedInputs.length === 0) {
                 container.innerHTML = "<p>No saved inputs found.</p>";
                 return;
@@ -2871,18 +2791,50 @@
                 const radio = div.querySelector('input[type="radio"]');
                 const btn = div.querySelector(".delete-btn");
                 if (radio && btn) {
-                    btn.style.display = radio.value === selectedValue && radio.checked ? "inline" : "none";
+                    btn.style.display =
+                        radio.value === selectedValue && radio.checked
+                            ? "inline"
+                            : "none";
                 }
             });
         }
         window.deleteSavedInput = function (value) {
+            if (
+                value === "about-us" &&
+                JSON.parse(localStorage.getItem("savedInputs") || "[]").length === 1
+            ) {
+                alert("Cannot delete the default 'about-us' link!");
+                return;
+            }
+
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             const indexToRemove = savedInputs.indexOf(value);
             const isCurrentSelected = getSelectedInput() === value;
+            if (savedInputs.length === 1 && value !== "about-us") {
+                const defaultInput = "about-us";
+                savedInputs = [defaultInput];
+                localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
+                localStorage.setItem("selectedInput", defaultInput);
+
+                const container = document.getElementById("radioContainer");
+                container.innerHTML = "";
+                addSavedInputToDOM(defaultInput, container, true);
+
+                document.getElementById("customInput").value = defaultInput;
+                document.getElementById("masterLanguage").disabled = false;
+                document.getElementById("clearSavedLinksBtn").style.display = "block";
+                document.getElementById("links").innerHTML = "";
+
+                savedLinksCount = 1;
+                updateSavedLinksCount();
+                generateLinks();
+                return;
+            }
             savedInputs = savedInputs.filter((input) => input !== value);
             localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
             const container = document.getElementById("radioContainer");
             container.innerHTML = "";
+
             let newSelectedInput = getSelectedInput();
             if (isCurrentSelected) {
                 if (savedInputs.length > 0) {
@@ -2894,12 +2846,14 @@
                     localStorage.removeItem("selectedInput");
                 }
             }
+
             savedLinksCount--;
             updateSavedLinksCount();
             savedInputs.forEach((input) => {
                 const isChecked = input === newSelectedInput;
                 addSavedInputToDOM(input, container, isChecked);
             });
+
             if (savedInputs.length === 0) {
                 container.style.display = "none";
                 document.getElementById("clearSavedLinksBtn").style.display = "none";
@@ -2914,7 +2868,8 @@
             }
         };
         window.onload = function () {
-            const savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
+            const savedInputs =
+                JSON.parse(localStorage.getItem("savedInputs")) || [];
             savedLinksCount = savedInputs.length;
             updateSavedLinksCount();
             const selected = getSelectedInput();
@@ -2944,17 +2899,27 @@
         function generateLinksFromInput(input) {
             return input.split("?")[0];
         }
-        document.getElementById("customInput").addEventListener("input", function () {
-            let inputValue = this.value;
-            if (inputValue.startsWith("/")) {
-                inputValue = inputValue.substring(1);
-            }
-            const baseUrls = ["https://author-grundfos-prod-65.adobecqms.net/", "https://www.grundfos.com/", "https://product-selection.grundfos.com/"];
-            const customUrl = "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
-            let isValid = baseUrls.some((url) => inputValue.startsWith(url));
-            let finalUrl = isValid || inputValue.startsWith(customUrl) ? inputValue : customUrl + inputValue;
-            console.log("Final URL:", finalUrl);
-        });
+        document
+            .getElementById("customInput")
+            .addEventListener("input", function () {
+                let inputValue = this.value;
+                if (inputValue.startsWith("/")) {
+                    inputValue = inputValue.substring(1);
+                }
+                const baseUrls = [
+                    "https://author-grundfos-prod-65.adobecqms.net/",
+                    "https://www.grundfos.com/",
+                    "https://product-selection.grundfos.com/",
+                ];
+                const customUrl =
+                    "https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB/";
+                let isValid = baseUrls.some((url) => inputValue.startsWith(url));
+                let finalUrl =
+                    isValid || inputValue.startsWith(customUrl)
+                        ? inputValue
+                        : customUrl + inputValue;
+                console.log("Final URL:", finalUrl);
+            });
         const openModalButton = document.getElementById("openModalButton");
         const modal = document.getElementById("modal");
         const closeModalButton = document.getElementById("closeModalButton");
@@ -2981,38 +2946,54 @@
             }
         }
         function handleInputSearch() {
-            const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
-            document.getElementById("masterLanguageInfo").textContent = "Master Language: ";
-            document.getElementById("localLanguagesInfo").textContent = "Local Languages: ";
+            const searchInput = document
+                .getElementById("searchInput")
+                .value.toUpperCase()
+                .trim();
+            document.getElementById("masterLanguageInfo").textContent =
+                "Master Language: ";
+            document.getElementById("localLanguagesInfo").textContent =
+                "Local Languages: ";
             if (languageMapping[searchInput]) {
                 const localLang = languageMapping[searchInput][0];
                 let found = false;
                 for (const masterLang in localLanguages) {
                     if (localLanguages[masterLang].includes(localLang)) {
-                        document.getElementById("masterLanguageInfo").textContent = "Master Language: " + masterLang;
-                        document.getElementById("localLanguagesInfo").textContent = "Local Languages: " + localLang;
+                        document.getElementById("masterLanguageInfo").textContent =
+                            "Master Language: " + masterLang;
+                        document.getElementById("localLanguagesInfo").textContent =
+                            "Local Languages: " + localLang;
                         found = true;
                         break;
                     }
                 }
                 if (!found) {
-                    document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
-                    document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+                    document.getElementById("masterLanguageInfo").textContent =
+                        "Master Language: Not Found";
+                    document.getElementById("localLanguagesInfo").textContent =
+                        "Local Languages: Not Found";
                 }
             } else {
-                document.getElementById("masterLanguageInfo").textContent = "Master Language: Not Found";
-                document.getElementById("localLanguagesInfo").textContent = "Local Languages: Not Found";
+                document.getElementById("masterLanguageInfo").textContent =
+                    "Master Language: Not Found";
+                document.getElementById("localLanguagesInfo").textContent =
+                    "Local Languages: Not Found";
             }
         }
         function applySearchInput() {
-            const searchInput = document.getElementById("searchInput").value.toUpperCase().trim();
+            const searchInput = document
+                .getElementById("searchInput")
+                .value.toUpperCase()
+                .trim();
             const customInput = document.getElementById("customInput").value.trim();
             if (!customInput) {
                 alert("Please enter data into the customInput before proceeding.");
                 return;
             }
             if (!searchInput) {
-                alert("Please enter data into the Search Language before proceeding.");
+                alert(
+                    "Please enter data into the Search Language before proceeding."
+                );
                 return;
             }
             if (languageMapping[searchInput]) {
@@ -3029,7 +3010,9 @@
                             }
                         }
                         updateLocalLanguages1(localLanguages[masterLang]);
-                        const localCheckboxToSelect = document.querySelector(`#localLanguages input[type="checkbox"][value="${localLang}"]`);
+                        const localCheckboxToSelect = document.querySelector(
+                            `#localLanguages input[type="checkbox"][value="${localLang}"]`
+                        );
                         if (localCheckboxToSelect) {
                             localCheckboxToSelect.checked = true;
                         }
@@ -3041,13 +3024,17 @@
                 if (!found) {
                     document.getElementById("masterLanguage").selectedIndex = 0;
                     document.getElementById("localLanguages").innerHTML = "";
-                    const localCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+                    const localCheckboxes = document.querySelectorAll(
+                        '#localLanguages input[type="checkbox"]'
+                    );
                     localCheckboxes.forEach((checkbox) => (checkbox.checked = false));
                 }
             } else {
                 document.getElementById("masterLanguage").selectedIndex = 0;
                 document.getElementById("localLanguages").innerHTML = "";
-                const localCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+                const localCheckboxes = document.querySelectorAll(
+                    '#localLanguages input[type="checkbox"]'
+                );
                 localCheckboxes.forEach((checkbox) => (checkbox.checked = false));
             }
         }
@@ -3071,9 +3058,12 @@
                 alert("Please provide a valid URL.");
                 return;
             }
-            const languagePattern = /https:\/\/(?:www|product-selection)\.grundfos\.com\/([a-z]{2})\//;
-            const languageMastersPattern = /.*?\/content\/grundfos\/language-masters\/([a-z]{2}-[A-Z]{2})/;
-            const nonLanguageMastersPattern = /.*?\/content\/grundfos\/([a-z]{2})\/([a-z]{2})\//;
+            const languagePattern =
+                /https:\/\/(?:www|product-selection)\.grundfos\.com\/([a-z]{2})\//;
+            const languageMastersPattern =
+                /.*?\/content\/grundfos\/language-masters\/([a-z]{2}-[A-Z]{2})/;
+            const nonLanguageMastersPattern =
+                /.*?\/content\/grundfos\/([a-z]{2})\/([a-z]{2})\//;
             let languageCode = null;
             const matchLanguage = inputURL.match(languagePattern);
             if (matchLanguage) {
@@ -3087,7 +3077,9 @@
                     return;
                 }
             } else {
-                const matchNonLanguageMasters = inputURL.match(nonLanguageMastersPattern);
+                const matchNonLanguageMasters = inputURL.match(
+                    nonLanguageMastersPattern
+                );
                 if (matchNonLanguageMasters) {
                     const countryCode = matchNonLanguageMasters[1];
                     const languageCodeSuffix = matchNonLanguageMasters[2];
@@ -3112,12 +3104,16 @@
             let matchedLocals = [];
             let fullMatchFound = false;
             for (const [master, locals] of Object.entries(localLanguages)) {
-                const localMatches = locals.filter((local) => local.startsWith(languageCode + "/"));
+                const localMatches = locals.filter((local) =>
+                    local.startsWith(languageCode + "/")
+                );
                 if (localMatches.length > 0) {
                     matchedLocals = matchedLocals.concat(localMatches);
                 }
             }
-            let prioritizedLocals = matchedLocals.filter((local) => local === `${languageCode}/${languageCode}`);
+            let prioritizedLocals = matchedLocals.filter(
+                (local) => local === `${languageCode}/${languageCode}`
+            );
             if (prioritizedLocals.length === 0) {
                 prioritizedLocals = matchedLocals.sort((a, b) => {
                     if (a.includes("/nl") && !b.includes("/nl")) return -1;
@@ -3173,7 +3169,8 @@
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
-                    const savedStates = JSON.parse(localStorage.getItem("checkboxStates")) || [];
+                    const savedStates =
+                        JSON.parse(localStorage.getItem("checkboxStates")) || [];
                     const savedState = savedStates.find((state) => state.id === code);
                     if (savedState) {
                         checkbox.checked = savedState.checked;
@@ -3204,7 +3201,8 @@
                     localLanguagesDiv.appendChild(checkbox);
                     localLanguagesDiv.appendChild(label);
                     localLanguagesDiv.appendChild(document.createElement("br"));
-                    const savedStates = JSON.parse(localStorage.getItem("checkboxStates")) || [];
+                    const savedStates =
+                        JSON.parse(localStorage.getItem("checkboxStates")) || [];
                     const savedState = savedStates.find((state) => state.id === code);
                     if (savedState) {
                         checkbox.checked = savedState.checked;
@@ -3215,7 +3213,9 @@
             applyDisabledStyles();
         }
         function applyDisabledStyles() {
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+            const checkboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]'
+            );
             checkboxes.forEach((checkbox) => {
                 const label = checkbox.nextElementSibling;
                 if (checkbox.disabled) {
@@ -3228,7 +3228,9 @@
             });
         }
         function handleLocalLanguageChange() {
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+            const checkboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]'
+            );
             const firstCheckbox = checkboxes[0];
             const checkboxStates = Array.from(checkboxes).map((checkbox) => ({
                 id: checkbox.id,
@@ -3251,16 +3253,25 @@
                 });
             }
             applyDisabledStyles();
-            const selectedLocalLanguages = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map((checkbox) => checkbox.value);
+            const selectedLocalLanguages = Array.from(
+                document.querySelectorAll(
+                    '#localLanguages input[type="checkbox"]:checked'
+                )
+            ).map((checkbox) => checkbox.value);
             currentLocalLanguages = selectedLocalLanguages;
             generateLinksForCondition3();
             generateLinks();
         }
         function initializeCheckboxes() {
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
-            const savedStates = JSON.parse(localStorage.getItem("checkboxStates")) || [];
+            const checkboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]'
+            );
+            const savedStates =
+                JSON.parse(localStorage.getItem("checkboxStates")) || [];
             checkboxes.forEach((checkbox) => {
-                const savedState = savedStates.find((state) => state.id === checkbox.id);
+                const savedState = savedStates.find(
+                    (state) => state.id === checkbox.id
+                );
                 if (savedState) {
                     checkbox.checked = savedState.checked;
                     checkbox.disabled = savedState.disabled;
@@ -3280,10 +3291,12 @@
         function removeDuplicateLinks(linksDiv) {
             const linkElements = linksDiv.querySelectorAll("p a");
             const seenURLs = new Set();
-            const paragraphs = Array.from(linksDiv.getElementsByTagName("p")).sort((a, b) => {
-                const textA = a.textContent.trim().toLowerCase();
-                const textB = b.textContent.trim().toLowerCase();
-            });
+            const paragraphs = Array.from(linksDiv.getElementsByTagName("p")).sort(
+                (a, b) => {
+                    const textA = a.textContent.trim().toLowerCase();
+                    const textB = b.textContent.trim().toLowerCase();
+                }
+            );
             paragraphs.forEach((p) => linksDiv.appendChild(p));
             linkElements.forEach((linkElement) => {
                 const url = linkElement.href.trim();
@@ -3304,9 +3317,15 @@
             const linksDiv = document.getElementById("links");
             const fragmentContainer = document.getElementById("fragmentContainer");
 
-            const conditions = Array.from(document.querySelectorAll('input[name="condition"]:checked')).map((cb) => cb.value);
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
-            const localLanguagesChecked = Array.from(checkboxes).map((cb) => cb.value);
+            const conditions = Array.from(
+                document.querySelectorAll('input[name="condition"]:checked')
+            ).map((cb) => cb.value);
+            const checkboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]:checked'
+            );
+            const localLanguagesChecked = Array.from(checkboxes).map(
+                (cb) => cb.value
+            );
             linksDiv.innerHTML = "";
             if (!conditions.includes("radio3")) {
                 fragmentContainer.innerHTML = "";
@@ -3319,16 +3338,23 @@
             conditions.forEach((condition) => {
                 switch (condition) {
                     case "radio1":
-                        generateLinksForCondition1(masterLanguage, localLanguagesChecked, result, linksDiv);
+                        generateLinksForCondition1(
+                            masterLanguage,
+                            localLanguagesChecked,
+                            result,
+                            linksDiv
+                        );
                         break;
-                    // case "radio2":
-                    //     generateLinksForCondition2(masterLanguage, localLanguagesChecked, result, linksDiv);
-                    //     break;
                     case "radio3":
                         generateLinksForCondition3();
                         break;
                     case "radio4":
-                        generateLinksForCondition4(masterLanguage, localLanguagesChecked, fragmentInput, linksDiv);
+                        generateLinksForCondition4(
+                            masterLanguage,
+                            localLanguagesChecked,
+                            fragmentInput,
+                            linksDiv
+                        );
                         break;
                 }
             });
@@ -3353,7 +3379,9 @@
             if (lmIndex !== -1) {
                 let path = url.substring(lmIndex + "language-masters/".length);
                 const firstSlashIndex = path.indexOf("/");
-                return firstSlashIndex !== -1 ? path.substring(firstSlashIndex + 1) : path;
+                return firstSlashIndex !== -1
+                    ? path.substring(firstSlashIndex + 1)
+                    : path;
             }
             const grundfosMatch = url.match(/^.*grundfos\/([^/]+\/[^/]+\/.*)/);
             if (grundfosMatch) {
@@ -3373,7 +3401,8 @@
                 }
                 return path;
             }
-            const domainPattern = /https:\/\/(www|product-selection)\.grundfos\.com\/([a-z]{2})\//;
+            const domainPattern =
+                /https:\/\/(www|product-selection)\.grundfos\.com\/([a-z]{2})\//;
             const match = url.match(domainPattern);
             if (match) {
                 const regionCode = match[2];
@@ -3384,9 +3413,17 @@
                 }
                 return path;
             }
-            let baseIndex = url.indexOf("www.grundfos.com/") !== -1 ? url.indexOf("www.grundfos.com/") : url.indexOf("product-selection.grundfos.com/");
+            let baseIndex =
+                url.indexOf("www.grundfos.com/") !== -1
+                    ? url.indexOf("www.grundfos.com/")
+                    : url.indexOf("product-selection.grundfos.com/");
             if (baseIndex !== -1) {
-                let path = url.substring(baseIndex + (url.indexOf("www.grundfos.com/") !== -1 ? "www.grundfos.com/".length : "product-selection.grundfos.com/".length));
+                let path = url.substring(
+                    baseIndex +
+                    (url.indexOf("www.grundfos.com/") !== -1
+                        ? "www.grundfos.com/".length
+                        : "product-selection.grundfos.com/".length)
+                );
                 if (url.includes("product-selection.grundfos.com/")) {
                     path = "products/" + path;
                 }
@@ -3405,7 +3442,14 @@
             if (path.startsWith("/")) path = path.slice(1);
             return path;
         }
-        function generateAdditionalLinks(masterLanguage, localLanguage, customInput, localLanguages, liveSiteLanguage, linksDiv) {
+        function generateAdditionalLinks(
+            masterLanguage,
+            localLanguage,
+            customInput,
+            localLanguages,
+            liveSiteLanguage,
+            linksDiv
+        ) {
             let linksHTML = "";
             let result = "";
             let baseUrl = customInput;
@@ -3462,11 +3506,16 @@
                 },
             ];
             const linkMapping = {
-                "products/industries": "https://www.grundfos.com/solutions/industries",
-                "products/applications": "https://product-selection.grundfos.com/applications",
-                "products/categories": "https://product-selection.grundfos.com/categories",
-                "products/pumped-liquid-guide": "https://product-selection.grundfos.com/pumped-liquid-guide",
-                "products/products": "https://product-selection.grundfos.com/products",
+                "products/industries":
+                    "https://www.grundfos.com/solutions/industries",
+                "products/applications":
+                    "https://product-selection.grundfos.com/applications",
+                "products/categories":
+                    "https://product-selection.grundfos.com/categories",
+                "products/pumped-liquid-guide":
+                    "https://product-selection.grundfos.com/pumped-liquid-guide",
+                "products/products":
+                    "https://product-selection.grundfos.com/products",
                 products: "https://product-selection.grundfos.com/",
                 "solutions/learn": "https://www.grundfos.com/solutions/learn",
                 support: "https://www.grundfos.com/solutions/support",
@@ -3478,24 +3527,39 @@
                 return;
             }
             let linkBase = baseUrl;
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
-            const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
+            const checkboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]:checked'
+            );
+            const localLanguagesChecked = Array.from(checkboxes).map(
+                (checkbox) => checkbox.value
+            );
             if (!Array.isArray(localLanguagesChecked)) {
                 localLanguagesChecked = [];
             }
             const localLanguagesList = localLanguages[masterLanguage] || [];
             if (localLanguagesChecked.includes(masterLanguage)) {
-                const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
+                const remainingLanguages = localLanguagesList.filter(
+                    (lang) => lang !== masterLanguage
+                );
                 let masterLanguageExists = false;
                 let localLanguageExists = false;
                 linksDiv.querySelectorAll("p").forEach((p) => {
-                    if (p.querySelector("strong") && p.querySelector("strong").textContent.includes(`Master Language Selected (${masterLanguage})`)) {
+                    if (
+                        p.querySelector("strong") &&
+                        p
+                            .querySelector("strong")
+                            .textContent.includes(
+                                `Master Language Selected (${masterLanguage})`
+                            )
+                    ) {
                         masterLanguageExists = true;
                     }
                 });
                 if (!masterLanguageExists) {
                     if (remainingLanguages.length > 0) {
-                        linksHTML += `<p><br><br><strong>Master Language Selected (${masterLanguage}):</strong> ${remainingLanguages.join(", ")}</p>`;
+                        linksHTML += `<p><br><br><strong>Master Language Selected (${masterLanguage}):</strong> ${remainingLanguages.join(
+                            ", "
+                        )}</p>`;
                     } else {
                         linksHTML += `<p><strong>Master Language Selected (${masterLanguage}):</strong> No additional locales available to display.</p>`;
                     }
@@ -3506,7 +3570,12 @@
                     const localLinkDisabledLocal = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${linkBase}?wcmmode=disabled`;
                     const localpublishLinks = `https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}${linkBase}`;
                     linksDiv.querySelectorAll("p").forEach((p) => {
-                        if (p.querySelector("strong") && p.querySelector("strong").textContent.includes(`Local Language (${language})`)) {
+                        if (
+                            p.querySelector("strong") &&
+                            p
+                                .querySelector("strong")
+                                .textContent.includes(`Local Language (${language})`)
+                        ) {
                             localLanguageExists = true;
                         }
                     });
@@ -3514,11 +3583,17 @@
                         linksHTML += `<p><strong>Local Language (${language}):</strong></p>`;
                     }
                     if (language === "www/en") {
-                        let liveSiteLink = `https://www.grundfos.com/${baseUrl}`.replace(/\/{2,}/g, "/");
+                        let liveSiteLink = `https://www.grundfos.com/${baseUrl}`.replace(
+                            /\/{2,}/g,
+                            "/"
+                        );
                         let modifiedLinkBase = linkBase;
                         replacements.forEach((replacement) => {
                             if (modifiedLinkBase.includes(replacement.old)) {
-                                modifiedLinkBase = modifiedLinkBase.replace(replacement.old, replacement.new);
+                                modifiedLinkBase = modifiedLinkBase.replace(
+                                    replacement.old,
+                                    replacement.new
+                                );
                             }
                         });
                         linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
@@ -3528,7 +3603,10 @@
                         const originalLinkBase = linkBase;
                         let finalLink = null;
                         for (let key in linkMapping) {
-                            if (linkMapping.hasOwnProperty(key) && originalLinkBase.includes(key)) {
+                            if (
+                                linkMapping.hasOwnProperty(key) &&
+                                originalLinkBase.includes(key)
+                            ) {
                                 finalLink = originalLinkBase.replace(key, linkMapping[key]);
                                 break;
                             }
@@ -3541,7 +3619,8 @@
                         let modifiedLinkBase = linkBase;
                         const localePrefix = language.split("/")[0];
                         const localeSuffix = language.split("/")[1];
-                        const liveLink = `https://www.grundfos.com/${language.split("/")[0]}/${baseUrl}`;
+                        const liveLink = `https://www.grundfos.com/${language.split("/")[0]
+                            }/${baseUrl}`;
                         let newLink = `https://www.grundfos.com/${baseUrl}`;
                         if (["ch/fr", "be/fr", "ca/fr"].includes(language)) {
                             newLink = `https://www.grundfos.com/${language}/${baseUrl}`;
@@ -3551,10 +3630,20 @@
                         if (newLink.includes("/products")) {
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/")) {
-                                newLink = originalLink.replace("https://www.grundfos.com/", "https://product-selection.grundfos.com/").replace("/products", "");
+                                newLink = originalLink
+                                    .replace(
+                                        "https://www.grundfos.com/",
+                                        "https://product-selection.grundfos.com/"
+                                    )
+                                    .replace("/products", "");
                             }
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
-                                newLink = originalLink.replace("https://www.grundfos.com/cn/", "https://product-selection.grundfos.cn/").replace("/products", "");
+                                newLink = originalLink
+                                    .replace(
+                                        "https://www.grundfos.com/cn/",
+                                        "https://product-selection.grundfos.cn/"
+                                    )
+                                    .replace("/products", "");
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
@@ -3566,7 +3655,10 @@
                         } else if (newLink.includes("solutions/learn")) {
                             newLink = newLink.replace("solutions/learn", "learn");
                             let updatedLinkBase = linkBase;
-                            updatedLinkBase = updatedLinkBase.replace("solutions/learn", "learn");
+                            updatedLinkBase = updatedLinkBase.replace(
+                                "solutions/learn",
+                                "learn"
+                            );
                             linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}" class="editSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}" class="pulishSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}</a></p>
@@ -3575,7 +3667,12 @@
                         } else {
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
-                                newLink = originalLink.replace("https://www.grundfos.com/cn/", "Https://www.grundfos.cn/").replace("/products", "");
+                                newLink = originalLink
+                                    .replace(
+                                        "https://www.grundfos.com/cn/",
+                                        "Https://www.grundfos.cn/"
+                                    )
+                                    .replace("/products", "");
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
@@ -3589,13 +3686,28 @@
                 });
             } else if (localLanguagesChecked.length > 0) {
                 let addedSelectedLanguages = false;
-                const selectedLanguagesCount = Array.from(linksDiv.querySelectorAll("p")).filter((p) => p.innerHTML.includes("Selected Local Languages:")).length;
+                const selectedLanguagesCount = Array.from(
+                    linksDiv.querySelectorAll("p")
+                ).filter((p) =>
+                    p.innerHTML.includes("Selected Local Languages:")
+                ).length;
                 if (selectedLanguagesCount === 0) {
-                    const selectedLanguagesText = `<p><strong><br><br>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
+                    const selectedLanguagesText = `<p><strong><br><br>Selected Local Languages:</strong> ${localLanguagesChecked.join(
+                        ", "
+                    )}</p>`;
                     linksHTML += selectedLanguagesText;
                 }
                 linksDiv.querySelectorAll("p").forEach((p) => {
-                    if (p.querySelector("strong") && p.querySelector("strong").textContent.includes(`Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}`)) {
+                    if (
+                        p.querySelector("strong") &&
+                        p
+                            .querySelector("strong")
+                            .textContent.includes(
+                                `Selected Local Languages:</strong> ${localLanguagesChecked.join(
+                                    ", "
+                                )}`
+                            )
+                    ) {
                         localLanguageExists = true;
                     }
                 });
@@ -3606,7 +3718,14 @@
                     const localLinkDisabledLocal = `https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${selectedLocalLanguage}/${linkBase}?wcmmode=disabled`;
                     let localLanguageExists = false;
                     linksDiv.querySelectorAll("p").forEach((p) => {
-                        if (p.querySelector("strong") && p.querySelector("strong").textContent.includes(`Local Language (${selectedLocalLanguage})`)) {
+                        if (
+                            p.querySelector("strong") &&
+                            p
+                                .querySelector("strong")
+                                .textContent.includes(
+                                    `Local Language (${selectedLocalLanguage})`
+                                )
+                        ) {
                             localLanguageExists = true;
                         }
                     });
@@ -3614,12 +3733,18 @@
                         linksHTML += `<p><strong>Local Language (${selectedLocalLanguage}):</strong></p>`;
                     }
                     if (selectedLocalLanguage === "www/en") {
-                        let liveSiteLink = `https://www.grundfos.com/${baseUrl}`.replace(/\/{2,}/g, "/");
+                        let liveSiteLink = `https://www.grundfos.com/${baseUrl}`.replace(
+                            /\/{2,}/g,
+                            "/"
+                        );
                         let updatedLinkBase = linkBase;
                         let modifiedLinkBase = updatedLinkBase;
                         replacements.forEach((replacement) => {
                             if (modifiedLinkBase.includes(replacement.old)) {
-                                modifiedLinkBase = modifiedLinkBase.replace(replacement.old, replacement.new);
+                                modifiedLinkBase = modifiedLinkBase.replace(
+                                    replacement.old,
+                                    replacement.new
+                                );
                             }
                         });
                         linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
@@ -3629,7 +3754,10 @@
                         const originalLinkBase = linkBase;
                         let finalLink = null;
                         for (let key in linkMapping) {
-                            if (linkMapping.hasOwnProperty(key) && originalLinkBase.includes(key)) {
+                            if (
+                                linkMapping.hasOwnProperty(key) &&
+                                originalLinkBase.includes(key)
+                            ) {
                                 finalLink = originalLinkBase.replace(key, linkMapping[key]);
                                 break;
                             }
@@ -3645,7 +3773,8 @@
                         linksHTML += `<p>Preview: <a href="${localLinkDisabledLocal}" class="previewSiteLocal" target="_blank">${localLinkDisabledLocal}</a></p>`;
                         const localePrefix = selectedLocalLanguage.split("/")[0];
                         const localeSuffix = selectedLocalLanguage.split("/")[1];
-                        const liveLink = `https://www.grundfos.com/${selectedLocalLanguage.split("/")[0]}/${baseUrl}`;
+                        const liveLink = `https://www.grundfos.com/${selectedLocalLanguage.split("/")[0]
+                            }/${baseUrl}`;
                         let newLink = `https://www.grundfos.com/${baseUrl}`;
                         if (["ch/fr", "be/fr", "ca/fr"].includes(selectedLocalLanguage)) {
                             newLink = `https://www.grundfos.com/${selectedLocalLanguage}/${baseUrl}`;
@@ -3655,10 +3784,20 @@
                         if (newLink.includes("/products")) {
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/")) {
-                                newLink = originalLink.replace("https://www.grundfos.com/", "https://product-selection.grundfos.com/").replace("/products", "");
+                                newLink = originalLink
+                                    .replace(
+                                        "https://www.grundfos.com/",
+                                        "https://product-selection.grundfos.com/"
+                                    )
+                                    .replace("/products", "");
                             }
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
-                                newLink = originalLink.replace("https://www.grundfos.com/cn/", "https://product-selection.grundfos.cn/").replace("/products", "");
+                                newLink = originalLink
+                                    .replace(
+                                        "https://www.grundfos.com/cn/",
+                                        "https://product-selection.grundfos.cn/"
+                                    )
+                                    .replace("/products", "");
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
@@ -3669,7 +3808,10 @@
                         } else {
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
-                                newLink = originalLink.replace("https://www.grundfos.com/cn/", "https://www.grundfos.cn/");
+                                newLink = originalLink.replace(
+                                    "https://www.grundfos.com/cn/",
+                                    "https://www.grundfos.cn/"
+                                );
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
@@ -3682,7 +3824,12 @@
             }
             return linksHTML;
         }
-        function generateLinksForCondition1(masterLanguage, localLanguagesChecked, customInput, linksDiv) {
+        function generateLinksForCondition1(
+            masterLanguage,
+            localLanguagesChecked,
+            customInput,
+            linksDiv
+        ) {
             const uniqueLinks = new Set();
             const uniqueTexts = new Set();
             let PartLinkExists = false;
@@ -3746,10 +3893,6 @@
                         linksHTML += `<p><strong>Editor (en_GB)</strong>: <a href="${editorLinkMaster}" class="editliveEngbMaster" target="_blank">${editorLinkMaster}</a></p>`;
                         uniqueLinks.add(editorLinkMaster);
                     }
-                    // if (!uniqueLinks.has(Rollout)) {
-                    //     linksHTML += `<p><strong>Rollout (en_GB)</strong>: <a href="${Rollout}" class="rolloutlocalMaster"  target="_blank">${Rollout}</a></p>`;
-                    //     uniqueLinks.add(Rollout);
-                    // }
                     if (!uniqueLinks.has(previewLinkMaster)) {
                         linksHTML += `<p><strong>Preview (en_GB)</strong>: <a href="${previewLinkMaster}" class="previewliveEngbMaster"  target="_blank">${previewLinkMaster}</a><br></p>`;
                         uniqueLinks.add(previewLinkMaster);
@@ -3781,75 +3924,18 @@
                         uniqueLinks.add(previewLink);
                     }
                 }
-                linksHTML += generateAdditionalLinks(masterLanguage, localLanguage, customInput, localLanguages, liveSiteLanguage, linksDiv);
+                linksHTML += generateAdditionalLinks(
+                    masterLanguage,
+                    localLanguage,
+                    customInput,
+                    localLanguages,
+                    liveSiteLanguage,
+                    linksDiv
+                );
                 linksDiv.innerHTML += linksHTML;
                 removeDuplicateLinks(linksDiv);
             });
         }
-        // function generateLinksForCondition2(masterLanguage, localLanguagesChecked, customInput, linksDiv) {
-        //     const uniqueLinks = new Set();
-        //     const uniqueTexts = new Set();
-        //     let linksHTML = ``;
-        //     const Rollout = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-        //     const sitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-        //     const sitesENLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB/${customInput}`;
-        //     const editLink = `https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-        //     const Properties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/language-masters/${masterLanguage}/${customInput}`;
-        //     linksHTML += '<p class="openTagging"><strong>*************Start Tagging*************</strong></p>';
-
-        //     linksHTML += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
-        //     linksHTML += `Site Live: <a href="${sitesLink}" class="sitelivelocalMaster" target="_blank">${sitesLink}</a><br>`;
-        //     linksHTML += `Editor: <a href="${editLink}" class="editlocalMaster" target="_blank">${editLink}</a><br>`;
-        //     linksHTML += `Rollout: <a href="${Rollout}" class="rolloutlocalMaster" target="_blank">${Rollout}</a><br>`;
-        //     linksHTML += `Properties: <a href="${Properties}" class="propertieslocalMaster" target="_blank">${Properties}</a><br>`;
-        //     const localLanguagesList = localLanguages[masterLanguage] || [];
-        //     if (localLanguagesChecked.includes(masterLanguage)) {
-        //         const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
-        //         if (remainingLanguages.length > 0) {
-        //             linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): ${remainingLanguages.join(", ")}</strong></p>`;
-        //         } else {
-        //             linksHTML += `<p><strong>Master Language Selected (${masterLanguage}): No additional locales available to display.</strong></p>`;
-        //         }
-        //         remainingLanguages.forEach((language) => {
-        //             linksHTML += generateLocalLanguageLinksTagging(language, customInput);
-        //         });
-        //         linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
-        //     } else if (localLanguagesChecked.length > 0) {
-        //         linksHTML += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
-        //         localLanguagesChecked.forEach((selectedLocalLanguage) => {
-        //             linksHTML += generateLocalLanguageLinksTagging(selectedLocalLanguage, customInput);
-        //         });
-        //         linksHTML += '<p class="closeTagging"><strong>*************End Tagging*************</strong></p>';
-        //     } else {
-        //         linksHTML += `<p><strong>No local languages selected.</strong></p>`;
-        //     }
-        //     linksDiv.innerHTML += linksHTML;
-        // }
-        // function generateLocalLanguageLinksTagging(language, customInput) {
-        //     function applyReplacements(input) {
-        //         const replacements = [
-        //             { old: "products", new: "solutions" },
-        //             { old: "learn", new: "solutions/learn" },
-        //             { old: "support", new: "solutions/support" },
-        //             { old: "about-us/sustainability", new: "sustainability" },
-        //             { old: "about-us/media", new: "media" },
-        //             { old: "about-us/careers", new: "careers" },
-        //         ];
-        //         let updatedInput = input;
-        //         replacements.forEach((replacement) => {
-        //             updatedInput = updatedInput.replace(new RegExp(replacement.old, "g"), replacement.new);
-        //         });
-        //         return updatedInput;
-        //     }
-        //     let updatedCustomInput = customInput;
-        //     if (language === "www/en") {
-        //         updatedCustomInput = applyReplacements(customInput);
-        //     }
-        //     const localpublishLinks = [`https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedCustomInput}`];
-        //     const localsitesLink = `https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/${language}/${updatedCustomInput}`;
-        //     const localProperties = `https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/grundfos/${language}/${updatedCustomInput}`;
-        //     return `<p><strong>Local Language (${language}):</strong></p>` + `Properties: <a href="${localProperties}" target="_blank">${localProperties}</a><br>` + `Publish: <a href="${localpublishLinks}" class="publish" target="_blank">${localpublishLinks}</a><br>`;
-        // }
         let savedFragmentInputs = [];
         const fragmentInput = document.getElementById("fragmentInput");
         const savedFragmentsContainer = document.getElementById("savedFragments");
@@ -3866,39 +3952,36 @@
         let currentLocalLanguages = [];
         let currentSelectedFragments = [];
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("masterLanguage").addEventListener("change", handleMasterLanguageChange);
+            document
+                .getElementById("masterLanguage")
+                .addEventListener("change", handleMasterLanguageChange);
             document.getElementById("addFragment").addEventListener("click", () => {
                 const fragmentValue = fragmentInput.value.trim();
                 const normalizedNewFragment = extractFragmentPath(fragmentValue);
+                const normalizedSavedFragments =
+                    savedFragmentInputs.map(extractFragmentPath);
 
-                // Normalize all saved fragments to detect duplicates
-                const normalizedSavedFragments = savedFragmentInputs.map(extractFragmentPath);
-
-                if (normalizedNewFragment && !normalizedSavedFragments.includes(normalizedNewFragment)) {
-                    // Add to saved fragments (original value)
+                if (
+                    normalizedNewFragment &&
+                    !normalizedSavedFragments.includes(normalizedNewFragment)
+                ) {
                     savedFragmentInputs.push(fragmentValue);
-
-                    // Update local storage first
                     saveFragmentsToLocalStorage();
-
-                    // Clear existing selection
                     currentSelectedFragments = [];
-                    const existingCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+                    const existingCheckboxes = document.querySelectorAll(
+                        '#savedFragments input[type="checkbox"]'
+                    );
                     existingCheckboxes.forEach((cb) => {
                         cb.checked = false;
                         const removeBtn = cb.parentElement.nextElementSibling;
                         if (removeBtn) removeBtn.style.display = "none";
                     });
-
-                    // Clear input and container
                     fragmentInput.value = "";
                     fragmentContainer.innerHTML = "";
-
-                    // Update UI with new fragment
                     updateSavedFragmentsCheckboxes();
-
-                    // Select only the new fragment
-                    const newCheckbox = document.querySelector(`#savedFragments input[type="checkbox"][value="${fragmentValue}"]`);
+                    const newCheckbox = document.querySelector(
+                        `#savedFragments input[type="checkbox"][value="${fragmentValue}"]`
+                    );
                     if (newCheckbox) {
                         newCheckbox.checked = true;
                         const removeButton = newCheckbox.parentElement.nextElementSibling;
@@ -3907,9 +3990,11 @@
                         }
                         currentSelectedFragments = [fragmentValue];
                     }
-
-                    // Generate links only if we have selected languages
-                    const localLanguagesChecked = Array.from(document.querySelectorAll('#localLanguages input[type="checkbox"]:checked')).map((cb) => cb.value);
+                    const localLanguagesChecked = Array.from(
+                        document.querySelectorAll(
+                            '#localLanguages input[type="checkbox"]:checked'
+                        )
+                    ).map((cb) => cb.value);
                     if (localLanguagesChecked.length > 0) {
                         generateLinksForCondition3();
                     }
@@ -3919,13 +4004,15 @@
             });
         });
         function saveFragmentsToLocalStorage() {
-            localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
+            localStorage.setItem(
+                "savedFragments",
+                JSON.stringify(savedFragmentInputs)
+            );
         }
         function updateSavedFragmentsCheckboxes() {
-            const savedFragmentContainer = document.getElementById("savedFragments");
+            const savedFragmentContainer =
+                document.getElementById("savedFragments");
             savedFragmentContainer.innerHTML = "";
-
-            // Ensure currentSelectedFragments is initialized
             if (!Array.isArray(currentSelectedFragments)) {
                 currentSelectedFragments = [];
             }
@@ -3933,46 +4020,38 @@
 
             savedFragmentInputs.forEach((fragment) => {
                 const fragmentsIndex = fragment.indexOf("/fragments");
-                let fragmentPath = fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
+                let fragmentPath =
+                    fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
                 if (fragmentPath.endsWith(".html")) {
                     fragmentPath = fragmentPath.slice(0, -5);
                 }
                 if (fragmentPath.endsWith("/")) {
                     fragmentPath = fragmentPath.slice(0, -1);
                 }
-
-                // Create container div for each fragment
                 const fragmentDiv = document.createElement("div");
                 fragmentDiv.style.display = "flex";
                 fragmentDiv.style.alignItems = "center";
                 fragmentDiv.style.marginBottom = "5px";
-
-                // Create label and checkbox
                 const label = document.createElement("label");
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.value = fragment;
-
-                // Set checkbox state and create remove button accordingly
                 const isChecked = currentChecked.includes(fragment);
                 checkbox.checked = isChecked;
-
-                // Create and setup remove button
                 const removeButton = document.createElement("button");
                 removeButton.textContent = "X";
                 removeButton.style.marginLeft = "10px";
                 removeButton.style.cursor = "pointer";
                 removeButton.style.padding = "5px";
-                removeButton.style.display = "none"; // Initially hidden
+                removeButton.style.display = "none";
 
                 if (isChecked) {
                     removeButton.style.display = "inline-block";
                 }
-
-                // Add event listeners
                 checkbox.addEventListener("change", function (e) {
-                    // Update remove button visibility immediately
-                    removeButton.style.display = e.target.checked ? "inline-block" : "none";
+                    removeButton.style.display = e.target.checked
+                        ? "inline-block"
+                        : "none";
                     handleSavedFragmentChange();
                     saveSavedFragmentsState();
                 });
@@ -3980,24 +4059,23 @@
                 removeButton.addEventListener("click", function () {
                     removeFragment(fragment);
                 });
-
-                // Assemble the elements
                 label.appendChild(checkbox);
                 label.appendChild(document.createTextNode(` ${fragmentPath}`));
                 fragmentDiv.appendChild(label);
                 fragmentDiv.appendChild(removeButton);
                 savedFragmentContainer.appendChild(fragmentDiv);
             });
-
-            // Save the current state
             saveSavedFragmentsState();
-
-            // Force update all remove buttons visibility
-            const allCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+            const allCheckboxes = document.querySelectorAll(
+                '#savedFragments input[type="checkbox"]'
+            );
             allCheckboxes.forEach((checkbox) => {
                 const removeButton = checkbox.parentElement.nextElementSibling;
                 if (removeButton) {
-                    if (!checkbox.checked || !currentSelectedFragments.includes(checkbox.value)) {
+                    if (
+                        !checkbox.checked ||
+                        !currentSelectedFragments.includes(checkbox.value)
+                    ) {
                         removeButton.style.display = "none";
                         checkbox.checked = false;
                     } else {
@@ -4025,7 +4103,9 @@
             if (index !== -1) {
                 savedFragmentInputs.splice(index, 1);
             }
-            currentSelectedFragments = currentSelectedFragments.filter((f) => f !== fragment);
+            currentSelectedFragments = currentSelectedFragments.filter(
+                (f) => f !== fragment
+            );
             updateSavedFragmentsCheckboxes();
             saveSavedFragmentsState();
             if (currentSelectedFragments.length === 0) {
@@ -4036,129 +4116,123 @@
             saveFragmentsToLocalStorage();
         }
         function selectNewlyAddedCheckbox(fragmentValue) {
-            const checkbox = document.querySelector(`#savedFragments input[type="checkbox"][value="${fragmentValue}"]`);
+            const checkbox = document.querySelector(
+                `#savedFragments input[type="checkbox"][value="${fragmentValue}"]`
+            );
             if (checkbox) {
                 checkbox.checked = true;
             }
         }
         function handleSavedFragmentChange() {
-            // Update selected fragments
-            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]:checked');
-            currentSelectedFragments = Array.from(savedFragmentCheckboxes).map((checkbox) => checkbox.value);
-
-            // Update remove buttons visibility
-            document.querySelectorAll('#savedFragments input[type="checkbox"]').forEach((checkbox) => {
-                const removeButton = checkbox.parentElement.nextElementSibling;
-                if (removeButton) {
-                    removeButton.style.display = checkbox.checked ? "inline-block" : "none";
-                }
-            });
-
-            // Clear and regenerate links
+            const savedFragmentCheckboxes = document.querySelectorAll(
+                '#savedFragments input[type="checkbox"]:checked'
+            );
+            currentSelectedFragments = Array.from(savedFragmentCheckboxes).map(
+                (checkbox) => checkbox.value
+            );
+            document
+                .querySelectorAll('#savedFragments input[type="checkbox"]')
+                .forEach((checkbox) => {
+                    const removeButton = checkbox.parentElement.nextElementSibling;
+                    if (removeButton) {
+                        removeButton.style.display = checkbox.checked
+                            ? "inline-block"
+                            : "none";
+                    }
+                });
             fragmentContainer.innerHTML = "";
             if (currentSelectedFragments.length > 0) {
                 generateLinksForCondition3();
             }
-
-            // Save state to localStorage
             saveSavedFragmentsState();
         }
         function handleMasterLanguageChange() {
             const masterLanguage = document.getElementById("masterLanguage").value;
             if (currentMasterLanguage !== masterLanguage) {
                 currentMasterLanguage = masterLanguage;
-
-                // Reset search UI
                 const searchContainer = document.getElementById("searchContainer");
                 const button = document.getElementById("toggleSearchButton");
                 searchContainer.style.display = "none";
                 button.textContent = "Show Search Input";
-
-                // Reset all local language checkboxes
-                const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
+                const localLanguageCheckboxes = document.querySelectorAll(
+                    '#localLanguages input[type="checkbox"]'
+                );
                 localLanguageCheckboxes.forEach((checkbox) => {
                     checkbox.checked = false;
                 });
-
-                // Reset all fragment checkboxes except first one
-                const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+                const savedFragmentCheckboxes = document.querySelectorAll(
+                    '#savedFragments input[type="checkbox"]'
+                );
                 savedFragmentCheckboxes.forEach((checkbox, index) => {
-                    // Check only the first checkbox, uncheck others
                     checkbox.checked = index === 0;
                     const removeButton = checkbox.parentElement.nextElementSibling;
                     if (removeButton) {
-                        removeButton.style.display = index === 0 ? "inline-block" : "none";
+                        removeButton.style.display =
+                            index === 0 ? "inline-block" : "none";
                     }
                 });
-
-                // Update current states
                 currentLocalLanguages = [];
-                currentSelectedFragments = savedFragmentCheckboxes.length > 0 ? [savedFragmentCheckboxes[0].value] : [];
-
-                // Update local languages UI
+                currentSelectedFragments =
+                    savedFragmentCheckboxes.length > 0
+                        ? [savedFragmentCheckboxes[0].value]
+                        : [];
                 updateLocalLanguages();
-
-                // Check the first checkbox after languages are updated
                 setTimeout(() => {
-                    const firstCheckbox = document.querySelector('#localLanguages input[type="checkbox"]');
+                    const firstCheckbox = document.querySelector(
+                        '#localLanguages input[type="checkbox"]'
+                    );
                     if (firstCheckbox) {
                         firstCheckbox.checked = true;
                         firstCheckbox.dispatchEvent(new Event("change"));
                     }
-
-                    // Generate links if needed
                     generateLinksForCondition3();
                 }, 100);
             }
         }
         document.addEventListener("DOMContentLoaded", () => {
-            // Load all saved data from localStorage
             loadSelectionsFromLocalStorage();
-
-            // Load saved fragments
             const savedFragments = localStorage.getItem("savedFragments");
             if (savedFragments) {
                 savedFragmentInputs = JSON.parse(savedFragments);
-                // Load checked state for fragments
-                const checkedFragments = JSON.parse(localStorage.getItem("checkedSavedFragments") || "[]");
+
+                const checkedFragments = JSON.parse(
+                    localStorage.getItem("checkedSavedFragments") || "[]"
+                );
                 currentSelectedFragments = checkedFragments;
             }
-
-            // Update UI with saved fragments
             updateSavedFragmentsCheckboxes();
-
-            // Add event listeners
-            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+            const savedFragmentCheckboxes = document.querySelectorAll(
+                '#savedFragments input[type="checkbox"]'
+            );
             savedFragmentCheckboxes.forEach((checkbox) => {
                 checkbox.addEventListener("change", handleSavedFragmentChange);
             });
-
-            // Regenerate links if we have selected fragments and languages
             if (currentSelectedFragments.length > 0) {
                 generateLinksForCondition3();
             }
 
-            document.getElementById("masterLanguage").addEventListener("change", saveSelectionsToLocalStorage);
-            document.querySelectorAll('#localLanguages input[type="checkbox"]').forEach((cb) => {
-                cb.addEventListener("change", saveSelectionsToLocalStorage);
-            });
+            document
+                .getElementById("masterLanguage")
+                .addEventListener("change", saveSelectionsToLocalStorage);
+            document
+                .querySelectorAll('#localLanguages input[type="checkbox"]')
+                .forEach((cb) => {
+                    cb.addEventListener("change", saveSelectionsToLocalStorage);
+                });
             document.querySelectorAll('input[name="condition"]').forEach((cb) => {
                 cb.addEventListener("change", saveSelectionsToLocalStorage);
             });
         });
         function generateLinksForCondition3() {
-            // Clear existing content first
             fragmentContainer.innerHTML = "";
-
-            // Get current selections
-            const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
-            const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
+            const checkboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]:checked'
+            );
+            const localLanguagesChecked = Array.from(checkboxes).map(
+                (checkbox) => checkbox.value
+            );
             const masterLanguage = document.getElementById("masterLanguage").value;
-
-            // Update current state
             currentLocalLanguages = localLanguagesChecked;
-
-            // Validate selections
             if (!masterLanguage) {
                 console.log("No master language selected");
                 return;
@@ -4173,11 +4247,10 @@
                 console.log("No local languages selected");
                 return;
             }
-
-            // Generate links for each selected fragment
             currentSelectedFragments.forEach((fragment) => {
                 const fragmentsIndex = fragment.indexOf("/fragments");
-                let fragmentPath = fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
+                let fragmentPath =
+                    fragmentsIndex !== -1 ? fragment.substring(fragmentsIndex) : "";
                 if (fragmentPath.endsWith(".html")) {
                     fragmentPath = fragmentPath.slice(0, -5);
                 }
@@ -4195,7 +4268,7 @@
                     fragmentHtml += `<p><strong>Master Language:</strong> en-GB</p>`;
                     fragmentHtml += `Site Live (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB${fragmentPath}" class="fragment-sitelive-enGB" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/language-masters/en-GB${fragmentPath}</a><br>`;
                     fragmentHtml += `Editor (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB${fragmentPath}" class="fragment-edit-enGB" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/language-masters/en-GB${fragmentPath}</a><br>`;
-                    // fragmentHtml += `Rollout(en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${fragmentPath}" class="fragment-rollout-localMaster" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/overlay/wcm/msm/content/touch-ui/admin/rolloutdialog.html/content/grundfos/language-masters/${masterLanguage}/${fragmentPath}</a><br>`;
+
                     fragmentHtml += `Preview (en-GB): <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB${fragmentPath}?wcmmode=disabled" class="fragment-preview-enGB" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/language-masters/en-GB${fragmentPath}?wcmmode=disabled</a><br>`;
                 }
                 fragmentHtml += `<p><strong>Master Language:</strong> ${masterLanguage}</p>`;
@@ -4205,19 +4278,31 @@
                 fragmentHtml += `Preview: <a href="${masterLinkPreview}" target="_blank" class="fragment-preview-localMaster">${masterLinkPreview}</a><br>`;
                 const localLanguagesList = localLanguages[masterLanguage] || [];
                 if (localLanguagesChecked.includes(masterLanguage)) {
-                    const remainingLanguages = localLanguagesList.filter((lang) => lang !== masterLanguage);
+                    const remainingLanguages = localLanguagesList.filter(
+                        (lang) => lang !== masterLanguage
+                    );
                     if (remainingLanguages.length > 0) {
-                        fragmentHtml += `<p><strong>Master Language Selected (${masterLanguage}): ${remainingLanguages.join(", ")}</strong></p>`;
+                        fragmentHtml += `<p><strong>Master Language Selected (${masterLanguage}): ${remainingLanguages.join(
+                            ", "
+                        )}</strong></p>`;
                     } else {
                         fragmentHtml += `<p><strong>Master Language Selected (${masterLanguage}): No additional locales available to display.</strong></p>`;
                     }
                     remainingLanguages.forEach((language) => {
-                        fragmentHtml += generateLocalLanguageLinks(language, fragmentPath);
+                        fragmentHtml += generateLocalLanguageLinks(
+                            language,
+                            fragmentPath
+                        );
                     });
                 } else if (localLanguagesChecked.length > 0) {
-                    fragmentHtml += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(", ")}</p>`;
+                    fragmentHtml += `<p><strong>Selected Local Languages:</strong> ${localLanguagesChecked.join(
+                        ", "
+                    )}</p>`;
                     localLanguagesChecked.forEach((selectedLocalLanguage) => {
-                        fragmentHtml += generateLocalLanguageLinks(selectedLocalLanguage, fragmentPath);
+                        fragmentHtml += generateLocalLanguageLinks(
+                            selectedLocalLanguage,
+                            fragmentPath
+                        );
                     });
                 } else {
                     fragmentHtml += `<p><strong>No local languages selected.</strong></p>`;
@@ -4265,7 +4350,8 @@
             if (input.length === 0) {
                 return;
             }
-            const output = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+            const output =
+                input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
             document.getElementById("inputText").value = output;
         }
         document.addEventListener("DOMContentLoaded", () => {
@@ -4276,7 +4362,9 @@
             document.addEventListener("click", (event) => {
                 const target = event.target;
                 if (target && target.tagName === "A") {
-                    const parentContainer = target.closest("#links, #fragmentContainer");
+                    const parentContainer = target.closest(
+                        "#links, #fragmentContainer"
+                    );
                     if (parentContainer) {
                         const currentLang = getCurrentLang();
                         if (previousLink) {
@@ -4296,25 +4384,33 @@
                 resetLinks("#links");
                 alert("The link status in #links has been reset!");
             });
-            document.getElementById("resetFragmentLinks").addEventListener("click", () => {
-                resetLinks("#fragmentContainer");
-                alert("The link state in #fragmentContainer has been reset!");
-            });
+            document
+                .getElementById("resetFragmentLinks")
+                .addEventListener("click", () => {
+                    resetLinks("#fragmentContainer");
+                    alert("The link state in #fragmentContainer has been reset!");
+                });
             function saveLinkState(lang, href, state) {
                 const storageKey = `linkStates_${lang}`;
-                const linkStates = JSON.parse(localStorage.getItem(storageKey) || "{}");
+                const linkStates = JSON.parse(
+                    localStorage.getItem(storageKey) || "{}"
+                );
                 linkStates[href] = state;
                 localStorage.setItem(storageKey, JSON.stringify(linkStates));
             }
             function loadLinkStates() {
                 const currentLang = getCurrentLang();
                 const storageKey = `linkStates_${currentLang}`;
-                const linkStates = JSON.parse(localStorage.getItem(storageKey) || "{}");
+                const linkStates = JSON.parse(
+                    localStorage.getItem(storageKey) || "{}"
+                );
                 ["#links", "#fragmentContainer"].forEach((containerId) => {
                     const container = document.querySelector(containerId);
                     if (!container) return;
                     for (const [href, state] of Object.entries(linkStates)) {
-                        const link = Array.from(container.querySelectorAll("a")).find((link) => link.href === href);
+                        const link = Array.from(container.querySelectorAll("a")).find(
+                            (link) => link.href === href
+                        );
                         if (link) {
                             link.classList.add(state);
                             if (state === "active") previousLink = link;
@@ -4333,8 +4429,12 @@
                 updateResetButtons();
             }
             function getCurrentLang() {
-                const pathParts = window.location.pathname.split("/").filter((part) => part);
-                return pathParts.length >= 2 ? `${pathParts[0]}/${pathParts[1]}` : "default";
+                const pathParts = window.location.pathname
+                    .split("/")
+                    .filter((part) => part);
+                return pathParts.length >= 2
+                    ? `${pathParts[0]}/${pathParts[1]}`
+                    : "default";
             }
             function observeContainers() {
                 const observer = new MutationObserver(() => {
@@ -4347,58 +4447,85 @@
                 });
             }
             function updateResetButtons() {
-                const hasActiveLinks = document.querySelector("#links a.active, #links a.previous");
-                const hasActiveFragmentLinks = document.querySelector("#fragmentContainer a.active, #fragmentContainer a.previous");
-                document.getElementById("resetLinks").style.display = hasActiveLinks ? "block" : "none";
-                document.getElementById("resetFragmentLinks").style.display = hasActiveFragmentLinks ? "block" : "none";
+                const hasActiveLinks = document.querySelector(
+                    "#links a.active, #links a.previous"
+                );
+                const hasActiveFragmentLinks = document.querySelector(
+                    "#fragmentContainer a.active, #fragmentContainer a.previous"
+                );
+                document.getElementById("resetLinks").style.display = hasActiveLinks
+                    ? "block"
+                    : "none";
+                document.getElementById("resetFragmentLinks").style.display =
+                    hasActiveFragmentLinks ? "block" : "none";
             }
         });
-        document.getElementById("customInput").addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                generateLinks();
-            }
-        });
-        document.getElementById("searchInput").addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                applySearchInput();
-            }
-        });
-        document.getElementById("customInput").addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("generateAndSaveBtn").click();
-            }
-        });
+        document
+            .getElementById("customInput")
+            .addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    generateLinks();
+                }
+            });
+        document
+            .getElementById("searchInput")
+            .addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    applySearchInput();
+                }
+            });
+        document
+            .getElementById("customInput")
+            .addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("generateAndSaveBtn").click();
+                }
+            });
         document.addEventListener("keydown", function (event) {
             if (event.target.id === "masterCodeInput" && event.key === "Enter") {
                 event.preventDefault();
                 generateMasterCheckboxes();
             }
         });
-        document.getElementById("fragmentInput").addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                const fragmentValue = fragmentInput.value.trim();
-                if (fragmentValue && !savedFragmentInputs.includes(fragmentValue)) {
-                    savedFragmentInputs.push(fragmentValue);
-                    currentSelectedFragments = [fragmentValue];
-                    updateSavedFragmentsCheckboxes();
-                    selectNewlyAddedCheckbox(fragmentValue);
-                    fragmentInput.value = "";
-                    fragmentContainer.innerHTML = "";
-                    generateLinksForCondition3();
-                } else {
+        document
+            .getElementById("fragmentInput")
+            .addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    const fragmentValue = fragmentInput.value.trim();
+                    if (fragmentValue && !savedFragmentInputs.includes(fragmentValue)) {
+                        savedFragmentInputs.push(fragmentValue);
+                        currentSelectedFragments = [fragmentValue];
+                        updateSavedFragmentsCheckboxes();
+                        selectNewlyAddedCheckbox(fragmentValue);
+                        fragmentInput.value = "";
+                        fragmentContainer.innerHTML = "";
+                        generateLinksForCondition3();
+                    } else {
+                    }
                 }
-            }
-        });
+            });
         function saveSelectionsToLocalStorage() {
             const masterLanguage = document.getElementById("masterLanguage").value;
-            const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
-            const taskCheckboxes = document.querySelectorAll('input[name="condition"]:checked');
-            const selectedLocalLanguages = Array.from(localLanguageCheckboxes).map((cb) => cb.value);
+            const localLanguageCheckboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]:checked'
+            );
+            const taskCheckboxes = document.querySelectorAll(
+                'input[name="condition"]:checked'
+            );
+            const selectedLocalLanguages = Array.from(localLanguageCheckboxes).map(
+                (cb) => cb.value
+            );
             const selectedTasks = Array.from(taskCheckboxes).map((cb) => cb.value);
             localStorage.setItem("selectedMasterLanguage", masterLanguage);
-            localStorage.setItem("selectedLocalLanguages", JSON.stringify(selectedLocalLanguages));
-            localStorage.setItem("selectedTaskTypes", JSON.stringify(selectedTasks));
+            localStorage.setItem(
+                "selectedLocalLanguages",
+                JSON.stringify(selectedLocalLanguages)
+            );
+            localStorage.setItem(
+                "selectedTaskTypes",
+                JSON.stringify(selectedTasks)
+            );
         }
         function loadSelectionsFromLocalStorage() {
             const masterSelect = document.getElementById("masterLanguage");
@@ -4411,39 +4538,52 @@
             }
             const customInput = document.getElementById("customInput");
             if (customInput) {
-                const savedCustomInput = localStorage.getItem("customInputValue") || "";
+                const savedCustomInput =
+                    localStorage.getItem("customInputValue") || "";
                 customInput.value = savedCustomInput;
             }
             const fragmentInput = document.getElementById("fragmentInput");
             if (fragmentInput) {
-                const savedFragmentInput = localStorage.getItem("fragmentInputValue") || "";
+                const savedFragmentInput =
+                    localStorage.getItem("fragmentInputValue") || "";
                 fragmentInput.value = savedFragmentInput;
             }
-            const localLanguageCheckboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]');
-            const selectedLocalLanguages = JSON.parse(localStorage.getItem("selectedLocalLanguages") || "[]");
+            const localLanguageCheckboxes = document.querySelectorAll(
+                '#localLanguages input[type="checkbox"]'
+            );
+            const selectedLocalLanguages = JSON.parse(
+                localStorage.getItem("selectedLocalLanguages") || "[]"
+            );
             localLanguageCheckboxes.forEach((cb) => {
                 cb.checked = selectedLocalLanguages.includes(cb.value);
             });
-            const taskCheckboxes = document.querySelectorAll('input[name="condition"]');
-            const selectedTasks = JSON.parse(localStorage.getItem("selectedTaskTypes") || "[]");
+            const taskCheckboxes = document.querySelectorAll(
+                'input[name="condition"]'
+            );
+            const selectedTasks = JSON.parse(
+                localStorage.getItem("selectedTaskTypes") || "[]"
+            );
             taskCheckboxes.forEach((cb) => {
                 cb.checked = selectedTasks.includes(cb.value);
             });
         }
         function saveSavedFragmentsState() {
-            // Save checked fragments
-            const savedFragmentCheckboxes = document.querySelectorAll('#savedFragments input[type="checkbox"]');
+            const savedFragmentCheckboxes = document.querySelectorAll(
+                '#savedFragments input[type="checkbox"]'
+            );
             const checkedFragments = [];
             savedFragmentCheckboxes.forEach((checkbox) => {
                 if (checkbox.checked) checkedFragments.push(checkbox.value);
             });
-            localStorage.setItem("checkedSavedFragments", JSON.stringify(checkedFragments));
-
-            // Also update currentSelectedFragments to match
+            localStorage.setItem(
+                "checkedSavedFragments",
+                JSON.stringify(checkedFragments)
+            );
             currentSelectedFragments = checkedFragments;
-
-            // Save all fragments
-            localStorage.setItem("savedFragments", JSON.stringify(savedFragmentInputs));
+            localStorage.setItem(
+                "savedFragments",
+                JSON.stringify(savedFragmentInputs)
+            );
         }
     </script>
 </body>
