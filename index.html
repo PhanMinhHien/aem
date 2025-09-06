@@ -816,6 +816,16 @@
                                         <label for="classBatchSize"><b>Batch size:</b></label>
                                         <input type="number" id="classBatchSize" value="1" min="1" style="width: 80px" />
                                     </div>
+                                    <!-- Next Mode -->
+                                    <div class="form-group" style="margin-top: 15px">
+                                        <label for="nextModeSelect"><b>Next Mode:</b></label>
+                                        <select id="nextModeSelect">
+                                            <option value="radio">Next Radio</option>
+                                            <option value="customMaster">Next Custom Master</option>
+                                            <option value="fixedMaster">Next Key Master</option>
+                                        </select>
+                                    </div>
+
                                     <!-- Auto Run Button -->
                                     <button id="runClassAutoBtn" class="btn primary full">Auto Run All</button>
                                 </div>
@@ -1678,14 +1688,7 @@
                         await runStepWithBatch(currentTags, batchSize);
 
                         if (idx === typeTasks[currentTask].length - 1) {
-                            const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
-                            const currentRadio = radios.find((r) => r.checked) || radios[0];
-                            const nextIndex = radios.indexOf(currentRadio) + 1;
-                            if (nextIndex < radios.length) {
-                                radios[nextIndex].checked = true;
-                                updateCustomInput(radios[nextIndex]);
-                                updateSavedLinksCount();
-                            }
+                            goNextAfterStep();
                         }
                     };
 
@@ -1732,13 +1735,48 @@
                     }
                 }
 
-                const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
-                const currentRadio = radios.find((r) => r.checked) || radios[0];
-                const nextIndex = radios.indexOf(currentRadio) + 1;
-                if (nextIndex < radios.length) {
-                    radios[nextIndex].checked = true;
-                    updateCustomInput(radios[nextIndex]);
-                    updateSavedLinksCount();
+                goNextAfterStep();
+            });
+            let nextMode = localStorage.getItem("nextMode") || "radio";
+
+            function setNextMode(mode) {
+                nextMode = mode;
+                localStorage.setItem("nextMode", mode);
+            }
+
+            function goNextAfterStep() {
+                if (nextMode === "radio") {
+                    const radios = Array.from(document.querySelectorAll("#radioContainer input[type='radio']"));
+                    const currentRadio = radios.find((r) => r.checked) || radios[0];
+                    const nextIndex = radios.indexOf(currentRadio) + 1;
+                    if (nextIndex < radios.length) {
+                        radios[nextIndex].checked = true;
+                        updateCustomInput(radios[nextIndex]);
+                        updateSavedLinksCount();
+                    }
+                } else if (nextMode === "customMaster") {
+                    const buttons = Array.from(document.querySelectorAll("#customMasterCodes button"));
+                    const activeBtn = buttons.find((b) => b.classList.contains("active"));
+                    const nextIndex = buttons.indexOf(activeBtn) + 1;
+                    if (nextIndex < buttons.length) {
+                        buttons[nextIndex].click();
+                    }
+                } else if (nextMode === "fixedMaster") {
+                    const buttons = Array.from(document.querySelectorAll("#fixedMasterCodes button"));
+                    const activeBtn = buttons.find((b) => b.classList.contains("active"));
+                    const nextIndex = buttons.indexOf(activeBtn) + 1;
+                    if (nextIndex < buttons.length) {
+                        buttons[nextIndex].click();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", () => {
+                const nextModeSelect = document.getElementById("nextModeSelect");
+                if (nextModeSelect) {
+                    nextModeSelect.value = nextMode;
+                    nextModeSelect.addEventListener("change", (e) => {
+                        setNextMode(e.target.value);
+                    });
                 }
             });
 
