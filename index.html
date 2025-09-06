@@ -1383,6 +1383,18 @@
 
                 refreshTagOptionsFromDOM();
                 setTimeout(refreshTagOptionsFromDOM, 200);
+
+                const lastFixed = loadActiveFixedMasterCode();
+                if (lastFixed) {
+                    const btn = Array.from(fixedContainer.children).find((b) => b.textContent === lastFixed);
+                    if (btn) btn.click();
+                }
+
+                const lastCustom = loadActiveCustomMasterCode();
+                if (lastCustom) {
+                    const btn = Array.from(customMasterCodesContainer.children).find((b) => b.textContent === lastCustom);
+                    if (btn) btn.click();
+                }
             });
             function debounce(fn, wait = 100) {
                 let t;
@@ -2127,6 +2139,24 @@
             function getSelectedInput() {
                 return localStorage.getItem("selectedInput") || "";
             }
+            function saveSelectedTags() {
+                localStorage.setItem("selectedTags", JSON.stringify(selectedTags));
+            }
+
+            function saveActiveFixedMasterCode(code) {
+                localStorage.setItem("activeFixedMasterCode", code);
+            }
+            function loadActiveFixedMasterCode() {
+                return localStorage.getItem("activeFixedMasterCode") || null;
+            }
+
+            function saveActiveCustomMasterCode(code) {
+                localStorage.setItem("activeCustomMasterCode", code);
+            }
+            function loadActiveCustomMasterCode() {
+                return localStorage.getItem("activeCustomMasterCode") || null;
+            }
+
             const fixedMasterCodes = ["zh-CN", "da-DK", "fr-FR", "de-DE", "hu-HU", "es-ES", "sr-RS"];
             const fixedContainer = document.getElementById("fixedMasterCodes");
             fixedMasterCodes.forEach((code) => {
@@ -2138,20 +2168,48 @@
                 button.style.color = "#007bff";
                 button.style.borderRadius = "5px";
                 button.style.cursor = "pointer";
+
                 button.onclick = function () {
-                    document.getElementById("masterLanguage").value = code;
-                    updateLocalLanguages();
-                };
-                fixedContainer.appendChild(button);
-                button.onmouseover = function () {
+                    fixedContainer.querySelectorAll("button").forEach((btn) => {
+                        btn.classList.remove("active");
+                        btn.style.backgroundColor = "#fff";
+                        btn.style.color = "#007bff";
+                    });
+
+                    button.classList.add("active");
                     button.style.backgroundColor = "#007bff";
                     button.style.color = "#fff";
+
+                    document.getElementById("masterLanguage").value = code;
+                    updateLocalLanguages();
+                    saveActiveFixedMasterCode(code);
                 };
+
+                button.onmouseover = function () {
+                    if (!button.classList.contains("active")) {
+                        button.style.backgroundColor = "#007bff";
+                        button.style.color = "#fff";
+                    }
+                };
+
                 button.onmouseout = function () {
-                    button.style.backgroundColor = "#fff";
-                    button.style.color = "#007bff";
+                    if (!button.classList.contains("active")) {
+                        button.style.backgroundColor = "#fff";
+                        button.style.color = "#007bff";
+                    }
                 };
+
+                fixedContainer.appendChild(button);
             });
+
+            const style = document.createElement("style");
+            style.textContent = `
+    #fixedMasterCodes button.active {
+        background-color: #007bff !important;
+        color: #fff !important;
+    }
+`;
+            document.head.appendChild(style);
 
             const selectElement = document.getElementById("masterLanguage");
             const datalistElement = document.getElementById("masterLanguages");
@@ -2207,26 +2265,44 @@
                 button.style.cursor = "pointer";
                 button.onclick = function () {
                     Array.from(customMasterCodesContainer.children).forEach((btn) => {
+                        btn.classList.remove("active");
+
                         btn.style.backgroundColor = "#fff";
                         btn.style.color = "#007bff";
                     });
-
+                    button.classList.add("active");
+                    button.style.backgroundColor = "#007bff";
+                    button.style.color = "#fff";
                     document.getElementById("masterLanguage").value = code;
-                    updateLocalLanguages();
-                };
 
+                    updateLocalLanguages();
+                    saveActiveCustomMasterCode(code);
+                };
                 button.onmouseover = function () {
-                    if (document.getElementById("masterLanguage").value !== code) {
+                    if (!button.classList.contains("active")) {
                         button.style.backgroundColor = "#007bff";
                         button.style.color = "#fff";
                     }
                 };
+
                 button.onmouseout = function () {
-                    if (document.getElementById("masterLanguage").value !== code) {
+                    if (!button.classList.contains("active")) {
                         button.style.backgroundColor = "#fff";
                         button.style.color = "#007bff";
                     }
                 };
+                // button.onmouseover = function () {
+                //     if (document.getElementById("masterLanguage").value !== code) {
+                //         button.style.backgroundColor = "#007bff";
+                //         button.style.color = "#fff";
+                //     }
+                // };
+                // button.onmouseout = function () {
+                //     if (document.getElementById("masterLanguage").value !== code) {
+                //         button.style.backgroundColor = "#fff";
+                //         button.style.color = "#007bff";
+                //     }
+                // };
                 customMasterCodesContainer.appendChild(button);
             });
 
