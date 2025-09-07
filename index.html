@@ -774,16 +774,16 @@
                             <div id="localLanguagesInfo">Local Languages:</div>
                             <button id="applySearchButton" onclick="applySearchInput()">Apply Search</button>
                         </div>
-                        <div class="fixedMasterCodesContainer" style="margin-top: 20px">
+                        <div class="fixedMasterCodesContainer" style="margin: 20px 0">
                             <h2>Key Markets</h2>
                             <div id="fixedMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
-                            <h2>Country</h2>
+                            <h2>Selected Countries</h2>
                             <div id="customMasterCodes" style="display: flex; flex-wrap: wrap; gap: 10px"></div>
 
                             <input list="masterLanguages" id="masterLanguageInput" name="masterLanguage" />
                             <datalist id="masterLanguages"> </datalist>
 
-                            <button id="addCustomMasterCode" style="margin-top: 20px">Add Custom Master Code</button>
+                            <!-- <button id="addCustomMasterCode" style="margin-top: 20px">Select Country</button> -->
                         </div>
                         <div class="autoTasks">
                             <div class="autoOpenLinksByClass" style="max-width: 700px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background: #f9f9f9">
@@ -820,8 +820,8 @@
                                     <div class="form-group" style="margin-top: 15px">
                                         <label for="nextModeSelect"><b>Next Mode:</b></label>
                                         <select id="nextModeSelect">
-                                            <option value="radio">Next Radio</option>
-                                            <option value="customMaster">Next Custom Master</option>
+                                            <option value="radio">Next Saved Links</option>
+                                            <option value="customMaster">Next Selected Master</option>
                                             <option value="fixedMaster">Next Key Master</option>
                                         </select>
                                     </div>
@@ -839,7 +839,7 @@
                     </div>
 
                     <div class="floating-panel" id="savedCustomInputs">
-                        <h2>Save Links (<span id="linkCount">0</span>)</h2>
+                        <h2>Saved Links (<span id="linkCount">0</span>)</h2>
                         <div id="radioContainer"></div>
                         <button id="clearSavedLinksBtn" onclick="clearRadioSelections()" style="margin-top: 15px; background: #ffdddd; border: 1px solid #ff9999; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: red; width: 100%; font-weight: bold">🧹 Clear Saved Links</button>
                     </div>
@@ -2195,7 +2195,7 @@
                 return localStorage.getItem("activeCustomMasterCode") || null;
             }
 
-            const fixedMasterCodes = ["zh-CN", "da-DK", "fr-FR", "de-DE", "hu-HU", "es-ES", "sr-RS"];
+            const fixedMasterCodes = ["en-GB", "en-US", "en-AU", "zh-CN", "da-DK", "fr-FR", "de-DE", "hu-HU", "es-ES", "sr-RS"];
             const fixedContainer = document.getElementById("fixedMasterCodes");
             fixedMasterCodes.forEach((code) => {
                 const button = document.createElement("button");
@@ -2251,7 +2251,7 @@
 
             const selectElement = document.getElementById("masterLanguage");
             const datalistElement = document.getElementById("masterLanguages");
-            const addCustomMasterCodeButton = document.getElementById("addCustomMasterCode");
+            // const addCustomMasterCodeButton = document.getElementById("addCustomMasterCode");
             const customMasterCodesContainer = document.getElementById("customMasterCodes");
             const masterLanguageInput = document.getElementById("masterLanguageInput");
             const tagsContainer = document.createElement("div");
