@@ -2373,18 +2373,22 @@
                         tag.remove();
                         loadSelectToDatalist();
                         saveSelectedTags();
-                        if (selectedTags.length > 0) {
-                            const prevTag = selectedTags[idx - 1] || selectedTags[0];
-                            const prevButton = Array.from(customMasterCodesContainer.children).find((btn) => btn.textContent === prevTag);
-
-                            if (prevButton) {
-                                prevButton.click();
-                            }
-                        }
                     }
 
                     const button = Array.from(customMasterCodesContainer.children).find((btn) => btn.textContent === code);
-                    if (button) button.remove();
+                    if (button) {
+                        const wasActive = button.classList.contains("active");
+                        button.remove();
+
+                        if (wasActive && selectedTags.length > 0) {
+                            const nextTag = selectedTags[idx] || selectedTags[idx - 1];
+                            const nextButton = Array.from(customMasterCodesContainer.children).find((btn) => btn.textContent === nextTag);
+
+                            if (nextButton) {
+                                nextButton.click();
+                            }
+                        }
+                    }
                 };
 
                 tag.appendChild(removeBtn);
@@ -2396,13 +2400,19 @@
                 const val = masterLanguageInput.value.trim();
                 if (val && !selectedTags.includes(val)) {
                     selectedTags.push(val);
+
+                    // Tạo tag
                     const tag = createTag(val);
                     tagsContainer.insertBefore(tag, masterLanguageInput);
+
                     masterLanguageInput.value = "";
                     loadSelectToDatalist();
                     saveSelectedTags();
+
                     document.getElementById("masterLanguage").value = val;
                     updateLocalLanguages();
+
+                    // Tạo button mới giống như trong selectedTags.forEach
                     const button = document.createElement("button");
                     button.textContent = val;
                     button.style.backgroundColor = "#fff";
@@ -2414,22 +2424,29 @@
 
                     button.onclick = function () {
                         Array.from(customMasterCodesContainer.children).forEach((btn) => {
+                            btn.classList.remove("active");
                             btn.style.backgroundColor = "#fff";
                             btn.style.color = "#007bff";
                         });
 
+                        button.classList.add("active");
+                        button.style.backgroundColor = "#007bff";
+                        button.style.color = "#fff";
+
                         document.getElementById("masterLanguage").value = val;
                         updateLocalLanguages();
+                        saveActiveCustomMasterCode(val);
                     };
 
                     button.onmouseover = function () {
-                        if (document.getElementById("masterLanguage").value !== val) {
+                        if (!button.classList.contains("active")) {
                             button.style.backgroundColor = "#007bff";
                             button.style.color = "#fff";
                         }
                     };
+
                     button.onmouseout = function () {
-                        if (document.getElementById("masterLanguage").value !== val) {
+                        if (!button.classList.contains("active")) {
                             button.style.backgroundColor = "#fff";
                             button.style.color = "#007bff";
                         }
