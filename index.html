@@ -2574,7 +2574,7 @@
             const RadioSelections = document.getElementById("savedCustomInputs");
             const container = document.getElementById("radioContainer");
             const clearBtn = document.getElementById("clearSavedLinksBtn");
-            const defaultInput = "about-us";
+            const defaultInput = "";
             if (container) {
                 container.innerHTML = "";
                 addSavedInputToDOM(defaultInput, container, true);
@@ -2606,7 +2606,7 @@
                 return;
             }
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
-            if (savedInputs.length === 1 && savedInputs[0] === "about-us") {
+            if (savedInputs.length === 1 && savedInputs[0] === "") {
                 savedInputs = [];
             }
 
@@ -2759,16 +2759,16 @@
             });
         }
         window.deleteSavedInput = function (value) {
-            if (value === "about-us" && JSON.parse(localStorage.getItem("savedInputs") || "[]").length === 1) {
-                alert("Cannot delete the default 'about-us' link!");
+            if (value === "" && JSON.parse(localStorage.getItem("savedInputs") || "[]").length === 1) {
+                alert("Cannot delete the default '' link!");
                 return;
             }
 
             let savedInputs = JSON.parse(localStorage.getItem("savedInputs")) || [];
             const indexToRemove = savedInputs.indexOf(value);
             const isCurrentSelected = getSelectedInput() === value;
-            if (savedInputs.length === 1 && value !== "about-us") {
-                const defaultInput = "about-us";
+            if (savedInputs.length === 1 && value !== "") {
+                const defaultInput = "";
                 savedInputs = [defaultInput];
                 localStorage.setItem("savedInputs", JSON.stringify(savedInputs));
                 localStorage.setItem("selectedInput", defaultInput);
@@ -3382,9 +3382,9 @@
                 "about-us/media": "https://www.grundfos.com/media",
                 "about-us/careers": "https://www.grundfos.com/careers",
             };
-            if (!baseUrl || baseUrl === "undefined") {
-                return;
-            }
+            // if (!baseUrl || baseUrl === "undefined") {
+            //     return;
+            // }
             let linkBase = baseUrl;
             const checkboxes = document.querySelectorAll('#localLanguages input[type="checkbox"]:checked');
             const localLanguagesChecked = Array.from(checkboxes).map((checkbox) => checkbox.value);
