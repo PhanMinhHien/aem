@@ -1273,6 +1273,7 @@
             "Publish Site Local": ".pulishSiteLocal",
             "Preview Site Local": ".previewSiteLocal",
             "Live Site Link": ".liveSiteLink",
+            "Live Site Link Clear Cache": ".liveSiteLink-cache",
 
             "Fragment Live Site en-GB": ".fragment-sitelive-enGB",
             "Fragment Edit Site en-GB": ".fragment-edit-enGB",
@@ -3188,6 +3189,58 @@
             }
             applyDisabledStyles();
         }
+        function generateRandomQueryParam() {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            return alphabet[Math.floor(Math.random() * alphabet.length)];
+        }
+
+        function addQueryLinks() {
+            const linksDiv = document.getElementById('links');
+            if (!linksDiv) return;
+            
+            const liveSiteLinks = linksDiv.querySelectorAll('p a:not([href*="?"]):not([href*="author-grundfos-prod-65"])');
+            
+            liveSiteLinks.forEach(link => {
+                const originalUrl = link.href;
+                const parentP = link.closest('p');
+                
+                const nextP = parentP.nextElementSibling;
+                if (!nextP || !nextP.textContent.includes('Live Site Link (Clear cache)')) {
+                    const queryLink = document.createElement('p');
+                    const queryParam = generateRandomQueryParam();
+                    queryLink.innerHTML = `Live Site Link (Clear cache): <a href="${originalUrl}?${queryParam}" class="liveSiteLink-cache " target="_blank">${originalUrl}?${queryParam} </a><br>`;
+                    parentP.insertAdjacentElement('afterend', queryLink);
+
+                    const queryAnchor = queryLink.querySelector('a');
+                    queryAnchor.addEventListener('click', function(e) {
+                        const currentUrl = this.href; 
+                        
+                        setTimeout(() => {
+                            const baseUrl = currentUrl.split('?')[0];
+                            const newQueryParam = generateRandomQueryParam();
+                            this.href = `${baseUrl}?${newQueryParam}`;
+                            this.textContent = `${baseUrl}?${newQueryParam}`;
+                        }, 100);
+                    });
+                }
+            });
+        }
+
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList') {
+                    setTimeout(addQueryLinks, 100); 
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const linksDiv = document.getElementById('links');
+            if (linksDiv) {
+                observer.observe(linksDiv, { childList: true, subtree: true });
+            }
+        });
+
         function removeDuplicateLinks(linksDiv) {
             const linkElements = linksDiv.querySelectorAll("p a");
             const seenURLs = new Set();
@@ -3313,6 +3366,11 @@
             if (path.startsWith("/")) path = path.slice(1);
             return path;
         }
+        function generateRandomQueryParam() {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            return alphabet[Math.floor(Math.random() * alphabet.length)];
+        }
+
         function generateAdditionalLinks(masterLanguage, localLanguage, customInput, localLanguages, liveSiteLanguage, linksDiv) {
             let linksHTML = "";
             let result = "";
@@ -3444,7 +3502,7 @@
                         if (!finalLink) {
                             finalLink = `https://www.grundfos.com/${originalLinkBase}`;
                         }
-                        linksHTML += `<p>Live Site Link: <a href="${finalLink}" target="_blank">${finalLink}</a></p>`;
+                        linksHTML += `<p>Live Site Link: <a href="${finalLink}" class="liveSiteLink" target="_blank">${finalLink}</a></p>`;
                     } else {
                         let modifiedLinkBase = linkBase;
                         const localePrefix = language.split("/")[0];
@@ -3470,7 +3528,7 @@
                             linksHTML += `<p>Editor: <a href="${localLinkEditorLocal}" class="editSiteLocal" target="_blank">${localLinkEditorLocal}</a></p>`;
                             linksHTML += `<p>Publish: <a href="${localpublishLinks}" class="pulishSiteLocal" target="_blank">${localpublishLinks}</a></p>`;
                             linksHTML += `<p>Preview: <a href="${localLinkDisabledLocal}" class="previewSiteLocal" target="_blank">${localLinkDisabledLocal}</a></p>`;
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink"  target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a></p>`;
                         } else if (newLink.includes("solutions/learn")) {
                             newLink = newLink.replace("solutions/learn", "learn");
                             let updatedLinkBase = linkBase;
@@ -3479,7 +3537,7 @@
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}" class="editSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}" class="pulishSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${updatedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled" class="previewSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled</a></p>`;
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a></p>`;
                         } else {
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
@@ -3491,7 +3549,7 @@
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}" class="editSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${modifiedLinkBase}"  class="pulishSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/${language}/${modifiedLinkBase}</a></p>
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled" lass="previewSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a></p>`;
                         }
                     }
                 });
@@ -3570,10 +3628,10 @@
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a></p>`;
                         } else if (newLink.includes("solutions/learn")) {
                             newLink = newLink.replace("solutions/learn", "learn");
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a></p>`;
                         } else {
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
@@ -3581,7 +3639,7 @@
                             }
                             newLink = newLink.replace("/www/", "/");
                             newLink = newLink.replace("/gb/", "/uk/");
-                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a><br></p>`;
+                            linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a></p>`;
                         }
                     }
                 });
