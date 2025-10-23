@@ -3539,6 +3539,7 @@
                                     <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled" class="previewSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/${language}/${updatedLinkBase}?wcmmode=disabled</a></p>`;
                             linksHTML += `<p>Live Site Link: <a href="${newLink}" class="liveSiteLink" target="_blank">${newLink}</a></p>`;
                         } else {
+                            let modifiedLinkBase = linkBase;
                             let originalLink = newLink;
                             if (originalLink.includes("https://www.grundfos.com/cn/")) {
                                 newLink = originalLink.replace("https://www.grundfos.com/cn/", "Https://www.grundfos.cn/").replace("/products", "");
