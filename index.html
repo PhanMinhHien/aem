@@ -3197,13 +3197,13 @@
         function addQueryLinks() {
             const linksDiv = document.getElementById('links');
             if (!linksDiv) return;
-            
+
             const liveSiteLinks = linksDiv.querySelectorAll('p a:not([href*="?"]):not([href*="author-grundfos-prod-65"])');
-            
+
             liveSiteLinks.forEach(link => {
                 const originalUrl = link.href;
                 const parentP = link.closest('p');
-                
+
                 const nextP = parentP.nextElementSibling;
                 if (!nextP || !nextP.textContent.includes('Live Site Link (Clear cache)')) {
                     const queryLink = document.createElement('p');
@@ -3212,9 +3212,9 @@
                     parentP.insertAdjacentElement('afterend', queryLink);
 
                     const queryAnchor = queryLink.querySelector('a');
-                    queryAnchor.addEventListener('click', function(e) {
-                        const currentUrl = this.href; 
-                        
+                    queryAnchor.addEventListener('click', function (e) {
+                        const currentUrl = this.href;
+
                         setTimeout(() => {
                             const baseUrl = currentUrl.split('?')[0];
                             const newQueryParam = generateRandomQueryParam();
@@ -3229,7 +3229,7 @@
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
                 if (mutation.type === 'childList') {
-                    setTimeout(addQueryLinks, 100); 
+                    setTimeout(addQueryLinks, 100);
                 }
             });
         });
@@ -3490,7 +3490,7 @@
                         linksHTML += `<p>Site Live: <a href="https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}" class="liveSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/sites.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Editor: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}" class="editSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}</a></p>
                                     <p>Publish: <a href="https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}" class="pulishSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/mnt/override/libs/wcm/core/content/common/managepublicationwizard.html?item=/content/grundfos/www/en/${modifiedLinkBase}</a></p>
-                                    <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" class="previewSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/editor.html/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
+                                    <p>Preview: <a href="https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled" class="previewSiteLocal" target="_blank">https://author-grundfos-prod-65.adobecqms.net/content/grundfos/www/en/${modifiedLinkBase}?wcmmode=disabled</a></p>`;
                         const originalLinkBase = linkBase;
                         let finalLink = null;
                         for (let key in linkMapping) {
